@@ -52,7 +52,7 @@ const handleExpression = (property, value, symbols) => {
 		'nonMatchSymbols': escape(nonMatchSymbols),
 		'unicodeVersion': unicodeVersion,
 	}).trim() + '\n';
-	fs.writeFileSync(`output/${ outputFile }.case`, output);
+	fs.writeFileSync(`output/${ outputFile }.js`, output);
 };
 
 const properties = require('regenerate-unicode-properties');

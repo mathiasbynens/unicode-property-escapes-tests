@@ -9,7 +9,7 @@ const fs = require('fs');
 const jsesc = require('jsesc');
 
 const _template = require('lodash.template');
-const TEST_TEMPLATE = fs.readFileSync('templates/test.case', 'utf8');
+const TEST_TEMPLATE = fs.readFileSync('templates/test.template', 'utf8');
 const template = _template(TEST_TEMPLATE);
 
 const escape = (value) => {

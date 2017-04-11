@@ -1,0 +1,22 @@
+// Copyright 2017 Mathias Bynens. All rights reserved.
+// This code is governed by the BSD license found in the LICENSE file.
+
+/*---
+template: default
+author: Mathias Bynens
+desc: Unicode property escapes `\p{<%= UnicodePropertyValueExpression %>}` and `\P{<%= UnicodePropertyValueExpression %>}`
+esid: sec-static-semantics-unicodematchproperty-p
+flags: [generated]
+features: [regexp-unicode-property-escapes]
+---*/
+
+assert(
+	/^\p{<%= UnicodePropertyValueExpression %>}+$/u.test(<%= matchSymbols %>),
+	"\\p{<%= UnicodePropertyValueExpression %>} doesn't match all symbols it should match"
+);
+
+<% if (nonMatchSymbols.length > 2) { %>assert(
+	/^\P{<%= UnicodePropertyValueExpression %>}+$/u.test(<%= nonMatchSymbols %>),
+	"\\P{<%= UnicodePropertyValueExpression %>} doesn't match all symbols it should match"
+);
+<% } %>

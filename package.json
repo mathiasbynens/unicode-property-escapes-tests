@@ -1,0 +1,15 @@
+{
+  "name": "unicode-property-escapes-tests",
+  "private": true,
+  "scripts": {
+    "build": "rm -rf -- output/*.js && node build.js",
+    "test": "npm run build"
+  },
+  "devDependencies": {
+    "jsesc": "^2.5.0",
+    "lodash.template": "^4.4.0",
+    "regenerate-unicode-properties": "^5.0.0",
+    "unicode-9.0.0": "^0.7.2",
+    "unicode-tr51": "^8.1.1"
+  }
+}

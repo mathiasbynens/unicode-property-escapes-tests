@@ -47,9 +47,10 @@ const handleExpression = (property, value, symbols) => {
 	const nonMatchSymbols = expression == 'Any' ? '' : findInverse(symbols);
 	symbols = symbols.join('');
 	const output = template({
-		'UnicodePropertyValueExpression': expression,
+		'expression': expression,
 		'matchSymbols': escape(symbols.slice(0, MAX_MATCH_LENGTH)),
 		'nonMatchSymbols': escape(nonMatchSymbols),
+		'unicodeVersion': unicodeVersion,
 	}).trim() + '\n';
 	fs.writeFileSync(`output/${ outputFile }.case`, output);
 };
@@ -58,14 +59,15 @@ const properties = require('regenerate-unicode-properties');
 
 const package = require('./package.json');
 const dependencies = Object.keys(package.devDependencies);
-const version = dependencies.find((name) =>/^unicode-\d/.test(name));
+const unicodePackage = dependencies.find((name) =>/^unicode-\d/.test(name));
+const unicodeVersion = unicodePackage.replace(/^unicode-/g, '');
 
 for (const [property, values] of properties) {
 	for (const value of values) {
 		const expression = `${ property }=${ value }`;
 		const symbols = (() => {
 			try {
-				return require(`${ version }/${ property }/${ value }/symbols.js`);
+				return require(`${ unicodePackage }/${ property }/${ value }/symbols.js`);
 			} catch (exception) {
 				return require(`unicode-tr51/${ value }.js`);
 			}

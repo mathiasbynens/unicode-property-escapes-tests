@@ -13,7 +13,7 @@ npm install
 npm run build
 ```
 
-The `output` directory holds the generated test files.
+The `output` directory holds the generated test files, ready to be upstreamed to test262’s `test/built-ins/RegExp/property-escapes/` directory.
 
 ## Author
 

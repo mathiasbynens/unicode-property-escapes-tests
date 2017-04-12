@@ -35,33 +35,31 @@ const findInverse = (symbols) => {
 	return nonMatchSymbols;
 };
 
+const generateExpressions = require('./generate-expressions.js');
+
 const handleExpression = (property, value, symbols) => {
-	const isNonBinaryProperty = property && property != 'Binary_Property';
-	const expression = isNonBinaryProperty ?
-		`${ property }=${ value }` :
-		value;
-	const outputFile = isNonBinaryProperty ?
-		`${ property }_-_${ value }` :
-		value;
-	console.log(`Handling \`\\p{${ expression }}\`…`);
-	const nonMatchSymbols = expression == 'Any' ? '' : findInverse(symbols);
+	const expressions = generateExpressions(property, value);
+	const mainExpression = expressions[0];
+	const outputFile = mainExpression.replace('=', '_-_');
+	console.log(`Handling \`\\p{${ mainExpression }}\`…`);
+	const nonMatchSymbols = mainExpression == 'Any' ? '' : findInverse(symbols);
 	symbols = symbols.join('');
 	const output = template({
-		'expression': expression,
+		'mainExpression': mainExpression,
+		'expressions': expressions,
 		'matchSymbols': escape(symbols.slice(0, MAX_MATCH_LENGTH)),
 		'nonMatchSymbols': escape(nonMatchSymbols),
 		'unicodeVersion': unicodeVersion,
-	}).trim() + '\n';
+	}).replace(/\n{3,}/g, '\n\n').trim() + '\n';
 	fs.writeFileSync(`output/${ outputFile }.js`, output);
 };
-
-const properties = require('regenerate-unicode-properties');
 
 const package = require('./package.json');
 const dependencies = Object.keys(package.devDependencies);
 const unicodePackage = dependencies.find((name) =>/^unicode-\d/.test(name));
 const unicodeVersion = unicodePackage.replace(/^unicode-/g, '');
 
+const properties = require('regenerate-unicode-properties');
 for (const [property, values] of properties) {
 	for (const value of values) {
 		const expression = `${ property }=${ value }`;
@@ -73,8 +71,5 @@ for (const [property, values] of properties) {
 			}
 		})();
 		handleExpression(property, value, symbols);
-		if (property === 'General_Category') {
-			handleExpression('', value, symbols);
-		}
 	}
 }

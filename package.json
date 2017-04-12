@@ -10,6 +10,8 @@
     "lodash.template": "^4.4.0",
     "regenerate-unicode-properties": "^5.0.0",
     "unicode-9.0.0": "^0.7.2",
+    "unicode-property-aliases": "^1.1.1",
+    "unicode-property-value-aliases": "^1.2.2",
     "unicode-tr51": "^8.1.1"
   }
 }

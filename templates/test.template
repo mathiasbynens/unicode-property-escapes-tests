@@ -25,7 +25,7 @@ const buildString = ({ loneCodePoints, ranges }) => {
 const matchSymbols = buildString(<%= matchSymbols %>);
 <% for (const expression of expressions) { %>assert(
 	/^\p{<%= expression %>}+$/u.test(matchSymbols),
-	"\\p{<%= expression %>} matches all proper symbols"
+	"`\\p{<%= expression %>}` matches all proper symbols"
 );
 <% } %>
 <% if (nonMatchSymbols) { %>
@@ -34,7 +34,15 @@ const nonMatchSymbols = buildString(<%= nonMatchSymbols %>);
 	for (const expression of expressions) {
 %>assert(
 	/^\P{<%= expression %>}+$/u.test(nonMatchSymbols),
-	"\\P{<%= expression %>} matches all proper symbols"
+	"`\\P{<%= expression %>}` matches all proper symbols"
+);
+<%
+	}
+} else {
+	for (const expression of expressions) {
+%>assert(
+	!/\P{<%= expression %>}/u.test(""),
+	"`\\P{<%= expression %>}` matches nothing (not even the empty string)"
 );
 <%
 	}

@@ -12,14 +12,24 @@ esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
 ---*/
 
-const matchSymbols = <%= matchSymbols %>;
+const buildString = ({ loneCodePoints, ranges }) => {
+	let result = String.fromCodePoint(...loneCodePoints);
+	for (const [start, end] of ranges) {
+		for (let codePoint = start; codePoint <= end; codePoint++) {
+			result += String.fromCodePoint(codePoint);
+		}
+	}
+	return result;
+};
+
+const matchSymbols = buildString(<%= matchSymbols %>);
 <% for (const expression of expressions) { %>assert(
 	/^\p{<%= expression %>}+$/u.test(matchSymbols),
 	"\\p{<%= expression %>} matches all proper symbols"
 );
 <% } %>
-<% if (nonMatchSymbols.length > 2) { %>
-const nonMatchSymbols = <%= nonMatchSymbols %>;
+<% if (nonMatchSymbols) { %>
+const nonMatchSymbols = buildString(<%= nonMatchSymbols %>);
 <%
 	for (const expression of expressions) {
 %>assert(

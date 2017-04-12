@@ -1,12 +1,9 @@
-// The maximum number of code points in the string used for the `\p{…}` test.
-const MAX_MATCH_LENGTH = 0x10FFFF;
-// The maximum number of code points in the string used for the `\P{…}` test.
-const MAX_NON_MATCH_LENGTH = 0x10FFFF;
-// Higher values result in more accurate, but larger (and slower) tests.
-// Lower values result in less accurate, but smaller (and faster) tests.
-
 const fs = require('fs');
 const jsesc = require('jsesc');
+
+const UNICODE_VERSION = require(
+	'regenerate-unicode-properties/unicode-version.js'
+);
 
 const _template = require('lodash.template');
 const TEST_TEMPLATE = fs.readFileSync('templates/test.template', 'utf8');
@@ -14,6 +11,8 @@ const template = _template(TEST_TEMPLATE);
 
 const escape = (value) => {
 	return jsesc(value, {
+		'compact': false,
+		'numbers': 'hexadecimal',
 		'quotes': 'double',
 		'wrap': true,
 	});
@@ -21,58 +20,65 @@ const escape = (value) => {
 
 const regenerate = require('regenerate');
 const UNICODE_SET = regenerate().addRange(0x0, 0x10FFFF);
-const findInverse = (set) => {
-	const codePoints = UNICODE_SET.clone()
-		.remove(set)
-		.toArray()
-		.slice(0, MAX_NON_MATCH_LENGTH);
-	const chunkSize = 0xFFFF;
-	let result = '';
-	for (let index = 0; index < codePoints.length; index += chunkSize) {
-		const chunk = codePoints.slice(index, index + chunkSize);
-		result += String.fromCodePoint.apply(null, chunk);
+
+const codePointToString = (codePoint) => {
+	return '0x' + ('00000' + codePoint.toString(16).toUpperCase()).slice(-6);
+};
+
+regenerate.prototype.toTestData = function() {
+	const data = this.data;
+	// Iterate over the data per `(start, end)` pair.
+	let index = 0;
+	const length = data.length;
+	const loneCodePoints = [];
+	const ranges = [];
+	while (index < length) {
+		let start = data[index];
+		let end = data[index + 1] - 1; // Note: the `- 1` makes `end` inclusive.
+		if (start == end) {
+			loneCodePoints.push(codePointToString(start));
+		} else {
+			ranges.push(`[${ codePointToString(start) }, ${ codePointToString(end) }]`);
+		}
+		index += 2;
 	}
-	return result;
+	const loneCodePointsOutput = loneCodePoints.length ?
+		`[\n\t\t${ loneCodePoints.join(',\n\t\t') }\n\t]` :
+		`[]`;
+	const rangesOutput = ranges.length ?
+		`[\n\t\t${ ranges.join(',\n\t\t') }\n\t]` :
+		`[]`;
+	return `{\n\tloneCodePoints: ${ loneCodePointsOutput },\n\tranges: ${ rangesOutput }\n}`;
 };
 
 const generateExpressions = require('./generate-expressions.js');
 
-const handleExpression = (property, value, symbols, set) => {
+const handleExpression = (property, value, symbols) => {
 	const expressions = generateExpressions(property, value);
 	const mainExpression = expressions[0];
-	const outputFile = mainExpression.replace('=', '_-_');
 	console.log(`Handling \`\\p{${ mainExpression }}\`…`);
-	const nonMatchSymbols = mainExpression == 'Any' ? '' : findInverse(set);
-	symbols = symbols.join('');
+	const outputFile = mainExpression.replace('=', '_-_');
+	const matchSymbols = symbols.toTestData();
+	const nonMatchSymbols = mainExpression == 'Any' ?
+			'' :
+			UNICODE_SET.clone().remove(symbols).toTestData();
 	const output = template({
 		'mainExpression': mainExpression,
 		'expressions': expressions,
-		'matchSymbols': escape(symbols.slice(0, MAX_MATCH_LENGTH)),
-		'nonMatchSymbols': escape(nonMatchSymbols),
-		'unicodeVersion': unicodeVersion,
+		'matchSymbols': matchSymbols,
+		'nonMatchSymbols': nonMatchSymbols,
+		'unicodeVersion': UNICODE_VERSION,
 	}).replace(/\n{3,}/g, '\n\n').trim() + '\n';
 	fs.writeFileSync(`output/${ outputFile }.js`, output);
 };
-
-const package = require('./package.json');
-const dependencies = Object.keys(package.devDependencies);
-const unicodePackage = dependencies.find((name) =>/^unicode-\d/.test(name));
-const unicodeVersion = unicodePackage.replace(/^unicode-/g, '');
 
 const properties = require('regenerate-unicode-properties');
 for (const [property, values] of properties) {
 	for (const value of values) {
 		const expression = `${ property }=${ value }`;
-		const symbols = (() => {
-			try {
-				return require(`${ unicodePackage }/${ property }/${ value }/symbols.js`);
-			} catch (exception) {
-				return require(`unicode-tr51/${ value }.js`);
-			}
-		})();
 		const set = require(
 			`regenerate-unicode-properties/${ property }/${ value }.js`
 		);
-		handleExpression(property, value, symbols, set);
+		handleExpression(property, value, set);
 	}
 }

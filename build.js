@@ -1,7 +1,7 @@
 // The maximum number of code points in the string used for the `\p{…}` test.
 const MAX_MATCH_LENGTH = 0x10FFFF;
 // The maximum number of code points in the string used for the `\P{…}` test.
-const MAX_NON_MATCH_LENGTH = 256;
+const MAX_NON_MATCH_LENGTH = 0x10FFFF;
 // Higher values result in more accurate, but larger (and slower) tests.
 // Lower values result in less accurate, but smaller (and faster) tests.
 
@@ -19,30 +19,30 @@ const escape = (value) => {
 	});
 };
 
-const findInverse = (symbols) => {
-	let length = 0;
-	let nonMatchSymbols = '';
-	for (let codePoint = 0x0000; codePoint <= 0x10FFFF; codePoint++) {
-		const symbol = String.fromCodePoint(codePoint);
-		if (symbols.includes(symbol)) {
-			continue;
-		}
-		nonMatchSymbols += symbol;
-		if (++length == MAX_NON_MATCH_LENGTH) {
-			break;
-		}
+const regenerate = require('regenerate');
+const UNICODE_SET = regenerate().addRange(0x0, 0x10FFFF);
+const findInverse = (set) => {
+	const codePoints = UNICODE_SET.clone()
+		.remove(set)
+		.toArray()
+		.slice(0, MAX_NON_MATCH_LENGTH);
+	const chunkSize = 0xFFFF;
+	let result = '';
+	for (let index = 0; index < codePoints.length; index += chunkSize) {
+		const chunk = codePoints.slice(index, index + chunkSize);
+		result += String.fromCodePoint.apply(null, chunk);
 	}
-	return nonMatchSymbols;
+	return result;
 };
 
 const generateExpressions = require('./generate-expressions.js');
 
-const handleExpression = (property, value, symbols) => {
+const handleExpression = (property, value, symbols, set) => {
 	const expressions = generateExpressions(property, value);
 	const mainExpression = expressions[0];
 	const outputFile = mainExpression.replace('=', '_-_');
 	console.log(`Handling \`\\p{${ mainExpression }}\`…`);
-	const nonMatchSymbols = mainExpression == 'Any' ? '' : findInverse(symbols);
+	const nonMatchSymbols = mainExpression == 'Any' ? '' : findInverse(set);
 	symbols = symbols.join('');
 	const output = template({
 		'mainExpression': mainExpression,
@@ -70,6 +70,9 @@ for (const [property, values] of properties) {
 				return require(`unicode-tr51/${ value }.js`);
 			}
 		})();
-		handleExpression(property, value, symbols);
+		const set = require(
+			`regenerate-unicode-properties/${ property }/${ value }.js`
+		);
+		handleExpression(property, value, symbols, set);
 	}
 }

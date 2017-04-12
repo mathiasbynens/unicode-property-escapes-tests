@@ -18,10 +18,9 @@ const matchSymbols = <%= matchSymbols %>;
 	"\\p{<%= expression %>} matches all proper symbols"
 );
 <% } %>
-
+<% if (nonMatchSymbols.length > 2) { %>
 const nonMatchSymbols = <%= nonMatchSymbols %>;
 <%
-if (nonMatchSymbols.length > 2) {
 	for (const expression of expressions) {
 %>assert(
 	/^\P{<%= expression %>}+$/u.test(nonMatchSymbols),

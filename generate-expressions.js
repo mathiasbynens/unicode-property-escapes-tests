@@ -17,7 +17,7 @@ const generateExpressions = (property, value) => {
 	if (property == 'Binary_Property') {
 		const result = [value];
 		const alias = propertiesToAliases.get(value);
-		if (alias) {
+		if (alias && alias != value) {
 			result.push(alias);
 		}
 		return result;

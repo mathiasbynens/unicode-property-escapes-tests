@@ -167,10 +167,6 @@ assert(
 	/^\p{Cased}+$/u.test(matchSymbols),
 	"`\\p{Cased}` matches all proper symbols"
 );
-assert(
-	/^\p{Cased}+$/u.test(matchSymbols),
-	"`\\p{Cased}` matches all proper symbols"
-);
 
 const nonMatchSymbols = buildString({
 	loneCodePoints: [
@@ -314,10 +310,6 @@ const nonMatchSymbols = buildString({
 		[0x01F18A, 0x10FFFF]
 	]
 });
-assert(
-	/^\P{Cased}+$/u.test(nonMatchSymbols),
-	"`\\P{Cased}` matches all proper symbols"
-);
 assert(
 	/^\P{Cased}+$/u.test(nonMatchSymbols),
 	"`\\P{Cased}` matches all proper symbols"

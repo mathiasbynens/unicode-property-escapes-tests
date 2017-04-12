@@ -170,10 +170,6 @@ assert(
 	/^\p{Math}+$/u.test(matchSymbols),
 	"`\\p{Math}` matches all proper symbols"
 );
-assert(
-	/^\p{Math}+$/u.test(matchSymbols),
-	"`\\p{Math}` matches all proper symbols"
-);
 
 const nonMatchSymbols = buildString({
 	loneCodePoints: [
@@ -320,10 +316,6 @@ const nonMatchSymbols = buildString({
 		[0x01EEF2, 0x10FFFF]
 	]
 });
-assert(
-	/^\P{Math}+$/u.test(nonMatchSymbols),
-	"`\\P{Math}` matches all proper symbols"
-);
 assert(
 	/^\P{Math}+$/u.test(nonMatchSymbols),
 	"`\\P{Math}` matches all proper symbols"

@@ -34,10 +34,6 @@ assert(
 	/^\p{Radical}+$/u.test(matchSymbols),
 	"`\\p{Radical}` matches all proper symbols"
 );
-assert(
-	/^\p{Radical}+$/u.test(matchSymbols),
-	"`\\p{Radical}` matches all proper symbols"
-);
 
 const nonMatchSymbols = buildString({
 	loneCodePoints: [
@@ -49,10 +45,6 @@ const nonMatchSymbols = buildString({
 		[0x002FD6, 0x10FFFF]
 	]
 });
-assert(
-	/^\P{Radical}+$/u.test(nonMatchSymbols),
-	"`\\P{Radical}` matches all proper symbols"
-);
 assert(
 	/^\P{Radical}+$/u.test(nonMatchSymbols),
 	"`\\P{Radical}` matches all proper symbols"

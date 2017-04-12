@@ -53,10 +53,6 @@ assert(
 	/^\p{Dash}+$/u.test(matchSymbols),
 	"`\\p{Dash}` matches all proper symbols"
 );
-assert(
-	/^\p{Dash}+$/u.test(matchSymbols),
-	"`\\p{Dash}` matches all proper symbols"
-);
 
 const nonMatchSymbols = buildString({
 	loneCodePoints: [],
@@ -85,10 +81,6 @@ const nonMatchSymbols = buildString({
 		[0x00FF0E, 0x10FFFF]
 	]
 });
-assert(
-	/^\P{Dash}+$/u.test(nonMatchSymbols),
-	"`\\P{Dash}` matches all proper symbols"
-);
 assert(
 	/^\P{Dash}+$/u.test(nonMatchSymbols),
 	"`\\P{Dash}` matches all proper symbols"

@@ -1,9 +1,6 @@
 # npm error log
 npm-debug.log
 
-# Generated test files
-output
-
 # Installed npm modules
 node_modules
 

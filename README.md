@@ -15,6 +15,14 @@ npm run build
 
 The `output` directory holds the generated test files, ready to be upstreamed to test262’s `test/built-ins/RegExp/property-escapes/` directory.
 
+To run the tests in V8 using [`test262-harness`](https://github.com/bterlson/test262-harness):
+
+```sh
+test262-harness --test262Dir=$HOME/projects/test262 --hostPath=$HOME/projects/v8/out/native/d8 --hostType=d8 --hostArgs='--harmony_regexp_property' $(find output/*.js) --threads=4
+```
+
+This assumes you have [the Test262 repository](https://github.com/tc39/test262) checked out at `~/projects/test262`, and a native V8/`d8` build at `~/projects/v8/out/native/d8`.
+
 ## Author
 
 | [![twitter/mathias](https://gravatar.com/avatar/24e08a9ea84deb17ae121074d0f17125?s=70)](https://twitter.com/mathias "Follow @mathias on Twitter") |

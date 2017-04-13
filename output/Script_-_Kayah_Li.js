@@ -59,8 +59,10 @@ const nonMatchSymbols = buildString({
 		0x00A92E
 	],
 	ranges: [
+		[0x00DC00, 0x00DFFF],
 		[0x000000, 0x00A8FF],
-		[0x00A930, 0x10FFFF]
+		[0x00A930, 0x00DBFF],
+		[0x00E000, 0x10FFFF]
 	]
 });
 assert(

@@ -32,7 +32,8 @@ const buildString = ({ loneCodePoints, ranges }) => {
 const matchSymbols = buildString({
 	loneCodePoints: [],
 	ranges: [
-		[0x00D800, 0x00DFFF]
+		[0x00DC00, 0x00DFFF],
+		[0x00D800, 0x00DBFF]
 	]
 });
 assert(
@@ -63,6 +64,7 @@ assert(
 const nonMatchSymbols = buildString({
 	loneCodePoints: [],
 	ranges: [
+		[0x00DC00, 0x00DFFF],
 		[0x000000, 0x00D7FF],
 		[0x00E000, 0x10FFFF]
 	]

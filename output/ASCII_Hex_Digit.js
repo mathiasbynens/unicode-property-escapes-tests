@@ -49,10 +49,12 @@ assert(
 const nonMatchSymbols = buildString({
 	loneCodePoints: [],
 	ranges: [
+		[0x00DC00, 0x00DFFF],
 		[0x000000, 0x00002F],
 		[0x00003A, 0x000040],
 		[0x000047, 0x000060],
-		[0x000067, 0x10FFFF]
+		[0x000067, 0x00DBFF],
+		[0x00E000, 0x10FFFF]
 	]
 });
 assert(

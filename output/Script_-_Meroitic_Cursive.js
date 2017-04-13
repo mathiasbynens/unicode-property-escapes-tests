@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x0109D2, 0x0109FF]
   ]
 });
-assert(
-  /^\p{Script=Meroitic_Cursive}+$/u.test(matchSymbols),
-  "`\\p{Script=Meroitic_Cursive}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Meroitic_Cursive}+$/u,
+  matchSymbols,
+  "\\p{Script=Meroitic_Cursive}"
 );
-assert(
-  /^\p{Script=Merc}+$/u.test(matchSymbols),
-  "`\\p{Script=Merc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Merc}+$/u,
+  matchSymbols,
+  "\\p{Script=Merc}"
 );
-assert(
-  /^\p{sc=Meroitic_Cursive}+$/u.test(matchSymbols),
-  "`\\p{sc=Meroitic_Cursive}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Meroitic_Cursive}+$/u,
+  matchSymbols,
+  "\\p{sc=Meroitic_Cursive}"
 );
-assert(
-  /^\p{sc=Merc}+$/u.test(matchSymbols),
-  "`\\p{sc=Merc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Merc}+$/u,
+  matchSymbols,
+  "\\p{sc=Merc}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x010A00, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Meroitic_Cursive}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Meroitic_Cursive}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Meroitic_Cursive}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Meroitic_Cursive}"
 );
-assert(
-  /^\P{Script=Merc}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Merc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Merc}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Merc}"
 );
-assert(
-  /^\P{sc=Meroitic_Cursive}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Meroitic_Cursive}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Meroitic_Cursive}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Meroitic_Cursive}"
 );
-assert(
-  /^\P{sc=Merc}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Merc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Merc}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Merc}"
 );

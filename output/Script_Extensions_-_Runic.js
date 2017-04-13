@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x0016EE, 0x0016F8]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Runic}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Runic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Runic}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Runic}"
 );
-assert(
-  /^\p{Script_Extensions=Runr}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Runr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Runr}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Runr}"
 );
-assert(
-  /^\p{scx=Runic}+$/u.test(matchSymbols),
-  "`\\p{scx=Runic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Runic}+$/u,
+  matchSymbols,
+  "\\p{scx=Runic}"
 );
-assert(
-  /^\p{scx=Runr}+$/u.test(matchSymbols),
-  "`\\p{scx=Runr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Runr}+$/u,
+  matchSymbols,
+  "\\p{scx=Runr}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Runic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Runic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Runic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Runic}"
 );
-assert(
-  /^\P{Script_Extensions=Runr}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Runr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Runr}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Runr}"
 );
-assert(
-  /^\P{scx=Runic}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Runic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Runic}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Runic}"
 );
-assert(
-  /^\P{scx=Runr}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Runr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Runr}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Runr}"
 );

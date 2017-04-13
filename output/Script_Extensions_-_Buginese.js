@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -22,21 +22,25 @@ const matchSymbols = buildString({
     [0x001A1E, 0x001A1F]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Buginese}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Buginese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Buginese}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Buginese}"
 );
-assert(
-  /^\p{Script_Extensions=Bugi}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Bugi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Bugi}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Bugi}"
 );
-assert(
-  /^\p{scx=Buginese}+$/u.test(matchSymbols),
-  "`\\p{scx=Buginese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Buginese}+$/u,
+  matchSymbols,
+  "\\p{scx=Buginese}"
 );
-assert(
-  /^\p{scx=Bugi}+$/u.test(matchSymbols),
-  "`\\p{scx=Bugi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Bugi}+$/u,
+  matchSymbols,
+  "\\p{scx=Bugi}"
 );
 
 const nonMatchSymbols = buildString({
@@ -50,19 +54,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Buginese}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Buginese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Buginese}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Buginese}"
 );
-assert(
-  /^\P{Script_Extensions=Bugi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Bugi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Bugi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Bugi}"
 );
-assert(
-  /^\P{scx=Buginese}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Buginese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Buginese}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Buginese}"
 );
-assert(
-  /^\P{scx=Bugi}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Bugi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Bugi}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Bugi}"
 );

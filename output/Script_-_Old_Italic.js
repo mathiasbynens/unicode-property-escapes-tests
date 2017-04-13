@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x010300, 0x010323]
   ]
 });
-assert(
-  /^\p{Script=Old_Italic}+$/u.test(matchSymbols),
-  "`\\p{Script=Old_Italic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Old_Italic}+$/u,
+  matchSymbols,
+  "\\p{Script=Old_Italic}"
 );
-assert(
-  /^\p{Script=Ital}+$/u.test(matchSymbols),
-  "`\\p{Script=Ital}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Ital}+$/u,
+  matchSymbols,
+  "\\p{Script=Ital}"
 );
-assert(
-  /^\p{sc=Old_Italic}+$/u.test(matchSymbols),
-  "`\\p{sc=Old_Italic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Old_Italic}+$/u,
+  matchSymbols,
+  "\\p{sc=Old_Italic}"
 );
-assert(
-  /^\p{sc=Ital}+$/u.test(matchSymbols),
-  "`\\p{sc=Ital}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Ital}+$/u,
+  matchSymbols,
+  "\\p{sc=Ital}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x010324, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Old_Italic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Old_Italic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Old_Italic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Old_Italic}"
 );
-assert(
-  /^\P{Script=Ital}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Ital}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Ital}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Ital}"
 );
-assert(
-  /^\P{sc=Old_Italic}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Old_Italic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Old_Italic}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Old_Italic}"
 );
-assert(
-  /^\P{sc=Ital}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Ital}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Ital}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Ital}"
 );

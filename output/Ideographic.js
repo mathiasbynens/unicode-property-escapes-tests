@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -32,13 +32,15 @@ const matchSymbols = buildString({
     [0x02F800, 0x02FA1D]
   ]
 });
-assert(
-  /^\p{Ideographic}+$/u.test(matchSymbols),
-  "`\\p{Ideographic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Ideographic}+$/u,
+  matchSymbols,
+  "\\p{Ideographic}"
 );
-assert(
-  /^\p{Ideo}+$/u.test(matchSymbols),
-  "`\\p{Ideo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Ideo}+$/u,
+  matchSymbols,
+  "\\p{Ideo}"
 );
 
 const nonMatchSymbols = buildString({
@@ -63,11 +65,13 @@ const nonMatchSymbols = buildString({
     [0x02FA1E, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Ideographic}+$/u.test(nonMatchSymbols),
-  "`\\P{Ideographic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Ideographic}+$/u,
+  nonMatchSymbols,
+  "\\P{Ideographic}"
 );
-assert(
-  /^\P{Ideo}+$/u.test(nonMatchSymbols),
-  "`\\P{Ideo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Ideo}+$/u,
+  nonMatchSymbols,
+  "\\P{Ideo}"
 );

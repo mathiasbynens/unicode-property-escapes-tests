@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x010B58, 0x010B5F]
   ]
 });
-assert(
-  /^\p{Script=Inscriptional_Parthian}+$/u.test(matchSymbols),
-  "`\\p{Script=Inscriptional_Parthian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Inscriptional_Parthian}+$/u,
+  matchSymbols,
+  "\\p{Script=Inscriptional_Parthian}"
 );
-assert(
-  /^\p{Script=Prti}+$/u.test(matchSymbols),
-  "`\\p{Script=Prti}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Prti}+$/u,
+  matchSymbols,
+  "\\p{Script=Prti}"
 );
-assert(
-  /^\p{sc=Inscriptional_Parthian}+$/u.test(matchSymbols),
-  "`\\p{sc=Inscriptional_Parthian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Inscriptional_Parthian}+$/u,
+  matchSymbols,
+  "\\p{sc=Inscriptional_Parthian}"
 );
-assert(
-  /^\p{sc=Prti}+$/u.test(matchSymbols),
-  "`\\p{sc=Prti}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Prti}+$/u,
+  matchSymbols,
+  "\\p{sc=Prti}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x010B60, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Inscriptional_Parthian}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Inscriptional_Parthian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Inscriptional_Parthian}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Inscriptional_Parthian}"
 );
-assert(
-  /^\P{Script=Prti}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Prti}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Prti}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Prti}"
 );
-assert(
-  /^\P{sc=Inscriptional_Parthian}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Inscriptional_Parthian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Inscriptional_Parthian}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Inscriptional_Parthian}"
 );
-assert(
-  /^\P{sc=Prti}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Prti}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Prti}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Prti}"
 );

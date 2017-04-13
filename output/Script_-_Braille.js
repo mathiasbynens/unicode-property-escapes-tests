@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x002800, 0x0028FF]
   ]
 });
-assert(
-  /^\p{Script=Braille}+$/u.test(matchSymbols),
-  "`\\p{Script=Braille}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Braille}+$/u,
+  matchSymbols,
+  "\\p{Script=Braille}"
 );
-assert(
-  /^\p{Script=Brai}+$/u.test(matchSymbols),
-  "`\\p{Script=Brai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Brai}+$/u,
+  matchSymbols,
+  "\\p{Script=Brai}"
 );
-assert(
-  /^\p{sc=Braille}+$/u.test(matchSymbols),
-  "`\\p{sc=Braille}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Braille}+$/u,
+  matchSymbols,
+  "\\p{sc=Braille}"
 );
-assert(
-  /^\p{sc=Brai}+$/u.test(matchSymbols),
-  "`\\p{sc=Brai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Brai}+$/u,
+  matchSymbols,
+  "\\p{sc=Brai}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Braille}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Braille}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Braille}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Braille}"
 );
-assert(
-  /^\P{Script=Brai}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Brai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Brai}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Brai}"
 );
-assert(
-  /^\P{sc=Braille}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Braille}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Braille}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Braille}"
 );
-assert(
-  /^\P{sc=Brai}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Brai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Brai}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Brai}"
 );

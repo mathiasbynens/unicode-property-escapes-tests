@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x00ABF0, 0x00ABF9]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Meetei_Mayek}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Meetei_Mayek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Meetei_Mayek}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Meetei_Mayek}"
 );
-assert(
-  /^\p{Script_Extensions=Mtei}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Mtei}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Mtei}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Mtei}"
 );
-assert(
-  /^\p{scx=Meetei_Mayek}+$/u.test(matchSymbols),
-  "`\\p{scx=Meetei_Mayek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Meetei_Mayek}+$/u,
+  matchSymbols,
+  "\\p{scx=Meetei_Mayek}"
 );
-assert(
-  /^\p{scx=Mtei}+$/u.test(matchSymbols),
-  "`\\p{scx=Mtei}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Mtei}+$/u,
+  matchSymbols,
+  "\\p{scx=Mtei}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Meetei_Mayek}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Meetei_Mayek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Meetei_Mayek}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Meetei_Mayek}"
 );
-assert(
-  /^\P{Script_Extensions=Mtei}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Mtei}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Mtei}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Mtei}"
 );
-assert(
-  /^\P{scx=Meetei_Mayek}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Meetei_Mayek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Meetei_Mayek}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Meetei_Mayek}"
 );
-assert(
-  /^\P{scx=Mtei}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Mtei}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Mtei}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Mtei}"
 );

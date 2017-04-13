@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,13 +19,15 @@ const matchSymbols = buildString({
     [0x00200C, 0x00200D]
   ]
 });
-assert(
-  /^\p{Join_Control}+$/u.test(matchSymbols),
-  "`\\p{Join_Control}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Join_Control}+$/u,
+  matchSymbols,
+  "\\p{Join_Control}"
 );
-assert(
-  /^\p{Join_C}+$/u.test(matchSymbols),
-  "`\\p{Join_C}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Join_C}+$/u,
+  matchSymbols,
+  "\\p{Join_C}"
 );
 
 const nonMatchSymbols = buildString({
@@ -37,11 +39,13 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Join_Control}+$/u.test(nonMatchSymbols),
-  "`\\P{Join_Control}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Join_Control}+$/u,
+  nonMatchSymbols,
+  "\\P{Join_Control}"
 );
-assert(
-  /^\P{Join_C}+$/u.test(nonMatchSymbols),
-  "`\\P{Join_C}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Join_C}+$/u,
+  nonMatchSymbols,
+  "\\P{Join_C}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x010857, 0x01085F]
   ]
 });
-assert(
-  /^\p{Script=Imperial_Aramaic}+$/u.test(matchSymbols),
-  "`\\p{Script=Imperial_Aramaic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Imperial_Aramaic}+$/u,
+  matchSymbols,
+  "\\p{Script=Imperial_Aramaic}"
 );
-assert(
-  /^\p{Script=Armi}+$/u.test(matchSymbols),
-  "`\\p{Script=Armi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Armi}+$/u,
+  matchSymbols,
+  "\\p{Script=Armi}"
 );
-assert(
-  /^\p{sc=Imperial_Aramaic}+$/u.test(matchSymbols),
-  "`\\p{sc=Imperial_Aramaic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Imperial_Aramaic}+$/u,
+  matchSymbols,
+  "\\p{sc=Imperial_Aramaic}"
 );
-assert(
-  /^\p{sc=Armi}+$/u.test(matchSymbols),
-  "`\\p{sc=Armi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Armi}+$/u,
+  matchSymbols,
+  "\\p{sc=Armi}"
 );
 
 const nonMatchSymbols = buildString({
@@ -48,19 +52,23 @@ const nonMatchSymbols = buildString({
     [0x010860, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Imperial_Aramaic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Imperial_Aramaic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Imperial_Aramaic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Imperial_Aramaic}"
 );
-assert(
-  /^\P{Script=Armi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Armi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Armi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Armi}"
 );
-assert(
-  /^\P{sc=Imperial_Aramaic}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Imperial_Aramaic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Imperial_Aramaic}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Imperial_Aramaic}"
 );
-assert(
-  /^\P{sc=Armi}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Armi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Armi}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Armi}"
 );

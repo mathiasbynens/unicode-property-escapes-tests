@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x001B50, 0x001B7C]
   ]
 });
-assert(
-  /^\p{Script=Balinese}+$/u.test(matchSymbols),
-  "`\\p{Script=Balinese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Balinese}+$/u,
+  matchSymbols,
+  "\\p{Script=Balinese}"
 );
-assert(
-  /^\p{Script=Bali}+$/u.test(matchSymbols),
-  "`\\p{Script=Bali}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Bali}+$/u,
+  matchSymbols,
+  "\\p{Script=Bali}"
 );
-assert(
-  /^\p{sc=Balinese}+$/u.test(matchSymbols),
-  "`\\p{sc=Balinese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Balinese}+$/u,
+  matchSymbols,
+  "\\p{sc=Balinese}"
 );
-assert(
-  /^\p{sc=Bali}+$/u.test(matchSymbols),
-  "`\\p{sc=Bali}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Bali}+$/u,
+  matchSymbols,
+  "\\p{sc=Bali}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Balinese}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Balinese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Balinese}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Balinese}"
 );
-assert(
-  /^\P{Script=Bali}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Bali}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Bali}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Bali}"
 );
-assert(
-  /^\P{sc=Balinese}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Balinese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Balinese}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Balinese}"
 );
-assert(
-  /^\P{sc=Bali}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Bali}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Bali}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Bali}"
 );

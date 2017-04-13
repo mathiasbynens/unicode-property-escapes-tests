@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -590,13 +590,15 @@ const matchSymbols = buildString({
     [0x02F800, 0x02FA1D]
   ]
 });
-assert(
-  /^\p{ID_Start}+$/u.test(matchSymbols),
-  "`\\p{ID_Start}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{ID_Start}+$/u,
+  matchSymbols,
+  "\\p{ID_Start}"
 );
-assert(
-  /^\p{IDS}+$/u.test(matchSymbols),
-  "`\\p{IDS}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{IDS}+$/u,
+  matchSymbols,
+  "\\p{IDS}"
 );
 
 const nonMatchSymbols = buildString({
@@ -1179,11 +1181,13 @@ const nonMatchSymbols = buildString({
     [0x02FA1E, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{ID_Start}+$/u.test(nonMatchSymbols),
-  "`\\P{ID_Start}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{ID_Start}+$/u,
+  nonMatchSymbols,
+  "\\P{ID_Start}"
 );
-assert(
-  /^\P{IDS}+$/u.test(nonMatchSymbols),
-  "`\\P{IDS}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{IDS}+$/u,
+  nonMatchSymbols,
+  "\\P{IDS}"
 );

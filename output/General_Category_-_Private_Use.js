@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,29 +21,35 @@ const matchSymbols = buildString({
     [0x100000, 0x10FFFD]
   ]
 });
-assert(
-  /^\p{General_Category=Private_Use}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Private_Use}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Private_Use}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Private_Use}"
 );
-assert(
-  /^\p{General_Category=Co}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Co}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Co}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Co}"
 );
-assert(
-  /^\p{gc=Private_Use}+$/u.test(matchSymbols),
-  "`\\p{gc=Private_Use}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Private_Use}+$/u,
+  matchSymbols,
+  "\\p{gc=Private_Use}"
 );
-assert(
-  /^\p{gc=Co}+$/u.test(matchSymbols),
-  "`\\p{gc=Co}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Co}+$/u,
+  matchSymbols,
+  "\\p{gc=Co}"
 );
-assert(
-  /^\p{Private_Use}+$/u.test(matchSymbols),
-  "`\\p{Private_Use}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Private_Use}+$/u,
+  matchSymbols,
+  "\\p{Private_Use}"
 );
-assert(
-  /^\p{Co}+$/u.test(matchSymbols),
-  "`\\p{Co}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Co}+$/u,
+  matchSymbols,
+  "\\p{Co}"
 );
 
 const nonMatchSymbols = buildString({
@@ -56,27 +62,33 @@ const nonMatchSymbols = buildString({
     [0x10FFFE, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Private_Use}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Private_Use}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Private_Use}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Private_Use}"
 );
-assert(
-  /^\P{General_Category=Co}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Co}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Co}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Co}"
 );
-assert(
-  /^\P{gc=Private_Use}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Private_Use}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Private_Use}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Private_Use}"
 );
-assert(
-  /^\P{gc=Co}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Co}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Co}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Co}"
 );
-assert(
-  /^\P{Private_Use}+$/u.test(nonMatchSymbols),
-  "`\\P{Private_Use}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Private_Use}+$/u,
+  nonMatchSymbols,
+  "\\P{Private_Use}"
 );
-assert(
-  /^\P{Co}+$/u.test(nonMatchSymbols),
-  "`\\P{Co}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Co}+$/u,
+  nonMatchSymbols,
+  "\\P{Co}"
 );

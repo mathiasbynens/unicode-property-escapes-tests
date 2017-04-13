@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x0031A0, 0x0031BA]
   ]
 });
-assert(
-  /^\p{Script=Bopomofo}+$/u.test(matchSymbols),
-  "`\\p{Script=Bopomofo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Bopomofo}+$/u,
+  matchSymbols,
+  "\\p{Script=Bopomofo}"
 );
-assert(
-  /^\p{Script=Bopo}+$/u.test(matchSymbols),
-  "`\\p{Script=Bopo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Bopo}+$/u,
+  matchSymbols,
+  "\\p{Script=Bopo}"
 );
-assert(
-  /^\p{sc=Bopomofo}+$/u.test(matchSymbols),
-  "`\\p{sc=Bopomofo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Bopomofo}+$/u,
+  matchSymbols,
+  "\\p{sc=Bopomofo}"
 );
-assert(
-  /^\p{sc=Bopo}+$/u.test(matchSymbols),
-  "`\\p{sc=Bopo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Bopo}+$/u,
+  matchSymbols,
+  "\\p{sc=Bopo}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Bopomofo}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Bopomofo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Bopomofo}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Bopomofo}"
 );
-assert(
-  /^\P{Script=Bopo}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Bopo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Bopo}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Bopo}"
 );
-assert(
-  /^\P{sc=Bopomofo}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Bopomofo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Bopomofo}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Bopomofo}"
 );
-assert(
-  /^\P{sc=Bopo}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Bopo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Bopo}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Bopo}"
 );

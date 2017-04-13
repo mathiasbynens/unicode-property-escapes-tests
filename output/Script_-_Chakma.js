@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x011136, 0x011143]
   ]
 });
-assert(
-  /^\p{Script=Chakma}+$/u.test(matchSymbols),
-  "`\\p{Script=Chakma}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Chakma}+$/u,
+  matchSymbols,
+  "\\p{Script=Chakma}"
 );
-assert(
-  /^\p{Script=Cakm}+$/u.test(matchSymbols),
-  "`\\p{Script=Cakm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Cakm}+$/u,
+  matchSymbols,
+  "\\p{Script=Cakm}"
 );
-assert(
-  /^\p{sc=Chakma}+$/u.test(matchSymbols),
-  "`\\p{sc=Chakma}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Chakma}+$/u,
+  matchSymbols,
+  "\\p{sc=Chakma}"
 );
-assert(
-  /^\p{sc=Cakm}+$/u.test(matchSymbols),
-  "`\\p{sc=Cakm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Cakm}+$/u,
+  matchSymbols,
+  "\\p{sc=Cakm}"
 );
 
 const nonMatchSymbols = buildString({
@@ -48,19 +52,23 @@ const nonMatchSymbols = buildString({
     [0x011144, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Chakma}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Chakma}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Chakma}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Chakma}"
 );
-assert(
-  /^\P{Script=Cakm}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Cakm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Cakm}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Cakm}"
 );
-assert(
-  /^\P{sc=Chakma}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Chakma}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Chakma}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Chakma}"
 );
-assert(
-  /^\P{sc=Cakm}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Cakm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Cakm}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Cakm}"
 );

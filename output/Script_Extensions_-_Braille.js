@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x002800, 0x0028FF]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Braille}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Braille}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Braille}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Braille}"
 );
-assert(
-  /^\p{Script_Extensions=Brai}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Brai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Brai}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Brai}"
 );
-assert(
-  /^\p{scx=Braille}+$/u.test(matchSymbols),
-  "`\\p{scx=Braille}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Braille}+$/u,
+  matchSymbols,
+  "\\p{scx=Braille}"
 );
-assert(
-  /^\p{scx=Brai}+$/u.test(matchSymbols),
-  "`\\p{scx=Brai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Brai}+$/u,
+  matchSymbols,
+  "\\p{scx=Brai}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Braille}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Braille}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Braille}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Braille}"
 );
-assert(
-  /^\P{Script_Extensions=Brai}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Brai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Brai}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Brai}"
 );
-assert(
-  /^\P{scx=Braille}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Braille}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Braille}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Braille}"
 );
-assert(
-  /^\P{scx=Brai}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Brai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Brai}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Brai}"
 );

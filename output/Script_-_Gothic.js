@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x010330, 0x01034A]
   ]
 });
-assert(
-  /^\p{Script=Gothic}+$/u.test(matchSymbols),
-  "`\\p{Script=Gothic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Gothic}+$/u,
+  matchSymbols,
+  "\\p{Script=Gothic}"
 );
-assert(
-  /^\p{Script=Goth}+$/u.test(matchSymbols),
-  "`\\p{Script=Goth}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Goth}+$/u,
+  matchSymbols,
+  "\\p{Script=Goth}"
 );
-assert(
-  /^\p{sc=Gothic}+$/u.test(matchSymbols),
-  "`\\p{sc=Gothic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Gothic}+$/u,
+  matchSymbols,
+  "\\p{sc=Gothic}"
 );
-assert(
-  /^\p{sc=Goth}+$/u.test(matchSymbols),
-  "`\\p{sc=Goth}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Goth}+$/u,
+  matchSymbols,
+  "\\p{sc=Goth}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x01034B, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Gothic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Gothic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Gothic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Gothic}"
 );
-assert(
-  /^\P{Script=Goth}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Goth}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Goth}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Goth}"
 );
-assert(
-  /^\P{sc=Gothic}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Gothic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Gothic}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Gothic}"
 );
-assert(
-  /^\P{sc=Goth}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Goth}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Goth}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Goth}"
 );

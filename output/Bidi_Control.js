@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -23,13 +23,15 @@ const matchSymbols = buildString({
     [0x002066, 0x002069]
   ]
 });
-assert(
-  /^\p{Bidi_Control}+$/u.test(matchSymbols),
-  "`\\p{Bidi_Control}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Bidi_Control}+$/u,
+  matchSymbols,
+  "\\p{Bidi_Control}"
 );
-assert(
-  /^\p{Bidi_C}+$/u.test(matchSymbols),
-  "`\\p{Bidi_C}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Bidi_C}+$/u,
+  matchSymbols,
+  "\\p{Bidi_C}"
 );
 
 const nonMatchSymbols = buildString({
@@ -44,11 +46,13 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Bidi_Control}+$/u.test(nonMatchSymbols),
-  "`\\P{Bidi_Control}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Bidi_Control}+$/u,
+  nonMatchSymbols,
+  "\\P{Bidi_Control}"
 );
-assert(
-  /^\P{Bidi_C}+$/u.test(nonMatchSymbols),
-  "`\\P{Bidi_C}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Bidi_C}+$/u,
+  nonMatchSymbols,
+  "\\P{Bidi_C}"
 );

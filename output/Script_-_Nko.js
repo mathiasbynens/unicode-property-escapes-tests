@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x0007C0, 0x0007FA]
   ]
 });
-assert(
-  /^\p{Script=Nko}+$/u.test(matchSymbols),
-  "`\\p{Script=Nko}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Nko}+$/u,
+  matchSymbols,
+  "\\p{Script=Nko}"
 );
-assert(
-  /^\p{Script=Nkoo}+$/u.test(matchSymbols),
-  "`\\p{Script=Nkoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Nkoo}+$/u,
+  matchSymbols,
+  "\\p{Script=Nkoo}"
 );
-assert(
-  /^\p{sc=Nko}+$/u.test(matchSymbols),
-  "`\\p{sc=Nko}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Nko}+$/u,
+  matchSymbols,
+  "\\p{sc=Nko}"
 );
-assert(
-  /^\p{sc=Nkoo}+$/u.test(matchSymbols),
-  "`\\p{sc=Nkoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Nkoo}+$/u,
+  matchSymbols,
+  "\\p{sc=Nkoo}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Nko}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Nko}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Nko}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Nko}"
 );
-assert(
-  /^\P{Script=Nkoo}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Nkoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Nkoo}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Nkoo}"
 );
-assert(
-  /^\P{sc=Nko}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Nko}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Nko}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Nko}"
 );
-assert(
-  /^\P{sc=Nkoo}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Nkoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Nkoo}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Nkoo}"
 );

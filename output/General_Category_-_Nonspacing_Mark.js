@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -304,29 +304,35 @@ const matchSymbols = buildString({
     [0x0E0100, 0x0E01EF]
   ]
 });
-assert(
-  /^\p{General_Category=Nonspacing_Mark}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Nonspacing_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Nonspacing_Mark}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Nonspacing_Mark}"
 );
-assert(
-  /^\p{General_Category=Mn}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Mn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Mn}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Mn}"
 );
-assert(
-  /^\p{gc=Nonspacing_Mark}+$/u.test(matchSymbols),
-  "`\\p{gc=Nonspacing_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Nonspacing_Mark}+$/u,
+  matchSymbols,
+  "\\p{gc=Nonspacing_Mark}"
 );
-assert(
-  /^\p{gc=Mn}+$/u.test(matchSymbols),
-  "`\\p{gc=Mn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Mn}+$/u,
+  matchSymbols,
+  "\\p{gc=Mn}"
 );
-assert(
-  /^\p{Nonspacing_Mark}+$/u.test(matchSymbols),
-  "`\\p{Nonspacing_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Nonspacing_Mark}+$/u,
+  matchSymbols,
+  "\\p{Nonspacing_Mark}"
 );
-assert(
-  /^\p{Mn}+$/u.test(matchSymbols),
-  "`\\p{Mn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Mn}+$/u,
+  matchSymbols,
+  "\\p{Mn}"
 );
 
 const nonMatchSymbols = buildString({
@@ -623,27 +629,33 @@ const nonMatchSymbols = buildString({
     [0x0E01F0, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Nonspacing_Mark}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Nonspacing_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Nonspacing_Mark}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Nonspacing_Mark}"
 );
-assert(
-  /^\P{General_Category=Mn}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Mn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Mn}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Mn}"
 );
-assert(
-  /^\P{gc=Nonspacing_Mark}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Nonspacing_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Nonspacing_Mark}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Nonspacing_Mark}"
 );
-assert(
-  /^\P{gc=Mn}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Mn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Mn}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Mn}"
 );
-assert(
-  /^\P{Nonspacing_Mark}+$/u.test(nonMatchSymbols),
-  "`\\P{Nonspacing_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Nonspacing_Mark}+$/u,
+  nonMatchSymbols,
+  "\\P{Nonspacing_Mark}"
 );
-assert(
-  /^\P{Mn}+$/u.test(nonMatchSymbols),
-  "`\\P{Mn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Mn}+$/u,
+  nonMatchSymbols,
+  "\\P{Mn}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -609,13 +609,15 @@ const matchSymbols = buildString({
     [0x01E900, 0x01E921]
   ]
 });
-assert(
-  /^\p{Changes_When_Lowercased}+$/u.test(matchSymbols),
-  "`\\p{Changes_When_Lowercased}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Changes_When_Lowercased}+$/u,
+  matchSymbols,
+  "\\p{Changes_When_Lowercased}"
 );
-assert(
-  /^\p{CWL}+$/u.test(matchSymbols),
-  "`\\p{CWL}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{CWL}+$/u,
+  matchSymbols,
+  "\\p{CWL}"
 );
 
 const nonMatchSymbols = buildString({
@@ -1217,11 +1219,13 @@ const nonMatchSymbols = buildString({
     [0x01E922, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Changes_When_Lowercased}+$/u.test(nonMatchSymbols),
-  "`\\P{Changes_When_Lowercased}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Changes_When_Lowercased}+$/u,
+  nonMatchSymbols,
+  "\\P{Changes_When_Lowercased}"
 );
-assert(
-  /^\P{CWL}+$/u.test(nonMatchSymbols),
-  "`\\P{CWL}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{CWL}+$/u,
+  nonMatchSymbols,
+  "\\P{CWL}"
 );

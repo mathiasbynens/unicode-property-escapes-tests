@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -28,21 +28,25 @@ const matchSymbols = buildString({
     [0x00FB46, 0x00FB4F]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Hebrew}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Hebrew}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Hebrew}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Hebrew}"
 );
-assert(
-  /^\p{Script_Extensions=Hebr}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Hebr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Hebr}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Hebr}"
 );
-assert(
-  /^\p{scx=Hebrew}+$/u.test(matchSymbols),
-  "`\\p{scx=Hebrew}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Hebrew}+$/u,
+  matchSymbols,
+  "\\p{scx=Hebrew}"
 );
-assert(
-  /^\p{scx=Hebr}+$/u.test(matchSymbols),
-  "`\\p{scx=Hebr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Hebr}+$/u,
+  matchSymbols,
+  "\\p{scx=Hebr}"
 );
 
 const nonMatchSymbols = buildString({
@@ -63,19 +67,23 @@ const nonMatchSymbols = buildString({
     [0x00FB50, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Hebrew}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Hebrew}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Hebrew}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Hebrew}"
 );
-assert(
-  /^\P{Script_Extensions=Hebr}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Hebr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Hebr}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Hebr}"
 );
-assert(
-  /^\P{scx=Hebrew}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Hebrew}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Hebrew}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Hebrew}"
 );
-assert(
-  /^\P{scx=Hebr}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Hebr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Hebr}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Hebr}"
 );

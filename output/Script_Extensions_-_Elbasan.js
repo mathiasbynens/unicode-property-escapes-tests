@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x010500, 0x010527]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Elbasan}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Elbasan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Elbasan}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Elbasan}"
 );
-assert(
-  /^\p{Script_Extensions=Elba}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Elba}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Elba}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Elba}"
 );
-assert(
-  /^\p{scx=Elbasan}+$/u.test(matchSymbols),
-  "`\\p{scx=Elbasan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Elbasan}+$/u,
+  matchSymbols,
+  "\\p{scx=Elbasan}"
 );
-assert(
-  /^\p{scx=Elba}+$/u.test(matchSymbols),
-  "`\\p{scx=Elba}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Elba}+$/u,
+  matchSymbols,
+  "\\p{scx=Elba}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x010528, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Elbasan}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Elbasan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Elbasan}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Elbasan}"
 );
-assert(
-  /^\P{Script_Extensions=Elba}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Elba}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Elba}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Elba}"
 );
-assert(
-  /^\P{scx=Elbasan}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Elbasan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Elbasan}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Elbasan}"
 );
-assert(
-  /^\P{scx=Elba}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Elba}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Elba}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Elba}"
 );

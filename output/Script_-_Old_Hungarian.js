@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x010CFA, 0x010CFF]
   ]
 });
-assert(
-  /^\p{Script=Old_Hungarian}+$/u.test(matchSymbols),
-  "`\\p{Script=Old_Hungarian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Old_Hungarian}+$/u,
+  matchSymbols,
+  "\\p{Script=Old_Hungarian}"
 );
-assert(
-  /^\p{Script=Hung}+$/u.test(matchSymbols),
-  "`\\p{Script=Hung}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Hung}+$/u,
+  matchSymbols,
+  "\\p{Script=Hung}"
 );
-assert(
-  /^\p{sc=Old_Hungarian}+$/u.test(matchSymbols),
-  "`\\p{sc=Old_Hungarian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Old_Hungarian}+$/u,
+  matchSymbols,
+  "\\p{sc=Old_Hungarian}"
 );
-assert(
-  /^\p{sc=Hung}+$/u.test(matchSymbols),
-  "`\\p{sc=Hung}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Hung}+$/u,
+  matchSymbols,
+  "\\p{sc=Hung}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x010D00, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Old_Hungarian}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Old_Hungarian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Old_Hungarian}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Old_Hungarian}"
 );
-assert(
-  /^\P{Script=Hung}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Hung}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Hung}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Hung}"
 );
-assert(
-  /^\P{sc=Old_Hungarian}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Old_Hungarian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Old_Hungarian}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Old_Hungarian}"
 );
-assert(
-  /^\P{sc=Hung}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Hung}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Hung}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Hung}"
 );

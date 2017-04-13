@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -30,29 +30,35 @@ const matchSymbols = buildString({
     [0x00201B, 0x00201C]
   ]
 });
-assert(
-  /^\p{General_Category=Initial_Punctuation}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Initial_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Initial_Punctuation}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Initial_Punctuation}"
 );
-assert(
-  /^\p{General_Category=Pi}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Pi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Pi}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Pi}"
 );
-assert(
-  /^\p{gc=Initial_Punctuation}+$/u.test(matchSymbols),
-  "`\\p{gc=Initial_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Initial_Punctuation}+$/u,
+  matchSymbols,
+  "\\p{gc=Initial_Punctuation}"
 );
-assert(
-  /^\p{gc=Pi}+$/u.test(matchSymbols),
-  "`\\p{gc=Pi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Pi}+$/u,
+  matchSymbols,
+  "\\p{gc=Pi}"
 );
-assert(
-  /^\p{Initial_Punctuation}+$/u.test(matchSymbols),
-  "`\\p{Initial_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Initial_Punctuation}+$/u,
+  matchSymbols,
+  "\\p{Initial_Punctuation}"
 );
-assert(
-  /^\p{Pi}+$/u.test(matchSymbols),
-  "`\\p{Pi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Pi}+$/u,
+  matchSymbols,
+  "\\p{Pi}"
 );
 
 const nonMatchSymbols = buildString({
@@ -75,27 +81,33 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Initial_Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Initial_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Initial_Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Initial_Punctuation}"
 );
-assert(
-  /^\P{General_Category=Pi}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Pi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Pi}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Pi}"
 );
-assert(
-  /^\P{gc=Initial_Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Initial_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Initial_Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Initial_Punctuation}"
 );
-assert(
-  /^\P{gc=Pi}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Pi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Pi}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Pi}"
 );
-assert(
-  /^\P{Initial_Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{Initial_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Initial_Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{Initial_Punctuation}"
 );
-assert(
-  /^\P{Pi}+$/u.test(nonMatchSymbols),
-  "`\\P{Pi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Pi}+$/u,
+  nonMatchSymbols,
+  "\\P{Pi}"
 );

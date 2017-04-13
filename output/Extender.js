@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -47,13 +47,15 @@ const matchSymbols = buildString({
     [0x01E944, 0x01E946]
   ]
 });
-assert(
-  /^\p{Extender}+$/u.test(matchSymbols),
-  "`\\p{Extender}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Extender}+$/u,
+  matchSymbols,
+  "\\p{Extender}"
 );
-assert(
-  /^\p{Ext}+$/u.test(matchSymbols),
-  "`\\p{Ext}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Ext}+$/u,
+  matchSymbols,
+  "\\p{Ext}"
 );
 
 const nonMatchSymbols = buildString({
@@ -92,11 +94,13 @@ const nonMatchSymbols = buildString({
     [0x01E947, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Extender}+$/u.test(nonMatchSymbols),
-  "`\\P{Extender}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Extender}+$/u,
+  nonMatchSymbols,
+  "\\P{Extender}"
 );
-assert(
-  /^\P{Ext}+$/u.test(nonMatchSymbols),
-  "`\\P{Ext}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Ext}+$/u,
+  nonMatchSymbols,
+  "\\P{Ext}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -25,21 +25,25 @@ const matchSymbols = buildString({
     [0x010837, 0x010838]
   ]
 });
-assert(
-  /^\p{Script=Cypriot}+$/u.test(matchSymbols),
-  "`\\p{Script=Cypriot}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Cypriot}+$/u,
+  matchSymbols,
+  "\\p{Script=Cypriot}"
 );
-assert(
-  /^\p{Script=Cprt}+$/u.test(matchSymbols),
-  "`\\p{Script=Cprt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Cprt}+$/u,
+  matchSymbols,
+  "\\p{Script=Cprt}"
 );
-assert(
-  /^\p{sc=Cypriot}+$/u.test(matchSymbols),
-  "`\\p{sc=Cypriot}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Cypriot}+$/u,
+  matchSymbols,
+  "\\p{sc=Cypriot}"
 );
-assert(
-  /^\p{sc=Cprt}+$/u.test(matchSymbols),
-  "`\\p{sc=Cprt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Cprt}+$/u,
+  matchSymbols,
+  "\\p{sc=Cprt}"
 );
 
 const nonMatchSymbols = buildString({
@@ -57,19 +61,23 @@ const nonMatchSymbols = buildString({
     [0x010840, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Cypriot}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Cypriot}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Cypriot}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Cypriot}"
 );
-assert(
-  /^\P{Script=Cprt}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Cprt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Cprt}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Cprt}"
 );
-assert(
-  /^\P{sc=Cypriot}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Cypriot}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Cypriot}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Cypriot}"
 );
-assert(
-  /^\P{sc=Cprt}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Cprt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Cprt}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Cprt}"
 );

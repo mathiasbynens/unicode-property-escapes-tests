@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -22,21 +22,25 @@ const matchSymbols = buildString({
     [0x0112F0, 0x0112F9]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Khudawadi}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Khudawadi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Khudawadi}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Khudawadi}"
 );
-assert(
-  /^\p{Script_Extensions=Sind}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Sind}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Sind}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Sind}"
 );
-assert(
-  /^\p{scx=Khudawadi}+$/u.test(matchSymbols),
-  "`\\p{scx=Khudawadi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Khudawadi}+$/u,
+  matchSymbols,
+  "\\p{scx=Khudawadi}"
 );
-assert(
-  /^\p{scx=Sind}+$/u.test(matchSymbols),
-  "`\\p{scx=Sind}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Sind}+$/u,
+  matchSymbols,
+  "\\p{scx=Sind}"
 );
 
 const nonMatchSymbols = buildString({
@@ -51,19 +55,23 @@ const nonMatchSymbols = buildString({
     [0x0112FA, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Khudawadi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Khudawadi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Khudawadi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Khudawadi}"
 );
-assert(
-  /^\P{Script_Extensions=Sind}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Sind}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Sind}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Sind}"
 );
-assert(
-  /^\P{scx=Khudawadi}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Khudawadi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Khudawadi}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Khudawadi}"
 );
-assert(
-  /^\P{scx=Sind}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Sind}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Sind}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Sind}"
 );

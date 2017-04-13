@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -702,13 +702,15 @@ const matchSymbols = buildString({
     [0x0E0100, 0x0E01EF]
   ]
 });
-assert(
-  /^\p{XID_Continue}+$/u.test(matchSymbols),
-  "`\\p{XID_Continue}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{XID_Continue}+$/u,
+  matchSymbols,
+  "\\p{XID_Continue}"
 );
-assert(
-  /^\p{XIDC}+$/u.test(matchSymbols),
-  "`\\p{XIDC}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{XIDC}+$/u,
+  matchSymbols,
+  "\\p{XIDC}"
 );
 
 const nonMatchSymbols = buildString({
@@ -1403,11 +1405,13 @@ const nonMatchSymbols = buildString({
     [0x0E01F0, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{XID_Continue}+$/u.test(nonMatchSymbols),
-  "`\\P{XID_Continue}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{XID_Continue}+$/u,
+  nonMatchSymbols,
+  "\\P{XID_Continue}"
 );
-assert(
-  /^\P{XIDC}+$/u.test(nonMatchSymbols),
-  "`\\P{XIDC}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{XIDC}+$/u,
+  nonMatchSymbols,
+  "\\P{XIDC}"
 );

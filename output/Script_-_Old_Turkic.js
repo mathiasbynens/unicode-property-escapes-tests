@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x010C00, 0x010C48]
   ]
 });
-assert(
-  /^\p{Script=Old_Turkic}+$/u.test(matchSymbols),
-  "`\\p{Script=Old_Turkic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Old_Turkic}+$/u,
+  matchSymbols,
+  "\\p{Script=Old_Turkic}"
 );
-assert(
-  /^\p{Script=Orkh}+$/u.test(matchSymbols),
-  "`\\p{Script=Orkh}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Orkh}+$/u,
+  matchSymbols,
+  "\\p{Script=Orkh}"
 );
-assert(
-  /^\p{sc=Old_Turkic}+$/u.test(matchSymbols),
-  "`\\p{sc=Old_Turkic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Old_Turkic}+$/u,
+  matchSymbols,
+  "\\p{sc=Old_Turkic}"
 );
-assert(
-  /^\p{sc=Orkh}+$/u.test(matchSymbols),
-  "`\\p{sc=Orkh}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Orkh}+$/u,
+  matchSymbols,
+  "\\p{sc=Orkh}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x010C49, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Old_Turkic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Old_Turkic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Old_Turkic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Old_Turkic}"
 );
-assert(
-  /^\P{Script=Orkh}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Orkh}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Orkh}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Orkh}"
 );
-assert(
-  /^\P{sc=Old_Turkic}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Old_Turkic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Old_Turkic}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Old_Turkic}"
 );
-assert(
-  /^\P{sc=Orkh}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Orkh}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Orkh}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Orkh}"
 );

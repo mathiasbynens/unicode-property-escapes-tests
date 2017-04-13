@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -27,21 +27,25 @@ const matchSymbols = buildString({
     [0x002D00, 0x002D25]
   ]
 });
-assert(
-  /^\p{Script=Georgian}+$/u.test(matchSymbols),
-  "`\\p{Script=Georgian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Georgian}+$/u,
+  matchSymbols,
+  "\\p{Script=Georgian}"
 );
-assert(
-  /^\p{Script=Geor}+$/u.test(matchSymbols),
-  "`\\p{Script=Geor}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Geor}+$/u,
+  matchSymbols,
+  "\\p{Script=Geor}"
 );
-assert(
-  /^\p{sc=Georgian}+$/u.test(matchSymbols),
-  "`\\p{sc=Georgian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Georgian}+$/u,
+  matchSymbols,
+  "\\p{sc=Georgian}"
 );
-assert(
-  /^\p{sc=Geor}+$/u.test(matchSymbols),
-  "`\\p{sc=Geor}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Geor}+$/u,
+  matchSymbols,
+  "\\p{sc=Geor}"
 );
 
 const nonMatchSymbols = buildString({
@@ -61,19 +65,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Georgian}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Georgian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Georgian}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Georgian}"
 );
-assert(
-  /^\P{Script=Geor}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Geor}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Geor}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Geor}"
 );
-assert(
-  /^\P{sc=Georgian}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Georgian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Georgian}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Georgian}"
 );
-assert(
-  /^\P{sc=Geor}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Geor}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Geor}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Geor}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x00170E, 0x001714]
   ]
 });
-assert(
-  /^\p{Script=Tagalog}+$/u.test(matchSymbols),
-  "`\\p{Script=Tagalog}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Tagalog}+$/u,
+  matchSymbols,
+  "\\p{Script=Tagalog}"
 );
-assert(
-  /^\p{Script=Tglg}+$/u.test(matchSymbols),
-  "`\\p{Script=Tglg}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Tglg}+$/u,
+  matchSymbols,
+  "\\p{Script=Tglg}"
 );
-assert(
-  /^\p{sc=Tagalog}+$/u.test(matchSymbols),
-  "`\\p{sc=Tagalog}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Tagalog}+$/u,
+  matchSymbols,
+  "\\p{sc=Tagalog}"
 );
-assert(
-  /^\p{sc=Tglg}+$/u.test(matchSymbols),
-  "`\\p{sc=Tglg}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Tglg}+$/u,
+  matchSymbols,
+  "\\p{sc=Tglg}"
 );
 
 const nonMatchSymbols = buildString({
@@ -48,19 +52,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Tagalog}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Tagalog}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Tagalog}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Tagalog}"
 );
-assert(
-  /^\P{Script=Tglg}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Tglg}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Tglg}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Tglg}"
 );
-assert(
-  /^\P{sc=Tagalog}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Tagalog}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Tagalog}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Tagalog}"
 );
-assert(
-  /^\P{sc=Tglg}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Tglg}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Tglg}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Tglg}"
 );

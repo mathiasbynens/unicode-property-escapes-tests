@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -48,29 +48,35 @@ const matchSymbols = buildString({
     [0x01F3FB, 0x01F3FF]
   ]
 });
-assert(
-  /^\p{General_Category=Modifier_Symbol}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Modifier_Symbol}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Modifier_Symbol}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Modifier_Symbol}"
 );
-assert(
-  /^\p{General_Category=Sk}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Sk}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Sk}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Sk}"
 );
-assert(
-  /^\p{gc=Modifier_Symbol}+$/u.test(matchSymbols),
-  "`\\p{gc=Modifier_Symbol}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Modifier_Symbol}+$/u,
+  matchSymbols,
+  "\\p{gc=Modifier_Symbol}"
 );
-assert(
-  /^\p{gc=Sk}+$/u.test(matchSymbols),
-  "`\\p{gc=Sk}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Sk}+$/u,
+  matchSymbols,
+  "\\p{gc=Sk}"
 );
-assert(
-  /^\p{Modifier_Symbol}+$/u.test(matchSymbols),
-  "`\\p{Modifier_Symbol}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Modifier_Symbol}+$/u,
+  matchSymbols,
+  "\\p{Modifier_Symbol}"
 );
-assert(
-  /^\p{Sk}+$/u.test(matchSymbols),
-  "`\\p{Sk}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Sk}+$/u,
+  matchSymbols,
+  "\\p{Sk}"
 );
 
 const nonMatchSymbols = buildString({
@@ -111,27 +117,33 @@ const nonMatchSymbols = buildString({
     [0x01F400, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Modifier_Symbol}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Modifier_Symbol}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Modifier_Symbol}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Modifier_Symbol}"
 );
-assert(
-  /^\P{General_Category=Sk}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Sk}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Sk}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Sk}"
 );
-assert(
-  /^\P{gc=Modifier_Symbol}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Modifier_Symbol}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Modifier_Symbol}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Modifier_Symbol}"
 );
-assert(
-  /^\P{gc=Sk}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Sk}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Sk}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Sk}"
 );
-assert(
-  /^\P{Modifier_Symbol}+$/u.test(nonMatchSymbols),
-  "`\\P{Modifier_Symbol}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Modifier_Symbol}+$/u,
+  nonMatchSymbols,
+  "\\P{Modifier_Symbol}"
 );
-assert(
-  /^\P{Sk}+$/u.test(nonMatchSymbols),
-  "`\\P{Sk}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Sk}+$/u,
+  nonMatchSymbols,
+  "\\P{Sk}"
 );

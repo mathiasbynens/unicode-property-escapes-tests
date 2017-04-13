@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x00AADB, 0x00AADF]
   ]
 });
-assert(
-  /^\p{Script=Tai_Viet}+$/u.test(matchSymbols),
-  "`\\p{Script=Tai_Viet}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Tai_Viet}+$/u,
+  matchSymbols,
+  "\\p{Script=Tai_Viet}"
 );
-assert(
-  /^\p{Script=Tavt}+$/u.test(matchSymbols),
-  "`\\p{Script=Tavt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Tavt}+$/u,
+  matchSymbols,
+  "\\p{Script=Tavt}"
 );
-assert(
-  /^\p{sc=Tai_Viet}+$/u.test(matchSymbols),
-  "`\\p{sc=Tai_Viet}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Tai_Viet}+$/u,
+  matchSymbols,
+  "\\p{sc=Tai_Viet}"
 );
-assert(
-  /^\p{sc=Tavt}+$/u.test(matchSymbols),
-  "`\\p{sc=Tavt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Tavt}+$/u,
+  matchSymbols,
+  "\\p{sc=Tavt}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Tai_Viet}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Tai_Viet}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Tai_Viet}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Tai_Viet}"
 );
-assert(
-  /^\P{Script=Tavt}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Tavt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Tavt}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Tavt}"
 );
-assert(
-  /^\P{sc=Tai_Viet}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Tai_Viet}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Tai_Viet}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Tai_Viet}"
 );
-assert(
-  /^\P{sc=Tavt}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Tavt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Tavt}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Tavt}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x0109D2, 0x0109FF]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Meroitic_Cursive}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Meroitic_Cursive}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Meroitic_Cursive}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Meroitic_Cursive}"
 );
-assert(
-  /^\p{Script_Extensions=Merc}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Merc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Merc}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Merc}"
 );
-assert(
-  /^\p{scx=Meroitic_Cursive}+$/u.test(matchSymbols),
-  "`\\p{scx=Meroitic_Cursive}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Meroitic_Cursive}+$/u,
+  matchSymbols,
+  "\\p{scx=Meroitic_Cursive}"
 );
-assert(
-  /^\p{scx=Merc}+$/u.test(matchSymbols),
-  "`\\p{scx=Merc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Merc}+$/u,
+  matchSymbols,
+  "\\p{scx=Merc}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x010A00, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Meroitic_Cursive}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Meroitic_Cursive}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Meroitic_Cursive}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Meroitic_Cursive}"
 );
-assert(
-  /^\P{Script_Extensions=Merc}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Merc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Merc}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Merc}"
 );
-assert(
-  /^\P{scx=Meroitic_Cursive}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Meroitic_Cursive}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Meroitic_Cursive}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Meroitic_Cursive}"
 );
-assert(
-  /^\P{scx=Merc}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Merc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Merc}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Merc}"
 );

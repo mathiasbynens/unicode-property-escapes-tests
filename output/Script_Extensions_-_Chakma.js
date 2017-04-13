@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -22,21 +22,25 @@ const matchSymbols = buildString({
     [0x011136, 0x011143]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Chakma}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Chakma}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Chakma}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Chakma}"
 );
-assert(
-  /^\p{Script_Extensions=Cakm}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Cakm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Cakm}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Cakm}"
 );
-assert(
-  /^\p{scx=Chakma}+$/u.test(matchSymbols),
-  "`\\p{scx=Chakma}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Chakma}+$/u,
+  matchSymbols,
+  "\\p{scx=Chakma}"
 );
-assert(
-  /^\p{scx=Cakm}+$/u.test(matchSymbols),
-  "`\\p{scx=Cakm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Cakm}+$/u,
+  matchSymbols,
+  "\\p{scx=Cakm}"
 );
 
 const nonMatchSymbols = buildString({
@@ -52,19 +56,23 @@ const nonMatchSymbols = buildString({
     [0x011144, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Chakma}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Chakma}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Chakma}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Chakma}"
 );
-assert(
-  /^\P{Script_Extensions=Cakm}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Cakm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Cakm}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Cakm}"
 );
-assert(
-  /^\P{scx=Chakma}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Chakma}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Chakma}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Chakma}"
 );
-assert(
-  /^\P{scx=Cakm}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Cakm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Cakm}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Cakm}"
 );

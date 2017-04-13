@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x0016EE, 0x0016F8]
   ]
 });
-assert(
-  /^\p{Script=Runic}+$/u.test(matchSymbols),
-  "`\\p{Script=Runic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Runic}+$/u,
+  matchSymbols,
+  "\\p{Script=Runic}"
 );
-assert(
-  /^\p{Script=Runr}+$/u.test(matchSymbols),
-  "`\\p{Script=Runr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Runr}+$/u,
+  matchSymbols,
+  "\\p{Script=Runr}"
 );
-assert(
-  /^\p{sc=Runic}+$/u.test(matchSymbols),
-  "`\\p{sc=Runic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Runic}+$/u,
+  matchSymbols,
+  "\\p{sc=Runic}"
 );
-assert(
-  /^\p{sc=Runr}+$/u.test(matchSymbols),
-  "`\\p{sc=Runr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Runr}+$/u,
+  matchSymbols,
+  "\\p{sc=Runr}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Runic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Runic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Runic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Runic}"
 );
-assert(
-  /^\P{Script=Runr}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Runr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Runr}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Runr}"
 );
-assert(
-  /^\P{sc=Runic}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Runic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Runic}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Runic}"
 );
-assert(
-  /^\P{sc=Runr}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Runr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Runr}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Runr}"
 );

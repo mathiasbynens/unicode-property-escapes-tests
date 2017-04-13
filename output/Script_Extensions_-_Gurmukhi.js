@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -38,21 +38,25 @@ const matchSymbols = buildString({
     [0x00A830, 0x00A839]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Gurmukhi}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Gurmukhi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Gurmukhi}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Gurmukhi}"
 );
-assert(
-  /^\p{Script_Extensions=Guru}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Guru}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Guru}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Guru}"
 );
-assert(
-  /^\p{scx=Gurmukhi}+$/u.test(matchSymbols),
-  "`\\p{scx=Gurmukhi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Gurmukhi}+$/u,
+  matchSymbols,
+  "\\p{scx=Gurmukhi}"
 );
-assert(
-  /^\p{scx=Guru}+$/u.test(matchSymbols),
-  "`\\p{scx=Guru}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Guru}+$/u,
+  matchSymbols,
+  "\\p{scx=Guru}"
 );
 
 const nonMatchSymbols = buildString({
@@ -83,19 +87,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Gurmukhi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Gurmukhi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Gurmukhi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Gurmukhi}"
 );
-assert(
-  /^\P{Script_Extensions=Guru}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Guru}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Guru}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Guru}"
 );
-assert(
-  /^\P{scx=Gurmukhi}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Gurmukhi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Gurmukhi}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Gurmukhi}"
 );
-assert(
-  /^\P{scx=Guru}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Guru}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Guru}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Guru}"
 );

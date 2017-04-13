@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x00AB70, 0x00ABBF]
   ]
 });
-assert(
-  /^\p{Script=Cherokee}+$/u.test(matchSymbols),
-  "`\\p{Script=Cherokee}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Cherokee}+$/u,
+  matchSymbols,
+  "\\p{Script=Cherokee}"
 );
-assert(
-  /^\p{Script=Cher}+$/u.test(matchSymbols),
-  "`\\p{Script=Cher}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Cher}+$/u,
+  matchSymbols,
+  "\\p{Script=Cher}"
 );
-assert(
-  /^\p{sc=Cherokee}+$/u.test(matchSymbols),
-  "`\\p{sc=Cherokee}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Cherokee}+$/u,
+  matchSymbols,
+  "\\p{sc=Cherokee}"
 );
-assert(
-  /^\p{sc=Cher}+$/u.test(matchSymbols),
-  "`\\p{sc=Cher}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Cher}+$/u,
+  matchSymbols,
+  "\\p{sc=Cher}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Cherokee}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Cherokee}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Cherokee}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Cherokee}"
 );
-assert(
-  /^\P{Script=Cher}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Cher}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Cher}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Cher}"
 );
-assert(
-  /^\P{sc=Cherokee}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Cherokee}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Cherokee}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Cherokee}"
 );
-assert(
-  /^\P{sc=Cher}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Cher}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Cher}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Cher}"
 );

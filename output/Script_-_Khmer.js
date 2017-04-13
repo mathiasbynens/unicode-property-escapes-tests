@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -22,21 +22,25 @@ const matchSymbols = buildString({
     [0x0019E0, 0x0019FF]
   ]
 });
-assert(
-  /^\p{Script=Khmer}+$/u.test(matchSymbols),
-  "`\\p{Script=Khmer}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Khmer}+$/u,
+  matchSymbols,
+  "\\p{Script=Khmer}"
 );
-assert(
-  /^\p{Script=Khmr}+$/u.test(matchSymbols),
-  "`\\p{Script=Khmr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Khmr}+$/u,
+  matchSymbols,
+  "\\p{Script=Khmr}"
 );
-assert(
-  /^\p{sc=Khmer}+$/u.test(matchSymbols),
-  "`\\p{sc=Khmer}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Khmer}+$/u,
+  matchSymbols,
+  "\\p{sc=Khmer}"
 );
-assert(
-  /^\p{sc=Khmr}+$/u.test(matchSymbols),
-  "`\\p{sc=Khmr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Khmr}+$/u,
+  matchSymbols,
+  "\\p{sc=Khmr}"
 );
 
 const nonMatchSymbols = buildString({
@@ -51,19 +55,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Khmer}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Khmer}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Khmer}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Khmer}"
 );
-assert(
-  /^\P{Script=Khmr}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Khmr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Khmr}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Khmr}"
 );
-assert(
-  /^\P{sc=Khmer}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Khmer}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Khmer}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Khmer}"
 );
-assert(
-  /^\P{sc=Khmr}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Khmr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Khmr}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Khmr}"
 );

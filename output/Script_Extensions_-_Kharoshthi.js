@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -26,21 +26,25 @@ const matchSymbols = buildString({
     [0x010A50, 0x010A58]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Kharoshthi}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Kharoshthi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Kharoshthi}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Kharoshthi}"
 );
-assert(
-  /^\p{Script_Extensions=Khar}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Khar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Khar}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Khar}"
 );
-assert(
-  /^\p{scx=Kharoshthi}+$/u.test(matchSymbols),
-  "`\\p{scx=Kharoshthi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Kharoshthi}+$/u,
+  matchSymbols,
+  "\\p{scx=Kharoshthi}"
 );
-assert(
-  /^\p{scx=Khar}+$/u.test(matchSymbols),
-  "`\\p{scx=Khar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Khar}+$/u,
+  matchSymbols,
+  "\\p{scx=Khar}"
 );
 
 const nonMatchSymbols = buildString({
@@ -60,19 +64,23 @@ const nonMatchSymbols = buildString({
     [0x010A59, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Kharoshthi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Kharoshthi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Kharoshthi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Kharoshthi}"
 );
-assert(
-  /^\P{Script_Extensions=Khar}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Khar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Khar}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Khar}"
 );
-assert(
-  /^\P{scx=Kharoshthi}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Kharoshthi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Kharoshthi}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Kharoshthi}"
 );
-assert(
-  /^\P{scx=Khar}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Khar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Khar}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Khar}"
 );

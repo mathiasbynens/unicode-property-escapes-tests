@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -85,13 +85,15 @@ const matchSymbols = buildString({
     [0x016B37, 0x016B38]
   ]
 });
-assert(
-  /^\p{Sentence_Terminal}+$/u.test(matchSymbols),
-  "`\\p{Sentence_Terminal}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Sentence_Terminal}+$/u,
+  matchSymbols,
+  "\\p{Sentence_Terminal}"
 );
-assert(
-  /^\p{STerm}+$/u.test(matchSymbols),
-  "`\\p{STerm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{STerm}+$/u,
+  matchSymbols,
+  "\\p{STerm}"
 );
 
 const nonMatchSymbols = buildString({
@@ -169,11 +171,13 @@ const nonMatchSymbols = buildString({
     [0x01DA89, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Sentence_Terminal}+$/u.test(nonMatchSymbols),
-  "`\\P{Sentence_Terminal}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Sentence_Terminal}+$/u,
+  nonMatchSymbols,
+  "\\P{Sentence_Terminal}"
 );
-assert(
-  /^\P{STerm}+$/u.test(nonMatchSymbols),
-  "`\\P{STerm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{STerm}+$/u,
+  nonMatchSymbols,
+  "\\P{STerm}"
 );

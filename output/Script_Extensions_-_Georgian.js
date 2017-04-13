@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -27,21 +27,25 @@ const matchSymbols = buildString({
     [0x002D00, 0x002D25]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Georgian}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Georgian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Georgian}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Georgian}"
 );
-assert(
-  /^\p{Script_Extensions=Geor}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Geor}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Geor}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Geor}"
 );
-assert(
-  /^\p{scx=Georgian}+$/u.test(matchSymbols),
-  "`\\p{scx=Georgian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Georgian}+$/u,
+  matchSymbols,
+  "\\p{scx=Georgian}"
 );
-assert(
-  /^\p{scx=Geor}+$/u.test(matchSymbols),
-  "`\\p{scx=Geor}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Geor}+$/u,
+  matchSymbols,
+  "\\p{scx=Geor}"
 );
 
 const nonMatchSymbols = buildString({
@@ -61,19 +65,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Georgian}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Georgian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Georgian}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Georgian}"
 );
-assert(
-  /^\P{Script_Extensions=Geor}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Geor}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Geor}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Geor}"
 );
-assert(
-  /^\P{scx=Georgian}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Georgian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Georgian}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Georgian}"
 );
-assert(
-  /^\P{scx=Geor}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Geor}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Geor}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Geor}"
 );

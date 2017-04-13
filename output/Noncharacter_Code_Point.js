@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -36,13 +36,15 @@ const matchSymbols = buildString({
     [0x10FFFE, 0x10FFFF]
   ]
 });
-assert(
-  /^\p{Noncharacter_Code_Point}+$/u.test(matchSymbols),
-  "`\\p{Noncharacter_Code_Point}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Noncharacter_Code_Point}+$/u,
+  matchSymbols,
+  "\\p{Noncharacter_Code_Point}"
 );
-assert(
-  /^\p{NChar}+$/u.test(matchSymbols),
-  "`\\p{NChar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{NChar}+$/u,
+  matchSymbols,
+  "\\p{NChar}"
 );
 
 const nonMatchSymbols = buildString({
@@ -70,11 +72,13 @@ const nonMatchSymbols = buildString({
     [0x100000, 0x10FFFD]
   ]
 });
-assert(
-  /^\P{Noncharacter_Code_Point}+$/u.test(nonMatchSymbols),
-  "`\\P{Noncharacter_Code_Point}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Noncharacter_Code_Point}+$/u,
+  nonMatchSymbols,
+  "\\P{Noncharacter_Code_Point}"
 );
-assert(
-  /^\P{NChar}+$/u.test(nonMatchSymbols),
-  "`\\P{NChar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{NChar}+$/u,
+  nonMatchSymbols,
+  "\\P{NChar}"
 );

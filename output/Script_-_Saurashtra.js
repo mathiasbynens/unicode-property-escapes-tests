@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x00A8CE, 0x00A8D9]
   ]
 });
-assert(
-  /^\p{Script=Saurashtra}+$/u.test(matchSymbols),
-  "`\\p{Script=Saurashtra}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Saurashtra}+$/u,
+  matchSymbols,
+  "\\p{Script=Saurashtra}"
 );
-assert(
-  /^\p{Script=Saur}+$/u.test(matchSymbols),
-  "`\\p{Script=Saur}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Saur}+$/u,
+  matchSymbols,
+  "\\p{Script=Saur}"
 );
-assert(
-  /^\p{sc=Saurashtra}+$/u.test(matchSymbols),
-  "`\\p{sc=Saurashtra}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Saurashtra}+$/u,
+  matchSymbols,
+  "\\p{sc=Saurashtra}"
 );
-assert(
-  /^\p{sc=Saur}+$/u.test(matchSymbols),
-  "`\\p{sc=Saur}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Saur}+$/u,
+  matchSymbols,
+  "\\p{sc=Saur}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Saurashtra}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Saurashtra}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Saurashtra}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Saurashtra}"
 );
-assert(
-  /^\P{Script=Saur}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Saur}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Saur}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Saur}"
 );
-assert(
-  /^\P{sc=Saurashtra}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Saurashtra}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Saurashtra}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Saurashtra}"
 );
-assert(
-  /^\P{sc=Saur}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Saur}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Saur}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Saur}"
 );

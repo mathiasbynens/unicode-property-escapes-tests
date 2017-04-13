@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x0104D8, 0x0104FB]
   ]
 });
-assert(
-  /^\p{Script=Osage}+$/u.test(matchSymbols),
-  "`\\p{Script=Osage}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Osage}+$/u,
+  matchSymbols,
+  "\\p{Script=Osage}"
 );
-assert(
-  /^\p{Script=Osge}+$/u.test(matchSymbols),
-  "`\\p{Script=Osge}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Osge}+$/u,
+  matchSymbols,
+  "\\p{Script=Osge}"
 );
-assert(
-  /^\p{sc=Osage}+$/u.test(matchSymbols),
-  "`\\p{sc=Osage}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Osage}+$/u,
+  matchSymbols,
+  "\\p{sc=Osage}"
 );
-assert(
-  /^\p{sc=Osge}+$/u.test(matchSymbols),
-  "`\\p{sc=Osge}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Osge}+$/u,
+  matchSymbols,
+  "\\p{sc=Osge}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x0104FC, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Osage}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Osage}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Osage}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Osage}"
 );
-assert(
-  /^\P{Script=Osge}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Osge}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Osge}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Osge}"
 );
-assert(
-  /^\P{sc=Osage}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Osage}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Osage}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Osage}"
 );
-assert(
-  /^\P{sc=Osge}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Osge}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Osge}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Osge}"
 );

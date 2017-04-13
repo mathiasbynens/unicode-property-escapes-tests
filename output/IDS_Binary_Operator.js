@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,13 +20,15 @@ const matchSymbols = buildString({
     [0x002FF4, 0x002FFB]
   ]
 });
-assert(
-  /^\p{IDS_Binary_Operator}+$/u.test(matchSymbols),
-  "`\\p{IDS_Binary_Operator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{IDS_Binary_Operator}+$/u,
+  matchSymbols,
+  "\\p{IDS_Binary_Operator}"
 );
-assert(
-  /^\p{IDSB}+$/u.test(matchSymbols),
-  "`\\p{IDSB}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{IDSB}+$/u,
+  matchSymbols,
+  "\\p{IDSB}"
 );
 
 const nonMatchSymbols = buildString({
@@ -39,11 +41,13 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{IDS_Binary_Operator}+$/u.test(nonMatchSymbols),
-  "`\\P{IDS_Binary_Operator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{IDS_Binary_Operator}+$/u,
+  nonMatchSymbols,
+  "\\P{IDS_Binary_Operator}"
 );
-assert(
-  /^\P{IDSB}+$/u.test(nonMatchSymbols),
-  "`\\P{IDSB}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{IDSB}+$/u,
+  nonMatchSymbols,
+  "\\P{IDSB}"
 );

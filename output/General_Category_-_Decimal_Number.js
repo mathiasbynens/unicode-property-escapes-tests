@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -72,41 +72,50 @@ const matchSymbols = buildString({
     [0x01E950, 0x01E959]
   ]
 });
-assert(
-  /^\p{General_Category=Decimal_Number}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Decimal_Number}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Decimal_Number}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Decimal_Number}"
 );
-assert(
-  /^\p{General_Category=Nd}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Nd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Nd}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Nd}"
 );
-assert(
-  /^\p{General_Category=digit}+$/u.test(matchSymbols),
-  "`\\p{General_Category=digit}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=digit}+$/u,
+  matchSymbols,
+  "\\p{General_Category=digit}"
 );
-assert(
-  /^\p{gc=Decimal_Number}+$/u.test(matchSymbols),
-  "`\\p{gc=Decimal_Number}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Decimal_Number}+$/u,
+  matchSymbols,
+  "\\p{gc=Decimal_Number}"
 );
-assert(
-  /^\p{gc=Nd}+$/u.test(matchSymbols),
-  "`\\p{gc=Nd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Nd}+$/u,
+  matchSymbols,
+  "\\p{gc=Nd}"
 );
-assert(
-  /^\p{gc=digit}+$/u.test(matchSymbols),
-  "`\\p{gc=digit}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=digit}+$/u,
+  matchSymbols,
+  "\\p{gc=digit}"
 );
-assert(
-  /^\p{Decimal_Number}+$/u.test(matchSymbols),
-  "`\\p{Decimal_Number}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Decimal_Number}+$/u,
+  matchSymbols,
+  "\\p{Decimal_Number}"
 );
-assert(
-  /^\p{Nd}+$/u.test(matchSymbols),
-  "`\\p{Nd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Nd}+$/u,
+  matchSymbols,
+  "\\p{Nd}"
 );
-assert(
-  /^\p{digit}+$/u.test(matchSymbols),
-  "`\\p{digit}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{digit}+$/u,
+  matchSymbols,
+  "\\p{digit}"
 );
 
 const nonMatchSymbols = buildString({
@@ -171,39 +180,48 @@ const nonMatchSymbols = buildString({
     [0x01E95A, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Decimal_Number}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Decimal_Number}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Decimal_Number}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Decimal_Number}"
 );
-assert(
-  /^\P{General_Category=Nd}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Nd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Nd}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Nd}"
 );
-assert(
-  /^\P{General_Category=digit}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=digit}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=digit}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=digit}"
 );
-assert(
-  /^\P{gc=Decimal_Number}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Decimal_Number}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Decimal_Number}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Decimal_Number}"
 );
-assert(
-  /^\P{gc=Nd}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Nd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Nd}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Nd}"
 );
-assert(
-  /^\P{gc=digit}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=digit}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=digit}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=digit}"
 );
-assert(
-  /^\P{Decimal_Number}+$/u.test(nonMatchSymbols),
-  "`\\P{Decimal_Number}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Decimal_Number}+$/u,
+  nonMatchSymbols,
+  "\\P{Decimal_Number}"
 );
-assert(
-  /^\P{Nd}+$/u.test(nonMatchSymbols),
-  "`\\P{Nd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Nd}+$/u,
+  nonMatchSymbols,
+  "\\P{Nd}"
 );
-assert(
-  /^\P{digit}+$/u.test(nonMatchSymbols),
-  "`\\P{digit}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{digit}+$/u,
+  nonMatchSymbols,
+  "\\P{digit}"
 );

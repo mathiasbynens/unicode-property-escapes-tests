@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -32,13 +32,15 @@ const matchSymbols = buildString({
     [0x00FF62, 0x00FF63]
   ]
 });
-assert(
-  /^\p{Quotation_Mark}+$/u.test(matchSymbols),
-  "`\\p{Quotation_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Quotation_Mark}+$/u,
+  matchSymbols,
+  "\\p{Quotation_Mark}"
 );
-assert(
-  /^\p{QMark}+$/u.test(matchSymbols),
-  "`\\p{QMark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{QMark}+$/u,
+  matchSymbols,
+  "\\p{QMark}"
 );
 
 const nonMatchSymbols = buildString({
@@ -62,11 +64,13 @@ const nonMatchSymbols = buildString({
     [0x00FF64, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Quotation_Mark}+$/u.test(nonMatchSymbols),
-  "`\\P{Quotation_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Quotation_Mark}+$/u,
+  nonMatchSymbols,
+  "\\P{Quotation_Mark}"
 );
-assert(
-  /^\P{QMark}+$/u.test(nonMatchSymbols),
-  "`\\P{QMark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{QMark}+$/u,
+  nonMatchSymbols,
+  "\\P{QMark}"
 );

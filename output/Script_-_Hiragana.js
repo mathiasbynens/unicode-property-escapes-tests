@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -23,21 +23,25 @@ const matchSymbols = buildString({
     [0x00309D, 0x00309F]
   ]
 });
-assert(
-  /^\p{Script=Hiragana}+$/u.test(matchSymbols),
-  "`\\p{Script=Hiragana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Hiragana}+$/u,
+  matchSymbols,
+  "\\p{Script=Hiragana}"
 );
-assert(
-  /^\p{Script=Hira}+$/u.test(matchSymbols),
-  "`\\p{Script=Hira}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Hira}+$/u,
+  matchSymbols,
+  "\\p{Script=Hira}"
 );
-assert(
-  /^\p{sc=Hiragana}+$/u.test(matchSymbols),
-  "`\\p{sc=Hiragana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Hiragana}+$/u,
+  matchSymbols,
+  "\\p{sc=Hiragana}"
 );
-assert(
-  /^\p{sc=Hira}+$/u.test(matchSymbols),
-  "`\\p{sc=Hira}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Hira}+$/u,
+  matchSymbols,
+  "\\p{sc=Hira}"
 );
 
 const nonMatchSymbols = buildString({
@@ -52,19 +56,23 @@ const nonMatchSymbols = buildString({
     [0x01F201, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Hiragana}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Hiragana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Hiragana}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Hiragana}"
 );
-assert(
-  /^\P{Script=Hira}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Hira}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Hira}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Hira}"
 );
-assert(
-  /^\P{sc=Hiragana}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Hiragana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Hiragana}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Hiragana}"
 );
-assert(
-  /^\P{sc=Hira}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Hira}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Hira}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Hira}"
 );

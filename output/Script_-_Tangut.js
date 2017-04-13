@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -22,21 +22,25 @@ const matchSymbols = buildString({
     [0x018800, 0x018AF2]
   ]
 });
-assert(
-  /^\p{Script=Tangut}+$/u.test(matchSymbols),
-  "`\\p{Script=Tangut}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Tangut}+$/u,
+  matchSymbols,
+  "\\p{Script=Tangut}"
 );
-assert(
-  /^\p{Script=Tang}+$/u.test(matchSymbols),
-  "`\\p{Script=Tang}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Tang}+$/u,
+  matchSymbols,
+  "\\p{Script=Tang}"
 );
-assert(
-  /^\p{sc=Tangut}+$/u.test(matchSymbols),
-  "`\\p{sc=Tangut}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Tangut}+$/u,
+  matchSymbols,
+  "\\p{sc=Tangut}"
 );
-assert(
-  /^\p{sc=Tang}+$/u.test(matchSymbols),
-  "`\\p{sc=Tang}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Tang}+$/u,
+  matchSymbols,
+  "\\p{sc=Tang}"
 );
 
 const nonMatchSymbols = buildString({
@@ -50,19 +54,23 @@ const nonMatchSymbols = buildString({
     [0x018AF3, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Tangut}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Tangut}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Tangut}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Tangut}"
 );
-assert(
-  /^\P{Script=Tang}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Tang}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Tang}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Tang}"
 );
-assert(
-  /^\P{sc=Tangut}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Tangut}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Tangut}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Tangut}"
 );
-assert(
-  /^\P{sc=Tang}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Tang}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Tang}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Tang}"
 );

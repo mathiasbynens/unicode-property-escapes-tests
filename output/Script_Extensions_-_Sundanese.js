@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x001CC0, 0x001CC7]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Sundanese}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Sundanese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Sundanese}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Sundanese}"
 );
-assert(
-  /^\p{Script_Extensions=Sund}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Sund}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Sund}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Sund}"
 );
-assert(
-  /^\p{scx=Sundanese}+$/u.test(matchSymbols),
-  "`\\p{scx=Sundanese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Sundanese}+$/u,
+  matchSymbols,
+  "\\p{scx=Sundanese}"
 );
-assert(
-  /^\p{scx=Sund}+$/u.test(matchSymbols),
-  "`\\p{scx=Sund}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Sund}+$/u,
+  matchSymbols,
+  "\\p{scx=Sund}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Sundanese}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Sundanese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Sundanese}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Sundanese}"
 );
-assert(
-  /^\P{Script_Extensions=Sund}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Sund}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Sund}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Sund}"
 );
-assert(
-  /^\P{scx=Sundanese}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Sundanese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Sundanese}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Sundanese}"
 );
-assert(
-  /^\P{scx=Sund}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Sund}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Sund}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Sund}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -27,21 +27,25 @@ const matchSymbols = buildString({
     [0x00FF71, 0x00FF9D]
   ]
 });
-assert(
-  /^\p{Script=Katakana}+$/u.test(matchSymbols),
-  "`\\p{Script=Katakana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Katakana}+$/u,
+  matchSymbols,
+  "\\p{Script=Katakana}"
 );
-assert(
-  /^\p{Script=Kana}+$/u.test(matchSymbols),
-  "`\\p{Script=Kana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Kana}+$/u,
+  matchSymbols,
+  "\\p{Script=Kana}"
 );
-assert(
-  /^\p{sc=Katakana}+$/u.test(matchSymbols),
-  "`\\p{sc=Katakana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Katakana}+$/u,
+  matchSymbols,
+  "\\p{sc=Katakana}"
 );
-assert(
-  /^\p{sc=Kana}+$/u.test(matchSymbols),
-  "`\\p{sc=Kana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Kana}+$/u,
+  matchSymbols,
+  "\\p{sc=Kana}"
 );
 
 const nonMatchSymbols = buildString({
@@ -61,19 +65,23 @@ const nonMatchSymbols = buildString({
     [0x01B001, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Katakana}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Katakana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Katakana}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Katakana}"
 );
-assert(
-  /^\P{Script=Kana}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Kana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Kana}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Kana}"
 );
-assert(
-  /^\P{sc=Katakana}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Katakana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Katakana}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Katakana}"
 );
-assert(
-  /^\P{sc=Kana}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Kana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Kana}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Kana}"
 );

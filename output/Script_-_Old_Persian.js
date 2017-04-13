@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x0103C8, 0x0103D5]
   ]
 });
-assert(
-  /^\p{Script=Old_Persian}+$/u.test(matchSymbols),
-  "`\\p{Script=Old_Persian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Old_Persian}+$/u,
+  matchSymbols,
+  "\\p{Script=Old_Persian}"
 );
-assert(
-  /^\p{Script=Xpeo}+$/u.test(matchSymbols),
-  "`\\p{Script=Xpeo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Xpeo}+$/u,
+  matchSymbols,
+  "\\p{Script=Xpeo}"
 );
-assert(
-  /^\p{sc=Old_Persian}+$/u.test(matchSymbols),
-  "`\\p{sc=Old_Persian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Old_Persian}+$/u,
+  matchSymbols,
+  "\\p{sc=Old_Persian}"
 );
-assert(
-  /^\p{sc=Xpeo}+$/u.test(matchSymbols),
-  "`\\p{sc=Xpeo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Xpeo}+$/u,
+  matchSymbols,
+  "\\p{sc=Xpeo}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x0103D6, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Old_Persian}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Old_Persian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Old_Persian}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Old_Persian}"
 );
-assert(
-  /^\P{Script=Xpeo}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Xpeo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Xpeo}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Xpeo}"
 );
-assert(
-  /^\P{sc=Old_Persian}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Old_Persian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Old_Persian}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Old_Persian}"
 );
-assert(
-  /^\P{sc=Xpeo}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Xpeo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Xpeo}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Xpeo}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -28,21 +28,25 @@ const matchSymbols = buildString({
     [0x00FB46, 0x00FB4F]
   ]
 });
-assert(
-  /^\p{Script=Hebrew}+$/u.test(matchSymbols),
-  "`\\p{Script=Hebrew}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Hebrew}+$/u,
+  matchSymbols,
+  "\\p{Script=Hebrew}"
 );
-assert(
-  /^\p{Script=Hebr}+$/u.test(matchSymbols),
-  "`\\p{Script=Hebr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Hebr}+$/u,
+  matchSymbols,
+  "\\p{Script=Hebr}"
 );
-assert(
-  /^\p{sc=Hebrew}+$/u.test(matchSymbols),
-  "`\\p{sc=Hebrew}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Hebrew}+$/u,
+  matchSymbols,
+  "\\p{sc=Hebrew}"
 );
-assert(
-  /^\p{sc=Hebr}+$/u.test(matchSymbols),
-  "`\\p{sc=Hebr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Hebr}+$/u,
+  matchSymbols,
+  "\\p{sc=Hebr}"
 );
 
 const nonMatchSymbols = buildString({
@@ -63,19 +67,23 @@ const nonMatchSymbols = buildString({
     [0x00FB50, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Hebrew}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Hebrew}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Hebrew}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Hebrew}"
 );
-assert(
-  /^\P{Script=Hebr}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Hebr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Hebr}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Hebr}"
 );
-assert(
-  /^\P{sc=Hebrew}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Hebrew}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Hebrew}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Hebrew}"
 );
-assert(
-  /^\P{sc=Hebr}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Hebr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Hebr}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Hebr}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x0108FB, 0x0108FF]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Hatran}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Hatran}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Hatran}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Hatran}"
 );
-assert(
-  /^\p{Script_Extensions=Hatr}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Hatr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Hatr}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Hatr}"
 );
-assert(
-  /^\p{scx=Hatran}+$/u.test(matchSymbols),
-  "`\\p{scx=Hatran}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Hatran}+$/u,
+  matchSymbols,
+  "\\p{scx=Hatran}"
 );
-assert(
-  /^\p{scx=Hatr}+$/u.test(matchSymbols),
-  "`\\p{scx=Hatr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Hatr}+$/u,
+  matchSymbols,
+  "\\p{scx=Hatr}"
 );
 
 const nonMatchSymbols = buildString({
@@ -50,19 +54,23 @@ const nonMatchSymbols = buildString({
     [0x010900, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Hatran}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Hatran}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Hatran}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Hatran}"
 );
-assert(
-  /^\P{Script_Extensions=Hatr}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Hatr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Hatr}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Hatr}"
 );
-assert(
-  /^\P{scx=Hatran}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Hatran}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Hatran}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Hatran}"
 );
-assert(
-  /^\P{scx=Hatr}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Hatr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Hatr}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Hatr}"
 );

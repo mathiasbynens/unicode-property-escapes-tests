@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -27,21 +27,25 @@ const matchSymbols = buildString({
     [0x00FE2E, 0x00FE2F]
   ]
 });
-assert(
-  /^\p{Script=Cyrillic}+$/u.test(matchSymbols),
-  "`\\p{Script=Cyrillic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Cyrillic}+$/u,
+  matchSymbols,
+  "\\p{Script=Cyrillic}"
 );
-assert(
-  /^\p{Script=Cyrl}+$/u.test(matchSymbols),
-  "`\\p{Script=Cyrl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Cyrl}+$/u,
+  matchSymbols,
+  "\\p{Script=Cyrl}"
 );
-assert(
-  /^\p{sc=Cyrillic}+$/u.test(matchSymbols),
-  "`\\p{sc=Cyrillic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Cyrillic}+$/u,
+  matchSymbols,
+  "\\p{sc=Cyrillic}"
 );
-assert(
-  /^\p{sc=Cyrl}+$/u.test(matchSymbols),
-  "`\\p{sc=Cyrl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Cyrl}+$/u,
+  matchSymbols,
+  "\\p{sc=Cyrl}"
 );
 
 const nonMatchSymbols = buildString({
@@ -60,19 +64,23 @@ const nonMatchSymbols = buildString({
     [0x00FE30, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Cyrillic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Cyrillic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Cyrillic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Cyrillic}"
 );
-assert(
-  /^\P{Script=Cyrl}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Cyrl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Cyrl}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Cyrl}"
 );
-assert(
-  /^\P{sc=Cyrillic}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Cyrillic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Cyrillic}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Cyrillic}"
 );
-assert(
-  /^\P{sc=Cyrl}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Cyrl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Cyrl}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Cyrl}"
 );

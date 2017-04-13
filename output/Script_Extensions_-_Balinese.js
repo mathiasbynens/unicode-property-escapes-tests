@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x001B50, 0x001B7C]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Balinese}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Balinese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Balinese}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Balinese}"
 );
-assert(
-  /^\p{Script_Extensions=Bali}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Bali}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Bali}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Bali}"
 );
-assert(
-  /^\p{scx=Balinese}+$/u.test(matchSymbols),
-  "`\\p{scx=Balinese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Balinese}+$/u,
+  matchSymbols,
+  "\\p{scx=Balinese}"
 );
-assert(
-  /^\p{scx=Bali}+$/u.test(matchSymbols),
-  "`\\p{scx=Bali}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Bali}+$/u,
+  matchSymbols,
+  "\\p{scx=Bali}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Balinese}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Balinese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Balinese}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Balinese}"
 );
-assert(
-  /^\P{Script_Extensions=Bali}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Bali}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Bali}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Bali}"
 );
-assert(
-  /^\P{scx=Balinese}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Balinese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Balinese}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Balinese}"
 );
-assert(
-  /^\P{scx=Bali}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Bali}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Bali}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Bali}"
 );

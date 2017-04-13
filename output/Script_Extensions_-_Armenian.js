@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -24,21 +24,25 @@ const matchSymbols = buildString({
     [0x00FB13, 0x00FB17]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Armenian}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Armenian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Armenian}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Armenian}"
 );
-assert(
-  /^\p{Script_Extensions=Armn}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Armn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Armn}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Armn}"
 );
-assert(
-  /^\p{scx=Armenian}+$/u.test(matchSymbols),
-  "`\\p{scx=Armenian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Armenian}+$/u,
+  matchSymbols,
+  "\\p{scx=Armenian}"
 );
-assert(
-  /^\p{scx=Armn}+$/u.test(matchSymbols),
-  "`\\p{scx=Armn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Armn}+$/u,
+  matchSymbols,
+  "\\p{scx=Armn}"
 );
 
 const nonMatchSymbols = buildString({
@@ -56,19 +60,23 @@ const nonMatchSymbols = buildString({
     [0x00FB18, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Armenian}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Armenian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Armenian}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Armenian}"
 );
-assert(
-  /^\P{Script_Extensions=Armn}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Armn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Armn}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Armn}"
 );
-assert(
-  /^\P{scx=Armenian}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Armenian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Armenian}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Armenian}"
 );
-assert(
-  /^\P{scx=Armn}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Armn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Armn}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Armn}"
 );

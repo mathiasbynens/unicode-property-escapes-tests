@@ -10,22 +10,24 @@ info: |
   Unicode v<%= unicodeVersion %>
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString(<%= matchSymbols %>);
-<% for (const expression of expressions) { %>assert(
-  /^\p{<%= expression %>}+$/u.test(matchSymbols),
-  "`\\p{<%= expression %>}` matches all proper symbols"
+<% for (const expression of expressions) { %>testPropertyEscapes(
+  /^\p{<%= expression %>}+$/u,
+  matchSymbols,
+  "\\p{<%= expression %>}"
 );
 <% } %>
 <% if (nonMatchSymbols) { %>
 const nonMatchSymbols = buildString(<%= nonMatchSymbols %>);
 <%
   for (const expression of expressions) {
-%>assert(
-  /^\P{<%= expression %>}+$/u.test(nonMatchSymbols),
-  "`\\P{<%= expression %>}` matches all proper symbols"
+%>testPropertyEscapes(
+  /^\P{<%= expression %>}+$/u,
+  nonMatchSymbols,
+  "\\P{<%= expression %>}"
 );
 <%
   }
@@ -33,7 +35,7 @@ const nonMatchSymbols = buildString(<%= nonMatchSymbols %>);
   for (const expression of expressions) {
 %>assert(
   !/\P{<%= expression %>}/u.test(""),
-  "`\\P{<%= expression %>}` matches nothing (not even the empty string)"
+  "`\\P{<%= expression %>}` should match nothing (not even the empty string)"
 );
 <%
   }

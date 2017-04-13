@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x001A1E, 0x001A1F]
   ]
 });
-assert(
-  /^\p{Script=Buginese}+$/u.test(matchSymbols),
-  "`\\p{Script=Buginese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Buginese}+$/u,
+  matchSymbols,
+  "\\p{Script=Buginese}"
 );
-assert(
-  /^\p{Script=Bugi}+$/u.test(matchSymbols),
-  "`\\p{Script=Bugi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Bugi}+$/u,
+  matchSymbols,
+  "\\p{Script=Bugi}"
 );
-assert(
-  /^\p{sc=Buginese}+$/u.test(matchSymbols),
-  "`\\p{sc=Buginese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Buginese}+$/u,
+  matchSymbols,
+  "\\p{sc=Buginese}"
 );
-assert(
-  /^\p{sc=Bugi}+$/u.test(matchSymbols),
-  "`\\p{sc=Bugi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Bugi}+$/u,
+  matchSymbols,
+  "\\p{sc=Bugi}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Buginese}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Buginese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Buginese}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Buginese}"
 );
-assert(
-  /^\P{Script=Bugi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Bugi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Bugi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Bugi}"
 );
-assert(
-  /^\P{sc=Buginese}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Buginese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Buginese}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Buginese}"
 );
-assert(
-  /^\P{sc=Bugi}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Bugi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Bugi}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Bugi}"
 );

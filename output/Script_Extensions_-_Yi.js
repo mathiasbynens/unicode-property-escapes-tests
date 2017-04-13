@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -26,21 +26,25 @@ const matchSymbols = buildString({
     [0x00FF61, 0x00FF65]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Yi}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Yi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Yi}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Yi}"
 );
-assert(
-  /^\p{Script_Extensions=Yiii}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Yiii}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Yiii}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Yiii}"
 );
-assert(
-  /^\p{scx=Yi}+$/u.test(matchSymbols),
-  "`\\p{scx=Yi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Yi}+$/u,
+  matchSymbols,
+  "\\p{scx=Yi}"
 );
-assert(
-  /^\p{scx=Yiii}+$/u.test(matchSymbols),
-  "`\\p{scx=Yiii}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Yiii}+$/u,
+  matchSymbols,
+  "\\p{scx=Yiii}"
 );
 
 const nonMatchSymbols = buildString({
@@ -58,19 +62,23 @@ const nonMatchSymbols = buildString({
     [0x00FF66, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Yi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Yi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Yi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Yi}"
 );
-assert(
-  /^\P{Script_Extensions=Yiii}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Yiii}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Yiii}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Yiii}"
 );
-assert(
-  /^\P{scx=Yi}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Yi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Yi}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Yi}"
 );
-assert(
-  /^\P{scx=Yiii}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Yiii}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Yiii}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Yiii}"
 );

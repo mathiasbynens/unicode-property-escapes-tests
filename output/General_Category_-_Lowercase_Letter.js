@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -652,29 +652,35 @@ const matchSymbols = buildString({
     [0x01E922, 0x01E943]
   ]
 });
-assert(
-  /^\p{General_Category=Lowercase_Letter}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Lowercase_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Lowercase_Letter}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Lowercase_Letter}"
 );
-assert(
-  /^\p{General_Category=Ll}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Ll}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Ll}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Ll}"
 );
-assert(
-  /^\p{gc=Lowercase_Letter}+$/u.test(matchSymbols),
-  "`\\p{gc=Lowercase_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Lowercase_Letter}+$/u,
+  matchSymbols,
+  "\\p{gc=Lowercase_Letter}"
 );
-assert(
-  /^\p{gc=Ll}+$/u.test(matchSymbols),
-  "`\\p{gc=Ll}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Ll}+$/u,
+  matchSymbols,
+  "\\p{gc=Ll}"
 );
-assert(
-  /^\p{Lowercase_Letter}+$/u.test(matchSymbols),
-  "`\\p{Lowercase_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Lowercase_Letter}+$/u,
+  matchSymbols,
+  "\\p{Lowercase_Letter}"
 );
-assert(
-  /^\p{Ll}+$/u.test(matchSymbols),
-  "`\\p{Ll}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Ll}+$/u,
+  matchSymbols,
+  "\\p{Ll}"
 );
 
 const nonMatchSymbols = buildString({
@@ -1319,27 +1325,33 @@ const nonMatchSymbols = buildString({
     [0x01E944, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Lowercase_Letter}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Lowercase_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Lowercase_Letter}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Lowercase_Letter}"
 );
-assert(
-  /^\P{General_Category=Ll}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Ll}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Ll}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Ll}"
 );
-assert(
-  /^\P{gc=Lowercase_Letter}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Lowercase_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Lowercase_Letter}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Lowercase_Letter}"
 );
-assert(
-  /^\P{gc=Ll}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Ll}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Ll}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Ll}"
 );
-assert(
-  /^\P{Lowercase_Letter}+$/u.test(nonMatchSymbols),
-  "`\\P{Lowercase_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Lowercase_Letter}+$/u,
+  nonMatchSymbols,
+  "\\P{Lowercase_Letter}"
 );
-assert(
-  /^\P{Ll}+$/u.test(nonMatchSymbols),
-  "`\\P{Ll}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Ll}+$/u,
+  nonMatchSymbols,
+  "\\P{Ll}"
 );

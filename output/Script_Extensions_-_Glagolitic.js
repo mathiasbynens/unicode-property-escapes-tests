@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -30,21 +30,25 @@ const matchSymbols = buildString({
     [0x01E026, 0x01E02A]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Glagolitic}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Glagolitic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Glagolitic}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Glagolitic}"
 );
-assert(
-  /^\p{Script_Extensions=Glag}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Glag}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Glag}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Glag}"
 );
-assert(
-  /^\p{scx=Glagolitic}+$/u.test(matchSymbols),
-  "`\\p{scx=Glagolitic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Glagolitic}+$/u,
+  matchSymbols,
+  "\\p{scx=Glagolitic}"
 );
-assert(
-  /^\p{scx=Glag}+$/u.test(matchSymbols),
-  "`\\p{scx=Glag}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Glag}+$/u,
+  matchSymbols,
+  "\\p{scx=Glag}"
 );
 
 const nonMatchSymbols = buildString({
@@ -67,19 +71,23 @@ const nonMatchSymbols = buildString({
     [0x01E02B, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Glagolitic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Glagolitic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Glagolitic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Glagolitic}"
 );
-assert(
-  /^\P{Script_Extensions=Glag}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Glag}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Glag}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Glag}"
 );
-assert(
-  /^\P{scx=Glagolitic}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Glagolitic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Glagolitic}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Glagolitic}"
 );
-assert(
-  /^\P{scx=Glag}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Glag}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Glag}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Glag}"
 );

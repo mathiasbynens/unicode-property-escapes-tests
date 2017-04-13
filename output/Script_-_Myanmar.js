@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x00AA60, 0x00AA7F]
   ]
 });
-assert(
-  /^\p{Script=Myanmar}+$/u.test(matchSymbols),
-  "`\\p{Script=Myanmar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Myanmar}+$/u,
+  matchSymbols,
+  "\\p{Script=Myanmar}"
 );
-assert(
-  /^\p{Script=Mymr}+$/u.test(matchSymbols),
-  "`\\p{Script=Mymr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Mymr}+$/u,
+  matchSymbols,
+  "\\p{Script=Mymr}"
 );
-assert(
-  /^\p{sc=Myanmar}+$/u.test(matchSymbols),
-  "`\\p{sc=Myanmar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Myanmar}+$/u,
+  matchSymbols,
+  "\\p{sc=Myanmar}"
 );
-assert(
-  /^\p{sc=Mymr}+$/u.test(matchSymbols),
-  "`\\p{sc=Mymr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Mymr}+$/u,
+  matchSymbols,
+  "\\p{sc=Mymr}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Myanmar}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Myanmar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Myanmar}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Myanmar}"
 );
-assert(
-  /^\P{Script=Mymr}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Mymr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Mymr}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Mymr}"
 );
-assert(
-  /^\P{sc=Myanmar}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Myanmar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Myanmar}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Myanmar}"
 );
-assert(
-  /^\P{sc=Mymr}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Mymr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Mymr}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Mymr}"
 );

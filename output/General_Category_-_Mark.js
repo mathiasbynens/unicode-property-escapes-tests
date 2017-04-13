@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -269,41 +269,50 @@ const matchSymbols = buildString({
     [0x0E0100, 0x0E01EF]
   ]
 });
-assert(
-  /^\p{General_Category=Mark}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Mark}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Mark}"
 );
-assert(
-  /^\p{General_Category=M}+$/u.test(matchSymbols),
-  "`\\p{General_Category=M}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=M}+$/u,
+  matchSymbols,
+  "\\p{General_Category=M}"
 );
-assert(
-  /^\p{General_Category=Combining_Mark}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Combining_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Combining_Mark}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Combining_Mark}"
 );
-assert(
-  /^\p{gc=Mark}+$/u.test(matchSymbols),
-  "`\\p{gc=Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Mark}+$/u,
+  matchSymbols,
+  "\\p{gc=Mark}"
 );
-assert(
-  /^\p{gc=M}+$/u.test(matchSymbols),
-  "`\\p{gc=M}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=M}+$/u,
+  matchSymbols,
+  "\\p{gc=M}"
 );
-assert(
-  /^\p{gc=Combining_Mark}+$/u.test(matchSymbols),
-  "`\\p{gc=Combining_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Combining_Mark}+$/u,
+  matchSymbols,
+  "\\p{gc=Combining_Mark}"
 );
-assert(
-  /^\p{Mark}+$/u.test(matchSymbols),
-  "`\\p{Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Mark}+$/u,
+  matchSymbols,
+  "\\p{Mark}"
 );
-assert(
-  /^\p{M}+$/u.test(matchSymbols),
-  "`\\p{M}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{M}+$/u,
+  matchSymbols,
+  "\\p{M}"
 );
-assert(
-  /^\p{Combining_Mark}+$/u.test(matchSymbols),
-  "`\\p{Combining_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Combining_Mark}+$/u,
+  matchSymbols,
+  "\\p{Combining_Mark}"
 );
 
 const nonMatchSymbols = buildString({
@@ -565,39 +574,48 @@ const nonMatchSymbols = buildString({
     [0x0E01F0, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Mark}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Mark}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Mark}"
 );
-assert(
-  /^\P{General_Category=M}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=M}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=M}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=M}"
 );
-assert(
-  /^\P{General_Category=Combining_Mark}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Combining_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Combining_Mark}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Combining_Mark}"
 );
-assert(
-  /^\P{gc=Mark}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Mark}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Mark}"
 );
-assert(
-  /^\P{gc=M}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=M}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=M}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=M}"
 );
-assert(
-  /^\P{gc=Combining_Mark}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Combining_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Combining_Mark}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Combining_Mark}"
 );
-assert(
-  /^\P{Mark}+$/u.test(nonMatchSymbols),
-  "`\\P{Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Mark}+$/u,
+  nonMatchSymbols,
+  "\\P{Mark}"
 );
-assert(
-  /^\P{M}+$/u.test(nonMatchSymbols),
-  "`\\P{M}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{M}+$/u,
+  nonMatchSymbols,
+  "\\P{M}"
 );
-assert(
-  /^\P{Combining_Mark}+$/u.test(nonMatchSymbols),
-  "`\\P{Combining_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Combining_Mark}+$/u,
+  nonMatchSymbols,
+  "\\P{Combining_Mark}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -25,21 +25,25 @@ const matchSymbols = buildString({
     [0x01129F, 0x0112A9]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Multani}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Multani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Multani}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Multani}"
 );
-assert(
-  /^\p{Script_Extensions=Mult}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Mult}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Mult}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Mult}"
 );
-assert(
-  /^\p{scx=Multani}+$/u.test(matchSymbols),
-  "`\\p{scx=Multani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Multani}+$/u,
+  matchSymbols,
+  "\\p{scx=Multani}"
 );
-assert(
-  /^\p{scx=Mult}+$/u.test(matchSymbols),
-  "`\\p{scx=Mult}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Mult}+$/u,
+  matchSymbols,
+  "\\p{scx=Mult}"
 );
 
 const nonMatchSymbols = buildString({
@@ -57,19 +61,23 @@ const nonMatchSymbols = buildString({
     [0x0112AA, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Multani}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Multani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Multani}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Multani}"
 );
-assert(
-  /^\P{Script_Extensions=Mult}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Mult}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Mult}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Mult}"
 );
-assert(
-  /^\P{scx=Multani}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Multani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Multani}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Multani}"
 );
-assert(
-  /^\P{scx=Mult}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Mult}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Mult}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Mult}"
 );

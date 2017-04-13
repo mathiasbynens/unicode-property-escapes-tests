@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x010300, 0x010323]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Old_Italic}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Old_Italic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Old_Italic}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Old_Italic}"
 );
-assert(
-  /^\p{Script_Extensions=Ital}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Ital}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Ital}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Ital}"
 );
-assert(
-  /^\p{scx=Old_Italic}+$/u.test(matchSymbols),
-  "`\\p{scx=Old_Italic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Old_Italic}+$/u,
+  matchSymbols,
+  "\\p{scx=Old_Italic}"
 );
-assert(
-  /^\p{scx=Ital}+$/u.test(matchSymbols),
-  "`\\p{scx=Ital}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Ital}+$/u,
+  matchSymbols,
+  "\\p{scx=Ital}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x010324, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Old_Italic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Old_Italic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Old_Italic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Old_Italic}"
 );
-assert(
-  /^\P{Script_Extensions=Ital}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Ital}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Ital}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Ital}"
 );
-assert(
-  /^\P{scx=Old_Italic}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Old_Italic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Old_Italic}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Old_Italic}"
 );
-assert(
-  /^\P{scx=Ital}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Ital}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Ital}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Ital}"
 );

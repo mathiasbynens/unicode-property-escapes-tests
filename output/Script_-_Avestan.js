@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x010B39, 0x010B3F]
   ]
 });
-assert(
-  /^\p{Script=Avestan}+$/u.test(matchSymbols),
-  "`\\p{Script=Avestan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Avestan}+$/u,
+  matchSymbols,
+  "\\p{Script=Avestan}"
 );
-assert(
-  /^\p{Script=Avst}+$/u.test(matchSymbols),
-  "`\\p{Script=Avst}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Avst}+$/u,
+  matchSymbols,
+  "\\p{Script=Avst}"
 );
-assert(
-  /^\p{sc=Avestan}+$/u.test(matchSymbols),
-  "`\\p{sc=Avestan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Avestan}+$/u,
+  matchSymbols,
+  "\\p{sc=Avestan}"
 );
-assert(
-  /^\p{sc=Avst}+$/u.test(matchSymbols),
-  "`\\p{sc=Avst}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Avst}+$/u,
+  matchSymbols,
+  "\\p{sc=Avst}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x010B40, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Avestan}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Avestan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Avestan}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Avestan}"
 );
-assert(
-  /^\P{Script=Avst}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Avst}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Avst}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Avst}"
 );
-assert(
-  /^\P{sc=Avestan}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Avestan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Avestan}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Avestan}"
 );
-assert(
-  /^\P{sc=Avst}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Avst}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Avst}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Avst}"
 );

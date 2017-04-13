@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -657,29 +657,35 @@ const matchSymbols = buildString({
     [0x10FFFE, 0x10FFFF]
   ]
 });
-assert(
-  /^\p{General_Category=Unassigned}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Unassigned}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Unassigned}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Unassigned}"
 );
-assert(
-  /^\p{General_Category=Cn}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Cn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Cn}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Cn}"
 );
-assert(
-  /^\p{gc=Unassigned}+$/u.test(matchSymbols),
-  "`\\p{gc=Unassigned}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Unassigned}+$/u,
+  matchSymbols,
+  "\\p{gc=Unassigned}"
 );
-assert(
-  /^\p{gc=Cn}+$/u.test(matchSymbols),
-  "`\\p{gc=Cn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Cn}+$/u,
+  matchSymbols,
+  "\\p{gc=Cn}"
 );
-assert(
-  /^\p{Unassigned}+$/u.test(matchSymbols),
-  "`\\p{Unassigned}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Unassigned}+$/u,
+  matchSymbols,
+  "\\p{Unassigned}"
 );
-assert(
-  /^\p{Cn}+$/u.test(matchSymbols),
-  "`\\p{Cn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Cn}+$/u,
+  matchSymbols,
+  "\\p{Cn}"
 );
 
 const nonMatchSymbols = buildString({
@@ -1328,27 +1334,33 @@ const nonMatchSymbols = buildString({
     [0x100000, 0x10FFFD]
   ]
 });
-assert(
-  /^\P{General_Category=Unassigned}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Unassigned}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Unassigned}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Unassigned}"
 );
-assert(
-  /^\P{General_Category=Cn}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Cn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Cn}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Cn}"
 );
-assert(
-  /^\P{gc=Unassigned}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Unassigned}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Unassigned}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Unassigned}"
 );
-assert(
-  /^\P{gc=Cn}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Cn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Cn}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Cn}"
 );
-assert(
-  /^\P{Unassigned}+$/u.test(nonMatchSymbols),
-  "`\\P{Unassigned}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Unassigned}+$/u,
+  nonMatchSymbols,
+  "\\P{Unassigned}"
 );
-assert(
-  /^\P{Cn}+$/u.test(nonMatchSymbols),
-  "`\\P{Cn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Cn}+$/u,
+  nonMatchSymbols,
+  "\\P{Cn}"
 );

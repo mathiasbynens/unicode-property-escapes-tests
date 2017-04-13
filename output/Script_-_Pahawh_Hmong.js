@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -23,21 +23,25 @@ const matchSymbols = buildString({
     [0x016B7D, 0x016B8F]
   ]
 });
-assert(
-  /^\p{Script=Pahawh_Hmong}+$/u.test(matchSymbols),
-  "`\\p{Script=Pahawh_Hmong}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Pahawh_Hmong}+$/u,
+  matchSymbols,
+  "\\p{Script=Pahawh_Hmong}"
 );
-assert(
-  /^\p{Script=Hmng}+$/u.test(matchSymbols),
-  "`\\p{Script=Hmng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Hmng}+$/u,
+  matchSymbols,
+  "\\p{Script=Hmng}"
 );
-assert(
-  /^\p{sc=Pahawh_Hmong}+$/u.test(matchSymbols),
-  "`\\p{sc=Pahawh_Hmong}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Pahawh_Hmong}+$/u,
+  matchSymbols,
+  "\\p{sc=Pahawh_Hmong}"
 );
-assert(
-  /^\p{sc=Hmng}+$/u.test(matchSymbols),
-  "`\\p{sc=Hmng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Hmng}+$/u,
+  matchSymbols,
+  "\\p{sc=Hmng}"
 );
 
 const nonMatchSymbols = buildString({
@@ -54,19 +58,23 @@ const nonMatchSymbols = buildString({
     [0x016B90, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Pahawh_Hmong}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Pahawh_Hmong}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Pahawh_Hmong}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Pahawh_Hmong}"
 );
-assert(
-  /^\P{Script=Hmng}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Hmng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Hmng}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Hmng}"
 );
-assert(
-  /^\P{sc=Pahawh_Hmong}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Pahawh_Hmong}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Pahawh_Hmong}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Pahawh_Hmong}"
 );
-assert(
-  /^\P{sc=Hmng}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Hmng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Hmng}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Hmng}"
 );

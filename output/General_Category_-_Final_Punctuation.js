@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -28,29 +28,35 @@ const matchSymbols = buildString({
   ],
   ranges: []
 });
-assert(
-  /^\p{General_Category=Final_Punctuation}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Final_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Final_Punctuation}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Final_Punctuation}"
 );
-assert(
-  /^\p{General_Category=Pf}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Pf}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Pf}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Pf}"
 );
-assert(
-  /^\p{gc=Final_Punctuation}+$/u.test(matchSymbols),
-  "`\\p{gc=Final_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Final_Punctuation}+$/u,
+  matchSymbols,
+  "\\p{gc=Final_Punctuation}"
 );
-assert(
-  /^\p{gc=Pf}+$/u.test(matchSymbols),
-  "`\\p{gc=Pf}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Pf}+$/u,
+  matchSymbols,
+  "\\p{gc=Pf}"
 );
-assert(
-  /^\p{Final_Punctuation}+$/u.test(matchSymbols),
-  "`\\p{Final_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Final_Punctuation}+$/u,
+  matchSymbols,
+  "\\p{Final_Punctuation}"
 );
-assert(
-  /^\p{Pf}+$/u.test(matchSymbols),
-  "`\\p{Pf}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Pf}+$/u,
+  matchSymbols,
+  "\\p{Pf}"
 );
 
 const nonMatchSymbols = buildString({
@@ -72,27 +78,33 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Final_Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Final_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Final_Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Final_Punctuation}"
 );
-assert(
-  /^\P{General_Category=Pf}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Pf}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Pf}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Pf}"
 );
-assert(
-  /^\P{gc=Final_Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Final_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Final_Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Final_Punctuation}"
 );
-assert(
-  /^\P{gc=Pf}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Pf}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Pf}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Pf}"
 );
-assert(
-  /^\P{Final_Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{Final_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Final_Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{Final_Punctuation}"
 );
-assert(
-  /^\P{Pf}+$/u.test(nonMatchSymbols),
-  "`\\P{Pf}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Pf}+$/u,
+  nonMatchSymbols,
+  "\\P{Pf}"
 );

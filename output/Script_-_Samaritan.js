@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x000830, 0x00083E]
   ]
 });
-assert(
-  /^\p{Script=Samaritan}+$/u.test(matchSymbols),
-  "`\\p{Script=Samaritan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Samaritan}+$/u,
+  matchSymbols,
+  "\\p{Script=Samaritan}"
 );
-assert(
-  /^\p{Script=Samr}+$/u.test(matchSymbols),
-  "`\\p{Script=Samr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Samr}+$/u,
+  matchSymbols,
+  "\\p{Script=Samr}"
 );
-assert(
-  /^\p{sc=Samaritan}+$/u.test(matchSymbols),
-  "`\\p{sc=Samaritan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Samaritan}+$/u,
+  matchSymbols,
+  "\\p{sc=Samaritan}"
 );
-assert(
-  /^\p{sc=Samr}+$/u.test(matchSymbols),
-  "`\\p{sc=Samr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Samr}+$/u,
+  matchSymbols,
+  "\\p{sc=Samr}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Samaritan}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Samaritan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Samaritan}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Samaritan}"
 );
-assert(
-  /^\P{Script=Samr}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Samr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Samr}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Samr}"
 );
-assert(
-  /^\P{sc=Samaritan}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Samaritan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Samaritan}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Samaritan}"
 );
-assert(
-  /^\P{sc=Samr}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Samr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Samr}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Samr}"
 );

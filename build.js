@@ -7,7 +7,9 @@ const UNICODE_VERSION = require(
 
 const _template = require('lodash.template');
 const TEST_TEMPLATE = fs.readFileSync('templates/test.template', 'utf8');
-const template = _template(TEST_TEMPLATE);
+const template = _template(TEST_TEMPLATE, {
+	'interpolate': /<%=([\s\S]+?)%>/g
+});
 
 const escape = (value) => {
 	return jsesc(value, {

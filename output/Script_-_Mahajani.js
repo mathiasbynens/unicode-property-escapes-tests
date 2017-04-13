@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x011150, 0x011176]
   ]
 });
-assert(
-  /^\p{Script=Mahajani}+$/u.test(matchSymbols),
-  "`\\p{Script=Mahajani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Mahajani}+$/u,
+  matchSymbols,
+  "\\p{Script=Mahajani}"
 );
-assert(
-  /^\p{Script=Mahj}+$/u.test(matchSymbols),
-  "`\\p{Script=Mahj}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Mahj}+$/u,
+  matchSymbols,
+  "\\p{Script=Mahj}"
 );
-assert(
-  /^\p{sc=Mahajani}+$/u.test(matchSymbols),
-  "`\\p{sc=Mahajani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Mahajani}+$/u,
+  matchSymbols,
+  "\\p{sc=Mahajani}"
 );
-assert(
-  /^\p{sc=Mahj}+$/u.test(matchSymbols),
-  "`\\p{sc=Mahj}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Mahj}+$/u,
+  matchSymbols,
+  "\\p{sc=Mahj}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x011177, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Mahajani}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Mahajani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Mahajani}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Mahajani}"
 );
-assert(
-  /^\P{Script=Mahj}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Mahj}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Mahj}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Mahj}"
 );
-assert(
-  /^\P{sc=Mahajani}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Mahajani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Mahajani}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Mahajani}"
 );
-assert(
-  /^\P{sc=Mahj}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Mahj}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Mahj}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Mahj}"
 );

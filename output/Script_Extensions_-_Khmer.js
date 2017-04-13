@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -22,21 +22,25 @@ const matchSymbols = buildString({
     [0x0019E0, 0x0019FF]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Khmer}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Khmer}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Khmer}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Khmer}"
 );
-assert(
-  /^\p{Script_Extensions=Khmr}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Khmr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Khmr}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Khmr}"
 );
-assert(
-  /^\p{scx=Khmer}+$/u.test(matchSymbols),
-  "`\\p{scx=Khmer}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Khmer}+$/u,
+  matchSymbols,
+  "\\p{scx=Khmer}"
 );
-assert(
-  /^\p{scx=Khmr}+$/u.test(matchSymbols),
-  "`\\p{scx=Khmr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Khmr}+$/u,
+  matchSymbols,
+  "\\p{scx=Khmr}"
 );
 
 const nonMatchSymbols = buildString({
@@ -51,19 +55,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Khmer}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Khmer}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Khmer}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Khmer}"
 );
-assert(
-  /^\P{Script_Extensions=Khmr}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Khmr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Khmr}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Khmr}"
 );
-assert(
-  /^\P{scx=Khmer}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Khmer}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Khmer}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Khmer}"
 );
-assert(
-  /^\P{scx=Khmr}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Khmr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Khmr}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Khmr}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x00A930, 0x00A953]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Rejang}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Rejang}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Rejang}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Rejang}"
 );
-assert(
-  /^\p{Script_Extensions=Rjng}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Rjng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Rjng}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Rjng}"
 );
-assert(
-  /^\p{scx=Rejang}+$/u.test(matchSymbols),
-  "`\\p{scx=Rejang}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Rejang}+$/u,
+  matchSymbols,
+  "\\p{scx=Rejang}"
 );
-assert(
-  /^\p{scx=Rjng}+$/u.test(matchSymbols),
-  "`\\p{scx=Rjng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Rjng}+$/u,
+  matchSymbols,
+  "\\p{scx=Rjng}"
 );
 
 const nonMatchSymbols = buildString({
@@ -48,19 +52,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Rejang}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Rejang}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Rejang}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Rejang}"
 );
-assert(
-  /^\P{Script_Extensions=Rjng}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Rjng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Rjng}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Rjng}"
 );
-assert(
-  /^\P{scx=Rejang}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Rejang}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Rejang}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Rejang}"
 );
-assert(
-  /^\P{scx=Rjng}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Rjng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Rjng}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Rjng}"
 );

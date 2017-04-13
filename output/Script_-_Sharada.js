@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x0111D0, 0x0111DF]
   ]
 });
-assert(
-  /^\p{Script=Sharada}+$/u.test(matchSymbols),
-  "`\\p{Script=Sharada}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Sharada}+$/u,
+  matchSymbols,
+  "\\p{Script=Sharada}"
 );
-assert(
-  /^\p{Script=Shrd}+$/u.test(matchSymbols),
-  "`\\p{Script=Shrd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Shrd}+$/u,
+  matchSymbols,
+  "\\p{Script=Shrd}"
 );
-assert(
-  /^\p{sc=Sharada}+$/u.test(matchSymbols),
-  "`\\p{sc=Sharada}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Sharada}+$/u,
+  matchSymbols,
+  "\\p{sc=Sharada}"
 );
-assert(
-  /^\p{sc=Shrd}+$/u.test(matchSymbols),
-  "`\\p{sc=Shrd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Shrd}+$/u,
+  matchSymbols,
+  "\\p{sc=Shrd}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x0111E0, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Sharada}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Sharada}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Sharada}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Sharada}"
 );
-assert(
-  /^\P{Script=Shrd}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Shrd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Shrd}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Shrd}"
 );
-assert(
-  /^\P{sc=Sharada}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Sharada}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Sharada}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Sharada}"
 );
-assert(
-  /^\P{sc=Shrd}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Shrd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Shrd}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Shrd}"
 );

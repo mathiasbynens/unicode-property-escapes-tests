@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x010500, 0x010527]
   ]
 });
-assert(
-  /^\p{Script=Elbasan}+$/u.test(matchSymbols),
-  "`\\p{Script=Elbasan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Elbasan}+$/u,
+  matchSymbols,
+  "\\p{Script=Elbasan}"
 );
-assert(
-  /^\p{Script=Elba}+$/u.test(matchSymbols),
-  "`\\p{Script=Elba}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Elba}+$/u,
+  matchSymbols,
+  "\\p{Script=Elba}"
 );
-assert(
-  /^\p{sc=Elbasan}+$/u.test(matchSymbols),
-  "`\\p{sc=Elbasan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Elbasan}+$/u,
+  matchSymbols,
+  "\\p{sc=Elbasan}"
 );
-assert(
-  /^\p{sc=Elba}+$/u.test(matchSymbols),
-  "`\\p{sc=Elba}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Elba}+$/u,
+  matchSymbols,
+  "\\p{sc=Elba}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x010528, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Elbasan}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Elbasan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Elbasan}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Elbasan}"
 );
-assert(
-  /^\P{Script=Elba}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Elba}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Elba}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Elba}"
 );
-assert(
-  /^\P{sc=Elbasan}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Elbasan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Elbasan}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Elbasan}"
 );
-assert(
-  /^\P{sc=Elba}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Elba}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Elba}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Elba}"
 );

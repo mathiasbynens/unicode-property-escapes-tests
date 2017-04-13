@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x0118A0, 0x0118F2]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Warang_Citi}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Warang_Citi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Warang_Citi}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Warang_Citi}"
 );
-assert(
-  /^\p{Script_Extensions=Wara}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Wara}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Wara}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Wara}"
 );
-assert(
-  /^\p{scx=Warang_Citi}+$/u.test(matchSymbols),
-  "`\\p{scx=Warang_Citi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Warang_Citi}+$/u,
+  matchSymbols,
+  "\\p{scx=Warang_Citi}"
 );
-assert(
-  /^\p{scx=Wara}+$/u.test(matchSymbols),
-  "`\\p{scx=Wara}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Wara}+$/u,
+  matchSymbols,
+  "\\p{scx=Wara}"
 );
 
 const nonMatchSymbols = buildString({
@@ -48,19 +52,23 @@ const nonMatchSymbols = buildString({
     [0x011900, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Warang_Citi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Warang_Citi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Warang_Citi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Warang_Citi}"
 );
-assert(
-  /^\P{Script_Extensions=Wara}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Wara}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Wara}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Wara}"
 );
-assert(
-  /^\P{scx=Warang_Citi}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Warang_Citi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Warang_Citi}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Warang_Citi}"
 );
-assert(
-  /^\P{scx=Wara}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Wara}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Wara}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Wara}"
 );

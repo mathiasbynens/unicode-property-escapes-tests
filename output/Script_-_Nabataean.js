@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x0108A7, 0x0108AF]
   ]
 });
-assert(
-  /^\p{Script=Nabataean}+$/u.test(matchSymbols),
-  "`\\p{Script=Nabataean}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Nabataean}+$/u,
+  matchSymbols,
+  "\\p{Script=Nabataean}"
 );
-assert(
-  /^\p{Script=Nbat}+$/u.test(matchSymbols),
-  "`\\p{Script=Nbat}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Nbat}+$/u,
+  matchSymbols,
+  "\\p{Script=Nbat}"
 );
-assert(
-  /^\p{sc=Nabataean}+$/u.test(matchSymbols),
-  "`\\p{sc=Nabataean}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Nabataean}+$/u,
+  matchSymbols,
+  "\\p{sc=Nabataean}"
 );
-assert(
-  /^\p{sc=Nbat}+$/u.test(matchSymbols),
-  "`\\p{sc=Nbat}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Nbat}+$/u,
+  matchSymbols,
+  "\\p{sc=Nbat}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x0108B0, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Nabataean}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Nabataean}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Nabataean}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Nabataean}"
 );
-assert(
-  /^\P{Script=Nbat}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Nbat}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Nbat}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Nbat}"
 );
-assert(
-  /^\P{sc=Nabataean}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Nabataean}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Nabataean}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Nabataean}"
 );
-assert(
-  /^\P{sc=Nbat}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Nbat}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Nbat}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Nbat}"
 );

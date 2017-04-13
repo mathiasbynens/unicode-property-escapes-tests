@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -33,21 +33,25 @@ const matchSymbols = buildString({
     [0x00FF61, 0x00FF9F]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Katakana}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Katakana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Katakana}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Katakana}"
 );
-assert(
-  /^\p{Script_Extensions=Kana}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Kana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Kana}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Kana}"
 );
-assert(
-  /^\p{scx=Katakana}+$/u.test(matchSymbols),
-  "`\\p{scx=Katakana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Katakana}+$/u,
+  matchSymbols,
+  "\\p{scx=Katakana}"
 );
-assert(
-  /^\p{scx=Kana}+$/u.test(matchSymbols),
-  "`\\p{scx=Kana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Kana}+$/u,
+  matchSymbols,
+  "\\p{scx=Kana}"
 );
 
 const nonMatchSymbols = buildString({
@@ -73,19 +77,23 @@ const nonMatchSymbols = buildString({
     [0x01B001, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Katakana}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Katakana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Katakana}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Katakana}"
 );
-assert(
-  /^\P{Script_Extensions=Kana}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Kana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Kana}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Kana}"
 );
-assert(
-  /^\P{scx=Katakana}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Katakana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Katakana}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Katakana}"
 );
-assert(
-  /^\P{scx=Kana}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Kana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Kana}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Kana}"
 );

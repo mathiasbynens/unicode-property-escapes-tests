@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x010BA9, 0x010BAF]
   ]
 });
-assert(
-  /^\p{Script=Psalter_Pahlavi}+$/u.test(matchSymbols),
-  "`\\p{Script=Psalter_Pahlavi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Psalter_Pahlavi}+$/u,
+  matchSymbols,
+  "\\p{Script=Psalter_Pahlavi}"
 );
-assert(
-  /^\p{Script=Phlp}+$/u.test(matchSymbols),
-  "`\\p{Script=Phlp}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Phlp}+$/u,
+  matchSymbols,
+  "\\p{Script=Phlp}"
 );
-assert(
-  /^\p{sc=Psalter_Pahlavi}+$/u.test(matchSymbols),
-  "`\\p{sc=Psalter_Pahlavi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Psalter_Pahlavi}+$/u,
+  matchSymbols,
+  "\\p{sc=Psalter_Pahlavi}"
 );
-assert(
-  /^\p{sc=Phlp}+$/u.test(matchSymbols),
-  "`\\p{sc=Phlp}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Phlp}+$/u,
+  matchSymbols,
+  "\\p{sc=Phlp}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x010BB0, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Psalter_Pahlavi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Psalter_Pahlavi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Psalter_Pahlavi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Psalter_Pahlavi}"
 );
-assert(
-  /^\P{Script=Phlp}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Phlp}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Phlp}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Phlp}"
 );
-assert(
-  /^\P{sc=Psalter_Pahlavi}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Psalter_Pahlavi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Psalter_Pahlavi}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Psalter_Pahlavi}"
 );
-assert(
-  /^\P{sc=Phlp}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Phlp}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Phlp}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Phlp}"
 );

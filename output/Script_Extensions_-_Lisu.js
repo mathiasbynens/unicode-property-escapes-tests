@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x00A4D0, 0x00A4FF]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Lisu}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Lisu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Lisu}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Lisu}"
 );
-assert(
-  /^\p{Script_Extensions=Lisu}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Lisu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Lisu}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Lisu}"
 );
-assert(
-  /^\p{scx=Lisu}+$/u.test(matchSymbols),
-  "`\\p{scx=Lisu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Lisu}+$/u,
+  matchSymbols,
+  "\\p{scx=Lisu}"
 );
-assert(
-  /^\p{scx=Lisu}+$/u.test(matchSymbols),
-  "`\\p{scx=Lisu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Lisu}+$/u,
+  matchSymbols,
+  "\\p{scx=Lisu}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Lisu}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Lisu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Lisu}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Lisu}"
 );
-assert(
-  /^\P{Script_Extensions=Lisu}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Lisu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Lisu}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Lisu}"
 );
-assert(
-  /^\P{scx=Lisu}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Lisu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Lisu}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Lisu}"
 );
-assert(
-  /^\P{scx=Lisu}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Lisu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Lisu}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Lisu}"
 );

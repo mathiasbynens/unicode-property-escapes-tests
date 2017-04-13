@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x001BFC, 0x001BFF]
   ]
 });
-assert(
-  /^\p{Script=Batak}+$/u.test(matchSymbols),
-  "`\\p{Script=Batak}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Batak}+$/u,
+  matchSymbols,
+  "\\p{Script=Batak}"
 );
-assert(
-  /^\p{Script=Batk}+$/u.test(matchSymbols),
-  "`\\p{Script=Batk}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Batk}+$/u,
+  matchSymbols,
+  "\\p{Script=Batk}"
 );
-assert(
-  /^\p{sc=Batak}+$/u.test(matchSymbols),
-  "`\\p{sc=Batak}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Batak}+$/u,
+  matchSymbols,
+  "\\p{sc=Batak}"
 );
-assert(
-  /^\p{sc=Batk}+$/u.test(matchSymbols),
-  "`\\p{sc=Batk}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Batk}+$/u,
+  matchSymbols,
+  "\\p{sc=Batk}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Batak}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Batak}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Batak}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Batak}"
 );
-assert(
-  /^\P{Script=Batk}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Batk}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Batk}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Batk}"
 );
-assert(
-  /^\P{sc=Batak}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Batak}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Batak}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Batak}"
 );
-assert(
-  /^\P{sc=Batk}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Batk}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Batk}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Batk}"
 );

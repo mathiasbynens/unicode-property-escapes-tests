@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -791,13 +791,15 @@ const matchSymbols = buildString({
     [0x02F800, 0x02FA1D]
   ]
 });
-assert(
-  /^\p{Grapheme_Base}+$/u.test(matchSymbols),
-  "`\\p{Grapheme_Base}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Grapheme_Base}+$/u,
+  matchSymbols,
+  "\\p{Grapheme_Base}"
 );
-assert(
-  /^\p{Gr_Base}+$/u.test(matchSymbols),
-  "`\\p{Gr_Base}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Gr_Base}+$/u,
+  matchSymbols,
+  "\\p{Gr_Base}"
 );
 
 const nonMatchSymbols = buildString({
@@ -1581,11 +1583,13 @@ const nonMatchSymbols = buildString({
     [0x02FA1E, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Grapheme_Base}+$/u.test(nonMatchSymbols),
-  "`\\P{Grapheme_Base}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Grapheme_Base}+$/u,
+  nonMatchSymbols,
+  "\\P{Grapheme_Base}"
 );
-assert(
-  /^\P{Gr_Base}+$/u.test(nonMatchSymbols),
-  "`\\P{Gr_Base}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Gr_Base}+$/u,
+  nonMatchSymbols,
+  "\\P{Gr_Base}"
 );

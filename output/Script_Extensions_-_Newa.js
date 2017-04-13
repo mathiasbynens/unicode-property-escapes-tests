@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -22,21 +22,25 @@ const matchSymbols = buildString({
     [0x011400, 0x011459]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Newa}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Newa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Newa}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Newa}"
 );
-assert(
-  /^\p{Script_Extensions=Newa}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Newa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Newa}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Newa}"
 );
-assert(
-  /^\p{scx=Newa}+$/u.test(matchSymbols),
-  "`\\p{scx=Newa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Newa}+$/u,
+  matchSymbols,
+  "\\p{scx=Newa}"
 );
-assert(
-  /^\p{scx=Newa}+$/u.test(matchSymbols),
-  "`\\p{scx=Newa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Newa}+$/u,
+  matchSymbols,
+  "\\p{scx=Newa}"
 );
 
 const nonMatchSymbols = buildString({
@@ -51,19 +55,23 @@ const nonMatchSymbols = buildString({
     [0x01145E, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Newa}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Newa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Newa}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Newa}"
 );
-assert(
-  /^\P{Script_Extensions=Newa}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Newa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Newa}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Newa}"
 );
-assert(
-  /^\P{scx=Newa}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Newa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Newa}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Newa}"
 );
-assert(
-  /^\P{scx=Newa}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Newa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Newa}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Newa}"
 );

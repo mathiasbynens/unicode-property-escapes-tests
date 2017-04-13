@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x00AB70, 0x00ABBF]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Cherokee}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Cherokee}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Cherokee}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Cherokee}"
 );
-assert(
-  /^\p{Script_Extensions=Cher}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Cher}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Cher}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Cher}"
 );
-assert(
-  /^\p{scx=Cherokee}+$/u.test(matchSymbols),
-  "`\\p{scx=Cherokee}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Cherokee}+$/u,
+  matchSymbols,
+  "\\p{scx=Cherokee}"
 );
-assert(
-  /^\p{scx=Cher}+$/u.test(matchSymbols),
-  "`\\p{scx=Cher}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Cher}+$/u,
+  matchSymbols,
+  "\\p{scx=Cher}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Cherokee}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Cherokee}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Cherokee}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Cherokee}"
 );
-assert(
-  /^\P{Script_Extensions=Cher}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Cher}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Cher}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Cher}"
 );
-assert(
-  /^\P{scx=Cherokee}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Cherokee}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Cherokee}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Cherokee}"
 );
-assert(
-  /^\P{scx=Cher}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Cher}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Cher}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Cher}"
 );

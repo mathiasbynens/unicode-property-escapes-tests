@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -37,21 +37,25 @@ const matchSymbols = buildString({
     [0x000EDC, 0x000EDF]
   ]
 });
-assert(
-  /^\p{Script=Lao}+$/u.test(matchSymbols),
-  "`\\p{Script=Lao}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Lao}+$/u,
+  matchSymbols,
+  "\\p{Script=Lao}"
 );
-assert(
-  /^\p{Script=Laoo}+$/u.test(matchSymbols),
-  "`\\p{Script=Laoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Laoo}+$/u,
+  matchSymbols,
+  "\\p{Script=Laoo}"
 );
-assert(
-  /^\p{sc=Lao}+$/u.test(matchSymbols),
-  "`\\p{sc=Lao}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Lao}+$/u,
+  matchSymbols,
+  "\\p{sc=Lao}"
 );
-assert(
-  /^\p{sc=Laoo}+$/u.test(matchSymbols),
-  "`\\p{sc=Laoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Laoo}+$/u,
+  matchSymbols,
+  "\\p{sc=Laoo}"
 );
 
 const nonMatchSymbols = buildString({
@@ -81,19 +85,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Lao}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Lao}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Lao}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Lao}"
 );
-assert(
-  /^\P{Script=Laoo}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Laoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Laoo}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Laoo}"
 );
-assert(
-  /^\P{sc=Lao}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Lao}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Lao}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Lao}"
 );
-assert(
-  /^\P{sc=Laoo}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Laoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Laoo}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Laoo}"
 );

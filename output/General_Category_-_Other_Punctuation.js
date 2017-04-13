@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -184,29 +184,35 @@ const matchSymbols = buildString({
     [0x01E95E, 0x01E95F]
   ]
 });
-assert(
-  /^\p{General_Category=Other_Punctuation}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Other_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Other_Punctuation}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Other_Punctuation}"
 );
-assert(
-  /^\p{General_Category=Po}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Po}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Po}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Po}"
 );
-assert(
-  /^\p{gc=Other_Punctuation}+$/u.test(matchSymbols),
-  "`\\p{gc=Other_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Other_Punctuation}+$/u,
+  matchSymbols,
+  "\\p{gc=Other_Punctuation}"
 );
-assert(
-  /^\p{gc=Po}+$/u.test(matchSymbols),
-  "`\\p{gc=Po}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Po}+$/u,
+  matchSymbols,
+  "\\p{gc=Po}"
 );
-assert(
-  /^\p{Other_Punctuation}+$/u.test(matchSymbols),
-  "`\\p{Other_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Other_Punctuation}+$/u,
+  matchSymbols,
+  "\\p{Other_Punctuation}"
 );
-assert(
-  /^\p{Po}+$/u.test(matchSymbols),
-  "`\\p{Po}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Po}+$/u,
+  matchSymbols,
+  "\\p{Po}"
 );
 
 const nonMatchSymbols = buildString({
@@ -383,27 +389,33 @@ const nonMatchSymbols = buildString({
     [0x01E960, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Other_Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Other_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Other_Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Other_Punctuation}"
 );
-assert(
-  /^\P{General_Category=Po}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Po}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Po}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Po}"
 );
-assert(
-  /^\P{gc=Other_Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Other_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Other_Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Other_Punctuation}"
 );
-assert(
-  /^\P{gc=Po}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Po}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Po}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Po}"
 );
-assert(
-  /^\P{Other_Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{Other_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Other_Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{Other_Punctuation}"
 );
-assert(
-  /^\P{Po}+$/u.test(nonMatchSymbols),
-  "`\\P{Po}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Po}+$/u,
+  nonMatchSymbols,
+  "\\P{Po}"
 );

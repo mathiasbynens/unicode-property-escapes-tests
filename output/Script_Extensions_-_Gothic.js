@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x010330, 0x01034A]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Gothic}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Gothic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Gothic}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Gothic}"
 );
-assert(
-  /^\p{Script_Extensions=Goth}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Goth}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Goth}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Goth}"
 );
-assert(
-  /^\p{scx=Gothic}+$/u.test(matchSymbols),
-  "`\\p{scx=Gothic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Gothic}+$/u,
+  matchSymbols,
+  "\\p{scx=Gothic}"
 );
-assert(
-  /^\p{scx=Goth}+$/u.test(matchSymbols),
-  "`\\p{scx=Goth}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Goth}+$/u,
+  matchSymbols,
+  "\\p{scx=Goth}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x01034B, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Gothic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Gothic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Gothic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Gothic}"
 );
-assert(
-  /^\P{Script_Extensions=Goth}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Goth}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Goth}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Goth}"
 );
-assert(
-  /^\P{scx=Gothic}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Gothic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Gothic}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Gothic}"
 );
-assert(
-  /^\P{scx=Goth}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Goth}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Goth}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Goth}"
 );

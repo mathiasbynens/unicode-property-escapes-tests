@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x00A500, 0x00A62B]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Vai}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Vai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Vai}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Vai}"
 );
-assert(
-  /^\p{Script_Extensions=Vaii}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Vaii}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Vaii}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Vaii}"
 );
-assert(
-  /^\p{scx=Vai}+$/u.test(matchSymbols),
-  "`\\p{scx=Vai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Vai}+$/u,
+  matchSymbols,
+  "\\p{scx=Vai}"
 );
-assert(
-  /^\p{scx=Vaii}+$/u.test(matchSymbols),
-  "`\\p{scx=Vaii}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Vaii}+$/u,
+  matchSymbols,
+  "\\p{scx=Vaii}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Vai}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Vai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Vai}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Vai}"
 );
-assert(
-  /^\P{Script_Extensions=Vaii}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Vaii}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Vaii}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Vaii}"
 );
-assert(
-  /^\P{scx=Vai}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Vai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Vai}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Vai}"
 );
-assert(
-  /^\P{scx=Vaii}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Vaii}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Vaii}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Vaii}"
 );

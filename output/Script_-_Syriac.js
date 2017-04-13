@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x00074D, 0x00074F]
   ]
 });
-assert(
-  /^\p{Script=Syriac}+$/u.test(matchSymbols),
-  "`\\p{Script=Syriac}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Syriac}+$/u,
+  matchSymbols,
+  "\\p{Script=Syriac}"
 );
-assert(
-  /^\p{Script=Syrc}+$/u.test(matchSymbols),
-  "`\\p{Script=Syrc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Syrc}+$/u,
+  matchSymbols,
+  "\\p{Script=Syrc}"
 );
-assert(
-  /^\p{sc=Syriac}+$/u.test(matchSymbols),
-  "`\\p{sc=Syriac}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Syriac}+$/u,
+  matchSymbols,
+  "\\p{sc=Syriac}"
 );
-assert(
-  /^\p{sc=Syrc}+$/u.test(matchSymbols),
-  "`\\p{sc=Syrc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Syrc}+$/u,
+  matchSymbols,
+  "\\p{sc=Syrc}"
 );
 
 const nonMatchSymbols = buildString({
@@ -50,19 +54,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Syriac}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Syriac}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Syriac}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Syriac}"
 );
-assert(
-  /^\P{Script=Syrc}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Syrc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Syrc}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Syrc}"
 );
-assert(
-  /^\P{sc=Syriac}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Syriac}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Syriac}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Syriac}"
 );
-assert(
-  /^\P{sc=Syrc}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Syrc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Syrc}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Syrc}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -663,13 +663,15 @@ const matchSymbols = buildString({
     [0x02F800, 0x02FA1D]
   ]
 });
-assert(
-  /^\p{Alphabetic}+$/u.test(matchSymbols),
-  "`\\p{Alphabetic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Alphabetic}+$/u,
+  matchSymbols,
+  "\\p{Alphabetic}"
 );
-assert(
-  /^\p{Alpha}+$/u.test(matchSymbols),
-  "`\\p{Alpha}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Alpha}+$/u,
+  matchSymbols,
+  "\\p{Alpha}"
 );
 
 const nonMatchSymbols = buildString({
@@ -1325,11 +1327,13 @@ const nonMatchSymbols = buildString({
     [0x02FA1E, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Alphabetic}+$/u.test(nonMatchSymbols),
-  "`\\P{Alphabetic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Alphabetic}+$/u,
+  nonMatchSymbols,
+  "\\P{Alphabetic}"
 );
-assert(
-  /^\P{Alpha}+$/u.test(nonMatchSymbols),
-  "`\\P{Alpha}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Alpha}+$/u,
+  nonMatchSymbols,
+  "\\P{Alpha}"
 );

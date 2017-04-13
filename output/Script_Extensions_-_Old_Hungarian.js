@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x010CFA, 0x010CFF]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Old_Hungarian}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Old_Hungarian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Old_Hungarian}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Old_Hungarian}"
 );
-assert(
-  /^\p{Script_Extensions=Hung}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Hung}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Hung}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Hung}"
 );
-assert(
-  /^\p{scx=Old_Hungarian}+$/u.test(matchSymbols),
-  "`\\p{scx=Old_Hungarian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Old_Hungarian}+$/u,
+  matchSymbols,
+  "\\p{scx=Old_Hungarian}"
 );
-assert(
-  /^\p{scx=Hung}+$/u.test(matchSymbols),
-  "`\\p{scx=Hung}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Hung}+$/u,
+  matchSymbols,
+  "\\p{scx=Hung}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x010D00, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Old_Hungarian}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Old_Hungarian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Old_Hungarian}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Old_Hungarian}"
 );
-assert(
-  /^\P{Script_Extensions=Hung}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Hung}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Hung}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Hung}"
 );
-assert(
-  /^\P{scx=Old_Hungarian}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Old_Hungarian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Old_Hungarian}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Old_Hungarian}"
 );
-assert(
-  /^\P{scx=Hung}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Hung}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Hung}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Hung}"
 );

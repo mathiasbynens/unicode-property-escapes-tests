@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -22,21 +22,25 @@ const matchSymbols = buildString({
     [0x010760, 0x010767]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Linear_A}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Linear_A}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Linear_A}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Linear_A}"
 );
-assert(
-  /^\p{Script_Extensions=Lina}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Lina}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Lina}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Lina}"
 );
-assert(
-  /^\p{scx=Linear_A}+$/u.test(matchSymbols),
-  "`\\p{scx=Linear_A}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Linear_A}+$/u,
+  matchSymbols,
+  "\\p{scx=Linear_A}"
 );
-assert(
-  /^\p{scx=Lina}+$/u.test(matchSymbols),
-  "`\\p{scx=Lina}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Lina}+$/u,
+  matchSymbols,
+  "\\p{scx=Lina}"
 );
 
 const nonMatchSymbols = buildString({
@@ -51,19 +55,23 @@ const nonMatchSymbols = buildString({
     [0x010768, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Linear_A}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Linear_A}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Linear_A}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Linear_A}"
 );
-assert(
-  /^\P{Script_Extensions=Lina}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Lina}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Lina}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Lina}"
 );
-assert(
-  /^\P{scx=Linear_A}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Linear_A}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Linear_A}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Linear_A}"
 );
-assert(
-  /^\P{scx=Lina}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Lina}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Lina}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Lina}"
 );

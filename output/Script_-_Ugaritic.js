@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x010380, 0x01039D]
   ]
 });
-assert(
-  /^\p{Script=Ugaritic}+$/u.test(matchSymbols),
-  "`\\p{Script=Ugaritic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Ugaritic}+$/u,
+  matchSymbols,
+  "\\p{Script=Ugaritic}"
 );
-assert(
-  /^\p{Script=Ugar}+$/u.test(matchSymbols),
-  "`\\p{Script=Ugar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Ugar}+$/u,
+  matchSymbols,
+  "\\p{Script=Ugar}"
 );
-assert(
-  /^\p{sc=Ugaritic}+$/u.test(matchSymbols),
-  "`\\p{sc=Ugaritic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Ugaritic}+$/u,
+  matchSymbols,
+  "\\p{sc=Ugaritic}"
 );
-assert(
-  /^\p{sc=Ugar}+$/u.test(matchSymbols),
-  "`\\p{sc=Ugar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Ugar}+$/u,
+  matchSymbols,
+  "\\p{sc=Ugar}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x0103A0, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Ugaritic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Ugaritic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Ugaritic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Ugaritic}"
 );
-assert(
-  /^\P{Script=Ugar}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Ugar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Ugar}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Ugar}"
 );
-assert(
-  /^\P{sc=Ugaritic}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Ugaritic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Ugaritic}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Ugaritic}"
 );
-assert(
-  /^\P{sc=Ugar}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Ugar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Ugar}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Ugar}"
 );

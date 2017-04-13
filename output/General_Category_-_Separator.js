@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -27,29 +27,35 @@ const matchSymbols = buildString({
     [0x002028, 0x002029]
   ]
 });
-assert(
-  /^\p{General_Category=Separator}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Separator}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Separator}"
 );
-assert(
-  /^\p{General_Category=Z}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Z}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Z}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Z}"
 );
-assert(
-  /^\p{gc=Separator}+$/u.test(matchSymbols),
-  "`\\p{gc=Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Separator}+$/u,
+  matchSymbols,
+  "\\p{gc=Separator}"
 );
-assert(
-  /^\p{gc=Z}+$/u.test(matchSymbols),
-  "`\\p{gc=Z}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Z}+$/u,
+  matchSymbols,
+  "\\p{gc=Z}"
 );
-assert(
-  /^\p{Separator}+$/u.test(matchSymbols),
-  "`\\p{Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Separator}+$/u,
+  matchSymbols,
+  "\\p{Separator}"
 );
-assert(
-  /^\p{Z}+$/u.test(matchSymbols),
-  "`\\p{Z}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Z}+$/u,
+  matchSymbols,
+  "\\p{Z}"
 );
 
 const nonMatchSymbols = buildString({
@@ -68,27 +74,33 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Separator}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Separator}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Separator}"
 );
-assert(
-  /^\P{General_Category=Z}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Z}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Z}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Z}"
 );
-assert(
-  /^\P{gc=Separator}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Separator}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Separator}"
 );
-assert(
-  /^\P{gc=Z}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Z}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Z}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Z}"
 );
-assert(
-  /^\P{Separator}+$/u.test(nonMatchSymbols),
-  "`\\P{Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Separator}+$/u,
+  nonMatchSymbols,
+  "\\P{Separator}"
 );
-assert(
-  /^\P{Z}+$/u.test(nonMatchSymbols),
-  "`\\P{Z}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Z}+$/u,
+  nonMatchSymbols,
+  "\\P{Z}"
 );

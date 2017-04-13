@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x000840, 0x00085B]
   ]
 });
-assert(
-  /^\p{Script=Mandaic}+$/u.test(matchSymbols),
-  "`\\p{Script=Mandaic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Mandaic}+$/u,
+  matchSymbols,
+  "\\p{Script=Mandaic}"
 );
-assert(
-  /^\p{Script=Mand}+$/u.test(matchSymbols),
-  "`\\p{Script=Mand}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Mand}+$/u,
+  matchSymbols,
+  "\\p{Script=Mand}"
 );
-assert(
-  /^\p{sc=Mandaic}+$/u.test(matchSymbols),
-  "`\\p{sc=Mandaic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Mandaic}+$/u,
+  matchSymbols,
+  "\\p{sc=Mandaic}"
 );
-assert(
-  /^\p{sc=Mand}+$/u.test(matchSymbols),
-  "`\\p{sc=Mand}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Mand}+$/u,
+  matchSymbols,
+  "\\p{sc=Mand}"
 );
 
 const nonMatchSymbols = buildString({
@@ -48,19 +52,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Mandaic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Mandaic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Mandaic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Mandaic}"
 );
-assert(
-  /^\P{Script=Mand}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Mand}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Mand}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Mand}"
 );
-assert(
-  /^\P{sc=Mandaic}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Mandaic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Mandaic}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Mandaic}"
 );
-assert(
-  /^\P{sc=Mand}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Mand}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Mand}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Mand}"
 );

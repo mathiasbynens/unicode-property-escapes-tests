@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x010900, 0x01091B]
   ]
 });
-assert(
-  /^\p{Script=Phoenician}+$/u.test(matchSymbols),
-  "`\\p{Script=Phoenician}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Phoenician}+$/u,
+  matchSymbols,
+  "\\p{Script=Phoenician}"
 );
-assert(
-  /^\p{Script=Phnx}+$/u.test(matchSymbols),
-  "`\\p{Script=Phnx}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Phnx}+$/u,
+  matchSymbols,
+  "\\p{Script=Phnx}"
 );
-assert(
-  /^\p{sc=Phoenician}+$/u.test(matchSymbols),
-  "`\\p{sc=Phoenician}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Phoenician}+$/u,
+  matchSymbols,
+  "\\p{sc=Phoenician}"
 );
-assert(
-  /^\p{sc=Phnx}+$/u.test(matchSymbols),
-  "`\\p{sc=Phnx}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Phnx}+$/u,
+  matchSymbols,
+  "\\p{sc=Phnx}"
 );
 
 const nonMatchSymbols = buildString({
@@ -48,19 +52,23 @@ const nonMatchSymbols = buildString({
     [0x010920, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Phoenician}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Phoenician}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Phoenician}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Phoenician}"
 );
-assert(
-  /^\P{Script=Phnx}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Phnx}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Phnx}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Phnx}"
 );
-assert(
-  /^\P{sc=Phoenician}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Phoenician}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Phoenician}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Phoenician}"
 );
-assert(
-  /^\P{sc=Phnx}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Phnx}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Phnx}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Phnx}"
 );

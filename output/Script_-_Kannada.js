@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -33,21 +33,25 @@ const matchSymbols = buildString({
     [0x000CF1, 0x000CF2]
   ]
 });
-assert(
-  /^\p{Script=Kannada}+$/u.test(matchSymbols),
-  "`\\p{Script=Kannada}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Kannada}+$/u,
+  matchSymbols,
+  "\\p{Script=Kannada}"
 );
-assert(
-  /^\p{Script=Knda}+$/u.test(matchSymbols),
-  "`\\p{Script=Knda}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Knda}+$/u,
+  matchSymbols,
+  "\\p{Script=Knda}"
 );
-assert(
-  /^\p{sc=Kannada}+$/u.test(matchSymbols),
-  "`\\p{sc=Kannada}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Kannada}+$/u,
+  matchSymbols,
+  "\\p{sc=Kannada}"
 );
-assert(
-  /^\p{sc=Knda}+$/u.test(matchSymbols),
-  "`\\p{sc=Knda}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Knda}+$/u,
+  matchSymbols,
+  "\\p{sc=Knda}"
 );
 
 const nonMatchSymbols = buildString({
@@ -73,19 +77,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Kannada}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Kannada}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Kannada}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Kannada}"
 );
-assert(
-  /^\P{Script=Knda}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Knda}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Knda}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Knda}"
 );
-assert(
-  /^\P{sc=Kannada}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Kannada}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Kannada}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Kannada}"
 );
-assert(
-  /^\P{sc=Knda}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Knda}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Knda}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Knda}"
 );

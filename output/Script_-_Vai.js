@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x00A500, 0x00A62B]
   ]
 });
-assert(
-  /^\p{Script=Vai}+$/u.test(matchSymbols),
-  "`\\p{Script=Vai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Vai}+$/u,
+  matchSymbols,
+  "\\p{Script=Vai}"
 );
-assert(
-  /^\p{Script=Vaii}+$/u.test(matchSymbols),
-  "`\\p{Script=Vaii}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Vaii}+$/u,
+  matchSymbols,
+  "\\p{Script=Vaii}"
 );
-assert(
-  /^\p{sc=Vai}+$/u.test(matchSymbols),
-  "`\\p{sc=Vai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Vai}+$/u,
+  matchSymbols,
+  "\\p{sc=Vai}"
 );
-assert(
-  /^\p{sc=Vaii}+$/u.test(matchSymbols),
-  "`\\p{sc=Vaii}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Vaii}+$/u,
+  matchSymbols,
+  "\\p{sc=Vaii}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Vai}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Vai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Vai}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Vai}"
 );
-assert(
-  /^\P{Script=Vaii}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Vaii}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Vaii}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Vaii}"
 );
-assert(
-  /^\P{sc=Vai}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Vai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Vai}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Vai}"
 );
-assert(
-  /^\P{sc=Vaii}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Vaii}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Vaii}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Vaii}"
 );

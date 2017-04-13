@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x0018B0, 0x0018F5]
   ]
 });
-assert(
-  /^\p{Script=Canadian_Aboriginal}+$/u.test(matchSymbols),
-  "`\\p{Script=Canadian_Aboriginal}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Canadian_Aboriginal}+$/u,
+  matchSymbols,
+  "\\p{Script=Canadian_Aboriginal}"
 );
-assert(
-  /^\p{Script=Cans}+$/u.test(matchSymbols),
-  "`\\p{Script=Cans}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Cans}+$/u,
+  matchSymbols,
+  "\\p{Script=Cans}"
 );
-assert(
-  /^\p{sc=Canadian_Aboriginal}+$/u.test(matchSymbols),
-  "`\\p{sc=Canadian_Aboriginal}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Canadian_Aboriginal}+$/u,
+  matchSymbols,
+  "\\p{sc=Canadian_Aboriginal}"
 );
-assert(
-  /^\p{sc=Cans}+$/u.test(matchSymbols),
-  "`\\p{sc=Cans}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Cans}+$/u,
+  matchSymbols,
+  "\\p{sc=Cans}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Canadian_Aboriginal}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Canadian_Aboriginal}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Canadian_Aboriginal}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Canadian_Aboriginal}"
 );
-assert(
-  /^\P{Script=Cans}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Cans}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Cans}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Cans}"
 );
-assert(
-  /^\P{sc=Canadian_Aboriginal}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Canadian_Aboriginal}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Canadian_Aboriginal}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Canadian_Aboriginal}"
 );
-assert(
-  /^\P{sc=Cans}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Cans}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Cans}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Cans}"
 );

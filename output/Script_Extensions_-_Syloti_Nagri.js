@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x00A800, 0x00A82B]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Syloti_Nagri}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Syloti_Nagri}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Syloti_Nagri}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Syloti_Nagri}"
 );
-assert(
-  /^\p{Script_Extensions=Sylo}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Sylo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Sylo}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Sylo}"
 );
-assert(
-  /^\p{scx=Syloti_Nagri}+$/u.test(matchSymbols),
-  "`\\p{scx=Syloti_Nagri}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Syloti_Nagri}+$/u,
+  matchSymbols,
+  "\\p{scx=Syloti_Nagri}"
 );
-assert(
-  /^\p{scx=Sylo}+$/u.test(matchSymbols),
-  "`\\p{scx=Sylo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Sylo}+$/u,
+  matchSymbols,
+  "\\p{scx=Sylo}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Syloti_Nagri}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Syloti_Nagri}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Syloti_Nagri}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Syloti_Nagri}"
 );
-assert(
-  /^\P{Script_Extensions=Sylo}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Sylo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Sylo}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Sylo}"
 );
-assert(
-  /^\P{scx=Syloti_Nagri}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Syloti_Nagri}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Syloti_Nagri}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Syloti_Nagri}"
 );
-assert(
-  /^\P{scx=Sylo}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Sylo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Sylo}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Sylo}"
 );

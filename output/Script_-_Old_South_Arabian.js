@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x010A60, 0x010A7F]
   ]
 });
-assert(
-  /^\p{Script=Old_South_Arabian}+$/u.test(matchSymbols),
-  "`\\p{Script=Old_South_Arabian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Old_South_Arabian}+$/u,
+  matchSymbols,
+  "\\p{Script=Old_South_Arabian}"
 );
-assert(
-  /^\p{Script=Sarb}+$/u.test(matchSymbols),
-  "`\\p{Script=Sarb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Sarb}+$/u,
+  matchSymbols,
+  "\\p{Script=Sarb}"
 );
-assert(
-  /^\p{sc=Old_South_Arabian}+$/u.test(matchSymbols),
-  "`\\p{sc=Old_South_Arabian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Old_South_Arabian}+$/u,
+  matchSymbols,
+  "\\p{sc=Old_South_Arabian}"
 );
-assert(
-  /^\p{sc=Sarb}+$/u.test(matchSymbols),
-  "`\\p{sc=Sarb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Sarb}+$/u,
+  matchSymbols,
+  "\\p{sc=Sarb}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x010A80, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Old_South_Arabian}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Old_South_Arabian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Old_South_Arabian}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Old_South_Arabian}"
 );
-assert(
-  /^\P{Script=Sarb}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Sarb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Sarb}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Sarb}"
 );
-assert(
-  /^\P{sc=Old_South_Arabian}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Old_South_Arabian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Old_South_Arabian}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Old_South_Arabian}"
 );
-assert(
-  /^\P{sc=Sarb}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Sarb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Sarb}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Sarb}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -23,21 +23,25 @@ const matchSymbols = buildString({
     [0x001AA0, 0x001AAD]
   ]
 });
-assert(
-  /^\p{Script=Tai_Tham}+$/u.test(matchSymbols),
-  "`\\p{Script=Tai_Tham}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Tai_Tham}+$/u,
+  matchSymbols,
+  "\\p{Script=Tai_Tham}"
 );
-assert(
-  /^\p{Script=Lana}+$/u.test(matchSymbols),
-  "`\\p{Script=Lana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Lana}+$/u,
+  matchSymbols,
+  "\\p{Script=Lana}"
 );
-assert(
-  /^\p{sc=Tai_Tham}+$/u.test(matchSymbols),
-  "`\\p{sc=Tai_Tham}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Tai_Tham}+$/u,
+  matchSymbols,
+  "\\p{sc=Tai_Tham}"
 );
-assert(
-  /^\p{sc=Lana}+$/u.test(matchSymbols),
-  "`\\p{sc=Lana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Lana}+$/u,
+  matchSymbols,
+  "\\p{sc=Lana}"
 );
 
 const nonMatchSymbols = buildString({
@@ -54,19 +58,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Tai_Tham}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Tai_Tham}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Tai_Tham}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Tai_Tham}"
 );
-assert(
-  /^\P{Script=Lana}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Lana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Lana}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Lana}"
 );
-assert(
-  /^\P{sc=Tai_Tham}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Tai_Tham}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Tai_Tham}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Tai_Tham}"
 );
-assert(
-  /^\P{sc=Lana}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Lana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Lana}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Lana}"
 );

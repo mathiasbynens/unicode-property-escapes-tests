@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x01E95E, 0x01E95F]
   ]
 });
-assert(
-  /^\p{Script=Adlam}+$/u.test(matchSymbols),
-  "`\\p{Script=Adlam}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Adlam}+$/u,
+  matchSymbols,
+  "\\p{Script=Adlam}"
 );
-assert(
-  /^\p{Script=Adlm}+$/u.test(matchSymbols),
-  "`\\p{Script=Adlm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Adlm}+$/u,
+  matchSymbols,
+  "\\p{Script=Adlm}"
 );
-assert(
-  /^\p{sc=Adlam}+$/u.test(matchSymbols),
-  "`\\p{sc=Adlam}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Adlam}+$/u,
+  matchSymbols,
+  "\\p{sc=Adlam}"
 );
-assert(
-  /^\p{sc=Adlm}+$/u.test(matchSymbols),
-  "`\\p{sc=Adlm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Adlm}+$/u,
+  matchSymbols,
+  "\\p{sc=Adlm}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x01E960, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Adlam}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Adlam}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Adlam}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Adlam}"
 );
-assert(
-  /^\P{Script=Adlm}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Adlm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Adlm}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Adlm}"
 );
-assert(
-  /^\P{sc=Adlam}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Adlam}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Adlam}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Adlam}"
 );
-assert(
-  /^\P{sc=Adlm}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Adlm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Adlm}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Adlm}"
 );

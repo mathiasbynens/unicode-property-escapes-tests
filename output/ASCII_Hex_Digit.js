@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,13 +21,15 @@ const matchSymbols = buildString({
     [0x000061, 0x000066]
   ]
 });
-assert(
-  /^\p{ASCII_Hex_Digit}+$/u.test(matchSymbols),
-  "`\\p{ASCII_Hex_Digit}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{ASCII_Hex_Digit}+$/u,
+  matchSymbols,
+  "\\p{ASCII_Hex_Digit}"
 );
-assert(
-  /^\p{AHex}+$/u.test(matchSymbols),
-  "`\\p{AHex}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{AHex}+$/u,
+  matchSymbols,
+  "\\p{AHex}"
 );
 
 const nonMatchSymbols = buildString({
@@ -41,11 +43,13 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{ASCII_Hex_Digit}+$/u.test(nonMatchSymbols),
-  "`\\P{ASCII_Hex_Digit}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{ASCII_Hex_Digit}+$/u,
+  nonMatchSymbols,
+  "\\P{ASCII_Hex_Digit}"
 );
-assert(
-  /^\P{AHex}+$/u.test(nonMatchSymbols),
-  "`\\P{AHex}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{AHex}+$/u,
+  nonMatchSymbols,
+  "\\P{AHex}"
 );

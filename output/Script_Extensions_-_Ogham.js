@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x001680, 0x00169C]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Ogham}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Ogham}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Ogham}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Ogham}"
 );
-assert(
-  /^\p{Script_Extensions=Ogam}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Ogam}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Ogam}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Ogam}"
 );
-assert(
-  /^\p{scx=Ogham}+$/u.test(matchSymbols),
-  "`\\p{scx=Ogham}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Ogham}+$/u,
+  matchSymbols,
+  "\\p{scx=Ogham}"
 );
-assert(
-  /^\p{scx=Ogam}+$/u.test(matchSymbols),
-  "`\\p{scx=Ogam}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Ogam}+$/u,
+  matchSymbols,
+  "\\p{scx=Ogam}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Ogham}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Ogham}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Ogham}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Ogham}"
 );
-assert(
-  /^\P{Script_Extensions=Ogam}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Ogam}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Ogam}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Ogam}"
 );
-assert(
-  /^\P{scx=Ogham}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Ogham}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Ogham}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Ogham}"
 );
-assert(
-  /^\P{scx=Ogam}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Ogam}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Ogam}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Ogam}"
 );

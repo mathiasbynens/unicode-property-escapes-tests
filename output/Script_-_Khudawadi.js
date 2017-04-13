@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x0112F0, 0x0112F9]
   ]
 });
-assert(
-  /^\p{Script=Khudawadi}+$/u.test(matchSymbols),
-  "`\\p{Script=Khudawadi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Khudawadi}+$/u,
+  matchSymbols,
+  "\\p{Script=Khudawadi}"
 );
-assert(
-  /^\p{Script=Sind}+$/u.test(matchSymbols),
-  "`\\p{Script=Sind}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Sind}+$/u,
+  matchSymbols,
+  "\\p{Script=Sind}"
 );
-assert(
-  /^\p{sc=Khudawadi}+$/u.test(matchSymbols),
-  "`\\p{sc=Khudawadi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Khudawadi}+$/u,
+  matchSymbols,
+  "\\p{sc=Khudawadi}"
 );
-assert(
-  /^\p{sc=Sind}+$/u.test(matchSymbols),
-  "`\\p{sc=Sind}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Sind}+$/u,
+  matchSymbols,
+  "\\p{sc=Sind}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x0112FA, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Khudawadi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Khudawadi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Khudawadi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Khudawadi}"
 );
-assert(
-  /^\P{Script=Sind}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Sind}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Sind}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Sind}"
 );
-assert(
-  /^\P{sc=Khudawadi}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Khudawadi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Khudawadi}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Khudawadi}"
 );
-assert(
-  /^\P{sc=Sind}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Sind}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Sind}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Sind}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -22,21 +22,25 @@ const matchSymbols = buildString({
     [0x0019DE, 0x0019DF]
   ]
 });
-assert(
-  /^\p{Script=New_Tai_Lue}+$/u.test(matchSymbols),
-  "`\\p{Script=New_Tai_Lue}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=New_Tai_Lue}+$/u,
+  matchSymbols,
+  "\\p{Script=New_Tai_Lue}"
 );
-assert(
-  /^\p{Script=Talu}+$/u.test(matchSymbols),
-  "`\\p{Script=Talu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Talu}+$/u,
+  matchSymbols,
+  "\\p{Script=Talu}"
 );
-assert(
-  /^\p{sc=New_Tai_Lue}+$/u.test(matchSymbols),
-  "`\\p{sc=New_Tai_Lue}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=New_Tai_Lue}+$/u,
+  matchSymbols,
+  "\\p{sc=New_Tai_Lue}"
 );
-assert(
-  /^\p{sc=Talu}+$/u.test(matchSymbols),
-  "`\\p{sc=Talu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Talu}+$/u,
+  matchSymbols,
+  "\\p{sc=Talu}"
 );
 
 const nonMatchSymbols = buildString({
@@ -51,19 +55,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=New_Tai_Lue}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=New_Tai_Lue}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=New_Tai_Lue}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=New_Tai_Lue}"
 );
-assert(
-  /^\P{Script=Talu}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Talu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Talu}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Talu}"
 );
-assert(
-  /^\P{sc=New_Tai_Lue}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=New_Tai_Lue}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=New_Tai_Lue}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=New_Tai_Lue}"
 );
-assert(
-  /^\P{sc=Talu}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Talu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Talu}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Talu}"
 );

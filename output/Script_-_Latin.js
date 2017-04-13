@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -50,21 +50,25 @@ const matchSymbols = buildString({
     [0x00FF41, 0x00FF5A]
   ]
 });
-assert(
-  /^\p{Script=Latin}+$/u.test(matchSymbols),
-  "`\\p{Script=Latin}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Latin}+$/u,
+  matchSymbols,
+  "\\p{Script=Latin}"
 );
-assert(
-  /^\p{Script=Latn}+$/u.test(matchSymbols),
-  "`\\p{Script=Latn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Latn}+$/u,
+  matchSymbols,
+  "\\p{Script=Latn}"
 );
-assert(
-  /^\p{sc=Latin}+$/u.test(matchSymbols),
-  "`\\p{sc=Latin}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Latin}+$/u,
+  matchSymbols,
+  "\\p{sc=Latin}"
 );
-assert(
-  /^\p{sc=Latn}+$/u.test(matchSymbols),
-  "`\\p{sc=Latn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Latn}+$/u,
+  matchSymbols,
+  "\\p{sc=Latn}"
 );
 
 const nonMatchSymbols = buildString({
@@ -107,19 +111,23 @@ const nonMatchSymbols = buildString({
     [0x00FF5B, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Latin}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Latin}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Latin}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Latin}"
 );
-assert(
-  /^\P{Script=Latn}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Latn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Latn}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Latn}"
 );
-assert(
-  /^\P{sc=Latin}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Latin}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Latin}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Latin}"
 );
-assert(
-  /^\P{sc=Latn}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Latn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Latn}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Latn}"
 );

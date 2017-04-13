@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -130,13 +130,15 @@ const matchSymbols = buildString({
     [0x00FF62, 0x00FF63]
   ]
 });
-assert(
-  /^\p{Bidi_Mirrored}+$/u.test(matchSymbols),
-  "`\\p{Bidi_Mirrored}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Bidi_Mirrored}+$/u,
+  matchSymbols,
+  "\\p{Bidi_Mirrored}"
 );
-assert(
-  /^\p{Bidi_M}+$/u.test(matchSymbols),
-  "`\\p{Bidi_M}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Bidi_M}+$/u,
+  matchSymbols,
+  "\\p{Bidi_M}"
 );
 
 const nonMatchSymbols = buildString({
@@ -259,11 +261,13 @@ const nonMatchSymbols = buildString({
     [0x01D7C4, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Bidi_Mirrored}+$/u.test(nonMatchSymbols),
-  "`\\P{Bidi_Mirrored}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Bidi_Mirrored}+$/u,
+  nonMatchSymbols,
+  "\\P{Bidi_Mirrored}"
 );
-assert(
-  /^\P{Bidi_M}+$/u.test(nonMatchSymbols),
-  "`\\P{Bidi_M}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Bidi_M}+$/u,
+  nonMatchSymbols,
+  "\\P{Bidi_M}"
 );

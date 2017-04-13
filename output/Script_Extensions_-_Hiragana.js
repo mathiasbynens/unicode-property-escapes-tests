@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -34,21 +34,25 @@ const matchSymbols = buildString({
     [0x00FF9E, 0x00FF9F]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Hiragana}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Hiragana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Hiragana}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Hiragana}"
 );
-assert(
-  /^\p{Script_Extensions=Hira}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Hira}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Hira}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Hira}"
 );
-assert(
-  /^\p{scx=Hiragana}+$/u.test(matchSymbols),
-  "`\\p{scx=Hiragana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Hiragana}+$/u,
+  matchSymbols,
+  "\\p{scx=Hiragana}"
 );
-assert(
-  /^\p{scx=Hira}+$/u.test(matchSymbols),
-  "`\\p{scx=Hira}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Hira}+$/u,
+  matchSymbols,
+  "\\p{scx=Hira}"
 );
 
 const nonMatchSymbols = buildString({
@@ -75,19 +79,23 @@ const nonMatchSymbols = buildString({
     [0x01F201, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Hiragana}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Hiragana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Hiragana}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Hiragana}"
 );
-assert(
-  /^\P{Script_Extensions=Hira}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Hira}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Hira}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Hira}"
 );
-assert(
-  /^\P{scx=Hiragana}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Hiragana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Hiragana}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Hiragana}"
 );
-assert(
-  /^\P{scx=Hira}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Hira}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Hira}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Hira}"
 );

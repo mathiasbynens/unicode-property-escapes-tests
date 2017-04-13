@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x01E8C7, 0x01E8D6]
   ]
 });
-assert(
-  /^\p{Script=Mende_Kikakui}+$/u.test(matchSymbols),
-  "`\\p{Script=Mende_Kikakui}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Mende_Kikakui}+$/u,
+  matchSymbols,
+  "\\p{Script=Mende_Kikakui}"
 );
-assert(
-  /^\p{Script=Mend}+$/u.test(matchSymbols),
-  "`\\p{Script=Mend}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Mend}+$/u,
+  matchSymbols,
+  "\\p{Script=Mend}"
 );
-assert(
-  /^\p{sc=Mende_Kikakui}+$/u.test(matchSymbols),
-  "`\\p{sc=Mende_Kikakui}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Mende_Kikakui}+$/u,
+  matchSymbols,
+  "\\p{sc=Mende_Kikakui}"
 );
-assert(
-  /^\p{sc=Mend}+$/u.test(matchSymbols),
-  "`\\p{sc=Mend}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Mend}+$/u,
+  matchSymbols,
+  "\\p{sc=Mend}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x01E8D7, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Mende_Kikakui}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Mende_Kikakui}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Mende_Kikakui}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Mende_Kikakui}"
 );
-assert(
-  /^\P{Script=Mend}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Mend}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Mend}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Mend}"
 );
-assert(
-  /^\P{sc=Mende_Kikakui}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Mende_Kikakui}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Mende_Kikakui}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Mende_Kikakui}"
 );
-assert(
-  /^\P{sc=Mend}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Mend}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Mend}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Mend}"
 );

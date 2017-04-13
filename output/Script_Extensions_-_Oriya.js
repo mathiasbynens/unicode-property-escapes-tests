@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -34,21 +34,25 @@ const matchSymbols = buildString({
     [0x000B66, 0x000B77]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Oriya}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Oriya}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Oriya}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Oriya}"
 );
-assert(
-  /^\p{Script_Extensions=Orya}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Orya}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Orya}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Orya}"
 );
-assert(
-  /^\p{scx=Oriya}+$/u.test(matchSymbols),
-  "`\\p{scx=Oriya}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Oriya}+$/u,
+  matchSymbols,
+  "\\p{scx=Oriya}"
 );
-assert(
-  /^\p{scx=Orya}+$/u.test(matchSymbols),
-  "`\\p{scx=Orya}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Orya}+$/u,
+  matchSymbols,
+  "\\p{scx=Orya}"
 );
 
 const nonMatchSymbols = buildString({
@@ -76,19 +80,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Oriya}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Oriya}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Oriya}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Oriya}"
 );
-assert(
-  /^\P{Script_Extensions=Orya}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Orya}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Orya}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Orya}"
 );
-assert(
-  /^\P{scx=Oriya}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Oriya}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Oriya}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Oriya}"
 );
-assert(
-  /^\P{scx=Orya}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Orya}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Orya}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Orya}"
 );

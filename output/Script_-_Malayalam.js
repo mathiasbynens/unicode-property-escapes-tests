@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -27,21 +27,25 @@ const matchSymbols = buildString({
     [0x000D66, 0x000D7F]
   ]
 });
-assert(
-  /^\p{Script=Malayalam}+$/u.test(matchSymbols),
-  "`\\p{Script=Malayalam}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Malayalam}+$/u,
+  matchSymbols,
+  "\\p{Script=Malayalam}"
 );
-assert(
-  /^\p{Script=Mlym}+$/u.test(matchSymbols),
-  "`\\p{Script=Mlym}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Mlym}+$/u,
+  matchSymbols,
+  "\\p{Script=Mlym}"
 );
-assert(
-  /^\p{sc=Malayalam}+$/u.test(matchSymbols),
-  "`\\p{sc=Malayalam}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Malayalam}+$/u,
+  matchSymbols,
+  "\\p{sc=Malayalam}"
 );
-assert(
-  /^\p{sc=Mlym}+$/u.test(matchSymbols),
-  "`\\p{sc=Mlym}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Mlym}+$/u,
+  matchSymbols,
+  "\\p{sc=Mlym}"
 );
 
 const nonMatchSymbols = buildString({
@@ -62,19 +66,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Malayalam}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Malayalam}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Malayalam}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Malayalam}"
 );
-assert(
-  /^\P{Script=Mlym}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Mlym}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Mlym}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Mlym}"
 );
-assert(
-  /^\P{sc=Malayalam}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Malayalam}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Malayalam}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Malayalam}"
 );
-assert(
-  /^\P{sc=Mlym}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Mlym}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Mlym}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Mlym}"
 );

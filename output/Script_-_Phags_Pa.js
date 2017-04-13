@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x00A840, 0x00A877]
   ]
 });
-assert(
-  /^\p{Script=Phags_Pa}+$/u.test(matchSymbols),
-  "`\\p{Script=Phags_Pa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Phags_Pa}+$/u,
+  matchSymbols,
+  "\\p{Script=Phags_Pa}"
 );
-assert(
-  /^\p{Script=Phag}+$/u.test(matchSymbols),
-  "`\\p{Script=Phag}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Phag}+$/u,
+  matchSymbols,
+  "\\p{Script=Phag}"
 );
-assert(
-  /^\p{sc=Phags_Pa}+$/u.test(matchSymbols),
-  "`\\p{sc=Phags_Pa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Phags_Pa}+$/u,
+  matchSymbols,
+  "\\p{sc=Phags_Pa}"
 );
-assert(
-  /^\p{sc=Phag}+$/u.test(matchSymbols),
-  "`\\p{sc=Phag}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Phag}+$/u,
+  matchSymbols,
+  "\\p{sc=Phag}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Phags_Pa}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Phags_Pa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Phags_Pa}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Phags_Pa}"
 );
-assert(
-  /^\P{Script=Phag}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Phag}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Phag}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Phag}"
 );
-assert(
-  /^\P{sc=Phags_Pa}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Phags_Pa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Phags_Pa}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Phags_Pa}"
 );
-assert(
-  /^\P{sc=Phag}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Phag}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Phag}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Phag}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -134,29 +134,35 @@ const matchSymbols = buildString({
     [0x01F100, 0x01F10C]
   ]
 });
-assert(
-  /^\p{General_Category=Number}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Number}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Number}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Number}"
 );
-assert(
-  /^\p{General_Category=N}+$/u.test(matchSymbols),
-  "`\\p{General_Category=N}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=N}+$/u,
+  matchSymbols,
+  "\\p{General_Category=N}"
 );
-assert(
-  /^\p{gc=Number}+$/u.test(matchSymbols),
-  "`\\p{gc=Number}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Number}+$/u,
+  matchSymbols,
+  "\\p{gc=Number}"
 );
-assert(
-  /^\p{gc=N}+$/u.test(matchSymbols),
-  "`\\p{gc=N}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=N}+$/u,
+  matchSymbols,
+  "\\p{gc=N}"
 );
-assert(
-  /^\p{Number}+$/u.test(matchSymbols),
-  "`\\p{Number}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Number}+$/u,
+  matchSymbols,
+  "\\p{Number}"
 );
-assert(
-  /^\p{N}+$/u.test(matchSymbols),
-  "`\\p{N}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{N}+$/u,
+  matchSymbols,
+  "\\p{N}"
 );
 
 const nonMatchSymbols = buildString({
@@ -283,27 +289,33 @@ const nonMatchSymbols = buildString({
     [0x01F10D, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Number}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Number}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Number}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Number}"
 );
-assert(
-  /^\P{General_Category=N}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=N}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=N}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=N}"
 );
-assert(
-  /^\P{gc=Number}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Number}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Number}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Number}"
 );
-assert(
-  /^\P{gc=N}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=N}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=N}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=N}"
 );
-assert(
-  /^\P{Number}+$/u.test(nonMatchSymbols),
-  "`\\P{Number}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Number}+$/u,
+  nonMatchSymbols,
+  "\\P{Number}"
 );
-assert(
-  /^\P{N}+$/u.test(nonMatchSymbols),
-  "`\\P{N}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{N}+$/u,
+  nonMatchSymbols,
+  "\\P{N}"
 );

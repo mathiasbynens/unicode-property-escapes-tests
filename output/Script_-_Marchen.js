@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x011CA9, 0x011CB6]
   ]
 });
-assert(
-  /^\p{Script=Marchen}+$/u.test(matchSymbols),
-  "`\\p{Script=Marchen}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Marchen}+$/u,
+  matchSymbols,
+  "\\p{Script=Marchen}"
 );
-assert(
-  /^\p{Script=Marc}+$/u.test(matchSymbols),
-  "`\\p{Script=Marc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Marc}+$/u,
+  matchSymbols,
+  "\\p{Script=Marc}"
 );
-assert(
-  /^\p{sc=Marchen}+$/u.test(matchSymbols),
-  "`\\p{sc=Marchen}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Marchen}+$/u,
+  matchSymbols,
+  "\\p{sc=Marchen}"
 );
-assert(
-  /^\p{sc=Marc}+$/u.test(matchSymbols),
-  "`\\p{sc=Marc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Marc}+$/u,
+  matchSymbols,
+  "\\p{sc=Marc}"
 );
 
 const nonMatchSymbols = buildString({
@@ -50,19 +54,23 @@ const nonMatchSymbols = buildString({
     [0x011CB7, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Marchen}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Marchen}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Marchen}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Marchen}"
 );
-assert(
-  /^\P{Script=Marc}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Marc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Marc}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Marc}"
 );
-assert(
-  /^\P{sc=Marchen}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Marchen}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Marchen}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Marchen}"
 );
-assert(
-  /^\P{sc=Marc}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Marc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Marc}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Marc}"
 );

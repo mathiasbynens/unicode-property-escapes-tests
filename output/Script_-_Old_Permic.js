@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x010350, 0x01037A]
   ]
 });
-assert(
-  /^\p{Script=Old_Permic}+$/u.test(matchSymbols),
-  "`\\p{Script=Old_Permic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Old_Permic}+$/u,
+  matchSymbols,
+  "\\p{Script=Old_Permic}"
 );
-assert(
-  /^\p{Script=Perm}+$/u.test(matchSymbols),
-  "`\\p{Script=Perm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Perm}+$/u,
+  matchSymbols,
+  "\\p{Script=Perm}"
 );
-assert(
-  /^\p{sc=Old_Permic}+$/u.test(matchSymbols),
-  "`\\p{sc=Old_Permic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Old_Permic}+$/u,
+  matchSymbols,
+  "\\p{sc=Old_Permic}"
 );
-assert(
-  /^\p{sc=Perm}+$/u.test(matchSymbols),
-  "`\\p{sc=Perm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Perm}+$/u,
+  matchSymbols,
+  "\\p{sc=Perm}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x01037B, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Old_Permic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Old_Permic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Old_Permic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Old_Permic}"
 );
-assert(
-  /^\P{Script=Perm}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Perm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Perm}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Perm}"
 );
-assert(
-  /^\P{sc=Old_Permic}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Old_Permic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Old_Permic}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Old_Permic}"
 );
-assert(
-  /^\P{sc=Perm}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Perm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Perm}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Perm}"
 );

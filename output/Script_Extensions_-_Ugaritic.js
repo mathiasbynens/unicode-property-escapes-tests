@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x010380, 0x01039D]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Ugaritic}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Ugaritic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Ugaritic}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Ugaritic}"
 );
-assert(
-  /^\p{Script_Extensions=Ugar}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Ugar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Ugar}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Ugar}"
 );
-assert(
-  /^\p{scx=Ugaritic}+$/u.test(matchSymbols),
-  "`\\p{scx=Ugaritic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Ugaritic}+$/u,
+  matchSymbols,
+  "\\p{scx=Ugaritic}"
 );
-assert(
-  /^\p{scx=Ugar}+$/u.test(matchSymbols),
-  "`\\p{scx=Ugar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Ugar}+$/u,
+  matchSymbols,
+  "\\p{scx=Ugar}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x0103A0, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Ugaritic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Ugaritic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Ugaritic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Ugaritic}"
 );
-assert(
-  /^\P{Script_Extensions=Ugar}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Ugar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Ugar}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Ugar}"
 );
-assert(
-  /^\P{scx=Ugaritic}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Ugaritic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Ugaritic}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Ugaritic}"
 );
-assert(
-  /^\P{scx=Ugar}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Ugar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Ugar}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Ugar}"
 );

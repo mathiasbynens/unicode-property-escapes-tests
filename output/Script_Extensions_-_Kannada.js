@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -38,21 +38,25 @@ const matchSymbols = buildString({
     [0x00A830, 0x00A835]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Kannada}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Kannada}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Kannada}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Kannada}"
 );
-assert(
-  /^\p{Script_Extensions=Knda}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Knda}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Knda}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Knda}"
 );
-assert(
-  /^\p{scx=Kannada}+$/u.test(matchSymbols),
-  "`\\p{scx=Kannada}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Kannada}+$/u,
+  matchSymbols,
+  "\\p{scx=Kannada}"
 );
-assert(
-  /^\p{scx=Knda}+$/u.test(matchSymbols),
-  "`\\p{scx=Knda}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Knda}+$/u,
+  matchSymbols,
+  "\\p{scx=Knda}"
 );
 
 const nonMatchSymbols = buildString({
@@ -83,19 +87,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Kannada}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Kannada}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Kannada}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Kannada}"
 );
-assert(
-  /^\P{Script_Extensions=Knda}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Knda}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Knda}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Knda}"
 );
-assert(
-  /^\P{scx=Kannada}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Kannada}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Kannada}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Kannada}"
 );
-assert(
-  /^\P{scx=Knda}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Knda}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Knda}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Knda}"
 );

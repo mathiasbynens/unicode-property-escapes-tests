@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x0102A0, 0x0102D0]
   ]
 });
-assert(
-  /^\p{Script=Carian}+$/u.test(matchSymbols),
-  "`\\p{Script=Carian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Carian}+$/u,
+  matchSymbols,
+  "\\p{Script=Carian}"
 );
-assert(
-  /^\p{Script=Cari}+$/u.test(matchSymbols),
-  "`\\p{Script=Cari}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Cari}+$/u,
+  matchSymbols,
+  "\\p{Script=Cari}"
 );
-assert(
-  /^\p{sc=Carian}+$/u.test(matchSymbols),
-  "`\\p{sc=Carian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Carian}+$/u,
+  matchSymbols,
+  "\\p{sc=Carian}"
 );
-assert(
-  /^\p{sc=Cari}+$/u.test(matchSymbols),
-  "`\\p{sc=Cari}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Cari}+$/u,
+  matchSymbols,
+  "\\p{sc=Cari}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x0102D1, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Carian}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Carian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Carian}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Carian}"
 );
-assert(
-  /^\P{Script=Cari}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Cari}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Cari}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Cari}"
 );
-assert(
-  /^\P{sc=Carian}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Carian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Carian}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Carian}"
 );
-assert(
-  /^\P{sc=Cari}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Cari}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Cari}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Cari}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x010280, 0x01029C]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Lycian}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Lycian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Lycian}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Lycian}"
 );
-assert(
-  /^\p{Script_Extensions=Lyci}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Lyci}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Lyci}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Lyci}"
 );
-assert(
-  /^\p{scx=Lycian}+$/u.test(matchSymbols),
-  "`\\p{scx=Lycian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Lycian}+$/u,
+  matchSymbols,
+  "\\p{scx=Lycian}"
 );
-assert(
-  /^\p{scx=Lyci}+$/u.test(matchSymbols),
-  "`\\p{scx=Lyci}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Lyci}+$/u,
+  matchSymbols,
+  "\\p{scx=Lyci}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x01029D, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Lycian}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Lycian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Lycian}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Lycian}"
 );
-assert(
-  /^\P{Script_Extensions=Lyci}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Lyci}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Lyci}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Lyci}"
 );
-assert(
-  /^\P{scx=Lycian}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Lycian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Lycian}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Lycian}"
 );
-assert(
-  /^\P{scx=Lyci}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Lyci}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Lyci}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Lyci}"
 );

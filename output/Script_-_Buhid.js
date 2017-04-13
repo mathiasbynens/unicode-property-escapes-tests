@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x001740, 0x001753]
   ]
 });
-assert(
-  /^\p{Script=Buhid}+$/u.test(matchSymbols),
-  "`\\p{Script=Buhid}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Buhid}+$/u,
+  matchSymbols,
+  "\\p{Script=Buhid}"
 );
-assert(
-  /^\p{Script=Buhd}+$/u.test(matchSymbols),
-  "`\\p{Script=Buhd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Buhd}+$/u,
+  matchSymbols,
+  "\\p{Script=Buhd}"
 );
-assert(
-  /^\p{sc=Buhid}+$/u.test(matchSymbols),
-  "`\\p{sc=Buhid}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Buhid}+$/u,
+  matchSymbols,
+  "\\p{sc=Buhid}"
 );
-assert(
-  /^\p{sc=Buhd}+$/u.test(matchSymbols),
-  "`\\p{sc=Buhd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Buhd}+$/u,
+  matchSymbols,
+  "\\p{sc=Buhd}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Buhid}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Buhid}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Buhid}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Buhid}"
 );
-assert(
-  /^\P{Script=Buhd}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Buhd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Buhd}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Buhd}"
 );
-assert(
-  /^\P{sc=Buhid}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Buhid}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Buhid}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Buhid}"
 );
-assert(
-  /^\P{sc=Buhd}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Buhd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Buhd}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Buhd}"
 );

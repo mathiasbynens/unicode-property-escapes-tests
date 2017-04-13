@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -22,21 +22,25 @@ const matchSymbols = buildString({
     [0x002D6F, 0x002D70]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Tifinagh}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Tifinagh}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Tifinagh}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Tifinagh}"
 );
-assert(
-  /^\p{Script_Extensions=Tfng}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Tfng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Tfng}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Tfng}"
 );
-assert(
-  /^\p{scx=Tifinagh}+$/u.test(matchSymbols),
-  "`\\p{scx=Tifinagh}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Tifinagh}+$/u,
+  matchSymbols,
+  "\\p{scx=Tifinagh}"
 );
-assert(
-  /^\p{scx=Tfng}+$/u.test(matchSymbols),
-  "`\\p{scx=Tfng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Tfng}+$/u,
+  matchSymbols,
+  "\\p{scx=Tfng}"
 );
 
 const nonMatchSymbols = buildString({
@@ -50,19 +54,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Tifinagh}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Tifinagh}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Tifinagh}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Tifinagh}"
 );
-assert(
-  /^\P{Script_Extensions=Tfng}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Tfng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Tfng}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Tfng}"
 );
-assert(
-  /^\P{scx=Tifinagh}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Tifinagh}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Tifinagh}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Tifinagh}"
 );
-assert(
-  /^\P{scx=Tfng}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Tfng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Tfng}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Tfng}"
 );

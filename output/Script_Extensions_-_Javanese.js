@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x00A9DE, 0x00A9DF]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Javanese}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Javanese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Javanese}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Javanese}"
 );
-assert(
-  /^\p{Script_Extensions=Java}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Java}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Java}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Java}"
 );
-assert(
-  /^\p{scx=Javanese}+$/u.test(matchSymbols),
-  "`\\p{scx=Javanese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Javanese}+$/u,
+  matchSymbols,
+  "\\p{scx=Javanese}"
 );
-assert(
-  /^\p{scx=Java}+$/u.test(matchSymbols),
-  "`\\p{scx=Java}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Java}+$/u,
+  matchSymbols,
+  "\\p{scx=Java}"
 );
 
 const nonMatchSymbols = buildString({
@@ -50,19 +54,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Javanese}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Javanese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Javanese}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Javanese}"
 );
-assert(
-  /^\P{Script_Extensions=Java}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Java}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Java}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Java}"
 );
-assert(
-  /^\P{scx=Javanese}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Javanese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Javanese}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Javanese}"
 );
-assert(
-  /^\P{scx=Java}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Java}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Java}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Java}"
 );

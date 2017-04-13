@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x016AF0, 0x016AF5]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Bassa_Vah}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Bassa_Vah}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Bassa_Vah}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Bassa_Vah}"
 );
-assert(
-  /^\p{Script_Extensions=Bass}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Bass}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Bass}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Bass}"
 );
-assert(
-  /^\p{scx=Bassa_Vah}+$/u.test(matchSymbols),
-  "`\\p{scx=Bassa_Vah}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Bassa_Vah}+$/u,
+  matchSymbols,
+  "\\p{scx=Bassa_Vah}"
 );
-assert(
-  /^\p{scx=Bass}+$/u.test(matchSymbols),
-  "`\\p{scx=Bass}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Bass}+$/u,
+  matchSymbols,
+  "\\p{scx=Bass}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x016AF6, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Bassa_Vah}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Bassa_Vah}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Bassa_Vah}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Bassa_Vah}"
 );
-assert(
-  /^\P{Script_Extensions=Bass}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Bass}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Bass}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Bass}"
 );
-assert(
-  /^\P{scx=Bassa_Vah}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Bassa_Vah}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Bassa_Vah}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Bassa_Vah}"
 );
-assert(
-  /^\P{scx=Bass}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Bass}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Bass}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Bass}"
 );

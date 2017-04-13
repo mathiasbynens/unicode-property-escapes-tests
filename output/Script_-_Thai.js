@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x000E40, 0x000E5B]
   ]
 });
-assert(
-  /^\p{Script=Thai}+$/u.test(matchSymbols),
-  "`\\p{Script=Thai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Thai}+$/u,
+  matchSymbols,
+  "\\p{Script=Thai}"
 );
-assert(
-  /^\p{Script=Thai}+$/u.test(matchSymbols),
-  "`\\p{Script=Thai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Thai}+$/u,
+  matchSymbols,
+  "\\p{Script=Thai}"
 );
-assert(
-  /^\p{sc=Thai}+$/u.test(matchSymbols),
-  "`\\p{sc=Thai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Thai}+$/u,
+  matchSymbols,
+  "\\p{sc=Thai}"
 );
-assert(
-  /^\p{sc=Thai}+$/u.test(matchSymbols),
-  "`\\p{sc=Thai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Thai}+$/u,
+  matchSymbols,
+  "\\p{sc=Thai}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Thai}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Thai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Thai}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Thai}"
 );
-assert(
-  /^\P{Script=Thai}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Thai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Thai}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Thai}"
 );
-assert(
-  /^\P{sc=Thai}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Thai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Thai}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Thai}"
 );
-assert(
-  /^\P{sc=Thai}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Thai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Thai}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Thai}"
 );

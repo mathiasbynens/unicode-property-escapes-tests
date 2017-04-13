@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -464,29 +464,35 @@ const matchSymbols = buildString({
     [0x02F800, 0x02FA1D]
   ]
 });
-assert(
-  /^\p{General_Category=Other_Letter}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Other_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Other_Letter}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Other_Letter}"
 );
-assert(
-  /^\p{General_Category=Lo}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Lo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Lo}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Lo}"
 );
-assert(
-  /^\p{gc=Other_Letter}+$/u.test(matchSymbols),
-  "`\\p{gc=Other_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Other_Letter}+$/u,
+  matchSymbols,
+  "\\p{gc=Other_Letter}"
 );
-assert(
-  /^\p{gc=Lo}+$/u.test(matchSymbols),
-  "`\\p{gc=Lo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Lo}+$/u,
+  matchSymbols,
+  "\\p{gc=Lo}"
 );
-assert(
-  /^\p{Other_Letter}+$/u.test(matchSymbols),
-  "`\\p{Other_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Other_Letter}+$/u,
+  matchSymbols,
+  "\\p{Other_Letter}"
 );
-assert(
-  /^\p{Lo}+$/u.test(matchSymbols),
-  "`\\p{Lo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Lo}+$/u,
+  matchSymbols,
+  "\\p{Lo}"
 );
 
 const nonMatchSymbols = buildString({
@@ -943,27 +949,33 @@ const nonMatchSymbols = buildString({
     [0x02FA1E, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Other_Letter}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Other_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Other_Letter}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Other_Letter}"
 );
-assert(
-  /^\P{General_Category=Lo}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Lo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Lo}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Lo}"
 );
-assert(
-  /^\P{gc=Other_Letter}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Other_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Other_Letter}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Other_Letter}"
 );
-assert(
-  /^\P{gc=Lo}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Lo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Lo}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Lo}"
 );
-assert(
-  /^\P{Other_Letter}+$/u.test(nonMatchSymbols),
-  "`\\P{Other_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Other_Letter}+$/u,
+  nonMatchSymbols,
+  "\\P{Other_Letter}"
 );
-assert(
-  /^\P{Lo}+$/u.test(nonMatchSymbols),
-  "`\\P{Lo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Lo}+$/u,
+  nonMatchSymbols,
+  "\\P{Lo}"
 );

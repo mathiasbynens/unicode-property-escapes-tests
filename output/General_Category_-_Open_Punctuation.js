@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -93,29 +93,35 @@ const matchSymbols = buildString({
   ],
   ranges: []
 });
-assert(
-  /^\p{General_Category=Open_Punctuation}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Open_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Open_Punctuation}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Open_Punctuation}"
 );
-assert(
-  /^\p{General_Category=Ps}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Ps}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Ps}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Ps}"
 );
-assert(
-  /^\p{gc=Open_Punctuation}+$/u.test(matchSymbols),
-  "`\\p{gc=Open_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Open_Punctuation}+$/u,
+  matchSymbols,
+  "\\p{gc=Open_Punctuation}"
 );
-assert(
-  /^\p{gc=Ps}+$/u.test(matchSymbols),
-  "`\\p{gc=Ps}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Ps}+$/u,
+  matchSymbols,
+  "\\p{gc=Ps}"
 );
-assert(
-  /^\p{Open_Punctuation}+$/u.test(matchSymbols),
-  "`\\p{Open_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Open_Punctuation}+$/u,
+  matchSymbols,
+  "\\p{Open_Punctuation}"
 );
-assert(
-  /^\p{Ps}+$/u.test(matchSymbols),
-  "`\\p{Ps}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Ps}+$/u,
+  matchSymbols,
+  "\\p{Ps}"
 );
 
 const nonMatchSymbols = buildString({
@@ -202,27 +208,33 @@ const nonMatchSymbols = buildString({
     [0x00FF63, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Open_Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Open_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Open_Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Open_Punctuation}"
 );
-assert(
-  /^\P{General_Category=Ps}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Ps}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Ps}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Ps}"
 );
-assert(
-  /^\P{gc=Open_Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Open_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Open_Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Open_Punctuation}"
 );
-assert(
-  /^\P{gc=Ps}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Ps}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Ps}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Ps}"
 );
-assert(
-  /^\P{Open_Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{Open_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Open_Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{Open_Punctuation}"
 );
-assert(
-  /^\P{Ps}+$/u.test(nonMatchSymbols),
-  "`\\P{Ps}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Ps}+$/u,
+  nonMatchSymbols,
+  "\\P{Ps}"
 );

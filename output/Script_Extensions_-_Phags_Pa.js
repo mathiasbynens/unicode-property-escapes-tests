@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -22,21 +22,25 @@ const matchSymbols = buildString({
     [0x00A840, 0x00A877]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Phags_Pa}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Phags_Pa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Phags_Pa}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Phags_Pa}"
 );
-assert(
-  /^\p{Script_Extensions=Phag}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Phag}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Phag}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Phag}"
 );
-assert(
-  /^\p{scx=Phags_Pa}+$/u.test(matchSymbols),
-  "`\\p{scx=Phags_Pa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Phags_Pa}+$/u,
+  matchSymbols,
+  "\\p{scx=Phags_Pa}"
 );
-assert(
-  /^\p{scx=Phag}+$/u.test(matchSymbols),
-  "`\\p{scx=Phag}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Phag}+$/u,
+  matchSymbols,
+  "\\p{scx=Phag}"
 );
 
 const nonMatchSymbols = buildString({
@@ -51,19 +55,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Phags_Pa}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Phags_Pa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Phags_Pa}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Phags_Pa}"
 );
-assert(
-  /^\P{Script_Extensions=Phag}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Phag}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Phag}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Phag}"
 );
-assert(
-  /^\P{scx=Phags_Pa}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Phags_Pa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Phags_Pa}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Phags_Pa}"
 );
-assert(
-  /^\P{scx=Phag}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Phag}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Phag}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Phag}"
 );

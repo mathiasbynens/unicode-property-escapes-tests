@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -31,21 +31,25 @@ const matchSymbols = buildString({
     [0x000C78, 0x000C7F]
   ]
 });
-assert(
-  /^\p{Script=Telugu}+$/u.test(matchSymbols),
-  "`\\p{Script=Telugu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Telugu}+$/u,
+  matchSymbols,
+  "\\p{Script=Telugu}"
 );
-assert(
-  /^\p{Script=Telu}+$/u.test(matchSymbols),
-  "`\\p{Script=Telu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Telu}+$/u,
+  matchSymbols,
+  "\\p{Script=Telu}"
 );
-assert(
-  /^\p{sc=Telugu}+$/u.test(matchSymbols),
-  "`\\p{sc=Telugu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Telugu}+$/u,
+  matchSymbols,
+  "\\p{sc=Telugu}"
 );
-assert(
-  /^\p{sc=Telu}+$/u.test(matchSymbols),
-  "`\\p{sc=Telu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Telu}+$/u,
+  matchSymbols,
+  "\\p{sc=Telu}"
 );
 
 const nonMatchSymbols = buildString({
@@ -70,19 +74,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Telugu}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Telugu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Telugu}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Telugu}"
 );
-assert(
-  /^\P{Script=Telu}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Telu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Telu}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Telu}"
 );
-assert(
-  /^\P{sc=Telugu}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Telugu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Telugu}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Telugu}"
 );
-assert(
-  /^\P{sc=Telu}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Telu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Telu}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Telu}"
 );

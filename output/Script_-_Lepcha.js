@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x001C4D, 0x001C4F]
   ]
 });
-assert(
-  /^\p{Script=Lepcha}+$/u.test(matchSymbols),
-  "`\\p{Script=Lepcha}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Lepcha}+$/u,
+  matchSymbols,
+  "\\p{Script=Lepcha}"
 );
-assert(
-  /^\p{Script=Lepc}+$/u.test(matchSymbols),
-  "`\\p{Script=Lepc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Lepc}+$/u,
+  matchSymbols,
+  "\\p{Script=Lepc}"
 );
-assert(
-  /^\p{sc=Lepcha}+$/u.test(matchSymbols),
-  "`\\p{sc=Lepcha}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Lepcha}+$/u,
+  matchSymbols,
+  "\\p{sc=Lepcha}"
 );
-assert(
-  /^\p{sc=Lepc}+$/u.test(matchSymbols),
-  "`\\p{sc=Lepc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Lepc}+$/u,
+  matchSymbols,
+  "\\p{sc=Lepc}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Lepcha}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Lepcha}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Lepcha}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Lepcha}"
 );
-assert(
-  /^\P{Script=Lepc}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Lepc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Lepc}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Lepc}"
 );
-assert(
-  /^\P{sc=Lepcha}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Lepcha}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Lepcha}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Lepcha}"
 );
-assert(
-  /^\P{sc=Lepc}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Lepc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Lepc}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Lepc}"
 );

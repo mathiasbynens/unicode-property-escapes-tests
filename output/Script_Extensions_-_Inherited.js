@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -46,29 +46,35 @@ const matchSymbols = buildString({
     [0x0E0100, 0x0E01EF]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Inherited}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Inherited}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Inherited}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Inherited}"
 );
-assert(
-  /^\p{Script_Extensions=Zinh}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Zinh}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Zinh}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Zinh}"
 );
-assert(
-  /^\p{Script_Extensions=Qaai}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Qaai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Qaai}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Qaai}"
 );
-assert(
-  /^\p{scx=Inherited}+$/u.test(matchSymbols),
-  "`\\p{scx=Inherited}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Inherited}+$/u,
+  matchSymbols,
+  "\\p{scx=Inherited}"
 );
-assert(
-  /^\p{scx=Zinh}+$/u.test(matchSymbols),
-  "`\\p{scx=Zinh}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Zinh}+$/u,
+  matchSymbols,
+  "\\p{scx=Zinh}"
 );
-assert(
-  /^\p{scx=Qaai}+$/u.test(matchSymbols),
-  "`\\p{scx=Qaai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Qaai}+$/u,
+  matchSymbols,
+  "\\p{scx=Qaai}"
 );
 
 const nonMatchSymbols = buildString({
@@ -107,27 +113,33 @@ const nonMatchSymbols = buildString({
     [0x0E01F0, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Inherited}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Inherited}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Inherited}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Inherited}"
 );
-assert(
-  /^\P{Script_Extensions=Zinh}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Zinh}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Zinh}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Zinh}"
 );
-assert(
-  /^\P{Script_Extensions=Qaai}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Qaai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Qaai}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Qaai}"
 );
-assert(
-  /^\P{scx=Inherited}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Inherited}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Inherited}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Inherited}"
 );
-assert(
-  /^\P{scx=Zinh}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Zinh}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Zinh}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Zinh}"
 );
-assert(
-  /^\P{scx=Qaai}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Qaai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Qaai}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Qaai}"
 );

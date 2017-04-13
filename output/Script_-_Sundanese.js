@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x001CC0, 0x001CC7]
   ]
 });
-assert(
-  /^\p{Script=Sundanese}+$/u.test(matchSymbols),
-  "`\\p{Script=Sundanese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Sundanese}+$/u,
+  matchSymbols,
+  "\\p{Script=Sundanese}"
 );
-assert(
-  /^\p{Script=Sund}+$/u.test(matchSymbols),
-  "`\\p{Script=Sund}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Sund}+$/u,
+  matchSymbols,
+  "\\p{Script=Sund}"
 );
-assert(
-  /^\p{sc=Sundanese}+$/u.test(matchSymbols),
-  "`\\p{sc=Sundanese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Sundanese}+$/u,
+  matchSymbols,
+  "\\p{sc=Sundanese}"
 );
-assert(
-  /^\p{sc=Sund}+$/u.test(matchSymbols),
-  "`\\p{sc=Sund}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Sund}+$/u,
+  matchSymbols,
+  "\\p{sc=Sund}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Sundanese}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Sundanese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Sundanese}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Sundanese}"
 );
-assert(
-  /^\P{Script=Sund}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Sund}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Sund}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Sund}"
 );
-assert(
-  /^\P{sc=Sundanese}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Sundanese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Sundanese}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Sundanese}"
 );
-assert(
-  /^\P{sc=Sund}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Sund}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Sund}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Sund}"
 );

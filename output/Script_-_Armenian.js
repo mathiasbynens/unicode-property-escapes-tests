@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -25,21 +25,25 @@ const matchSymbols = buildString({
     [0x00FB13, 0x00FB17]
   ]
 });
-assert(
-  /^\p{Script=Armenian}+$/u.test(matchSymbols),
-  "`\\p{Script=Armenian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Armenian}+$/u,
+  matchSymbols,
+  "\\p{Script=Armenian}"
 );
-assert(
-  /^\p{Script=Armn}+$/u.test(matchSymbols),
-  "`\\p{Script=Armn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Armn}+$/u,
+  matchSymbols,
+  "\\p{Script=Armn}"
 );
-assert(
-  /^\p{sc=Armenian}+$/u.test(matchSymbols),
-  "`\\p{sc=Armenian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Armenian}+$/u,
+  matchSymbols,
+  "\\p{sc=Armenian}"
 );
-assert(
-  /^\p{sc=Armn}+$/u.test(matchSymbols),
-  "`\\p{sc=Armn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Armn}+$/u,
+  matchSymbols,
+  "\\p{sc=Armn}"
 );
 
 const nonMatchSymbols = buildString({
@@ -57,19 +61,23 @@ const nonMatchSymbols = buildString({
     [0x00FB18, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Armenian}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Armenian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Armenian}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Armenian}"
 );
-assert(
-  /^\P{Script=Armn}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Armn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Armn}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Armn}"
 );
-assert(
-  /^\P{sc=Armenian}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Armenian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Armenian}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Armenian}"
 );
-assert(
-  /^\P{sc=Armn}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Armn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Armn}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Armn}"
 );

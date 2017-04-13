@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -37,21 +37,25 @@ const matchSymbols = buildString({
     [0x000EDC, 0x000EDF]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Lao}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Lao}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Lao}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Lao}"
 );
-assert(
-  /^\p{Script_Extensions=Laoo}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Laoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Laoo}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Laoo}"
 );
-assert(
-  /^\p{scx=Lao}+$/u.test(matchSymbols),
-  "`\\p{scx=Lao}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Lao}+$/u,
+  matchSymbols,
+  "\\p{scx=Lao}"
 );
-assert(
-  /^\p{scx=Laoo}+$/u.test(matchSymbols),
-  "`\\p{scx=Laoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Laoo}+$/u,
+  matchSymbols,
+  "\\p{scx=Laoo}"
 );
 
 const nonMatchSymbols = buildString({
@@ -81,19 +85,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Lao}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Lao}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Lao}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Lao}"
 );
-assert(
-  /^\P{Script_Extensions=Laoo}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Laoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Laoo}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Laoo}"
 );
-assert(
-  /^\P{scx=Lao}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Lao}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Lao}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Lao}"
 );
-assert(
-  /^\P{scx=Laoo}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Laoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Laoo}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Laoo}"
 );

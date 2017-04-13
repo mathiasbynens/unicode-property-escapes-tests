@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x001680, 0x00169C]
   ]
 });
-assert(
-  /^\p{Script=Ogham}+$/u.test(matchSymbols),
-  "`\\p{Script=Ogham}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Ogham}+$/u,
+  matchSymbols,
+  "\\p{Script=Ogham}"
 );
-assert(
-  /^\p{Script=Ogam}+$/u.test(matchSymbols),
-  "`\\p{Script=Ogam}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Ogam}+$/u,
+  matchSymbols,
+  "\\p{Script=Ogam}"
 );
-assert(
-  /^\p{sc=Ogham}+$/u.test(matchSymbols),
-  "`\\p{sc=Ogham}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Ogham}+$/u,
+  matchSymbols,
+  "\\p{sc=Ogham}"
 );
-assert(
-  /^\p{sc=Ogam}+$/u.test(matchSymbols),
-  "`\\p{sc=Ogam}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Ogam}+$/u,
+  matchSymbols,
+  "\\p{sc=Ogam}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Ogham}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Ogham}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Ogham}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Ogham}"
 );
-assert(
-  /^\P{Script=Ogam}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Ogam}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Ogam}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Ogam}"
 );
-assert(
-  /^\P{sc=Ogham}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Ogham}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Ogham}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Ogham}"
 );
-assert(
-  /^\P{sc=Ogam}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Ogam}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Ogam}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Ogam}"
 );

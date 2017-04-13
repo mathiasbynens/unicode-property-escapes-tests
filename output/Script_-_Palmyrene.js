@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x010860, 0x01087F]
   ]
 });
-assert(
-  /^\p{Script=Palmyrene}+$/u.test(matchSymbols),
-  "`\\p{Script=Palmyrene}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Palmyrene}+$/u,
+  matchSymbols,
+  "\\p{Script=Palmyrene}"
 );
-assert(
-  /^\p{Script=Palm}+$/u.test(matchSymbols),
-  "`\\p{Script=Palm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Palm}+$/u,
+  matchSymbols,
+  "\\p{Script=Palm}"
 );
-assert(
-  /^\p{sc=Palmyrene}+$/u.test(matchSymbols),
-  "`\\p{sc=Palmyrene}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Palmyrene}+$/u,
+  matchSymbols,
+  "\\p{sc=Palmyrene}"
 );
-assert(
-  /^\p{sc=Palm}+$/u.test(matchSymbols),
-  "`\\p{sc=Palm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Palm}+$/u,
+  matchSymbols,
+  "\\p{sc=Palm}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x010880, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Palmyrene}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Palmyrene}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Palmyrene}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Palmyrene}"
 );
-assert(
-  /^\P{Script=Palm}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Palm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Palm}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Palm}"
 );
-assert(
-  /^\P{sc=Palmyrene}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Palmyrene}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Palmyrene}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Palmyrene}"
 );
-assert(
-  /^\P{sc=Palm}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Palm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Palm}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Palm}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x000830, 0x00083E]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Samaritan}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Samaritan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Samaritan}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Samaritan}"
 );
-assert(
-  /^\p{Script_Extensions=Samr}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Samr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Samr}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Samr}"
 );
-assert(
-  /^\p{scx=Samaritan}+$/u.test(matchSymbols),
-  "`\\p{scx=Samaritan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Samaritan}+$/u,
+  matchSymbols,
+  "\\p{scx=Samaritan}"
 );
-assert(
-  /^\p{scx=Samr}+$/u.test(matchSymbols),
-  "`\\p{scx=Samr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Samr}+$/u,
+  matchSymbols,
+  "\\p{scx=Samr}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Samaritan}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Samaritan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Samaritan}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Samaritan}"
 );
-assert(
-  /^\P{Script_Extensions=Samr}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Samr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Samr}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Samr}"
 );
-assert(
-  /^\P{scx=Samaritan}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Samaritan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Samaritan}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Samaritan}"
 );
-assert(
-  /^\P{scx=Samr}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Samr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Samr}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Samr}"
 );

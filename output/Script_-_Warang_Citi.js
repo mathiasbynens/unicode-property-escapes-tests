@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x0118A0, 0x0118F2]
   ]
 });
-assert(
-  /^\p{Script=Warang_Citi}+$/u.test(matchSymbols),
-  "`\\p{Script=Warang_Citi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Warang_Citi}+$/u,
+  matchSymbols,
+  "\\p{Script=Warang_Citi}"
 );
-assert(
-  /^\p{Script=Wara}+$/u.test(matchSymbols),
-  "`\\p{Script=Wara}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Wara}+$/u,
+  matchSymbols,
+  "\\p{Script=Wara}"
 );
-assert(
-  /^\p{sc=Warang_Citi}+$/u.test(matchSymbols),
-  "`\\p{sc=Warang_Citi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Warang_Citi}+$/u,
+  matchSymbols,
+  "\\p{sc=Warang_Citi}"
 );
-assert(
-  /^\p{sc=Wara}+$/u.test(matchSymbols),
-  "`\\p{sc=Wara}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Wara}+$/u,
+  matchSymbols,
+  "\\p{sc=Wara}"
 );
 
 const nonMatchSymbols = buildString({
@@ -48,19 +52,23 @@ const nonMatchSymbols = buildString({
     [0x011900, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Warang_Citi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Warang_Citi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Warang_Citi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Warang_Citi}"
 );
-assert(
-  /^\P{Script=Wara}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Wara}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Wara}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Wara}"
 );
-assert(
-  /^\P{sc=Warang_Citi}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Warang_Citi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Warang_Citi}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Warang_Citi}"
 );
-assert(
-  /^\P{sc=Wara}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Wara}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Wara}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Wara}"
 );

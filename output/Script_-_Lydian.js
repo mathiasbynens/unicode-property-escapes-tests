@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x010920, 0x010939]
   ]
 });
-assert(
-  /^\p{Script=Lydian}+$/u.test(matchSymbols),
-  "`\\p{Script=Lydian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Lydian}+$/u,
+  matchSymbols,
+  "\\p{Script=Lydian}"
 );
-assert(
-  /^\p{Script=Lydi}+$/u.test(matchSymbols),
-  "`\\p{Script=Lydi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Lydi}+$/u,
+  matchSymbols,
+  "\\p{Script=Lydi}"
 );
-assert(
-  /^\p{sc=Lydian}+$/u.test(matchSymbols),
-  "`\\p{sc=Lydian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Lydian}+$/u,
+  matchSymbols,
+  "\\p{sc=Lydian}"
 );
-assert(
-  /^\p{sc=Lydi}+$/u.test(matchSymbols),
-  "`\\p{sc=Lydi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Lydi}+$/u,
+  matchSymbols,
+  "\\p{sc=Lydi}"
 );
 
 const nonMatchSymbols = buildString({
@@ -48,19 +52,23 @@ const nonMatchSymbols = buildString({
     [0x010940, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Lydian}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Lydian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Lydian}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Lydian}"
 );
-assert(
-  /^\P{Script=Lydi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Lydi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Lydi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Lydi}"
 );
-assert(
-  /^\P{sc=Lydian}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Lydian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Lydian}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Lydian}"
 );
-assert(
-  /^\P{sc=Lydi}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Lydi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Lydi}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Lydi}"
 );

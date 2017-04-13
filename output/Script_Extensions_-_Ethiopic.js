@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -51,21 +51,25 @@ const matchSymbols = buildString({
     [0x00AB28, 0x00AB2E]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Ethiopic}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Ethiopic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Ethiopic}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Ethiopic}"
 );
-assert(
-  /^\p{Script_Extensions=Ethi}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Ethi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Ethi}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Ethi}"
 );
-assert(
-  /^\p{scx=Ethiopic}+$/u.test(matchSymbols),
-  "`\\p{scx=Ethiopic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Ethiopic}+$/u,
+  matchSymbols,
+  "\\p{scx=Ethiopic}"
 );
-assert(
-  /^\p{scx=Ethi}+$/u.test(matchSymbols),
-  "`\\p{scx=Ethi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Ethi}+$/u,
+  matchSymbols,
+  "\\p{scx=Ethi}"
 );
 
 const nonMatchSymbols = buildString({
@@ -109,19 +113,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Ethiopic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Ethiopic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Ethiopic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Ethiopic}"
 );
-assert(
-  /^\P{Script_Extensions=Ethi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Ethi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Ethi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Ethi}"
 );
-assert(
-  /^\P{scx=Ethiopic}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Ethiopic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Ethiopic}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Ethiopic}"
 );
-assert(
-  /^\P{scx=Ethi}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Ethi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Ethi}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Ethi}"
 );

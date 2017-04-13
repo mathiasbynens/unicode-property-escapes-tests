@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -35,21 +35,25 @@ const matchSymbols = buildString({
     [0x000BE6, 0x000BFA]
   ]
 });
-assert(
-  /^\p{Script=Tamil}+$/u.test(matchSymbols),
-  "`\\p{Script=Tamil}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Tamil}+$/u,
+  matchSymbols,
+  "\\p{Script=Tamil}"
 );
-assert(
-  /^\p{Script=Taml}+$/u.test(matchSymbols),
-  "`\\p{Script=Taml}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Taml}+$/u,
+  matchSymbols,
+  "\\p{Script=Taml}"
 );
-assert(
-  /^\p{sc=Tamil}+$/u.test(matchSymbols),
-  "`\\p{sc=Tamil}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Tamil}+$/u,
+  matchSymbols,
+  "\\p{sc=Tamil}"
 );
-assert(
-  /^\p{sc=Taml}+$/u.test(matchSymbols),
-  "`\\p{sc=Taml}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Taml}+$/u,
+  matchSymbols,
+  "\\p{sc=Taml}"
 );
 
 const nonMatchSymbols = buildString({
@@ -77,19 +81,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Tamil}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Tamil}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Tamil}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Tamil}"
 );
-assert(
-  /^\P{Script=Taml}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Taml}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Taml}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Taml}"
 );
-assert(
-  /^\P{sc=Tamil}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Tamil}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Tamil}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Tamil}"
 );
-assert(
-  /^\P{sc=Taml}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Taml}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Taml}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Taml}"
 );

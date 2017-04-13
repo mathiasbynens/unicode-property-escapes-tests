@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -31,21 +31,25 @@ const matchSymbols = buildString({
     [0x00FF61, 0x00FF65]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Bopomofo}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Bopomofo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Bopomofo}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Bopomofo}"
 );
-assert(
-  /^\p{Script_Extensions=Bopo}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Bopo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Bopo}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Bopo}"
 );
-assert(
-  /^\p{scx=Bopomofo}+$/u.test(matchSymbols),
-  "`\\p{scx=Bopomofo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Bopomofo}+$/u,
+  matchSymbols,
+  "\\p{scx=Bopomofo}"
 );
-assert(
-  /^\p{scx=Bopo}+$/u.test(matchSymbols),
-  "`\\p{scx=Bopo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Bopo}+$/u,
+  matchSymbols,
+  "\\p{scx=Bopo}"
 );
 
 const nonMatchSymbols = buildString({
@@ -69,19 +73,23 @@ const nonMatchSymbols = buildString({
     [0x00FF66, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Bopomofo}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Bopomofo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Bopomofo}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Bopomofo}"
 );
-assert(
-  /^\P{Script_Extensions=Bopo}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Bopo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Bopo}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Bopo}"
 );
-assert(
-  /^\P{scx=Bopomofo}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Bopomofo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Bopomofo}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Bopomofo}"
 );
-assert(
-  /^\P{scx=Bopo}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Bopo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Bopo}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Bopo}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -24,29 +24,35 @@ const matchSymbols = buildString({
     [0x00A670, 0x00A672]
   ]
 });
-assert(
-  /^\p{General_Category=Enclosing_Mark}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Enclosing_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Enclosing_Mark}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Enclosing_Mark}"
 );
-assert(
-  /^\p{General_Category=Me}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Me}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Me}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Me}"
 );
-assert(
-  /^\p{gc=Enclosing_Mark}+$/u.test(matchSymbols),
-  "`\\p{gc=Enclosing_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Enclosing_Mark}+$/u,
+  matchSymbols,
+  "\\p{gc=Enclosing_Mark}"
 );
-assert(
-  /^\p{gc=Me}+$/u.test(matchSymbols),
-  "`\\p{gc=Me}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Me}+$/u,
+  matchSymbols,
+  "\\p{gc=Me}"
 );
-assert(
-  /^\p{Enclosing_Mark}+$/u.test(matchSymbols),
-  "`\\p{Enclosing_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Enclosing_Mark}+$/u,
+  matchSymbols,
+  "\\p{Enclosing_Mark}"
 );
-assert(
-  /^\p{Me}+$/u.test(matchSymbols),
-  "`\\p{Me}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Me}+$/u,
+  matchSymbols,
+  "\\p{Me}"
 );
 
 const nonMatchSymbols = buildString({
@@ -63,27 +69,33 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Enclosing_Mark}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Enclosing_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Enclosing_Mark}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Enclosing_Mark}"
 );
-assert(
-  /^\P{General_Category=Me}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Me}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Me}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Me}"
 );
-assert(
-  /^\P{gc=Enclosing_Mark}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Enclosing_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Enclosing_Mark}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Enclosing_Mark}"
 );
-assert(
-  /^\P{gc=Me}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Me}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Me}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Me}"
 );
-assert(
-  /^\P{Enclosing_Mark}+$/u.test(nonMatchSymbols),
-  "`\\P{Enclosing_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Enclosing_Mark}+$/u,
+  nonMatchSymbols,
+  "\\P{Enclosing_Mark}"
 );
-assert(
-  /^\P{Me}+$/u.test(nonMatchSymbols),
-  "`\\P{Me}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Me}+$/u,
+  nonMatchSymbols,
+  "\\P{Me}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x001BFC, 0x001BFF]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Batak}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Batak}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Batak}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Batak}"
 );
-assert(
-  /^\p{Script_Extensions=Batk}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Batk}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Batk}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Batk}"
 );
-assert(
-  /^\p{scx=Batak}+$/u.test(matchSymbols),
-  "`\\p{scx=Batak}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Batak}+$/u,
+  matchSymbols,
+  "\\p{scx=Batak}"
 );
-assert(
-  /^\p{scx=Batk}+$/u.test(matchSymbols),
-  "`\\p{scx=Batk}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Batk}+$/u,
+  matchSymbols,
+  "\\p{scx=Batk}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Batak}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Batak}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Batak}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Batak}"
 );
-assert(
-  /^\P{Script_Extensions=Batk}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Batk}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Batk}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Batk}"
 );
-assert(
-  /^\P{scx=Batak}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Batak}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Batak}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Batak}"
 );
-assert(
-  /^\P{scx=Batk}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Batk}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Batk}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Batk}"
 );

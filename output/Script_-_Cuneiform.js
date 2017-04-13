@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -22,21 +22,25 @@ const matchSymbols = buildString({
     [0x012480, 0x012543]
   ]
 });
-assert(
-  /^\p{Script=Cuneiform}+$/u.test(matchSymbols),
-  "`\\p{Script=Cuneiform}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Cuneiform}+$/u,
+  matchSymbols,
+  "\\p{Script=Cuneiform}"
 );
-assert(
-  /^\p{Script=Xsux}+$/u.test(matchSymbols),
-  "`\\p{Script=Xsux}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Xsux}+$/u,
+  matchSymbols,
+  "\\p{Script=Xsux}"
 );
-assert(
-  /^\p{sc=Cuneiform}+$/u.test(matchSymbols),
-  "`\\p{sc=Cuneiform}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Cuneiform}+$/u,
+  matchSymbols,
+  "\\p{sc=Cuneiform}"
 );
-assert(
-  /^\p{sc=Xsux}+$/u.test(matchSymbols),
-  "`\\p{sc=Xsux}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Xsux}+$/u,
+  matchSymbols,
+  "\\p{sc=Xsux}"
 );
 
 const nonMatchSymbols = buildString({
@@ -52,19 +56,23 @@ const nonMatchSymbols = buildString({
     [0x012544, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Cuneiform}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Cuneiform}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Cuneiform}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Cuneiform}"
 );
-assert(
-  /^\P{Script=Xsux}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Xsux}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Xsux}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Xsux}"
 );
-assert(
-  /^\P{sc=Cuneiform}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Cuneiform}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Cuneiform}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Cuneiform}"
 );
-assert(
-  /^\P{sc=Xsux}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Xsux}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Xsux}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Xsux}"
 );

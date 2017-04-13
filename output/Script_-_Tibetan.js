@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -25,21 +25,25 @@ const matchSymbols = buildString({
     [0x000FD9, 0x000FDA]
   ]
 });
-assert(
-  /^\p{Script=Tibetan}+$/u.test(matchSymbols),
-  "`\\p{Script=Tibetan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Tibetan}+$/u,
+  matchSymbols,
+  "\\p{Script=Tibetan}"
 );
-assert(
-  /^\p{Script=Tibt}+$/u.test(matchSymbols),
-  "`\\p{Script=Tibt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Tibt}+$/u,
+  matchSymbols,
+  "\\p{Script=Tibt}"
 );
-assert(
-  /^\p{sc=Tibetan}+$/u.test(matchSymbols),
-  "`\\p{sc=Tibetan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Tibetan}+$/u,
+  matchSymbols,
+  "\\p{sc=Tibetan}"
 );
-assert(
-  /^\p{sc=Tibt}+$/u.test(matchSymbols),
-  "`\\p{sc=Tibt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Tibt}+$/u,
+  matchSymbols,
+  "\\p{sc=Tibt}"
 );
 
 const nonMatchSymbols = buildString({
@@ -58,19 +62,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Tibetan}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Tibetan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Tibetan}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Tibetan}"
 );
-assert(
-  /^\P{Script=Tibt}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Tibt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Tibt}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Tibt}"
 );
-assert(
-  /^\P{sc=Tibetan}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Tibetan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Tibetan}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Tibetan}"
 );
-assert(
-  /^\P{sc=Tibt}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Tibt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Tibt}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Tibt}"
 );

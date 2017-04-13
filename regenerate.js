@@ -35,9 +35,9 @@ regenerate.prototype.toTestCode = function() {
 	if (lowSurrogates.isEmpty()) {
 		return prettyPrint([...this.toTestData()]);
 	}
-	this.remove(LOW_SURROGATES);
+	const rest = this.clone().remove(LOW_SURROGATES);
 	const [ lowLoneCodePoints, lowRanges ] = lowSurrogates.toTestData();
-	const [ loneCodePoints, ranges ] = this.toTestData();
+	const [ loneCodePoints, ranges ] = rest.toTestData();
 	loneCodePoints.unshift(...lowLoneCodePoints);
 	ranges.unshift(...lowRanges);
 	return prettyPrint([ loneCodePoints, ranges ]);

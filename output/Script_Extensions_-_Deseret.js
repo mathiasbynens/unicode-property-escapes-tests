@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x010400, 0x01044F]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Deseret}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Deseret}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Deseret}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Deseret}"
 );
-assert(
-  /^\p{Script_Extensions=Dsrt}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Dsrt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Dsrt}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Dsrt}"
 );
-assert(
-  /^\p{scx=Deseret}+$/u.test(matchSymbols),
-  "`\\p{scx=Deseret}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Deseret}+$/u,
+  matchSymbols,
+  "\\p{scx=Deseret}"
 );
-assert(
-  /^\p{scx=Dsrt}+$/u.test(matchSymbols),
-  "`\\p{scx=Dsrt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Dsrt}+$/u,
+  matchSymbols,
+  "\\p{scx=Dsrt}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x010450, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Deseret}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Deseret}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Deseret}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Deseret}"
 );
-assert(
-  /^\P{Script_Extensions=Dsrt}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Dsrt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Dsrt}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Dsrt}"
 );
-assert(
-  /^\P{scx=Deseret}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Deseret}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Deseret}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Deseret}"
 );
-assert(
-  /^\P{scx=Dsrt}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Dsrt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Dsrt}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Dsrt}"
 );

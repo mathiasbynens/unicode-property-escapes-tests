@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,12 +21,13 @@ const matchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\p{Any}+$/u.test(matchSymbols),
-  "`\\p{Any}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Any}+$/u,
+  matchSymbols,
+  "\\p{Any}"
 );
 
 assert(
   !/\P{Any}/u.test(""),
-  "`\\P{Any}` matches nothing (not even the empty string)"
+  "`\\P{Any}` should match nothing (not even the empty string)"
 );

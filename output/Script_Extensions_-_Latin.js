@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -56,21 +56,25 @@ const matchSymbols = buildString({
     [0x00FF41, 0x00FF5A]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Latin}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Latin}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Latin}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Latin}"
 );
-assert(
-  /^\p{Script_Extensions=Latn}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Latn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Latn}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Latn}"
 );
-assert(
-  /^\p{scx=Latin}+$/u.test(matchSymbols),
-  "`\\p{scx=Latin}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Latin}+$/u,
+  matchSymbols,
+  "\\p{scx=Latin}"
 );
-assert(
-  /^\p{scx=Latn}+$/u.test(matchSymbols),
-  "`\\p{scx=Latn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Latn}+$/u,
+  matchSymbols,
+  "\\p{scx=Latn}"
 );
 
 const nonMatchSymbols = buildString({
@@ -119,19 +123,23 @@ const nonMatchSymbols = buildString({
     [0x00FF5B, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Latin}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Latin}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Latin}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Latin}"
 );
-assert(
-  /^\P{Script_Extensions=Latn}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Latn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Latn}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Latn}"
 );
-assert(
-  /^\P{scx=Latin}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Latin}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Latin}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Latin}"
 );
-assert(
-  /^\P{scx=Latn}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Latn}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Latn}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Latn}"
 );

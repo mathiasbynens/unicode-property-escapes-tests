@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -33,21 +33,25 @@ const matchSymbols = buildString({
     [0x0009E6, 0x0009FB]
   ]
 });
-assert(
-  /^\p{Script=Bengali}+$/u.test(matchSymbols),
-  "`\\p{Script=Bengali}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Bengali}+$/u,
+  matchSymbols,
+  "\\p{Script=Bengali}"
 );
-assert(
-  /^\p{Script=Beng}+$/u.test(matchSymbols),
-  "`\\p{Script=Beng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Beng}+$/u,
+  matchSymbols,
+  "\\p{Script=Beng}"
 );
-assert(
-  /^\p{sc=Bengali}+$/u.test(matchSymbols),
-  "`\\p{sc=Bengali}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Bengali}+$/u,
+  matchSymbols,
+  "\\p{sc=Bengali}"
 );
-assert(
-  /^\p{sc=Beng}+$/u.test(matchSymbols),
-  "`\\p{sc=Beng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Beng}+$/u,
+  matchSymbols,
+  "\\p{sc=Beng}"
 );
 
 const nonMatchSymbols = buildString({
@@ -73,19 +77,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Bengali}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Bengali}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Bengali}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Bengali}"
 );
-assert(
-  /^\P{Script=Beng}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Beng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Beng}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Beng}"
 );
-assert(
-  /^\P{sc=Bengali}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Bengali}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Bengali}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Bengali}"
 );
-assert(
-  /^\P{sc=Beng}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Beng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Beng}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Beng}"
 );

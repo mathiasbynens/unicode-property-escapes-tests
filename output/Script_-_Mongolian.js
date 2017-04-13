@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -26,21 +26,25 @@ const matchSymbols = buildString({
     [0x011660, 0x01166C]
   ]
 });
-assert(
-  /^\p{Script=Mongolian}+$/u.test(matchSymbols),
-  "`\\p{Script=Mongolian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Mongolian}+$/u,
+  matchSymbols,
+  "\\p{Script=Mongolian}"
 );
-assert(
-  /^\p{Script=Mong}+$/u.test(matchSymbols),
-  "`\\p{Script=Mong}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Mong}+$/u,
+  matchSymbols,
+  "\\p{Script=Mong}"
 );
-assert(
-  /^\p{sc=Mongolian}+$/u.test(matchSymbols),
-  "`\\p{sc=Mongolian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Mongolian}+$/u,
+  matchSymbols,
+  "\\p{sc=Mongolian}"
 );
-assert(
-  /^\p{sc=Mong}+$/u.test(matchSymbols),
-  "`\\p{sc=Mong}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Mong}+$/u,
+  matchSymbols,
+  "\\p{sc=Mong}"
 );
 
 const nonMatchSymbols = buildString({
@@ -59,19 +63,23 @@ const nonMatchSymbols = buildString({
     [0x01166D, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Mongolian}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Mongolian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Mongolian}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Mongolian}"
 );
-assert(
-  /^\P{Script=Mong}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Mong}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Mong}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Mong}"
 );
-assert(
-  /^\P{sc=Mongolian}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Mongolian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Mongolian}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Mongolian}"
 );
-assert(
-  /^\P{sc=Mong}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Mong}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Mong}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Mong}"
 );

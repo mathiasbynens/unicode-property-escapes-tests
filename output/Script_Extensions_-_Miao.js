@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x016F8F, 0x016F9F]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Miao}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Miao}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Miao}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Miao}"
 );
-assert(
-  /^\p{Script_Extensions=Plrd}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Plrd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Plrd}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Plrd}"
 );
-assert(
-  /^\p{scx=Miao}+$/u.test(matchSymbols),
-  "`\\p{scx=Miao}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Miao}+$/u,
+  matchSymbols,
+  "\\p{scx=Miao}"
 );
-assert(
-  /^\p{scx=Plrd}+$/u.test(matchSymbols),
-  "`\\p{scx=Plrd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Plrd}+$/u,
+  matchSymbols,
+  "\\p{scx=Plrd}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x016FA0, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Miao}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Miao}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Miao}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Miao}"
 );
-assert(
-  /^\P{Script_Extensions=Plrd}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Plrd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Plrd}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Plrd}"
 );
-assert(
-  /^\P{scx=Miao}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Miao}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Miao}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Miao}"
 );
-assert(
-  /^\P{scx=Plrd}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Plrd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Plrd}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Plrd}"
 );

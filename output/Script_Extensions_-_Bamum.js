@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x016800, 0x016A38]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Bamum}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Bamum}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Bamum}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Bamum}"
 );
-assert(
-  /^\p{Script_Extensions=Bamu}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Bamu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Bamu}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Bamu}"
 );
-assert(
-  /^\p{scx=Bamum}+$/u.test(matchSymbols),
-  "`\\p{scx=Bamum}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Bamum}+$/u,
+  matchSymbols,
+  "\\p{scx=Bamum}"
 );
-assert(
-  /^\p{scx=Bamu}+$/u.test(matchSymbols),
-  "`\\p{scx=Bamu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Bamu}+$/u,
+  matchSymbols,
+  "\\p{scx=Bamu}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x016A39, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Bamum}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Bamum}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Bamum}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Bamum}"
 );
-assert(
-  /^\P{Script_Extensions=Bamu}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Bamu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Bamu}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Bamu}"
 );
-assert(
-  /^\P{scx=Bamum}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Bamum}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Bamum}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Bamum}"
 );
-assert(
-  /^\P{scx=Bamu}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Bamu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Bamu}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Bamu}"
 );

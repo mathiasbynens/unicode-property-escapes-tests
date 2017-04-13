@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -159,21 +159,25 @@ const matchSymbols = buildString({
     [0x0E0020, 0x0E007F]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Common}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Common}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Common}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Common}"
 );
-assert(
-  /^\p{Script_Extensions=Zyyy}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Zyyy}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Zyyy}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Zyyy}"
 );
-assert(
-  /^\p{scx=Common}+$/u.test(matchSymbols),
-  "`\\p{scx=Common}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Common}+$/u,
+  matchSymbols,
+  "\\p{scx=Common}"
 );
-assert(
-  /^\p{scx=Zyyy}+$/u.test(matchSymbols),
-  "`\\p{scx=Zyyy}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Zyyy}+$/u,
+  matchSymbols,
+  "\\p{scx=Zyyy}"
 );
 
 const nonMatchSymbols = buildString({
@@ -324,19 +328,23 @@ const nonMatchSymbols = buildString({
     [0x0E0080, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Common}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Common}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Common}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Common}"
 );
-assert(
-  /^\P{Script_Extensions=Zyyy}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Zyyy}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Zyyy}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Zyyy}"
 );
-assert(
-  /^\P{scx=Common}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Common}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Common}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Common}"
 );
-assert(
-  /^\P{scx=Zyyy}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Zyyy}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Zyyy}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Zyyy}"
 );

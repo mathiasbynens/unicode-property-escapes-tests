@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -91,29 +91,35 @@ const matchSymbols = buildString({
     [0x00301E, 0x00301F]
   ]
 });
-assert(
-  /^\p{General_Category=Close_Punctuation}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Close_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Close_Punctuation}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Close_Punctuation}"
 );
-assert(
-  /^\p{General_Category=Pe}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Pe}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Pe}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Pe}"
 );
-assert(
-  /^\p{gc=Close_Punctuation}+$/u.test(matchSymbols),
-  "`\\p{gc=Close_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Close_Punctuation}+$/u,
+  matchSymbols,
+  "\\p{gc=Close_Punctuation}"
 );
-assert(
-  /^\p{gc=Pe}+$/u.test(matchSymbols),
-  "`\\p{gc=Pe}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Pe}+$/u,
+  matchSymbols,
+  "\\p{gc=Pe}"
 );
-assert(
-  /^\p{Close_Punctuation}+$/u.test(matchSymbols),
-  "`\\p{Close_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Close_Punctuation}+$/u,
+  matchSymbols,
+  "\\p{Close_Punctuation}"
 );
-assert(
-  /^\p{Pe}+$/u.test(matchSymbols),
-  "`\\p{Pe}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Pe}+$/u,
+  matchSymbols,
+  "\\p{Pe}"
 );
 
 const nonMatchSymbols = buildString({
@@ -197,27 +203,33 @@ const nonMatchSymbols = buildString({
     [0x00FF64, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Close_Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Close_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Close_Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Close_Punctuation}"
 );
-assert(
-  /^\P{General_Category=Pe}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Pe}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Pe}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Pe}"
 );
-assert(
-  /^\P{gc=Close_Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Close_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Close_Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Close_Punctuation}"
 );
-assert(
-  /^\P{gc=Pe}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Pe}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Pe}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Pe}"
 );
-assert(
-  /^\P{Close_Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{Close_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Close_Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{Close_Punctuation}"
 );
-assert(
-  /^\P{Pe}+$/u.test(nonMatchSymbols),
-  "`\\P{Pe}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Pe}+$/u,
+  nonMatchSymbols,
+  "\\P{Pe}"
 );

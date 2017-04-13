@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -32,21 +32,25 @@ const matchSymbols = buildString({
     [0x00FFDA, 0x00FFDC]
   ]
 });
-assert(
-  /^\p{Script=Hangul}+$/u.test(matchSymbols),
-  "`\\p{Script=Hangul}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Hangul}+$/u,
+  matchSymbols,
+  "\\p{Script=Hangul}"
 );
-assert(
-  /^\p{Script=Hang}+$/u.test(matchSymbols),
-  "`\\p{Script=Hang}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Hang}+$/u,
+  matchSymbols,
+  "\\p{Script=Hang}"
 );
-assert(
-  /^\p{sc=Hangul}+$/u.test(matchSymbols),
-  "`\\p{sc=Hangul}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Hangul}+$/u,
+  matchSymbols,
+  "\\p{sc=Hangul}"
 );
-assert(
-  /^\p{sc=Hang}+$/u.test(matchSymbols),
-  "`\\p{sc=Hang}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Hang}+$/u,
+  matchSymbols,
+  "\\p{sc=Hang}"
 );
 
 const nonMatchSymbols = buildString({
@@ -71,19 +75,23 @@ const nonMatchSymbols = buildString({
     [0x00FFDD, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Hangul}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Hangul}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Hangul}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Hangul}"
 );
-assert(
-  /^\P{Script=Hang}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Hang}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Hang}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Hang}"
 );
-assert(
-  /^\P{sc=Hangul}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Hangul}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Hangul}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Hangul}"
 );
-assert(
-  /^\P{sc=Hang}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Hang}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Hang}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Hang}"
 );

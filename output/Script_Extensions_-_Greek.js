@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -57,21 +57,25 @@ const matchSymbols = buildString({
     [0x01D200, 0x01D245]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Greek}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Greek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Greek}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Greek}"
 );
-assert(
-  /^\p{Script_Extensions=Grek}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Grek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Grek}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Grek}"
 );
-assert(
-  /^\p{scx=Greek}+$/u.test(matchSymbols),
-  "`\\p{scx=Greek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Greek}+$/u,
+  matchSymbols,
+  "\\p{scx=Greek}"
 );
-assert(
-  /^\p{scx=Grek}+$/u.test(matchSymbols),
-  "`\\p{scx=Grek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Grek}+$/u,
+  matchSymbols,
+  "\\p{scx=Grek}"
 );
 
 const nonMatchSymbols = buildString({
@@ -121,19 +125,23 @@ const nonMatchSymbols = buildString({
     [0x01D246, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Greek}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Greek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Greek}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Greek}"
 );
-assert(
-  /^\P{Script_Extensions=Grek}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Grek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Grek}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Grek}"
 );
-assert(
-  /^\P{scx=Greek}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Greek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Greek}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Greek}"
 );
-assert(
-  /^\P{scx=Grek}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Grek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Grek}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Grek}"
 );

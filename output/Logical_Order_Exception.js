@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -26,13 +26,15 @@ const matchSymbols = buildString({
     [0x00AABB, 0x00AABC]
   ]
 });
-assert(
-  /^\p{Logical_Order_Exception}+$/u.test(matchSymbols),
-  "`\\p{Logical_Order_Exception}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Logical_Order_Exception}+$/u,
+  matchSymbols,
+  "\\p{Logical_Order_Exception}"
 );
-assert(
-  /^\p{LOE}+$/u.test(matchSymbols),
-  "`\\p{LOE}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{LOE}+$/u,
+  matchSymbols,
+  "\\p{LOE}"
 );
 
 const nonMatchSymbols = buildString({
@@ -51,11 +53,13 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Logical_Order_Exception}+$/u.test(nonMatchSymbols),
-  "`\\P{Logical_Order_Exception}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Logical_Order_Exception}+$/u,
+  nonMatchSymbols,
+  "\\P{Logical_Order_Exception}"
 );
-assert(
-  /^\P{LOE}+$/u.test(nonMatchSymbols),
-  "`\\P{LOE}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{LOE}+$/u,
+  nonMatchSymbols,
+  "\\P{LOE}"
 );

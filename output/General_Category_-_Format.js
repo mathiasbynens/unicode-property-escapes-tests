@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -37,29 +37,35 @@ const matchSymbols = buildString({
     [0x0E0020, 0x0E007F]
   ]
 });
-assert(
-  /^\p{General_Category=Format}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Format}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Format}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Format}"
 );
-assert(
-  /^\p{General_Category=Cf}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Cf}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Cf}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Cf}"
 );
-assert(
-  /^\p{gc=Format}+$/u.test(matchSymbols),
-  "`\\p{gc=Format}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Format}+$/u,
+  matchSymbols,
+  "\\p{gc=Format}"
 );
-assert(
-  /^\p{gc=Cf}+$/u.test(matchSymbols),
-  "`\\p{gc=Cf}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Cf}+$/u,
+  matchSymbols,
+  "\\p{gc=Cf}"
 );
-assert(
-  /^\p{Format}+$/u.test(matchSymbols),
-  "`\\p{Format}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Format}+$/u,
+  matchSymbols,
+  "\\p{Format}"
 );
-assert(
-  /^\p{Cf}+$/u.test(matchSymbols),
-  "`\\p{Cf}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Cf}+$/u,
+  matchSymbols,
+  "\\p{Cf}"
 );
 
 const nonMatchSymbols = buildString({
@@ -89,27 +95,33 @@ const nonMatchSymbols = buildString({
     [0x0E0080, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Format}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Format}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Format}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Format}"
 );
-assert(
-  /^\P{General_Category=Cf}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Cf}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Cf}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Cf}"
 );
-assert(
-  /^\P{gc=Format}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Format}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Format}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Format}"
 );
-assert(
-  /^\P{gc=Cf}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Cf}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Cf}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Cf}"
 );
-assert(
-  /^\P{Format}+$/u.test(nonMatchSymbols),
-  "`\\P{Format}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Format}+$/u,
+  nonMatchSymbols,
+  "\\P{Format}"
 );
-assert(
-  /^\P{Cf}+$/u.test(nonMatchSymbols),
-  "`\\P{Cf}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Cf}+$/u,
+  nonMatchSymbols,
+  "\\P{Cf}"
 );

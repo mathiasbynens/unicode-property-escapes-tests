@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -50,21 +50,25 @@ const matchSymbols = buildString({
     [0x02F800, 0x02FA1D]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Han}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Han}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Han}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Han}"
 );
-assert(
-  /^\p{Script_Extensions=Hani}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Hani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Hani}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Hani}"
 );
-assert(
-  /^\p{scx=Han}+$/u.test(matchSymbols),
-  "`\\p{scx=Han}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Han}+$/u,
+  matchSymbols,
+  "\\p{scx=Han}"
 );
-assert(
-  /^\p{scx=Hani}+$/u.test(matchSymbols),
-  "`\\p{scx=Hani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Hani}+$/u,
+  matchSymbols,
+  "\\p{scx=Hani}"
 );
 
 const nonMatchSymbols = buildString({
@@ -107,19 +111,23 @@ const nonMatchSymbols = buildString({
     [0x02FA1E, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Han}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Han}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Han}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Han}"
 );
-assert(
-  /^\P{Script_Extensions=Hani}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Hani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Hani}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Hani}"
 );
-assert(
-  /^\P{scx=Han}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Han}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Han}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Han}"
 );
-assert(
-  /^\P{scx=Hani}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Hani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Hani}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Hani}"
 );

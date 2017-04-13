@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,13 +19,15 @@ const matchSymbols = buildString({
     [0x002FF2, 0x002FF3]
   ]
 });
-assert(
-  /^\p{IDS_Trinary_Operator}+$/u.test(matchSymbols),
-  "`\\p{IDS_Trinary_Operator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{IDS_Trinary_Operator}+$/u,
+  matchSymbols,
+  "\\p{IDS_Trinary_Operator}"
 );
-assert(
-  /^\p{IDST}+$/u.test(matchSymbols),
-  "`\\p{IDST}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{IDST}+$/u,
+  matchSymbols,
+  "\\p{IDST}"
 );
 
 const nonMatchSymbols = buildString({
@@ -37,11 +39,13 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{IDS_Trinary_Operator}+$/u.test(nonMatchSymbols),
-  "`\\P{IDS_Trinary_Operator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{IDS_Trinary_Operator}+$/u,
+  nonMatchSymbols,
+  "\\P{IDS_Trinary_Operator}"
 );
-assert(
-  /^\P{IDST}+$/u.test(nonMatchSymbols),
-  "`\\P{IDST}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{IDST}+$/u,
+  nonMatchSymbols,
+  "\\P{IDST}"
 );

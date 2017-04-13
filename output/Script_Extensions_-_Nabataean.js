@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x0108A7, 0x0108AF]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Nabataean}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Nabataean}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Nabataean}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Nabataean}"
 );
-assert(
-  /^\p{Script_Extensions=Nbat}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Nbat}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Nbat}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Nbat}"
 );
-assert(
-  /^\p{scx=Nabataean}+$/u.test(matchSymbols),
-  "`\\p{scx=Nabataean}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Nabataean}+$/u,
+  matchSymbols,
+  "\\p{scx=Nabataean}"
 );
-assert(
-  /^\p{scx=Nbat}+$/u.test(matchSymbols),
-  "`\\p{scx=Nbat}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Nbat}+$/u,
+  matchSymbols,
+  "\\p{scx=Nbat}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x0108B0, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Nabataean}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Nabataean}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Nabataean}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Nabataean}"
 );
-assert(
-  /^\P{Script_Extensions=Nbat}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Nbat}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Nbat}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Nbat}"
 );
-assert(
-  /^\P{scx=Nabataean}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Nabataean}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Nabataean}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Nabataean}"
 );
-assert(
-  /^\P{scx=Nbat}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Nbat}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Nbat}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Nbat}"
 );

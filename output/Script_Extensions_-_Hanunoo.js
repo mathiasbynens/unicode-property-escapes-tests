@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x001720, 0x001736]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Hanunoo}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Hanunoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Hanunoo}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Hanunoo}"
 );
-assert(
-  /^\p{Script_Extensions=Hano}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Hano}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Hano}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Hano}"
 );
-assert(
-  /^\p{scx=Hanunoo}+$/u.test(matchSymbols),
-  "`\\p{scx=Hanunoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Hanunoo}+$/u,
+  matchSymbols,
+  "\\p{scx=Hanunoo}"
 );
-assert(
-  /^\p{scx=Hano}+$/u.test(matchSymbols),
-  "`\\p{scx=Hano}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Hano}+$/u,
+  matchSymbols,
+  "\\p{scx=Hano}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Hanunoo}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Hanunoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Hanunoo}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Hanunoo}"
 );
-assert(
-  /^\P{Script_Extensions=Hano}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Hano}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Hano}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Hano}"
 );
-assert(
-  /^\P{scx=Hanunoo}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Hanunoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Hanunoo}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Hanunoo}"
 );
-assert(
-  /^\P{scx=Hano}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Hano}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Hano}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Hano}"
 );

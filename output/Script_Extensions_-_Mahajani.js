@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x011150, 0x011176]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Mahajani}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Mahajani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Mahajani}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Mahajani}"
 );
-assert(
-  /^\p{Script_Extensions=Mahj}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Mahj}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Mahj}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Mahj}"
 );
-assert(
-  /^\p{scx=Mahajani}+$/u.test(matchSymbols),
-  "`\\p{scx=Mahajani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Mahajani}+$/u,
+  matchSymbols,
+  "\\p{scx=Mahajani}"
 );
-assert(
-  /^\p{scx=Mahj}+$/u.test(matchSymbols),
-  "`\\p{scx=Mahj}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Mahj}+$/u,
+  matchSymbols,
+  "\\p{scx=Mahj}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x011177, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Mahajani}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Mahajani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Mahajani}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Mahajani}"
 );
-assert(
-  /^\P{Script_Extensions=Mahj}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Mahj}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Mahj}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Mahj}"
 );
-assert(
-  /^\P{scx=Mahajani}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Mahajani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Mahajani}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Mahajani}"
 );
-assert(
-  /^\P{scx=Mahj}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Mahj}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Mahj}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Mahj}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x001C4D, 0x001C4F]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Lepcha}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Lepcha}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Lepcha}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Lepcha}"
 );
-assert(
-  /^\p{Script_Extensions=Lepc}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Lepc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Lepc}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Lepc}"
 );
-assert(
-  /^\p{scx=Lepcha}+$/u.test(matchSymbols),
-  "`\\p{scx=Lepcha}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Lepcha}+$/u,
+  matchSymbols,
+  "\\p{scx=Lepcha}"
 );
-assert(
-  /^\p{scx=Lepc}+$/u.test(matchSymbols),
-  "`\\p{scx=Lepc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Lepc}+$/u,
+  matchSymbols,
+  "\\p{scx=Lepc}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Lepcha}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Lepcha}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Lepcha}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Lepcha}"
 );
-assert(
-  /^\P{Script_Extensions=Lepc}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Lepc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Lepc}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Lepc}"
 );
-assert(
-  /^\P{scx=Lepcha}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Lepcha}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Lepcha}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Lepcha}"
 );
-assert(
-  /^\P{scx=Lepc}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Lepc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Lepc}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Lepc}"
 );

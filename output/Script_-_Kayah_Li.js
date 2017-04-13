@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x00A900, 0x00A92D]
   ]
 });
-assert(
-  /^\p{Script=Kayah_Li}+$/u.test(matchSymbols),
-  "`\\p{Script=Kayah_Li}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Kayah_Li}+$/u,
+  matchSymbols,
+  "\\p{Script=Kayah_Li}"
 );
-assert(
-  /^\p{Script=Kali}+$/u.test(matchSymbols),
-  "`\\p{Script=Kali}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Kali}+$/u,
+  matchSymbols,
+  "\\p{Script=Kali}"
 );
-assert(
-  /^\p{sc=Kayah_Li}+$/u.test(matchSymbols),
-  "`\\p{sc=Kayah_Li}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Kayah_Li}+$/u,
+  matchSymbols,
+  "\\p{sc=Kayah_Li}"
 );
-assert(
-  /^\p{sc=Kali}+$/u.test(matchSymbols),
-  "`\\p{sc=Kali}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Kali}+$/u,
+  matchSymbols,
+  "\\p{sc=Kali}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Kayah_Li}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Kayah_Li}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Kayah_Li}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Kayah_Li}"
 );
-assert(
-  /^\P{Script=Kali}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Kali}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Kali}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Kali}"
 );
-assert(
-  /^\P{sc=Kayah_Li}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Kayah_Li}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Kayah_Li}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Kayah_Li}"
 );
-assert(
-  /^\P{sc=Kali}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Kali}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Kali}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Kali}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -51,21 +51,25 @@ const matchSymbols = buildString({
     [0x00AB28, 0x00AB2E]
   ]
 });
-assert(
-  /^\p{Script=Ethiopic}+$/u.test(matchSymbols),
-  "`\\p{Script=Ethiopic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Ethiopic}+$/u,
+  matchSymbols,
+  "\\p{Script=Ethiopic}"
 );
-assert(
-  /^\p{Script=Ethi}+$/u.test(matchSymbols),
-  "`\\p{Script=Ethi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Ethi}+$/u,
+  matchSymbols,
+  "\\p{Script=Ethi}"
 );
-assert(
-  /^\p{sc=Ethiopic}+$/u.test(matchSymbols),
-  "`\\p{sc=Ethiopic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Ethiopic}+$/u,
+  matchSymbols,
+  "\\p{sc=Ethiopic}"
 );
-assert(
-  /^\p{sc=Ethi}+$/u.test(matchSymbols),
-  "`\\p{sc=Ethi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Ethi}+$/u,
+  matchSymbols,
+  "\\p{sc=Ethi}"
 );
 
 const nonMatchSymbols = buildString({
@@ -109,19 +113,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Ethiopic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Ethiopic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Ethiopic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Ethiopic}"
 );
-assert(
-  /^\P{Script=Ethi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Ethi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Ethi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Ethi}"
 );
-assert(
-  /^\P{sc=Ethiopic}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Ethiopic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Ethiopic}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Ethiopic}"
 );
-assert(
-  /^\P{sc=Ethi}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Ethi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Ethi}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Ethi}"
 );

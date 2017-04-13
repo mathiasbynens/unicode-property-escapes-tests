@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x014400, 0x014646]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Anatolian_Hieroglyphs}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Anatolian_Hieroglyphs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Anatolian_Hieroglyphs}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Anatolian_Hieroglyphs}"
 );
-assert(
-  /^\p{Script_Extensions=Hluw}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Hluw}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Hluw}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Hluw}"
 );
-assert(
-  /^\p{scx=Anatolian_Hieroglyphs}+$/u.test(matchSymbols),
-  "`\\p{scx=Anatolian_Hieroglyphs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Anatolian_Hieroglyphs}+$/u,
+  matchSymbols,
+  "\\p{scx=Anatolian_Hieroglyphs}"
 );
-assert(
-  /^\p{scx=Hluw}+$/u.test(matchSymbols),
-  "`\\p{scx=Hluw}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Hluw}+$/u,
+  matchSymbols,
+  "\\p{scx=Hluw}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x014647, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Anatolian_Hieroglyphs}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Anatolian_Hieroglyphs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Anatolian_Hieroglyphs}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Anatolian_Hieroglyphs}"
 );
-assert(
-  /^\P{Script_Extensions=Hluw}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Hluw}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Hluw}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Hluw}"
 );
-assert(
-  /^\P{scx=Anatolian_Hieroglyphs}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Anatolian_Hieroglyphs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Anatolian_Hieroglyphs}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Anatolian_Hieroglyphs}"
 );
-assert(
-  /^\P{scx=Hluw}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Hluw}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Hluw}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Hluw}"
 );

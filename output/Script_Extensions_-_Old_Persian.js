@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x0103C8, 0x0103D5]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Old_Persian}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Old_Persian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Old_Persian}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Old_Persian}"
 );
-assert(
-  /^\p{Script_Extensions=Xpeo}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Xpeo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Xpeo}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Xpeo}"
 );
-assert(
-  /^\p{scx=Old_Persian}+$/u.test(matchSymbols),
-  "`\\p{scx=Old_Persian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Old_Persian}+$/u,
+  matchSymbols,
+  "\\p{scx=Old_Persian}"
 );
-assert(
-  /^\p{scx=Xpeo}+$/u.test(matchSymbols),
-  "`\\p{scx=Xpeo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Xpeo}+$/u,
+  matchSymbols,
+  "\\p{scx=Xpeo}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x0103D6, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Old_Persian}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Old_Persian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Old_Persian}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Old_Persian}"
 );
-assert(
-  /^\P{Script_Extensions=Xpeo}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Xpeo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Xpeo}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Xpeo}"
 );
-assert(
-  /^\P{scx=Old_Persian}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Old_Persian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Old_Persian}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Old_Persian}"
 );
-assert(
-  /^\P{scx=Xpeo}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Xpeo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Xpeo}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Xpeo}"
 );

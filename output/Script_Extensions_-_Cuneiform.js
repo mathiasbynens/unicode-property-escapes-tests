@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -22,21 +22,25 @@ const matchSymbols = buildString({
     [0x012480, 0x012543]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Cuneiform}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Cuneiform}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Cuneiform}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Cuneiform}"
 );
-assert(
-  /^\p{Script_Extensions=Xsux}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Xsux}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Xsux}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Xsux}"
 );
-assert(
-  /^\p{scx=Cuneiform}+$/u.test(matchSymbols),
-  "`\\p{scx=Cuneiform}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Cuneiform}+$/u,
+  matchSymbols,
+  "\\p{scx=Cuneiform}"
 );
-assert(
-  /^\p{scx=Xsux}+$/u.test(matchSymbols),
-  "`\\p{scx=Xsux}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Xsux}+$/u,
+  matchSymbols,
+  "\\p{scx=Xsux}"
 );
 
 const nonMatchSymbols = buildString({
@@ -52,19 +56,23 @@ const nonMatchSymbols = buildString({
     [0x012544, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Cuneiform}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Cuneiform}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Cuneiform}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Cuneiform}"
 );
-assert(
-  /^\P{Script_Extensions=Xsux}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Xsux}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Xsux}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Xsux}"
 );
-assert(
-  /^\P{scx=Cuneiform}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Cuneiform}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Cuneiform}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Cuneiform}"
 );
-assert(
-  /^\P{scx=Xsux}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Xsux}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Xsux}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Xsux}"
 );

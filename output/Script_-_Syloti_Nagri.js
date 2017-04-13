@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x00A800, 0x00A82B]
   ]
 });
-assert(
-  /^\p{Script=Syloti_Nagri}+$/u.test(matchSymbols),
-  "`\\p{Script=Syloti_Nagri}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Syloti_Nagri}+$/u,
+  matchSymbols,
+  "\\p{Script=Syloti_Nagri}"
 );
-assert(
-  /^\p{Script=Sylo}+$/u.test(matchSymbols),
-  "`\\p{Script=Sylo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Sylo}+$/u,
+  matchSymbols,
+  "\\p{Script=Sylo}"
 );
-assert(
-  /^\p{sc=Syloti_Nagri}+$/u.test(matchSymbols),
-  "`\\p{sc=Syloti_Nagri}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Syloti_Nagri}+$/u,
+  matchSymbols,
+  "\\p{sc=Syloti_Nagri}"
 );
-assert(
-  /^\p{sc=Sylo}+$/u.test(matchSymbols),
-  "`\\p{sc=Sylo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Sylo}+$/u,
+  matchSymbols,
+  "\\p{sc=Sylo}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Syloti_Nagri}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Syloti_Nagri}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Syloti_Nagri}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Syloti_Nagri}"
 );
-assert(
-  /^\P{Script=Sylo}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Sylo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Sylo}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Sylo}"
 );
-assert(
-  /^\P{sc=Syloti_Nagri}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Syloti_Nagri}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Syloti_Nagri}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Syloti_Nagri}"
 );
-assert(
-  /^\P{sc=Sylo}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Sylo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Sylo}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Sylo}"
 );

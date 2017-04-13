@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x0104A0, 0x0104A9]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Osmanya}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Osmanya}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Osmanya}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Osmanya}"
 );
-assert(
-  /^\p{Script_Extensions=Osma}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Osma}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Osma}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Osma}"
 );
-assert(
-  /^\p{scx=Osmanya}+$/u.test(matchSymbols),
-  "`\\p{scx=Osmanya}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Osmanya}+$/u,
+  matchSymbols,
+  "\\p{scx=Osmanya}"
 );
-assert(
-  /^\p{scx=Osma}+$/u.test(matchSymbols),
-  "`\\p{scx=Osma}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Osma}+$/u,
+  matchSymbols,
+  "\\p{scx=Osma}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x0104AA, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Osmanya}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Osmanya}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Osmanya}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Osmanya}"
 );
-assert(
-  /^\P{Script_Extensions=Osma}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Osma}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Osma}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Osma}"
 );
-assert(
-  /^\P{scx=Osmanya}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Osmanya}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Osmanya}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Osmanya}"
 );
-assert(
-  /^\P{scx=Osma}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Osma}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Osma}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Osma}"
 );

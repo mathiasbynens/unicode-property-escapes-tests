@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -590,29 +590,35 @@ const matchSymbols = buildString({
     [0x02F800, 0x02FA1D]
   ]
 });
-assert(
-  /^\p{General_Category=Letter}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Letter}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Letter}"
 );
-assert(
-  /^\p{General_Category=L}+$/u.test(matchSymbols),
-  "`\\p{General_Category=L}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=L}+$/u,
+  matchSymbols,
+  "\\p{General_Category=L}"
 );
-assert(
-  /^\p{gc=Letter}+$/u.test(matchSymbols),
-  "`\\p{gc=Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Letter}+$/u,
+  matchSymbols,
+  "\\p{gc=Letter}"
 );
-assert(
-  /^\p{gc=L}+$/u.test(matchSymbols),
-  "`\\p{gc=L}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=L}+$/u,
+  matchSymbols,
+  "\\p{gc=L}"
 );
-assert(
-  /^\p{Letter}+$/u.test(matchSymbols),
-  "`\\p{Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Letter}+$/u,
+  matchSymbols,
+  "\\p{Letter}"
 );
-assert(
-  /^\p{L}+$/u.test(matchSymbols),
-  "`\\p{L}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{L}+$/u,
+  matchSymbols,
+  "\\p{L}"
 );
 
 const nonMatchSymbols = buildString({
@@ -1195,27 +1201,33 @@ const nonMatchSymbols = buildString({
     [0x02FA1E, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Letter}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Letter}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Letter}"
 );
-assert(
-  /^\P{General_Category=L}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=L}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=L}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=L}"
 );
-assert(
-  /^\P{gc=Letter}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Letter}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Letter}"
 );
-assert(
-  /^\P{gc=L}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=L}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=L}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=L}"
 );
-assert(
-  /^\P{Letter}+$/u.test(nonMatchSymbols),
-  "`\\P{Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Letter}+$/u,
+  nonMatchSymbols,
+  "\\P{Letter}"
 );
-assert(
-  /^\P{L}+$/u.test(nonMatchSymbols),
-  "`\\P{L}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{L}+$/u,
+  nonMatchSymbols,
+  "\\P{L}"
 );

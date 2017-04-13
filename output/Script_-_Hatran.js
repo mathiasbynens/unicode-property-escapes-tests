@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x0108FB, 0x0108FF]
   ]
 });
-assert(
-  /^\p{Script=Hatran}+$/u.test(matchSymbols),
-  "`\\p{Script=Hatran}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Hatran}+$/u,
+  matchSymbols,
+  "\\p{Script=Hatran}"
 );
-assert(
-  /^\p{Script=Hatr}+$/u.test(matchSymbols),
-  "`\\p{Script=Hatr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Hatr}+$/u,
+  matchSymbols,
+  "\\p{Script=Hatr}"
 );
-assert(
-  /^\p{sc=Hatran}+$/u.test(matchSymbols),
-  "`\\p{sc=Hatran}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Hatran}+$/u,
+  matchSymbols,
+  "\\p{sc=Hatran}"
 );
-assert(
-  /^\p{sc=Hatr}+$/u.test(matchSymbols),
-  "`\\p{sc=Hatr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Hatr}+$/u,
+  matchSymbols,
+  "\\p{sc=Hatr}"
 );
 
 const nonMatchSymbols = buildString({
@@ -50,19 +54,23 @@ const nonMatchSymbols = buildString({
     [0x010900, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Hatran}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Hatran}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Hatran}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Hatran}"
 );
-assert(
-  /^\P{Script=Hatr}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Hatr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Hatr}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Hatr}"
 );
-assert(
-  /^\P{sc=Hatran}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Hatran}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Hatran}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Hatran}"
 );
-assert(
-  /^\P{sc=Hatr}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Hatr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Hatr}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Hatr}"
 );

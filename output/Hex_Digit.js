@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -24,13 +24,15 @@ const matchSymbols = buildString({
     [0x00FF41, 0x00FF46]
   ]
 });
-assert(
-  /^\p{Hex_Digit}+$/u.test(matchSymbols),
-  "`\\p{Hex_Digit}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Hex_Digit}+$/u,
+  matchSymbols,
+  "\\p{Hex_Digit}"
 );
-assert(
-  /^\p{Hex}+$/u.test(matchSymbols),
-  "`\\p{Hex}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Hex}+$/u,
+  matchSymbols,
+  "\\p{Hex}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,11 +49,13 @@ const nonMatchSymbols = buildString({
     [0x00FF47, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Hex_Digit}+$/u.test(nonMatchSymbols),
-  "`\\P{Hex_Digit}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Hex_Digit}+$/u,
+  nonMatchSymbols,
+  "\\P{Hex_Digit}"
 );
-assert(
-  /^\P{Hex}+$/u.test(nonMatchSymbols),
-  "`\\P{Hex}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Hex}+$/u,
+  nonMatchSymbols,
+  "\\P{Hex}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,13 +21,15 @@ const matchSymbols = buildString({
     [0x0E0100, 0x0E01EF]
   ]
 });
-assert(
-  /^\p{Variation_Selector}+$/u.test(matchSymbols),
-  "`\\p{Variation_Selector}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Variation_Selector}+$/u,
+  matchSymbols,
+  "\\p{Variation_Selector}"
 );
-assert(
-  /^\p{VS}+$/u.test(matchSymbols),
-  "`\\p{VS}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{VS}+$/u,
+  matchSymbols,
+  "\\p{VS}"
 );
 
 const nonMatchSymbols = buildString({
@@ -41,11 +43,13 @@ const nonMatchSymbols = buildString({
     [0x0E01F0, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Variation_Selector}+$/u.test(nonMatchSymbols),
-  "`\\P{Variation_Selector}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Variation_Selector}+$/u,
+  nonMatchSymbols,
+  "\\P{Variation_Selector}"
 );
-assert(
-  /^\P{VS}+$/u.test(nonMatchSymbols),
-  "`\\P{VS}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{VS}+$/u,
+  nonMatchSymbols,
+  "\\P{VS}"
 );

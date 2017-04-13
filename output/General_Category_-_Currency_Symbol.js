@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -36,29 +36,35 @@ const matchSymbols = buildString({
     [0x00FFE5, 0x00FFE6]
   ]
 });
-assert(
-  /^\p{General_Category=Currency_Symbol}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Currency_Symbol}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Currency_Symbol}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Currency_Symbol}"
 );
-assert(
-  /^\p{General_Category=Sc}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Sc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Sc}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Sc}"
 );
-assert(
-  /^\p{gc=Currency_Symbol}+$/u.test(matchSymbols),
-  "`\\p{gc=Currency_Symbol}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Currency_Symbol}+$/u,
+  matchSymbols,
+  "\\p{gc=Currency_Symbol}"
 );
-assert(
-  /^\p{gc=Sc}+$/u.test(matchSymbols),
-  "`\\p{gc=Sc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Sc}+$/u,
+  matchSymbols,
+  "\\p{gc=Sc}"
 );
-assert(
-  /^\p{Currency_Symbol}+$/u.test(matchSymbols),
-  "`\\p{Currency_Symbol}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Currency_Symbol}+$/u,
+  matchSymbols,
+  "\\p{Currency_Symbol}"
 );
-assert(
-  /^\p{Sc}+$/u.test(matchSymbols),
-  "`\\p{Sc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Sc}+$/u,
+  matchSymbols,
+  "\\p{Sc}"
 );
 
 const nonMatchSymbols = buildString({
@@ -86,27 +92,33 @@ const nonMatchSymbols = buildString({
     [0x00FFE7, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Currency_Symbol}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Currency_Symbol}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Currency_Symbol}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Currency_Symbol}"
 );
-assert(
-  /^\P{General_Category=Sc}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Sc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Sc}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Sc}"
 );
-assert(
-  /^\P{gc=Currency_Symbol}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Currency_Symbol}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Currency_Symbol}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Currency_Symbol}"
 );
-assert(
-  /^\P{gc=Sc}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Sc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Sc}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Sc}"
 );
-assert(
-  /^\P{Currency_Symbol}+$/u.test(nonMatchSymbols),
-  "`\\P{Currency_Symbol}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Currency_Symbol}+$/u,
+  nonMatchSymbols,
+  "\\P{Currency_Symbol}"
 );
-assert(
-  /^\P{Sc}+$/u.test(nonMatchSymbols),
-  "`\\P{Sc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Sc}+$/u,
+  nonMatchSymbols,
+  "\\P{Sc}"
 );

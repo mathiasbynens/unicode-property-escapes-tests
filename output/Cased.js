@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -154,9 +154,10 @@ const matchSymbols = buildString({
     [0x01F170, 0x01F189]
   ]
 });
-assert(
-  /^\p{Cased}+$/u.test(matchSymbols),
-  "`\\p{Cased}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Cased}+$/u,
+  matchSymbols,
+  "\\p{Cased}"
 );
 
 const nonMatchSymbols = buildString({
@@ -303,7 +304,8 @@ const nonMatchSymbols = buildString({
     [0x01F18A, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Cased}+$/u.test(nonMatchSymbols),
-  "`\\P{Cased}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Cased}+$/u,
+  nonMatchSymbols,
+  "\\P{Cased}"
 );

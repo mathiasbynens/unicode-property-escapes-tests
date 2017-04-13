@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x0116C0, 0x0116C9]
   ]
 });
-assert(
-  /^\p{Script=Takri}+$/u.test(matchSymbols),
-  "`\\p{Script=Takri}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Takri}+$/u,
+  matchSymbols,
+  "\\p{Script=Takri}"
 );
-assert(
-  /^\p{Script=Takr}+$/u.test(matchSymbols),
-  "`\\p{Script=Takr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Takr}+$/u,
+  matchSymbols,
+  "\\p{Script=Takr}"
 );
-assert(
-  /^\p{sc=Takri}+$/u.test(matchSymbols),
-  "`\\p{sc=Takri}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Takri}+$/u,
+  matchSymbols,
+  "\\p{sc=Takri}"
 );
-assert(
-  /^\p{sc=Takr}+$/u.test(matchSymbols),
-  "`\\p{sc=Takr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Takr}+$/u,
+  matchSymbols,
+  "\\p{sc=Takr}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x0116CA, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Takri}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Takri}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Takri}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Takri}"
 );
-assert(
-  /^\P{Script=Takr}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Takr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Takr}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Takr}"
 );
-assert(
-  /^\P{sc=Takri}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Takri}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Takri}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Takri}"
 );
-assert(
-  /^\P{sc=Takr}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Takr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Takr}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Takr}"
 );

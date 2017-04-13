@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x00A900, 0x00A92F]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Kayah_Li}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Kayah_Li}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Kayah_Li}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Kayah_Li}"
 );
-assert(
-  /^\p{Script_Extensions=Kali}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Kali}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Kali}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Kali}"
 );
-assert(
-  /^\p{scx=Kayah_Li}+$/u.test(matchSymbols),
-  "`\\p{scx=Kayah_Li}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Kayah_Li}+$/u,
+  matchSymbols,
+  "\\p{scx=Kayah_Li}"
 );
-assert(
-  /^\p{scx=Kali}+$/u.test(matchSymbols),
-  "`\\p{scx=Kali}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Kali}+$/u,
+  matchSymbols,
+  "\\p{scx=Kali}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Kayah_Li}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Kayah_Li}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Kayah_Li}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Kayah_Li}"
 );
-assert(
-  /^\P{Script_Extensions=Kali}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Kali}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Kali}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Kali}"
 );
-assert(
-  /^\P{scx=Kayah_Li}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Kayah_Li}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Kayah_Li}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Kayah_Li}"
 );
-assert(
-  /^\P{scx=Kali}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Kali}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Kali}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Kali}"
 );

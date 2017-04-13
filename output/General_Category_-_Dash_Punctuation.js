@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -36,29 +36,35 @@ const matchSymbols = buildString({
     [0x00FE31, 0x00FE32]
   ]
 });
-assert(
-  /^\p{General_Category=Dash_Punctuation}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Dash_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Dash_Punctuation}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Dash_Punctuation}"
 );
-assert(
-  /^\p{General_Category=Pd}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Pd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Pd}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Pd}"
 );
-assert(
-  /^\p{gc=Dash_Punctuation}+$/u.test(matchSymbols),
-  "`\\p{gc=Dash_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Dash_Punctuation}+$/u,
+  matchSymbols,
+  "\\p{gc=Dash_Punctuation}"
 );
-assert(
-  /^\p{gc=Pd}+$/u.test(matchSymbols),
-  "`\\p{gc=Pd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Pd}+$/u,
+  matchSymbols,
+  "\\p{gc=Pd}"
 );
-assert(
-  /^\p{Dash_Punctuation}+$/u.test(matchSymbols),
-  "`\\p{Dash_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Dash_Punctuation}+$/u,
+  matchSymbols,
+  "\\p{Dash_Punctuation}"
 );
-assert(
-  /^\p{Pd}+$/u.test(matchSymbols),
-  "`\\p{Pd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Pd}+$/u,
+  matchSymbols,
+  "\\p{Pd}"
 );
 
 const nonMatchSymbols = buildString({
@@ -86,27 +92,33 @@ const nonMatchSymbols = buildString({
     [0x00FF0E, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Dash_Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Dash_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Dash_Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Dash_Punctuation}"
 );
-assert(
-  /^\P{General_Category=Pd}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Pd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Pd}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Pd}"
 );
-assert(
-  /^\P{gc=Dash_Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Dash_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Dash_Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Dash_Punctuation}"
 );
-assert(
-  /^\P{gc=Pd}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Pd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Pd}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Pd}"
 );
-assert(
-  /^\P{Dash_Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{Dash_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Dash_Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{Dash_Punctuation}"
 );
-assert(
-  /^\P{Pd}+$/u.test(nonMatchSymbols),
-  "`\\P{Pd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Pd}+$/u,
+  nonMatchSymbols,
+  "\\P{Pd}"
 );

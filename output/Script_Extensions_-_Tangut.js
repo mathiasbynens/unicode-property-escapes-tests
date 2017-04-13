@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -22,21 +22,25 @@ const matchSymbols = buildString({
     [0x018800, 0x018AF2]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Tangut}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Tangut}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Tangut}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Tangut}"
 );
-assert(
-  /^\p{Script_Extensions=Tang}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Tang}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Tang}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Tang}"
 );
-assert(
-  /^\p{scx=Tangut}+$/u.test(matchSymbols),
-  "`\\p{scx=Tangut}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Tangut}+$/u,
+  matchSymbols,
+  "\\p{scx=Tangut}"
 );
-assert(
-  /^\p{scx=Tang}+$/u.test(matchSymbols),
-  "`\\p{scx=Tang}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Tang}+$/u,
+  matchSymbols,
+  "\\p{scx=Tang}"
 );
 
 const nonMatchSymbols = buildString({
@@ -50,19 +54,23 @@ const nonMatchSymbols = buildString({
     [0x018AF3, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Tangut}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Tangut}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Tangut}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Tangut}"
 );
-assert(
-  /^\P{Script_Extensions=Tang}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Tang}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Tang}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Tang}"
 );
-assert(
-  /^\P{scx=Tangut}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Tangut}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Tangut}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Tangut}"
 );
-assert(
-  /^\P{scx=Tang}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Tang}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Tang}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Tang}"
 );

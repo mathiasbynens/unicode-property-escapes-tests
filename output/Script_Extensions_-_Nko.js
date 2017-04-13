@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x0007C0, 0x0007FA]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Nko}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Nko}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Nko}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Nko}"
 );
-assert(
-  /^\p{Script_Extensions=Nkoo}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Nkoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Nkoo}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Nkoo}"
 );
-assert(
-  /^\p{scx=Nko}+$/u.test(matchSymbols),
-  "`\\p{scx=Nko}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Nko}+$/u,
+  matchSymbols,
+  "\\p{scx=Nko}"
 );
-assert(
-  /^\p{scx=Nkoo}+$/u.test(matchSymbols),
-  "`\\p{scx=Nkoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Nkoo}+$/u,
+  matchSymbols,
+  "\\p{scx=Nkoo}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Nko}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Nko}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Nko}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Nko}"
 );
-assert(
-  /^\P{Script_Extensions=Nkoo}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Nkoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Nkoo}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Nkoo}"
 );
-assert(
-  /^\P{scx=Nko}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Nko}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Nko}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Nko}"
 );
-assert(
-  /^\P{scx=Nkoo}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Nkoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Nkoo}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Nkoo}"
 );

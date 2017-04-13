@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x016800, 0x016A38]
   ]
 });
-assert(
-  /^\p{Script=Bamum}+$/u.test(matchSymbols),
-  "`\\p{Script=Bamum}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Bamum}+$/u,
+  matchSymbols,
+  "\\p{Script=Bamum}"
 );
-assert(
-  /^\p{Script=Bamu}+$/u.test(matchSymbols),
-  "`\\p{Script=Bamu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Bamu}+$/u,
+  matchSymbols,
+  "\\p{Script=Bamu}"
 );
-assert(
-  /^\p{sc=Bamum}+$/u.test(matchSymbols),
-  "`\\p{sc=Bamum}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Bamum}+$/u,
+  matchSymbols,
+  "\\p{sc=Bamum}"
 );
-assert(
-  /^\p{sc=Bamu}+$/u.test(matchSymbols),
-  "`\\p{sc=Bamu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Bamu}+$/u,
+  matchSymbols,
+  "\\p{sc=Bamu}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x016A39, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Bamum}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Bamum}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Bamum}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Bamum}"
 );
-assert(
-  /^\P{Script=Bamu}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Bamu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Bamu}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Bamu}"
 );
-assert(
-  /^\P{sc=Bamum}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Bamum}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Bamum}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Bamum}"
 );
-assert(
-  /^\P{sc=Bamu}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Bamu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Bamu}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Bamu}"
 );

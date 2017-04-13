@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x011650, 0x011659]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Modi}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Modi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Modi}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Modi}"
 );
-assert(
-  /^\p{Script_Extensions=Modi}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Modi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Modi}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Modi}"
 );
-assert(
-  /^\p{scx=Modi}+$/u.test(matchSymbols),
-  "`\\p{scx=Modi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Modi}+$/u,
+  matchSymbols,
+  "\\p{scx=Modi}"
 );
-assert(
-  /^\p{scx=Modi}+$/u.test(matchSymbols),
-  "`\\p{scx=Modi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Modi}+$/u,
+  matchSymbols,
+  "\\p{scx=Modi}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x01165A, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Modi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Modi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Modi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Modi}"
 );
-assert(
-  /^\P{Script_Extensions=Modi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Modi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Modi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Modi}"
 );
-assert(
-  /^\P{scx=Modi}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Modi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Modi}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Modi}"
 );
-assert(
-  /^\P{scx=Modi}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Modi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Modi}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Modi}"
 );

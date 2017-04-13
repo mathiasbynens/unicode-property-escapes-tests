@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x01DAA1, 0x01DAAF]
   ]
 });
-assert(
-  /^\p{Script_Extensions=SignWriting}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=SignWriting}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=SignWriting}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=SignWriting}"
 );
-assert(
-  /^\p{Script_Extensions=Sgnw}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Sgnw}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Sgnw}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Sgnw}"
 );
-assert(
-  /^\p{scx=SignWriting}+$/u.test(matchSymbols),
-  "`\\p{scx=SignWriting}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=SignWriting}+$/u,
+  matchSymbols,
+  "\\p{scx=SignWriting}"
 );
-assert(
-  /^\p{scx=Sgnw}+$/u.test(matchSymbols),
-  "`\\p{scx=Sgnw}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Sgnw}+$/u,
+  matchSymbols,
+  "\\p{scx=Sgnw}"
 );
 
 const nonMatchSymbols = buildString({
@@ -50,19 +54,23 @@ const nonMatchSymbols = buildString({
     [0x01DAB0, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=SignWriting}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=SignWriting}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=SignWriting}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=SignWriting}"
 );
-assert(
-  /^\P{Script_Extensions=Sgnw}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Sgnw}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Sgnw}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Sgnw}"
 );
-assert(
-  /^\P{scx=SignWriting}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=SignWriting}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=SignWriting}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=SignWriting}"
 );
-assert(
-  /^\P{scx=Sgnw}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Sgnw}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Sgnw}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Sgnw}"
 );

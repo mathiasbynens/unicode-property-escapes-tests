@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -35,21 +35,25 @@ const matchSymbols = buildString({
     [0x000A66, 0x000A75]
   ]
 });
-assert(
-  /^\p{Script=Gurmukhi}+$/u.test(matchSymbols),
-  "`\\p{Script=Gurmukhi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Gurmukhi}+$/u,
+  matchSymbols,
+  "\\p{Script=Gurmukhi}"
 );
-assert(
-  /^\p{Script=Guru}+$/u.test(matchSymbols),
-  "`\\p{Script=Guru}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Guru}+$/u,
+  matchSymbols,
+  "\\p{Script=Guru}"
 );
-assert(
-  /^\p{sc=Gurmukhi}+$/u.test(matchSymbols),
-  "`\\p{sc=Gurmukhi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Gurmukhi}+$/u,
+  matchSymbols,
+  "\\p{sc=Gurmukhi}"
 );
-assert(
-  /^\p{sc=Guru}+$/u.test(matchSymbols),
-  "`\\p{sc=Guru}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Guru}+$/u,
+  matchSymbols,
+  "\\p{sc=Guru}"
 );
 
 const nonMatchSymbols = buildString({
@@ -77,19 +81,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Gurmukhi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Gurmukhi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Gurmukhi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Gurmukhi}"
 );
-assert(
-  /^\P{Script=Guru}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Guru}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Guru}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Guru}"
 );
-assert(
-  /^\P{sc=Gurmukhi}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Gurmukhi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Gurmukhi}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Gurmukhi}"
 );
-assert(
-  /^\P{sc=Guru}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Guru}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Guru}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Guru}"
 );

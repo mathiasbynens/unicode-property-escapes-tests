@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -28,21 +28,25 @@ const matchSymbols = buildString({
     [0x00074D, 0x00074F]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Syriac}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Syriac}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Syriac}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Syriac}"
 );
-assert(
-  /^\p{Script_Extensions=Syrc}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Syrc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Syrc}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Syrc}"
 );
-assert(
-  /^\p{scx=Syriac}+$/u.test(matchSymbols),
-  "`\\p{scx=Syriac}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Syriac}+$/u,
+  matchSymbols,
+  "\\p{scx=Syriac}"
 );
-assert(
-  /^\p{scx=Syrc}+$/u.test(matchSymbols),
-  "`\\p{scx=Syrc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Syrc}+$/u,
+  matchSymbols,
+  "\\p{scx=Syrc}"
 );
 
 const nonMatchSymbols = buildString({
@@ -63,19 +67,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Syriac}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Syriac}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Syriac}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Syriac}"
 );
-assert(
-  /^\P{Script_Extensions=Syrc}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Syrc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Syrc}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Syrc}"
 );
-assert(
-  /^\P{scx=Syriac}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Syriac}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Syriac}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Syriac}"
 );
-assert(
-  /^\P{scx=Syrc}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Syrc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Syrc}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Syrc}"
 );

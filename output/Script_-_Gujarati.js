@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -33,21 +33,25 @@ const matchSymbols = buildString({
     [0x000AE6, 0x000AF1]
   ]
 });
-assert(
-  /^\p{Script=Gujarati}+$/u.test(matchSymbols),
-  "`\\p{Script=Gujarati}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Gujarati}+$/u,
+  matchSymbols,
+  "\\p{Script=Gujarati}"
 );
-assert(
-  /^\p{Script=Gujr}+$/u.test(matchSymbols),
-  "`\\p{Script=Gujr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Gujr}+$/u,
+  matchSymbols,
+  "\\p{Script=Gujr}"
 );
-assert(
-  /^\p{sc=Gujarati}+$/u.test(matchSymbols),
-  "`\\p{sc=Gujarati}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Gujarati}+$/u,
+  matchSymbols,
+  "\\p{sc=Gujarati}"
 );
-assert(
-  /^\p{sc=Gujr}+$/u.test(matchSymbols),
-  "`\\p{sc=Gujr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Gujr}+$/u,
+  matchSymbols,
+  "\\p{sc=Gujr}"
 );
 
 const nonMatchSymbols = buildString({
@@ -73,19 +77,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Gujarati}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Gujarati}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Gujarati}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Gujarati}"
 );
-assert(
-  /^\P{Script=Gujr}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Gujr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Gujr}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Gujr}"
 );
-assert(
-  /^\P{sc=Gujarati}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Gujarati}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Gujarati}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Gujarati}"
 );
-assert(
-  /^\P{sc=Gujr}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Gujr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Gujr}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Gujr}"
 );

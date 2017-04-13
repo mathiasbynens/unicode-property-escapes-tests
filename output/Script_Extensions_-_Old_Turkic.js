@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x010C00, 0x010C48]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Old_Turkic}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Old_Turkic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Old_Turkic}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Old_Turkic}"
 );
-assert(
-  /^\p{Script_Extensions=Orkh}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Orkh}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Orkh}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Orkh}"
 );
-assert(
-  /^\p{scx=Old_Turkic}+$/u.test(matchSymbols),
-  "`\\p{scx=Old_Turkic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Old_Turkic}+$/u,
+  matchSymbols,
+  "\\p{scx=Old_Turkic}"
 );
-assert(
-  /^\p{scx=Orkh}+$/u.test(matchSymbols),
-  "`\\p{scx=Orkh}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Orkh}+$/u,
+  matchSymbols,
+  "\\p{scx=Orkh}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x010C49, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Old_Turkic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Old_Turkic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Old_Turkic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Old_Turkic}"
 );
-assert(
-  /^\P{Script_Extensions=Orkh}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Orkh}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Orkh}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Orkh}"
 );
-assert(
-  /^\P{scx=Old_Turkic}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Old_Turkic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Old_Turkic}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Old_Turkic}"
 );
-assert(
-  /^\P{scx=Orkh}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Orkh}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Orkh}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Orkh}"
 );

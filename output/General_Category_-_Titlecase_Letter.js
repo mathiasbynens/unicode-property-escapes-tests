@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -29,29 +29,35 @@ const matchSymbols = buildString({
     [0x001FA8, 0x001FAF]
   ]
 });
-assert(
-  /^\p{General_Category=Titlecase_Letter}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Titlecase_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Titlecase_Letter}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Titlecase_Letter}"
 );
-assert(
-  /^\p{General_Category=Lt}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Lt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Lt}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Lt}"
 );
-assert(
-  /^\p{gc=Titlecase_Letter}+$/u.test(matchSymbols),
-  "`\\p{gc=Titlecase_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Titlecase_Letter}+$/u,
+  matchSymbols,
+  "\\p{gc=Titlecase_Letter}"
 );
-assert(
-  /^\p{gc=Lt}+$/u.test(matchSymbols),
-  "`\\p{gc=Lt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Lt}+$/u,
+  matchSymbols,
+  "\\p{gc=Lt}"
 );
-assert(
-  /^\p{Titlecase_Letter}+$/u.test(matchSymbols),
-  "`\\p{Titlecase_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Titlecase_Letter}+$/u,
+  matchSymbols,
+  "\\p{Titlecase_Letter}"
 );
-assert(
-  /^\p{Lt}+$/u.test(matchSymbols),
-  "`\\p{Lt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Lt}+$/u,
+  matchSymbols,
+  "\\p{Lt}"
 );
 
 const nonMatchSymbols = buildString({
@@ -72,27 +78,33 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Titlecase_Letter}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Titlecase_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Titlecase_Letter}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Titlecase_Letter}"
 );
-assert(
-  /^\P{General_Category=Lt}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Lt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Lt}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Lt}"
 );
-assert(
-  /^\P{gc=Titlecase_Letter}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Titlecase_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Titlecase_Letter}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Titlecase_Letter}"
 );
-assert(
-  /^\P{gc=Lt}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Lt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Lt}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Lt}"
 );
-assert(
-  /^\P{Titlecase_Letter}+$/u.test(nonMatchSymbols),
-  "`\\P{Titlecase_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Titlecase_Letter}+$/u,
+  nonMatchSymbols,
+  "\\P{Titlecase_Letter}"
 );
-assert(
-  /^\P{Lt}+$/u.test(nonMatchSymbols),
-  "`\\P{Lt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Lt}+$/u,
+  nonMatchSymbols,
+  "\\P{Lt}"
 );

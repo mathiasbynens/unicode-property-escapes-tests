@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -622,13 +622,15 @@ const matchSymbols = buildString({
     [0x01E900, 0x01E921]
   ]
 });
-assert(
-  /^\p{Changes_When_Casefolded}+$/u.test(matchSymbols),
-  "`\\p{Changes_When_Casefolded}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Changes_When_Casefolded}+$/u,
+  matchSymbols,
+  "\\p{Changes_When_Casefolded}"
 );
-assert(
-  /^\p{CWCF}+$/u.test(matchSymbols),
-  "`\\p{CWCF}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{CWCF}+$/u,
+  matchSymbols,
+  "\\p{CWCF}"
 );
 
 const nonMatchSymbols = buildString({
@@ -1243,11 +1245,13 @@ const nonMatchSymbols = buildString({
     [0x01E922, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Changes_When_Casefolded}+$/u.test(nonMatchSymbols),
-  "`\\P{Changes_When_Casefolded}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Changes_When_Casefolded}+$/u,
+  nonMatchSymbols,
+  "\\P{Changes_When_Casefolded}"
 );
-assert(
-  /^\P{CWCF}+$/u.test(nonMatchSymbols),
-  "`\\P{CWCF}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{CWCF}+$/u,
+  nonMatchSymbols,
+  "\\P{CWCF}"
 );

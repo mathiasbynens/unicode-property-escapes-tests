@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -23,21 +23,25 @@ const matchSymbols = buildString({
     [0x011660, 0x01166C]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Mongolian}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Mongolian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Mongolian}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Mongolian}"
 );
-assert(
-  /^\p{Script_Extensions=Mong}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Mong}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Mong}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Mong}"
 );
-assert(
-  /^\p{scx=Mongolian}+$/u.test(matchSymbols),
-  "`\\p{scx=Mongolian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Mongolian}+$/u,
+  matchSymbols,
+  "\\p{scx=Mongolian}"
 );
-assert(
-  /^\p{scx=Mong}+$/u.test(matchSymbols),
-  "`\\p{scx=Mong}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Mong}+$/u,
+  matchSymbols,
+  "\\p{scx=Mong}"
 );
 
 const nonMatchSymbols = buildString({
@@ -54,19 +58,23 @@ const nonMatchSymbols = buildString({
     [0x01166D, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Mongolian}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Mongolian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Mongolian}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Mongolian}"
 );
-assert(
-  /^\P{Script_Extensions=Mong}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Mong}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Mong}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Mong}"
 );
-assert(
-  /^\P{scx=Mongolian}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Mongolian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Mongolian}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Mongolian}"
 );
-assert(
-  /^\P{scx=Mong}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Mong}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Mong}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Mong}"
 );

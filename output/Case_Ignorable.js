@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -384,13 +384,15 @@ const matchSymbols = buildString({
     [0x0E0100, 0x0E01EF]
   ]
 });
-assert(
-  /^\p{Case_Ignorable}+$/u.test(matchSymbols),
-  "`\\p{Case_Ignorable}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Case_Ignorable}+$/u,
+  matchSymbols,
+  "\\p{Case_Ignorable}"
 );
-assert(
-  /^\p{CI}+$/u.test(matchSymbols),
-  "`\\p{CI}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{CI}+$/u,
+  matchSymbols,
+  "\\p{CI}"
 );
 
 const nonMatchSymbols = buildString({
@@ -767,11 +769,13 @@ const nonMatchSymbols = buildString({
     [0x0E01F0, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Case_Ignorable}+$/u.test(nonMatchSymbols),
-  "`\\P{Case_Ignorable}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Case_Ignorable}+$/u,
+  nonMatchSymbols,
+  "\\P{Case_Ignorable}"
 );
-assert(
-  /^\P{CI}+$/u.test(nonMatchSymbols),
-  "`\\P{CI}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{CI}+$/u,
+  nonMatchSymbols,
+  "\\P{CI}"
 );

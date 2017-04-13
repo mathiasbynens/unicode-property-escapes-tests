@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -27,13 +27,15 @@ const matchSymbols = buildString({
     [0x002329, 0x00232A]
   ]
 });
-assert(
-  /^\p{Deprecated}+$/u.test(matchSymbols),
-  "`\\p{Deprecated}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Deprecated}+$/u,
+  matchSymbols,
+  "\\p{Deprecated}"
 );
-assert(
-  /^\p{Dep}+$/u.test(matchSymbols),
-  "`\\p{Dep}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Dep}+$/u,
+  matchSymbols,
+  "\\p{Dep}"
 );
 
 const nonMatchSymbols = buildString({
@@ -53,11 +55,13 @@ const nonMatchSymbols = buildString({
     [0x0E0002, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Deprecated}+$/u.test(nonMatchSymbols),
-  "`\\P{Deprecated}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Deprecated}+$/u,
+  nonMatchSymbols,
+  "\\P{Deprecated}"
 );
-assert(
-  /^\P{Dep}+$/u.test(nonMatchSymbols),
-  "`\\P{Dep}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Dep}+$/u,
+  nonMatchSymbols,
+  "\\P{Dep}"
 );

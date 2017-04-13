@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -36,13 +36,15 @@ const matchSymbols = buildString({
     [0x0E0000, 0x0E0FFF]
   ]
 });
-assert(
-  /^\p{Default_Ignorable_Code_Point}+$/u.test(matchSymbols),
-  "`\\p{Default_Ignorable_Code_Point}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Default_Ignorable_Code_Point}+$/u,
+  matchSymbols,
+  "\\p{Default_Ignorable_Code_Point}"
 );
-assert(
-  /^\p{DI}+$/u.test(matchSymbols),
-  "`\\p{DI}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{DI}+$/u,
+  matchSymbols,
+  "\\p{DI}"
 );
 
 const nonMatchSymbols = buildString({
@@ -70,11 +72,13 @@ const nonMatchSymbols = buildString({
     [0x0E1000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Default_Ignorable_Code_Point}+$/u.test(nonMatchSymbols),
-  "`\\P{Default_Ignorable_Code_Point}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Default_Ignorable_Code_Point}+$/u,
+  nonMatchSymbols,
+  "\\P{Default_Ignorable_Code_Point}"
 );
-assert(
-  /^\P{DI}+$/u.test(nonMatchSymbols),
-  "`\\P{DI}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{DI}+$/u,
+  nonMatchSymbols,
+  "\\P{DI}"
 );

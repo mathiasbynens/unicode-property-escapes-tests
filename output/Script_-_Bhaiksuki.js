@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -22,21 +22,25 @@ const matchSymbols = buildString({
     [0x011C50, 0x011C6C]
   ]
 });
-assert(
-  /^\p{Script=Bhaiksuki}+$/u.test(matchSymbols),
-  "`\\p{Script=Bhaiksuki}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Bhaiksuki}+$/u,
+  matchSymbols,
+  "\\p{Script=Bhaiksuki}"
 );
-assert(
-  /^\p{Script=Bhks}+$/u.test(matchSymbols),
-  "`\\p{Script=Bhks}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Bhks}+$/u,
+  matchSymbols,
+  "\\p{Script=Bhks}"
 );
-assert(
-  /^\p{sc=Bhaiksuki}+$/u.test(matchSymbols),
-  "`\\p{sc=Bhaiksuki}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Bhaiksuki}+$/u,
+  matchSymbols,
+  "\\p{sc=Bhaiksuki}"
 );
-assert(
-  /^\p{sc=Bhks}+$/u.test(matchSymbols),
-  "`\\p{sc=Bhks}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Bhks}+$/u,
+  matchSymbols,
+  "\\p{sc=Bhks}"
 );
 
 const nonMatchSymbols = buildString({
@@ -52,19 +56,23 @@ const nonMatchSymbols = buildString({
     [0x011C6D, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Bhaiksuki}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Bhaiksuki}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Bhaiksuki}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Bhaiksuki}"
 );
-assert(
-  /^\P{Script=Bhks}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Bhks}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Bhks}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Bhks}"
 );
-assert(
-  /^\P{sc=Bhaiksuki}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Bhaiksuki}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Bhaiksuki}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Bhaiksuki}"
 );
-assert(
-  /^\P{sc=Bhks}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Bhks}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Bhks}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Bhks}"
 );

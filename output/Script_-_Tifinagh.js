@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -22,21 +22,25 @@ const matchSymbols = buildString({
     [0x002D6F, 0x002D70]
   ]
 });
-assert(
-  /^\p{Script=Tifinagh}+$/u.test(matchSymbols),
-  "`\\p{Script=Tifinagh}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Tifinagh}+$/u,
+  matchSymbols,
+  "\\p{Script=Tifinagh}"
 );
-assert(
-  /^\p{Script=Tfng}+$/u.test(matchSymbols),
-  "`\\p{Script=Tfng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Tfng}+$/u,
+  matchSymbols,
+  "\\p{Script=Tfng}"
 );
-assert(
-  /^\p{sc=Tifinagh}+$/u.test(matchSymbols),
-  "`\\p{sc=Tifinagh}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Tifinagh}+$/u,
+  matchSymbols,
+  "\\p{sc=Tifinagh}"
 );
-assert(
-  /^\p{sc=Tfng}+$/u.test(matchSymbols),
-  "`\\p{sc=Tfng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Tfng}+$/u,
+  matchSymbols,
+  "\\p{sc=Tfng}"
 );
 
 const nonMatchSymbols = buildString({
@@ -50,19 +54,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Tifinagh}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Tifinagh}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Tifinagh}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Tifinagh}"
 );
-assert(
-  /^\P{Script=Tfng}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Tfng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Tfng}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Tfng}"
 );
-assert(
-  /^\P{sc=Tifinagh}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Tifinagh}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Tifinagh}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Tifinagh}"
 );
-assert(
-  /^\P{sc=Tfng}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Tfng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Tfng}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Tfng}"
 );

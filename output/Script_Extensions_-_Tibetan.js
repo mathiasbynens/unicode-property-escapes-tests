@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -25,21 +25,25 @@ const matchSymbols = buildString({
     [0x000FD9, 0x000FDA]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Tibetan}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Tibetan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Tibetan}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Tibetan}"
 );
-assert(
-  /^\p{Script_Extensions=Tibt}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Tibt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Tibt}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Tibt}"
 );
-assert(
-  /^\p{scx=Tibetan}+$/u.test(matchSymbols),
-  "`\\p{scx=Tibetan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Tibetan}+$/u,
+  matchSymbols,
+  "\\p{scx=Tibetan}"
 );
-assert(
-  /^\p{scx=Tibt}+$/u.test(matchSymbols),
-  "`\\p{scx=Tibt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Tibt}+$/u,
+  matchSymbols,
+  "\\p{scx=Tibt}"
 );
 
 const nonMatchSymbols = buildString({
@@ -58,19 +62,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Tibetan}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Tibetan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Tibetan}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Tibetan}"
 );
-assert(
-  /^\P{Script_Extensions=Tibt}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Tibt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Tibt}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Tibt}"
 );
-assert(
-  /^\P{scx=Tibetan}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Tibetan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Tibetan}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Tibetan}"
 );
-assert(
-  /^\P{scx=Tibt}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Tibt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Tibt}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Tibt}"
 );

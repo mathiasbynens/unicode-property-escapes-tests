@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -22,21 +22,25 @@ const matchSymbols = buildString({
     [0x000840, 0x00085B]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Mandaic}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Mandaic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Mandaic}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Mandaic}"
 );
-assert(
-  /^\p{Script_Extensions=Mand}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Mand}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Mand}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Mand}"
 );
-assert(
-  /^\p{scx=Mandaic}+$/u.test(matchSymbols),
-  "`\\p{scx=Mandaic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Mandaic}+$/u,
+  matchSymbols,
+  "\\p{scx=Mandaic}"
 );
-assert(
-  /^\p{scx=Mand}+$/u.test(matchSymbols),
-  "`\\p{scx=Mand}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Mand}+$/u,
+  matchSymbols,
+  "\\p{scx=Mand}"
 );
 
 const nonMatchSymbols = buildString({
@@ -50,19 +54,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Mandaic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Mandaic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Mandaic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Mandaic}"
 );
-assert(
-  /^\P{Script_Extensions=Mand}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Mand}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Mand}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Mand}"
 );
-assert(
-  /^\P{scx=Mandaic}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Mandaic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Mandaic}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Mandaic}"
 );
-assert(
-  /^\P{scx=Mand}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Mand}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Mand}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Mand}"
 );

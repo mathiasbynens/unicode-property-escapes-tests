@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -23,21 +23,25 @@ const matchSymbols = buildString({
     [0x01BC9C, 0x01BC9F]
   ]
 });
-assert(
-  /^\p{Script=Duployan}+$/u.test(matchSymbols),
-  "`\\p{Script=Duployan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Duployan}+$/u,
+  matchSymbols,
+  "\\p{Script=Duployan}"
 );
-assert(
-  /^\p{Script=Dupl}+$/u.test(matchSymbols),
-  "`\\p{Script=Dupl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Dupl}+$/u,
+  matchSymbols,
+  "\\p{Script=Dupl}"
 );
-assert(
-  /^\p{sc=Duployan}+$/u.test(matchSymbols),
-  "`\\p{sc=Duployan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Duployan}+$/u,
+  matchSymbols,
+  "\\p{sc=Duployan}"
 );
-assert(
-  /^\p{sc=Dupl}+$/u.test(matchSymbols),
-  "`\\p{sc=Dupl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Dupl}+$/u,
+  matchSymbols,
+  "\\p{sc=Dupl}"
 );
 
 const nonMatchSymbols = buildString({
@@ -53,19 +57,23 @@ const nonMatchSymbols = buildString({
     [0x01BCA0, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Duployan}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Duployan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Duployan}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Duployan}"
 );
-assert(
-  /^\P{Script=Dupl}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Dupl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Dupl}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Dupl}"
 );
-assert(
-  /^\P{sc=Duployan}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Duployan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Duployan}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Duployan}"
 );
-assert(
-  /^\P{sc=Dupl}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Dupl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Dupl}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Dupl}"
 );

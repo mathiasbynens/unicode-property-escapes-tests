@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -23,21 +23,25 @@ const matchSymbols = buildString({
     [0x01BC9C, 0x01BCA3]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Duployan}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Duployan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Duployan}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Duployan}"
 );
-assert(
-  /^\p{Script_Extensions=Dupl}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Dupl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Dupl}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Dupl}"
 );
-assert(
-  /^\p{scx=Duployan}+$/u.test(matchSymbols),
-  "`\\p{scx=Duployan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Duployan}+$/u,
+  matchSymbols,
+  "\\p{scx=Duployan}"
 );
-assert(
-  /^\p{scx=Dupl}+$/u.test(matchSymbols),
-  "`\\p{scx=Dupl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Dupl}+$/u,
+  matchSymbols,
+  "\\p{scx=Dupl}"
 );
 
 const nonMatchSymbols = buildString({
@@ -53,19 +57,23 @@ const nonMatchSymbols = buildString({
     [0x01BCA4, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Duployan}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Duployan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Duployan}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Duployan}"
 );
-assert(
-  /^\P{Script_Extensions=Dupl}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Dupl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Dupl}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Dupl}"
 );
-assert(
-  /^\P{scx=Duployan}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Duployan}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Duployan}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Duployan}"
 );
-assert(
-  /^\P{scx=Dupl}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Dupl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Dupl}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Dupl}"
 );

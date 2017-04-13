@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,29 +20,35 @@ const matchSymbols = buildString({
     [0x00D800, 0x00DBFF]
   ]
 });
-assert(
-  /^\p{General_Category=Surrogate}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Surrogate}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Surrogate}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Surrogate}"
 );
-assert(
-  /^\p{General_Category=Cs}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Cs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Cs}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Cs}"
 );
-assert(
-  /^\p{gc=Surrogate}+$/u.test(matchSymbols),
-  "`\\p{gc=Surrogate}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Surrogate}+$/u,
+  matchSymbols,
+  "\\p{gc=Surrogate}"
 );
-assert(
-  /^\p{gc=Cs}+$/u.test(matchSymbols),
-  "`\\p{gc=Cs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Cs}+$/u,
+  matchSymbols,
+  "\\p{gc=Cs}"
 );
-assert(
-  /^\p{Surrogate}+$/u.test(matchSymbols),
-  "`\\p{Surrogate}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Surrogate}+$/u,
+  matchSymbols,
+  "\\p{Surrogate}"
 );
-assert(
-  /^\p{Cs}+$/u.test(matchSymbols),
-  "`\\p{Cs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Cs}+$/u,
+  matchSymbols,
+  "\\p{Cs}"
 );
 
 const nonMatchSymbols = buildString({
@@ -53,27 +59,33 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Surrogate}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Surrogate}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Surrogate}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Surrogate}"
 );
-assert(
-  /^\P{General_Category=Cs}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Cs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Cs}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Cs}"
 );
-assert(
-  /^\P{gc=Surrogate}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Surrogate}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Surrogate}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Surrogate}"
 );
-assert(
-  /^\P{gc=Cs}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Cs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Cs}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Cs}"
 );
-assert(
-  /^\P{Surrogate}+$/u.test(nonMatchSymbols),
-  "`\\P{Surrogate}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Surrogate}+$/u,
+  nonMatchSymbols,
+  "\\P{Surrogate}"
 );
-assert(
-  /^\P{Cs}+$/u.test(nonMatchSymbols),
-  "`\\P{Cs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Cs}+$/u,
+  nonMatchSymbols,
+  "\\P{Cs}"
 );

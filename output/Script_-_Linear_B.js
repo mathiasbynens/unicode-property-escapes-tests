@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -25,21 +25,25 @@ const matchSymbols = buildString({
     [0x010080, 0x0100FA]
   ]
 });
-assert(
-  /^\p{Script=Linear_B}+$/u.test(matchSymbols),
-  "`\\p{Script=Linear_B}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Linear_B}+$/u,
+  matchSymbols,
+  "\\p{Script=Linear_B}"
 );
-assert(
-  /^\p{Script=Linb}+$/u.test(matchSymbols),
-  "`\\p{Script=Linb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Linb}+$/u,
+  matchSymbols,
+  "\\p{Script=Linb}"
 );
-assert(
-  /^\p{sc=Linear_B}+$/u.test(matchSymbols),
-  "`\\p{sc=Linear_B}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Linear_B}+$/u,
+  matchSymbols,
+  "\\p{sc=Linear_B}"
 );
-assert(
-  /^\p{sc=Linb}+$/u.test(matchSymbols),
-  "`\\p{sc=Linb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Linb}+$/u,
+  matchSymbols,
+  "\\p{sc=Linb}"
 );
 
 const nonMatchSymbols = buildString({
@@ -58,19 +62,23 @@ const nonMatchSymbols = buildString({
     [0x0100FB, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Linear_B}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Linear_B}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Linear_B}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Linear_B}"
 );
-assert(
-  /^\P{Script=Linb}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Linb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Linb}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Linb}"
 );
-assert(
-  /^\P{sc=Linear_B}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Linear_B}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Linear_B}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Linear_B}"
 );
-assert(
-  /^\P{sc=Linb}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Linb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Linb}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Linb}"
 );

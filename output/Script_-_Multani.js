@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -24,21 +24,25 @@ const matchSymbols = buildString({
     [0x01129F, 0x0112A9]
   ]
 });
-assert(
-  /^\p{Script=Multani}+$/u.test(matchSymbols),
-  "`\\p{Script=Multani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Multani}+$/u,
+  matchSymbols,
+  "\\p{Script=Multani}"
 );
-assert(
-  /^\p{Script=Mult}+$/u.test(matchSymbols),
-  "`\\p{Script=Mult}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Mult}+$/u,
+  matchSymbols,
+  "\\p{Script=Mult}"
 );
-assert(
-  /^\p{sc=Multani}+$/u.test(matchSymbols),
-  "`\\p{sc=Multani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Multani}+$/u,
+  matchSymbols,
+  "\\p{sc=Multani}"
 );
-assert(
-  /^\p{sc=Mult}+$/u.test(matchSymbols),
-  "`\\p{sc=Mult}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Mult}+$/u,
+  matchSymbols,
+  "\\p{sc=Mult}"
 );
 
 const nonMatchSymbols = buildString({
@@ -55,19 +59,23 @@ const nonMatchSymbols = buildString({
     [0x0112AA, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Multani}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Multani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Multani}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Multani}"
 );
-assert(
-  /^\P{Script=Mult}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Mult}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Mult}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Mult}"
 );
-assert(
-  /^\P{sc=Multani}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Multani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Multani}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Multani}"
 );
-assert(
-  /^\P{sc=Mult}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Mult}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Mult}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Mult}"
 );

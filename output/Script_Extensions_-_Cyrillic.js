@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -27,21 +27,25 @@ const matchSymbols = buildString({
     [0x00FE2E, 0x00FE2F]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Cyrillic}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Cyrillic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Cyrillic}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Cyrillic}"
 );
-assert(
-  /^\p{Script_Extensions=Cyrl}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Cyrl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Cyrl}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Cyrl}"
 );
-assert(
-  /^\p{scx=Cyrillic}+$/u.test(matchSymbols),
-  "`\\p{scx=Cyrillic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Cyrillic}+$/u,
+  matchSymbols,
+  "\\p{scx=Cyrillic}"
 );
-assert(
-  /^\p{scx=Cyrl}+$/u.test(matchSymbols),
-  "`\\p{scx=Cyrl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Cyrl}+$/u,
+  matchSymbols,
+  "\\p{scx=Cyrl}"
 );
 
 const nonMatchSymbols = buildString({
@@ -60,19 +64,23 @@ const nonMatchSymbols = buildString({
     [0x00FE30, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Cyrillic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Cyrillic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Cyrillic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Cyrillic}"
 );
-assert(
-  /^\P{Script_Extensions=Cyrl}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Cyrl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Cyrl}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Cyrl}"
 );
-assert(
-  /^\P{scx=Cyrillic}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Cyrillic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Cyrillic}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Cyrillic}"
 );
-assert(
-  /^\P{scx=Cyrl}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Cyrl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Cyrl}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Cyrl}"
 );

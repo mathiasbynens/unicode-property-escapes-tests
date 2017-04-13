@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,9 +21,10 @@ const matchSymbols = buildString({
     [0x002F00, 0x002FD5]
   ]
 });
-assert(
-  /^\p{Radical}+$/u.test(matchSymbols),
-  "`\\p{Radical}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Radical}+$/u,
+  matchSymbols,
+  "\\p{Radical}"
 );
 
 const nonMatchSymbols = buildString({
@@ -38,7 +39,8 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Radical}+$/u.test(nonMatchSymbols),
-  "`\\P{Radical}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Radical}+$/u,
+  nonMatchSymbols,
+  "\\P{Radical}"
 );

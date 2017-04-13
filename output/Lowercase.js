@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -659,13 +659,15 @@ const matchSymbols = buildString({
     [0x01E922, 0x01E943]
   ]
 });
-assert(
-  /^\p{Lowercase}+$/u.test(matchSymbols),
-  "`\\p{Lowercase}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Lowercase}+$/u,
+  matchSymbols,
+  "\\p{Lowercase}"
 );
-assert(
-  /^\p{Lower}+$/u.test(matchSymbols),
-  "`\\p{Lower}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Lower}+$/u,
+  matchSymbols,
+  "\\p{Lower}"
 );
 
 const nonMatchSymbols = buildString({
@@ -1317,11 +1319,13 @@ const nonMatchSymbols = buildString({
     [0x01E944, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Lowercase}+$/u.test(nonMatchSymbols),
-  "`\\P{Lowercase}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Lowercase}+$/u,
+  nonMatchSymbols,
+  "\\P{Lowercase}"
 );
-assert(
-  /^\P{Lower}+$/u.test(nonMatchSymbols),
-  "`\\P{Lower}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Lower}+$/u,
+  nonMatchSymbols,
+  "\\P{Lower}"
 );

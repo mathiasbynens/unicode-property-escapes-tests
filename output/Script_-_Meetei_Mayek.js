@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x00ABF0, 0x00ABF9]
   ]
 });
-assert(
-  /^\p{Script=Meetei_Mayek}+$/u.test(matchSymbols),
-  "`\\p{Script=Meetei_Mayek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Meetei_Mayek}+$/u,
+  matchSymbols,
+  "\\p{Script=Meetei_Mayek}"
 );
-assert(
-  /^\p{Script=Mtei}+$/u.test(matchSymbols),
-  "`\\p{Script=Mtei}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Mtei}+$/u,
+  matchSymbols,
+  "\\p{Script=Mtei}"
 );
-assert(
-  /^\p{sc=Meetei_Mayek}+$/u.test(matchSymbols),
-  "`\\p{sc=Meetei_Mayek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Meetei_Mayek}+$/u,
+  matchSymbols,
+  "\\p{sc=Meetei_Mayek}"
 );
-assert(
-  /^\p{sc=Mtei}+$/u.test(matchSymbols),
-  "`\\p{sc=Mtei}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Mtei}+$/u,
+  matchSymbols,
+  "\\p{sc=Mtei}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Meetei_Mayek}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Meetei_Mayek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Meetei_Mayek}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Meetei_Mayek}"
 );
-assert(
-  /^\P{Script=Mtei}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Mtei}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Mtei}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Mtei}"
 );
-assert(
-  /^\P{sc=Meetei_Mayek}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Meetei_Mayek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Meetei_Mayek}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Meetei_Mayek}"
 );
-assert(
-  /^\P{sc=Mtei}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Mtei}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Mtei}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Mtei}"
 );

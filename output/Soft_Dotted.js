@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -50,13 +50,15 @@ const matchSymbols = buildString({
     [0x01D692, 0x01D693]
   ]
 });
-assert(
-  /^\p{Soft_Dotted}+$/u.test(matchSymbols),
-  "`\\p{Soft_Dotted}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Soft_Dotted}+$/u,
+  matchSymbols,
+  "\\p{Soft_Dotted}"
 );
-assert(
-  /^\p{SD}+$/u.test(matchSymbols),
-  "`\\p{SD}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{SD}+$/u,
+  matchSymbols,
+  "\\p{SD}"
 );
 
 const nonMatchSymbols = buildString({
@@ -99,11 +101,13 @@ const nonMatchSymbols = buildString({
     [0x01D694, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Soft_Dotted}+$/u.test(nonMatchSymbols),
-  "`\\P{Soft_Dotted}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Soft_Dotted}+$/u,
+  nonMatchSymbols,
+  "\\P{Soft_Dotted}"
 );
-assert(
-  /^\P{SD}+$/u.test(nonMatchSymbols),
-  "`\\P{SD}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{SD}+$/u,
+  nonMatchSymbols,
+  "\\P{SD}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -52,13 +52,15 @@ const matchSymbols = buildString({
     [0x01D1BB, 0x01D1C0]
   ]
 });
-assert(
-  /^\p{Composition_Exclusion}+$/u.test(matchSymbols),
-  "`\\p{Composition_Exclusion}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Composition_Exclusion}+$/u,
+  matchSymbols,
+  "\\p{Composition_Exclusion}"
 );
-assert(
-  /^\p{CE}+$/u.test(matchSymbols),
-  "`\\p{CE}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{CE}+$/u,
+  matchSymbols,
+  "\\p{CE}"
 );
 
 const nonMatchSymbols = buildString({
@@ -103,11 +105,13 @@ const nonMatchSymbols = buildString({
     [0x01D1C1, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Composition_Exclusion}+$/u.test(nonMatchSymbols),
-  "`\\P{Composition_Exclusion}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Composition_Exclusion}+$/u,
+  nonMatchSymbols,
+  "\\P{Composition_Exclusion}"
 );
-assert(
-  /^\P{CE}+$/u.test(nonMatchSymbols),
-  "`\\P{CE}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{CE}+$/u,
+  nonMatchSymbols,
+  "\\P{CE}"
 );

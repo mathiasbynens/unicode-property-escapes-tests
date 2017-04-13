@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x0102A0, 0x0102D0]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Carian}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Carian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Carian}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Carian}"
 );
-assert(
-  /^\p{Script_Extensions=Cari}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Cari}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Cari}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Cari}"
 );
-assert(
-  /^\p{scx=Carian}+$/u.test(matchSymbols),
-  "`\\p{scx=Carian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Carian}+$/u,
+  matchSymbols,
+  "\\p{scx=Carian}"
 );
-assert(
-  /^\p{scx=Cari}+$/u.test(matchSymbols),
-  "`\\p{scx=Cari}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Cari}+$/u,
+  matchSymbols,
+  "\\p{scx=Cari}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x0102D1, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Carian}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Carian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Carian}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Carian}"
 );
-assert(
-  /^\P{Script_Extensions=Cari}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Cari}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Cari}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Cari}"
 );
-assert(
-  /^\P{scx=Carian}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Carian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Carian}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Carian}"
 );
-assert(
-  /^\P{scx=Cari}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Cari}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Cari}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Cari}"
 );

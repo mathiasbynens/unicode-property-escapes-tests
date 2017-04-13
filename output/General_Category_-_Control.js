@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,41 +20,50 @@ const matchSymbols = buildString({
     [0x00007F, 0x00009F]
   ]
 });
-assert(
-  /^\p{General_Category=Control}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Control}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Control}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Control}"
 );
-assert(
-  /^\p{General_Category=Cc}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Cc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Cc}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Cc}"
 );
-assert(
-  /^\p{General_Category=cntrl}+$/u.test(matchSymbols),
-  "`\\p{General_Category=cntrl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=cntrl}+$/u,
+  matchSymbols,
+  "\\p{General_Category=cntrl}"
 );
-assert(
-  /^\p{gc=Control}+$/u.test(matchSymbols),
-  "`\\p{gc=Control}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Control}+$/u,
+  matchSymbols,
+  "\\p{gc=Control}"
 );
-assert(
-  /^\p{gc=Cc}+$/u.test(matchSymbols),
-  "`\\p{gc=Cc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Cc}+$/u,
+  matchSymbols,
+  "\\p{gc=Cc}"
 );
-assert(
-  /^\p{gc=cntrl}+$/u.test(matchSymbols),
-  "`\\p{gc=cntrl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=cntrl}+$/u,
+  matchSymbols,
+  "\\p{gc=cntrl}"
 );
-assert(
-  /^\p{Control}+$/u.test(matchSymbols),
-  "`\\p{Control}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Control}+$/u,
+  matchSymbols,
+  "\\p{Control}"
 );
-assert(
-  /^\p{Cc}+$/u.test(matchSymbols),
-  "`\\p{Cc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Cc}+$/u,
+  matchSymbols,
+  "\\p{Cc}"
 );
-assert(
-  /^\p{cntrl}+$/u.test(matchSymbols),
-  "`\\p{cntrl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{cntrl}+$/u,
+  matchSymbols,
+  "\\p{cntrl}"
 );
 
 const nonMatchSymbols = buildString({
@@ -66,39 +75,48 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Control}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Control}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Control}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Control}"
 );
-assert(
-  /^\P{General_Category=Cc}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Cc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Cc}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Cc}"
 );
-assert(
-  /^\P{General_Category=cntrl}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=cntrl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=cntrl}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=cntrl}"
 );
-assert(
-  /^\P{gc=Control}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Control}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Control}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Control}"
 );
-assert(
-  /^\P{gc=Cc}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Cc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Cc}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Cc}"
 );
-assert(
-  /^\P{gc=cntrl}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=cntrl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=cntrl}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=cntrl}"
 );
-assert(
-  /^\P{Control}+$/u.test(nonMatchSymbols),
-  "`\\P{Control}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Control}+$/u,
+  nonMatchSymbols,
+  "\\P{Control}"
 );
-assert(
-  /^\P{Cc}+$/u.test(nonMatchSymbols),
-  "`\\P{Cc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Cc}+$/u,
+  nonMatchSymbols,
+  "\\P{Cc}"
 );
-assert(
-  /^\P{cntrl}+$/u.test(nonMatchSymbols),
-  "`\\P{cntrl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{cntrl}+$/u,
+  nonMatchSymbols,
+  "\\P{cntrl}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -26,21 +26,25 @@ const matchSymbols = buildString({
     [0x010A50, 0x010A58]
   ]
 });
-assert(
-  /^\p{Script=Kharoshthi}+$/u.test(matchSymbols),
-  "`\\p{Script=Kharoshthi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Kharoshthi}+$/u,
+  matchSymbols,
+  "\\p{Script=Kharoshthi}"
 );
-assert(
-  /^\p{Script=Khar}+$/u.test(matchSymbols),
-  "`\\p{Script=Khar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Khar}+$/u,
+  matchSymbols,
+  "\\p{Script=Khar}"
 );
-assert(
-  /^\p{sc=Kharoshthi}+$/u.test(matchSymbols),
-  "`\\p{sc=Kharoshthi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Kharoshthi}+$/u,
+  matchSymbols,
+  "\\p{sc=Kharoshthi}"
 );
-assert(
-  /^\p{sc=Khar}+$/u.test(matchSymbols),
-  "`\\p{sc=Khar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Khar}+$/u,
+  matchSymbols,
+  "\\p{sc=Khar}"
 );
 
 const nonMatchSymbols = buildString({
@@ -60,19 +64,23 @@ const nonMatchSymbols = buildString({
     [0x010A59, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Kharoshthi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Kharoshthi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Kharoshthi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Kharoshthi}"
 );
-assert(
-  /^\P{Script=Khar}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Khar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Khar}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Khar}"
 );
-assert(
-  /^\P{sc=Kharoshthi}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Kharoshthi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Kharoshthi}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Kharoshthi}"
 );
-assert(
-  /^\P{sc=Khar}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Khar}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Khar}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Khar}"
 );

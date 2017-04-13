@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -22,21 +22,25 @@ const matchSymbols = buildString({
     [0x011400, 0x011459]
   ]
 });
-assert(
-  /^\p{Script=Newa}+$/u.test(matchSymbols),
-  "`\\p{Script=Newa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Newa}+$/u,
+  matchSymbols,
+  "\\p{Script=Newa}"
 );
-assert(
-  /^\p{Script=Newa}+$/u.test(matchSymbols),
-  "`\\p{Script=Newa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Newa}+$/u,
+  matchSymbols,
+  "\\p{Script=Newa}"
 );
-assert(
-  /^\p{sc=Newa}+$/u.test(matchSymbols),
-  "`\\p{sc=Newa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Newa}+$/u,
+  matchSymbols,
+  "\\p{sc=Newa}"
 );
-assert(
-  /^\p{sc=Newa}+$/u.test(matchSymbols),
-  "`\\p{sc=Newa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Newa}+$/u,
+  matchSymbols,
+  "\\p{sc=Newa}"
 );
 
 const nonMatchSymbols = buildString({
@@ -51,19 +55,23 @@ const nonMatchSymbols = buildString({
     [0x01145E, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Newa}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Newa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Newa}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Newa}"
 );
-assert(
-  /^\P{Script=Newa}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Newa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Newa}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Newa}"
 );
-assert(
-  /^\P{sc=Newa}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Newa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Newa}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Newa}"
 );
-assert(
-  /^\P{sc=Newa}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Newa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Newa}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Newa}"
 );

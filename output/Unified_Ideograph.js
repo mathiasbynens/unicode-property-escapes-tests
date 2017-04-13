@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -32,13 +32,15 @@ const matchSymbols = buildString({
     [0x02B820, 0x02CEA1]
   ]
 });
-assert(
-  /^\p{Unified_Ideograph}+$/u.test(matchSymbols),
-  "`\\p{Unified_Ideograph}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Unified_Ideograph}+$/u,
+  matchSymbols,
+  "\\p{Unified_Ideograph}"
 );
-assert(
-  /^\p{UIdeo}+$/u.test(matchSymbols),
-  "`\\p{UIdeo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{UIdeo}+$/u,
+  matchSymbols,
+  "\\p{UIdeo}"
 );
 
 const nonMatchSymbols = buildString({
@@ -63,11 +65,13 @@ const nonMatchSymbols = buildString({
     [0x02CEA2, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Unified_Ideograph}+$/u.test(nonMatchSymbols),
-  "`\\P{Unified_Ideograph}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Unified_Ideograph}+$/u,
+  nonMatchSymbols,
+  "\\P{Unified_Ideograph}"
 );
-assert(
-  /^\P{UIdeo}+$/u.test(nonMatchSymbols),
-  "`\\P{UIdeo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{UIdeo}+$/u,
+  nonMatchSymbols,
+  "\\P{UIdeo}"
 );

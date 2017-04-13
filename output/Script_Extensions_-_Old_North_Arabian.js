@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x010A80, 0x010A9F]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Old_North_Arabian}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Old_North_Arabian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Old_North_Arabian}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Old_North_Arabian}"
 );
-assert(
-  /^\p{Script_Extensions=Narb}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Narb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Narb}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Narb}"
 );
-assert(
-  /^\p{scx=Old_North_Arabian}+$/u.test(matchSymbols),
-  "`\\p{scx=Old_North_Arabian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Old_North_Arabian}+$/u,
+  matchSymbols,
+  "\\p{scx=Old_North_Arabian}"
 );
-assert(
-  /^\p{scx=Narb}+$/u.test(matchSymbols),
-  "`\\p{scx=Narb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Narb}+$/u,
+  matchSymbols,
+  "\\p{scx=Narb}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x010AA0, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Old_North_Arabian}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Old_North_Arabian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Old_North_Arabian}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Old_North_Arabian}"
 );
-assert(
-  /^\P{Script_Extensions=Narb}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Narb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Narb}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Narb}"
 );
-assert(
-  /^\P{scx=Old_North_Arabian}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Old_North_Arabian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Old_North_Arabian}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Old_North_Arabian}"
 );
-assert(
-  /^\P{scx=Narb}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Narb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Narb}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Narb}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x011730, 0x01173F]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Ahom}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Ahom}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Ahom}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Ahom}"
 );
-assert(
-  /^\p{Script_Extensions=Ahom}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Ahom}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Ahom}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Ahom}"
 );
-assert(
-  /^\p{scx=Ahom}+$/u.test(matchSymbols),
-  "`\\p{scx=Ahom}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Ahom}+$/u,
+  matchSymbols,
+  "\\p{scx=Ahom}"
 );
-assert(
-  /^\p{scx=Ahom}+$/u.test(matchSymbols),
-  "`\\p{scx=Ahom}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Ahom}+$/u,
+  matchSymbols,
+  "\\p{scx=Ahom}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x011740, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Ahom}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Ahom}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Ahom}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Ahom}"
 );
-assert(
-  /^\P{Script_Extensions=Ahom}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Ahom}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Ahom}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Ahom}"
 );
-assert(
-  /^\P{scx=Ahom}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Ahom}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Ahom}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Ahom}"
 );
-assert(
-  /^\P{scx=Ahom}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Ahom}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Ahom}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Ahom}"
 );

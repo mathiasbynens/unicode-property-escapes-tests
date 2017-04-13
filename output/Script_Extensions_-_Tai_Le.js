@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x001970, 0x001974]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Tai_Le}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Tai_Le}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Tai_Le}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Tai_Le}"
 );
-assert(
-  /^\p{Script_Extensions=Tale}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Tale}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Tale}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Tale}"
 );
-assert(
-  /^\p{scx=Tai_Le}+$/u.test(matchSymbols),
-  "`\\p{scx=Tai_Le}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Tai_Le}+$/u,
+  matchSymbols,
+  "\\p{scx=Tai_Le}"
 );
-assert(
-  /^\p{scx=Tale}+$/u.test(matchSymbols),
-  "`\\p{scx=Tale}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Tale}+$/u,
+  matchSymbols,
+  "\\p{scx=Tale}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Tai_Le}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Tai_Le}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Tai_Le}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Tai_Le}"
 );
-assert(
-  /^\P{Script_Extensions=Tale}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Tale}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Tale}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Tale}"
 );
-assert(
-  /^\P{scx=Tai_Le}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Tai_Le}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Tai_Le}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Tai_Le}"
 );
-assert(
-  /^\P{scx=Tale}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Tale}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Tale}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Tale}"
 );

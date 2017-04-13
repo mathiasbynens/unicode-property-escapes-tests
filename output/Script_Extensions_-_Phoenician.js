@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x010900, 0x01091B]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Phoenician}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Phoenician}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Phoenician}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Phoenician}"
 );
-assert(
-  /^\p{Script_Extensions=Phnx}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Phnx}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Phnx}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Phnx}"
 );
-assert(
-  /^\p{scx=Phoenician}+$/u.test(matchSymbols),
-  "`\\p{scx=Phoenician}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Phoenician}+$/u,
+  matchSymbols,
+  "\\p{scx=Phoenician}"
 );
-assert(
-  /^\p{scx=Phnx}+$/u.test(matchSymbols),
-  "`\\p{scx=Phnx}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Phnx}+$/u,
+  matchSymbols,
+  "\\p{scx=Phnx}"
 );
 
 const nonMatchSymbols = buildString({
@@ -48,19 +52,23 @@ const nonMatchSymbols = buildString({
     [0x010920, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Phoenician}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Phoenician}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Phoenician}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Phoenician}"
 );
-assert(
-  /^\P{Script_Extensions=Phnx}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Phnx}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Phnx}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Phnx}"
 );
-assert(
-  /^\P{scx=Phoenician}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Phoenician}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Phoenician}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Phoenician}"
 );
-assert(
-  /^\P{scx=Phnx}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Phnx}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Phnx}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Phnx}"
 );

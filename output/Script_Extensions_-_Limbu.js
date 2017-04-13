@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -25,21 +25,25 @@ const matchSymbols = buildString({
     [0x001944, 0x00194F]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Limbu}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Limbu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Limbu}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Limbu}"
 );
-assert(
-  /^\p{Script_Extensions=Limb}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Limb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Limb}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Limb}"
 );
-assert(
-  /^\p{scx=Limbu}+$/u.test(matchSymbols),
-  "`\\p{scx=Limbu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Limbu}+$/u,
+  matchSymbols,
+  "\\p{scx=Limbu}"
 );
-assert(
-  /^\p{scx=Limb}+$/u.test(matchSymbols),
-  "`\\p{scx=Limb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Limb}+$/u,
+  matchSymbols,
+  "\\p{scx=Limb}"
 );
 
 const nonMatchSymbols = buildString({
@@ -57,19 +61,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Limbu}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Limbu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Limbu}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Limbu}"
 );
-assert(
-  /^\P{Script_Extensions=Limb}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Limb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Limb}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Limb}"
 );
-assert(
-  /^\P{scx=Limbu}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Limbu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Limbu}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Limbu}"
 );
-assert(
-  /^\P{scx=Limb}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Limb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Limb}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Limb}"
 );

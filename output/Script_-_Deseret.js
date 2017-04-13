@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x010400, 0x01044F]
   ]
 });
-assert(
-  /^\p{Script=Deseret}+$/u.test(matchSymbols),
-  "`\\p{Script=Deseret}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Deseret}+$/u,
+  matchSymbols,
+  "\\p{Script=Deseret}"
 );
-assert(
-  /^\p{Script=Dsrt}+$/u.test(matchSymbols),
-  "`\\p{Script=Dsrt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Dsrt}+$/u,
+  matchSymbols,
+  "\\p{Script=Dsrt}"
 );
-assert(
-  /^\p{sc=Deseret}+$/u.test(matchSymbols),
-  "`\\p{sc=Deseret}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Deseret}+$/u,
+  matchSymbols,
+  "\\p{sc=Deseret}"
 );
-assert(
-  /^\p{sc=Dsrt}+$/u.test(matchSymbols),
-  "`\\p{sc=Dsrt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Dsrt}+$/u,
+  matchSymbols,
+  "\\p{sc=Dsrt}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x010450, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Deseret}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Deseret}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Deseret}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Deseret}"
 );
-assert(
-  /^\P{Script=Dsrt}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Dsrt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Dsrt}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Dsrt}"
 );
-assert(
-  /^\P{sc=Deseret}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Deseret}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Deseret}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Deseret}"
 );
-assert(
-  /^\P{sc=Dsrt}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Dsrt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Dsrt}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Dsrt}"
 );

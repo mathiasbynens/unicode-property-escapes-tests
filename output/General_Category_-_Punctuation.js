@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -187,41 +187,50 @@ const matchSymbols = buildString({
     [0x01E95E, 0x01E95F]
   ]
 });
-assert(
-  /^\p{General_Category=Punctuation}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Punctuation}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Punctuation}"
 );
-assert(
-  /^\p{General_Category=P}+$/u.test(matchSymbols),
-  "`\\p{General_Category=P}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=P}+$/u,
+  matchSymbols,
+  "\\p{General_Category=P}"
 );
-assert(
-  /^\p{General_Category=punct}+$/u.test(matchSymbols),
-  "`\\p{General_Category=punct}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=punct}+$/u,
+  matchSymbols,
+  "\\p{General_Category=punct}"
 );
-assert(
-  /^\p{gc=Punctuation}+$/u.test(matchSymbols),
-  "`\\p{gc=Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Punctuation}+$/u,
+  matchSymbols,
+  "\\p{gc=Punctuation}"
 );
-assert(
-  /^\p{gc=P}+$/u.test(matchSymbols),
-  "`\\p{gc=P}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=P}+$/u,
+  matchSymbols,
+  "\\p{gc=P}"
 );
-assert(
-  /^\p{gc=punct}+$/u.test(matchSymbols),
-  "`\\p{gc=punct}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=punct}+$/u,
+  matchSymbols,
+  "\\p{gc=punct}"
 );
-assert(
-  /^\p{Punctuation}+$/u.test(matchSymbols),
-  "`\\p{Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Punctuation}+$/u,
+  matchSymbols,
+  "\\p{Punctuation}"
 );
-assert(
-  /^\p{P}+$/u.test(matchSymbols),
-  "`\\p{P}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{P}+$/u,
+  matchSymbols,
+  "\\p{P}"
 );
-assert(
-  /^\p{punct}+$/u.test(matchSymbols),
-  "`\\p{punct}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{punct}+$/u,
+  matchSymbols,
+  "\\p{punct}"
 );
 
 const nonMatchSymbols = buildString({
@@ -401,39 +410,48 @@ const nonMatchSymbols = buildString({
     [0x01E960, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Punctuation}"
 );
-assert(
-  /^\P{General_Category=P}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=P}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=P}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=P}"
 );
-assert(
-  /^\P{General_Category=punct}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=punct}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=punct}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=punct}"
 );
-assert(
-  /^\P{gc=Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Punctuation}"
 );
-assert(
-  /^\P{gc=P}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=P}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=P}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=P}"
 );
-assert(
-  /^\P{gc=punct}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=punct}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=punct}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=punct}"
 );
-assert(
-  /^\P{Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{Punctuation}"
 );
-assert(
-  /^\P{P}+$/u.test(nonMatchSymbols),
-  "`\\P{P}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{P}+$/u,
+  nonMatchSymbols,
+  "\\P{P}"
 );
-assert(
-  /^\P{punct}+$/u.test(nonMatchSymbols),
-  "`\\P{punct}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{punct}+$/u,
+  nonMatchSymbols,
+  "\\P{punct}"
 );

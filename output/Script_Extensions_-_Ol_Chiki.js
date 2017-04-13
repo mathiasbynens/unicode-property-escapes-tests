@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x001C50, 0x001C7F]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Ol_Chiki}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Ol_Chiki}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Ol_Chiki}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Ol_Chiki}"
 );
-assert(
-  /^\p{Script_Extensions=Olck}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Olck}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Olck}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Olck}"
 );
-assert(
-  /^\p{scx=Ol_Chiki}+$/u.test(matchSymbols),
-  "`\\p{scx=Ol_Chiki}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Ol_Chiki}+$/u,
+  matchSymbols,
+  "\\p{scx=Ol_Chiki}"
 );
-assert(
-  /^\p{scx=Olck}+$/u.test(matchSymbols),
-  "`\\p{scx=Olck}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Olck}+$/u,
+  matchSymbols,
+  "\\p{scx=Olck}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Ol_Chiki}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Ol_Chiki}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Ol_Chiki}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Ol_Chiki}"
 );
-assert(
-  /^\P{Script_Extensions=Olck}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Olck}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Olck}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Olck}"
 );
-assert(
-  /^\P{scx=Ol_Chiki}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Ol_Chiki}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Ol_Chiki}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Ol_Chiki}"
 );
-assert(
-  /^\P{scx=Olck}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Olck}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Olck}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Olck}"
 );

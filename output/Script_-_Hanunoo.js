@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x001720, 0x001734]
   ]
 });
-assert(
-  /^\p{Script=Hanunoo}+$/u.test(matchSymbols),
-  "`\\p{Script=Hanunoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Hanunoo}+$/u,
+  matchSymbols,
+  "\\p{Script=Hanunoo}"
 );
-assert(
-  /^\p{Script=Hano}+$/u.test(matchSymbols),
-  "`\\p{Script=Hano}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Hano}+$/u,
+  matchSymbols,
+  "\\p{Script=Hano}"
 );
-assert(
-  /^\p{sc=Hanunoo}+$/u.test(matchSymbols),
-  "`\\p{sc=Hanunoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Hanunoo}+$/u,
+  matchSymbols,
+  "\\p{sc=Hanunoo}"
 );
-assert(
-  /^\p{sc=Hano}+$/u.test(matchSymbols),
-  "`\\p{sc=Hano}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Hano}+$/u,
+  matchSymbols,
+  "\\p{sc=Hano}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Hanunoo}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Hanunoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Hanunoo}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Hanunoo}"
 );
-assert(
-  /^\P{Script=Hano}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Hano}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Hano}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Hano}"
 );
-assert(
-  /^\P{sc=Hanunoo}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Hanunoo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Hanunoo}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Hanunoo}"
 );
-assert(
-  /^\P{sc=Hano}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Hano}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Hano}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Hano}"
 );

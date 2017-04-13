@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -36,21 +36,25 @@ const matchSymbols = buildString({
     [0x00A830, 0x00A839]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Gujarati}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Gujarati}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Gujarati}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Gujarati}"
 );
-assert(
-  /^\p{Script_Extensions=Gujr}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Gujr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Gujr}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Gujr}"
 );
-assert(
-  /^\p{scx=Gujarati}+$/u.test(matchSymbols),
-  "`\\p{scx=Gujarati}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Gujarati}+$/u,
+  matchSymbols,
+  "\\p{scx=Gujarati}"
 );
-assert(
-  /^\p{scx=Gujr}+$/u.test(matchSymbols),
-  "`\\p{scx=Gujr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Gujr}+$/u,
+  matchSymbols,
+  "\\p{scx=Gujr}"
 );
 
 const nonMatchSymbols = buildString({
@@ -79,19 +83,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Gujarati}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Gujarati}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Gujarati}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Gujarati}"
 );
-assert(
-  /^\P{Script_Extensions=Gujr}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Gujr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Gujr}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Gujr}"
 );
-assert(
-  /^\P{scx=Gujarati}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Gujarati}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Gujarati}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Gujarati}"
 );
-assert(
-  /^\P{scx=Gujr}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Gujr}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Gujr}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Gujr}"
 );

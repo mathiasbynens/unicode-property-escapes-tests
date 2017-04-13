@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -32,21 +32,25 @@ const matchSymbols = buildString({
     [0x000B66, 0x000B77]
   ]
 });
-assert(
-  /^\p{Script=Oriya}+$/u.test(matchSymbols),
-  "`\\p{Script=Oriya}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Oriya}+$/u,
+  matchSymbols,
+  "\\p{Script=Oriya}"
 );
-assert(
-  /^\p{Script=Orya}+$/u.test(matchSymbols),
-  "`\\p{Script=Orya}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Orya}+$/u,
+  matchSymbols,
+  "\\p{Script=Orya}"
 );
-assert(
-  /^\p{sc=Oriya}+$/u.test(matchSymbols),
-  "`\\p{sc=Oriya}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Oriya}+$/u,
+  matchSymbols,
+  "\\p{sc=Oriya}"
 );
-assert(
-  /^\p{sc=Orya}+$/u.test(matchSymbols),
-  "`\\p{sc=Orya}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Orya}+$/u,
+  matchSymbols,
+  "\\p{sc=Orya}"
 );
 
 const nonMatchSymbols = buildString({
@@ -72,19 +76,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Oriya}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Oriya}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Oriya}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Oriya}"
 );
-assert(
-  /^\P{Script=Orya}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Orya}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Orya}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Orya}"
 );
-assert(
-  /^\P{sc=Oriya}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Oriya}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Oriya}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Oriya}"
 );
-assert(
-  /^\P{sc=Orya}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Orya}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Orya}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Orya}"
 );

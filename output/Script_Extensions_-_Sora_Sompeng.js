@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x0110F0, 0x0110F9]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Sora_Sompeng}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Sora_Sompeng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Sora_Sompeng}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Sora_Sompeng}"
 );
-assert(
-  /^\p{Script_Extensions=Sora}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Sora}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Sora}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Sora}"
 );
-assert(
-  /^\p{scx=Sora_Sompeng}+$/u.test(matchSymbols),
-  "`\\p{scx=Sora_Sompeng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Sora_Sompeng}+$/u,
+  matchSymbols,
+  "\\p{scx=Sora_Sompeng}"
 );
-assert(
-  /^\p{scx=Sora}+$/u.test(matchSymbols),
-  "`\\p{scx=Sora}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Sora}+$/u,
+  matchSymbols,
+  "\\p{scx=Sora}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x0110FA, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Sora_Sompeng}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Sora_Sompeng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Sora_Sompeng}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Sora_Sompeng}"
 );
-assert(
-  /^\P{Script_Extensions=Sora}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Sora}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Sora}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Sora}"
 );
-assert(
-  /^\P{scx=Sora_Sompeng}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Sora_Sompeng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Sora_Sompeng}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Sora_Sompeng}"
 );
-assert(
-  /^\P{scx=Sora}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Sora}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Sora}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Sora}"
 );

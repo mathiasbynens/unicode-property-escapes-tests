@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -35,21 +35,25 @@ const matchSymbols = buildString({
     [0x000C78, 0x000C7F]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Telugu}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Telugu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Telugu}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Telugu}"
 );
-assert(
-  /^\p{Script_Extensions=Telu}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Telu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Telu}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Telu}"
 );
-assert(
-  /^\p{scx=Telugu}+$/u.test(matchSymbols),
-  "`\\p{scx=Telugu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Telugu}+$/u,
+  matchSymbols,
+  "\\p{scx=Telugu}"
 );
-assert(
-  /^\p{scx=Telu}+$/u.test(matchSymbols),
-  "`\\p{scx=Telu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Telu}+$/u,
+  matchSymbols,
+  "\\p{scx=Telu}"
 );
 
 const nonMatchSymbols = buildString({
@@ -77,19 +81,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Telugu}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Telugu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Telugu}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Telugu}"
 );
-assert(
-  /^\P{Script_Extensions=Telu}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Telu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Telu}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Telu}"
 );
-assert(
-  /^\P{scx=Telugu}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Telugu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Telugu}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Telugu}"
 );
-assert(
-  /^\P{scx=Telu}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Telu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Telu}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Telu}"
 );

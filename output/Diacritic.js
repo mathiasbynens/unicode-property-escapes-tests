@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -171,13 +171,15 @@ const matchSymbols = buildString({
     [0x01E948, 0x01E94A]
   ]
 });
-assert(
-  /^\p{Diacritic}+$/u.test(matchSymbols),
-  "`\\p{Diacritic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Diacritic}+$/u,
+  matchSymbols,
+  "\\p{Diacritic}"
 );
-assert(
-  /^\p{Dia}+$/u.test(matchSymbols),
-  "`\\p{Dia}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Dia}+$/u,
+  matchSymbols,
+  "\\p{Dia}"
 );
 
 const nonMatchSymbols = buildString({
@@ -341,11 +343,13 @@ const nonMatchSymbols = buildString({
     [0x01E94B, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Diacritic}+$/u.test(nonMatchSymbols),
-  "`\\P{Diacritic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Diacritic}+$/u,
+  nonMatchSymbols,
+  "\\P{Diacritic}"
 );
-assert(
-  /^\P{Dia}+$/u.test(nonMatchSymbols),
-  "`\\P{Dia}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Dia}+$/u,
+  nonMatchSymbols,
+  "\\P{Dia}"
 );

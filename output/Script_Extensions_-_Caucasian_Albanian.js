@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x010530, 0x010563]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Caucasian_Albanian}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Caucasian_Albanian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Caucasian_Albanian}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Caucasian_Albanian}"
 );
-assert(
-  /^\p{Script_Extensions=Aghb}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Aghb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Aghb}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Aghb}"
 );
-assert(
-  /^\p{scx=Caucasian_Albanian}+$/u.test(matchSymbols),
-  "`\\p{scx=Caucasian_Albanian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Caucasian_Albanian}+$/u,
+  matchSymbols,
+  "\\p{scx=Caucasian_Albanian}"
 );
-assert(
-  /^\p{scx=Aghb}+$/u.test(matchSymbols),
-  "`\\p{scx=Aghb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Aghb}+$/u,
+  matchSymbols,
+  "\\p{scx=Aghb}"
 );
 
 const nonMatchSymbols = buildString({
@@ -48,19 +52,23 @@ const nonMatchSymbols = buildString({
     [0x010570, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Caucasian_Albanian}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Caucasian_Albanian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Caucasian_Albanian}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Caucasian_Albanian}"
 );
-assert(
-  /^\P{Script_Extensions=Aghb}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Aghb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Aghb}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Aghb}"
 );
-assert(
-  /^\P{scx=Caucasian_Albanian}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Caucasian_Albanian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Caucasian_Albanian}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Caucasian_Albanian}"
 );
-assert(
-  /^\P{scx=Aghb}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Aghb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Aghb}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Aghb}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -55,21 +55,25 @@ const matchSymbols = buildString({
     [0x01D200, 0x01D245]
   ]
 });
-assert(
-  /^\p{Script=Greek}+$/u.test(matchSymbols),
-  "`\\p{Script=Greek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Greek}+$/u,
+  matchSymbols,
+  "\\p{Script=Greek}"
 );
-assert(
-  /^\p{Script=Grek}+$/u.test(matchSymbols),
-  "`\\p{Script=Grek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Grek}+$/u,
+  matchSymbols,
+  "\\p{Script=Grek}"
 );
-assert(
-  /^\p{sc=Greek}+$/u.test(matchSymbols),
-  "`\\p{sc=Greek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Greek}+$/u,
+  matchSymbols,
+  "\\p{sc=Greek}"
 );
-assert(
-  /^\p{sc=Grek}+$/u.test(matchSymbols),
-  "`\\p{sc=Grek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Grek}+$/u,
+  matchSymbols,
+  "\\p{sc=Grek}"
 );
 
 const nonMatchSymbols = buildString({
@@ -117,19 +121,23 @@ const nonMatchSymbols = buildString({
     [0x01D246, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Greek}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Greek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Greek}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Greek}"
 );
-assert(
-  /^\P{Script=Grek}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Grek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Grek}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Grek}"
 );
-assert(
-  /^\P{sc=Greek}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Greek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Greek}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Greek}"
 );
-assert(
-  /^\P{sc=Grek}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Grek}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Grek}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Grek}"
 );

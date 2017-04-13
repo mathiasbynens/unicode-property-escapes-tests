@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x010350, 0x01037A]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Old_Permic}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Old_Permic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Old_Permic}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Old_Permic}"
 );
-assert(
-  /^\p{Script_Extensions=Perm}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Perm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Perm}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Perm}"
 );
-assert(
-  /^\p{scx=Old_Permic}+$/u.test(matchSymbols),
-  "`\\p{scx=Old_Permic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Old_Permic}+$/u,
+  matchSymbols,
+  "\\p{scx=Old_Permic}"
 );
-assert(
-  /^\p{scx=Perm}+$/u.test(matchSymbols),
-  "`\\p{scx=Perm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Perm}+$/u,
+  matchSymbols,
+  "\\p{scx=Perm}"
 );
 
 const nonMatchSymbols = buildString({
@@ -48,19 +52,23 @@ const nonMatchSymbols = buildString({
     [0x01037B, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Old_Permic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Old_Permic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Old_Permic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Old_Permic}"
 );
-assert(
-  /^\P{Script_Extensions=Perm}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Perm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Perm}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Perm}"
 );
-assert(
-  /^\P{scx=Old_Permic}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Old_Permic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Old_Permic}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Old_Permic}"
 );
-assert(
-  /^\P{scx=Perm}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Perm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Perm}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Perm}"
 );

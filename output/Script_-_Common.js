@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -184,21 +184,25 @@ const matchSymbols = buildString({
     [0x0E0020, 0x0E007F]
   ]
 });
-assert(
-  /^\p{Script=Common}+$/u.test(matchSymbols),
-  "`\\p{Script=Common}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Common}+$/u,
+  matchSymbols,
+  "\\p{Script=Common}"
 );
-assert(
-  /^\p{Script=Zyyy}+$/u.test(matchSymbols),
-  "`\\p{Script=Zyyy}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Zyyy}+$/u,
+  matchSymbols,
+  "\\p{Script=Zyyy}"
 );
-assert(
-  /^\p{sc=Common}+$/u.test(matchSymbols),
-  "`\\p{sc=Common}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Common}+$/u,
+  matchSymbols,
+  "\\p{sc=Common}"
 );
-assert(
-  /^\p{sc=Zyyy}+$/u.test(matchSymbols),
-  "`\\p{sc=Zyyy}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Zyyy}+$/u,
+  matchSymbols,
+  "\\p{sc=Zyyy}"
 );
 
 const nonMatchSymbols = buildString({
@@ -374,19 +378,23 @@ const nonMatchSymbols = buildString({
     [0x0E0080, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Common}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Common}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Common}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Common}"
 );
-assert(
-  /^\P{Script=Zyyy}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Zyyy}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Zyyy}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Zyyy}"
 );
-assert(
-  /^\P{sc=Common}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Common}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Common}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Common}"
 );
-assert(
-  /^\P{sc=Zyyy}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Zyyy}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Zyyy}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Zyyy}"
 );

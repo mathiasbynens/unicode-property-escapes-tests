@@ -1,7 +1,9 @@
 const assert = require('assert');
 
-// `build-string.js` doesn’t export anything, so let’s `eval` it.
-eval(require('fs').readFileSync('./harness/buildString.js', 'utf8'));
+require('string.prototype.padstart').shim();
+
+// The script doesn’t export anything, so let’s `eval` it.
+eval(require('fs').readFileSync('./harness/regExpUtils.js', 'utf8'));
 
 const symbols = buildString({
 	loneCodePoints: [],
@@ -13,3 +15,10 @@ const symbols = buildString({
 });
 
 assert.equal([...symbols].length, 1113984);
+
+assert.throws(
+	() => {
+		testPropertyEscapes(/^b+$/, 'abc', '.');
+	},
+	/U\+000061/
+);

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x000780, 0x0007B1]
   ]
 });
-assert(
-  /^\p{Script=Thaana}+$/u.test(matchSymbols),
-  "`\\p{Script=Thaana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Thaana}+$/u,
+  matchSymbols,
+  "\\p{Script=Thaana}"
 );
-assert(
-  /^\p{Script=Thaa}+$/u.test(matchSymbols),
-  "`\\p{Script=Thaa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Thaa}+$/u,
+  matchSymbols,
+  "\\p{Script=Thaa}"
 );
-assert(
-  /^\p{sc=Thaana}+$/u.test(matchSymbols),
-  "`\\p{sc=Thaana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Thaana}+$/u,
+  matchSymbols,
+  "\\p{sc=Thaana}"
 );
-assert(
-  /^\p{sc=Thaa}+$/u.test(matchSymbols),
-  "`\\p{sc=Thaa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Thaa}+$/u,
+  matchSymbols,
+  "\\p{sc=Thaa}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Thaana}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Thaana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Thaana}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Thaana}"
 );
-assert(
-  /^\P{Script=Thaa}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Thaa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Thaa}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Thaa}"
 );
-assert(
-  /^\P{sc=Thaana}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Thaana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Thaana}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Thaana}"
 );
-assert(
-  /^\P{sc=Thaa}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Thaa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Thaa}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Thaa}"
 );

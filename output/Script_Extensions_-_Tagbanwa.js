@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -22,21 +22,25 @@ const matchSymbols = buildString({
     [0x001772, 0x001773]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Tagbanwa}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Tagbanwa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Tagbanwa}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Tagbanwa}"
 );
-assert(
-  /^\p{Script_Extensions=Tagb}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Tagb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Tagb}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Tagb}"
 );
-assert(
-  /^\p{scx=Tagbanwa}+$/u.test(matchSymbols),
-  "`\\p{scx=Tagbanwa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Tagbanwa}+$/u,
+  matchSymbols,
+  "\\p{scx=Tagbanwa}"
 );
-assert(
-  /^\p{scx=Tagb}+$/u.test(matchSymbols),
-  "`\\p{scx=Tagb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Tagb}+$/u,
+  matchSymbols,
+  "\\p{scx=Tagb}"
 );
 
 const nonMatchSymbols = buildString({
@@ -52,19 +56,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Tagbanwa}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Tagbanwa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Tagbanwa}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Tagbanwa}"
 );
-assert(
-  /^\P{Script_Extensions=Tagb}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Tagb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Tagb}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Tagb}"
 );
-assert(
-  /^\P{scx=Tagbanwa}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Tagbanwa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Tagbanwa}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Tagbanwa}"
 );
-assert(
-  /^\P{scx=Tagb}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Tagb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Tagb}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Tagb}"
 );

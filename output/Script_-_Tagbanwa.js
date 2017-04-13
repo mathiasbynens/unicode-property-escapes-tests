@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x001772, 0x001773]
   ]
 });
-assert(
-  /^\p{Script=Tagbanwa}+$/u.test(matchSymbols),
-  "`\\p{Script=Tagbanwa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Tagbanwa}+$/u,
+  matchSymbols,
+  "\\p{Script=Tagbanwa}"
 );
-assert(
-  /^\p{Script=Tagb}+$/u.test(matchSymbols),
-  "`\\p{Script=Tagb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Tagb}+$/u,
+  matchSymbols,
+  "\\p{Script=Tagb}"
 );
-assert(
-  /^\p{sc=Tagbanwa}+$/u.test(matchSymbols),
-  "`\\p{sc=Tagbanwa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Tagbanwa}+$/u,
+  matchSymbols,
+  "\\p{sc=Tagbanwa}"
 );
-assert(
-  /^\p{sc=Tagb}+$/u.test(matchSymbols),
-  "`\\p{sc=Tagb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Tagb}+$/u,
+  matchSymbols,
+  "\\p{sc=Tagb}"
 );
 
 const nonMatchSymbols = buildString({
@@ -50,19 +54,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Tagbanwa}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Tagbanwa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Tagbanwa}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Tagbanwa}"
 );
-assert(
-  /^\P{Script=Tagb}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Tagb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Tagb}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Tagb}"
 );
-assert(
-  /^\P{sc=Tagbanwa}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Tagbanwa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Tagbanwa}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Tagbanwa}"
 );
-assert(
-  /^\P{sc=Tagb}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Tagb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Tagb}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Tagb}"
 );

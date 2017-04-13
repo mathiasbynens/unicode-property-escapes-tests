@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x010B78, 0x010B7F]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Inscriptional_Pahlavi}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Inscriptional_Pahlavi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Inscriptional_Pahlavi}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Inscriptional_Pahlavi}"
 );
-assert(
-  /^\p{Script_Extensions=Phli}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Phli}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Phli}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Phli}"
 );
-assert(
-  /^\p{scx=Inscriptional_Pahlavi}+$/u.test(matchSymbols),
-  "`\\p{scx=Inscriptional_Pahlavi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Inscriptional_Pahlavi}+$/u,
+  matchSymbols,
+  "\\p{scx=Inscriptional_Pahlavi}"
 );
-assert(
-  /^\p{scx=Phli}+$/u.test(matchSymbols),
-  "`\\p{scx=Phli}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Phli}+$/u,
+  matchSymbols,
+  "\\p{scx=Phli}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x010B80, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Inscriptional_Pahlavi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Inscriptional_Pahlavi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Inscriptional_Pahlavi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Inscriptional_Pahlavi}"
 );
-assert(
-  /^\P{Script_Extensions=Phli}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Phli}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Phli}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Phli}"
 );
-assert(
-  /^\P{scx=Inscriptional_Pahlavi}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Inscriptional_Pahlavi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Inscriptional_Pahlavi}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Inscriptional_Pahlavi}"
 );
-assert(
-  /^\P{scx=Phli}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Phli}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Phli}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Phli}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -26,29 +26,35 @@ const matchSymbols = buildString({
     [0x002000, 0x00200A]
   ]
 });
-assert(
-  /^\p{General_Category=Space_Separator}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Space_Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Space_Separator}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Space_Separator}"
 );
-assert(
-  /^\p{General_Category=Zs}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Zs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Zs}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Zs}"
 );
-assert(
-  /^\p{gc=Space_Separator}+$/u.test(matchSymbols),
-  "`\\p{gc=Space_Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Space_Separator}+$/u,
+  matchSymbols,
+  "\\p{gc=Space_Separator}"
 );
-assert(
-  /^\p{gc=Zs}+$/u.test(matchSymbols),
-  "`\\p{gc=Zs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Zs}+$/u,
+  matchSymbols,
+  "\\p{gc=Zs}"
 );
-assert(
-  /^\p{Space_Separator}+$/u.test(matchSymbols),
-  "`\\p{Space_Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Space_Separator}+$/u,
+  matchSymbols,
+  "\\p{Space_Separator}"
 );
-assert(
-  /^\p{Zs}+$/u.test(matchSymbols),
-  "`\\p{Zs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Zs}+$/u,
+  matchSymbols,
+  "\\p{Zs}"
 );
 
 const nonMatchSymbols = buildString({
@@ -66,27 +72,33 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Space_Separator}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Space_Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Space_Separator}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Space_Separator}"
 );
-assert(
-  /^\P{General_Category=Zs}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Zs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Zs}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Zs}"
 );
-assert(
-  /^\P{gc=Space_Separator}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Space_Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Space_Separator}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Space_Separator}"
 );
-assert(
-  /^\P{gc=Zs}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Zs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Zs}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Zs}"
 );
-assert(
-  /^\P{Space_Separator}+$/u.test(nonMatchSymbols),
-  "`\\P{Space_Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Space_Separator}+$/u,
+  nonMatchSymbols,
+  "\\P{Space_Separator}"
 );
-assert(
-  /^\P{Zs}+$/u.test(nonMatchSymbols),
-  "`\\P{Zs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Zs}+$/u,
+  nonMatchSymbols,
+  "\\P{Zs}"
 );

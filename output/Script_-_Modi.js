@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x011650, 0x011659]
   ]
 });
-assert(
-  /^\p{Script=Modi}+$/u.test(matchSymbols),
-  "`\\p{Script=Modi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Modi}+$/u,
+  matchSymbols,
+  "\\p{Script=Modi}"
 );
-assert(
-  /^\p{Script=Modi}+$/u.test(matchSymbols),
-  "`\\p{Script=Modi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Modi}+$/u,
+  matchSymbols,
+  "\\p{Script=Modi}"
 );
-assert(
-  /^\p{sc=Modi}+$/u.test(matchSymbols),
-  "`\\p{sc=Modi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Modi}+$/u,
+  matchSymbols,
+  "\\p{sc=Modi}"
 );
-assert(
-  /^\p{sc=Modi}+$/u.test(matchSymbols),
-  "`\\p{sc=Modi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Modi}+$/u,
+  matchSymbols,
+  "\\p{sc=Modi}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x01165A, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Modi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Modi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Modi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Modi}"
 );
-assert(
-  /^\P{Script=Modi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Modi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Modi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Modi}"
 );
-assert(
-  /^\P{sc=Modi}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Modi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Modi}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Modi}"
 );
-assert(
-  /^\P{sc=Modi}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Modi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Modi}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Modi}"
 );

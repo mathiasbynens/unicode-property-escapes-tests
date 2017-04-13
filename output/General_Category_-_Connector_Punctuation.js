@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -25,29 +25,35 @@ const matchSymbols = buildString({
     [0x00FE4D, 0x00FE4F]
   ]
 });
-assert(
-  /^\p{General_Category=Connector_Punctuation}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Connector_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Connector_Punctuation}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Connector_Punctuation}"
 );
-assert(
-  /^\p{General_Category=Pc}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Pc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Pc}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Pc}"
 );
-assert(
-  /^\p{gc=Connector_Punctuation}+$/u.test(matchSymbols),
-  "`\\p{gc=Connector_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Connector_Punctuation}+$/u,
+  matchSymbols,
+  "\\p{gc=Connector_Punctuation}"
 );
-assert(
-  /^\p{gc=Pc}+$/u.test(matchSymbols),
-  "`\\p{gc=Pc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Pc}+$/u,
+  matchSymbols,
+  "\\p{gc=Pc}"
 );
-assert(
-  /^\p{Connector_Punctuation}+$/u.test(matchSymbols),
-  "`\\p{Connector_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Connector_Punctuation}+$/u,
+  matchSymbols,
+  "\\p{Connector_Punctuation}"
 );
-assert(
-  /^\p{Pc}+$/u.test(matchSymbols),
-  "`\\p{Pc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Pc}+$/u,
+  matchSymbols,
+  "\\p{Pc}"
 );
 
 const nonMatchSymbols = buildString({
@@ -64,27 +70,33 @@ const nonMatchSymbols = buildString({
     [0x00FF40, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Connector_Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Connector_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Connector_Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Connector_Punctuation}"
 );
-assert(
-  /^\P{General_Category=Pc}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Pc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Pc}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Pc}"
 );
-assert(
-  /^\P{gc=Connector_Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Connector_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Connector_Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Connector_Punctuation}"
 );
-assert(
-  /^\P{gc=Pc}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Pc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Pc}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Pc}"
 );
-assert(
-  /^\P{Connector_Punctuation}+$/u.test(nonMatchSymbols),
-  "`\\P{Connector_Punctuation}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Connector_Punctuation}+$/u,
+  nonMatchSymbols,
+  "\\P{Connector_Punctuation}"
 );
-assert(
-  /^\P{Pc}+$/u.test(nonMatchSymbols),
-  "`\\P{Pc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Pc}+$/u,
+  nonMatchSymbols,
+  "\\P{Pc}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -75,21 +75,25 @@ const matchSymbols = buildString({
     [0x01EEF0, 0x01EEF1]
   ]
 });
-assert(
-  /^\p{Script=Arabic}+$/u.test(matchSymbols),
-  "`\\p{Script=Arabic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Arabic}+$/u,
+  matchSymbols,
+  "\\p{Script=Arabic}"
 );
-assert(
-  /^\p{Script=Arab}+$/u.test(matchSymbols),
-  "`\\p{Script=Arab}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Arab}+$/u,
+  matchSymbols,
+  "\\p{Script=Arab}"
 );
-assert(
-  /^\p{sc=Arabic}+$/u.test(matchSymbols),
-  "`\\p{sc=Arabic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Arabic}+$/u,
+  matchSymbols,
+  "\\p{sc=Arabic}"
 );
-assert(
-  /^\p{sc=Arab}+$/u.test(matchSymbols),
-  "`\\p{sc=Arab}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Arab}+$/u,
+  matchSymbols,
+  "\\p{sc=Arab}"
 );
 
 const nonMatchSymbols = buildString({
@@ -157,19 +161,23 @@ const nonMatchSymbols = buildString({
     [0x01EEF2, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Arabic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Arabic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Arabic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Arabic}"
 );
-assert(
-  /^\P{Script=Arab}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Arab}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Arab}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Arab}"
 );
-assert(
-  /^\P{sc=Arabic}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Arabic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Arabic}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Arabic}"
 );
-assert(
-  /^\P{sc=Arab}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Arab}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Arab}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Arab}"
 );

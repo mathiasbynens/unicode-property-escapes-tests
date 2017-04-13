@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -24,13 +24,15 @@ const matchSymbols = buildString({
     [0x000600, 0x000605]
   ]
 });
-assert(
-  /^\p{Prepended_Concatenation_Mark}+$/u.test(matchSymbols),
-  "`\\p{Prepended_Concatenation_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Prepended_Concatenation_Mark}+$/u,
+  matchSymbols,
+  "\\p{Prepended_Concatenation_Mark}"
 );
-assert(
-  /^\p{PCM}+$/u.test(matchSymbols),
-  "`\\p{PCM}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{PCM}+$/u,
+  matchSymbols,
+  "\\p{PCM}"
 );
 
 const nonMatchSymbols = buildString({
@@ -46,11 +48,13 @@ const nonMatchSymbols = buildString({
     [0x0110BE, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Prepended_Concatenation_Mark}+$/u.test(nonMatchSymbols),
-  "`\\P{Prepended_Concatenation_Mark}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Prepended_Concatenation_Mark}+$/u,
+  nonMatchSymbols,
+  "\\P{Prepended_Concatenation_Mark}"
 );
-assert(
-  /^\P{PCM}+$/u.test(nonMatchSymbols),
-  "`\\P{PCM}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{PCM}+$/u,
+  nonMatchSymbols,
+  "\\P{PCM}"
 );

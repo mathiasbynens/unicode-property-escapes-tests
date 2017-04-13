@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x016A6E, 0x016A6F]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Mro}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Mro}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Mro}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Mro}"
 );
-assert(
-  /^\p{Script_Extensions=Mroo}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Mroo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Mroo}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Mroo}"
 );
-assert(
-  /^\p{scx=Mro}+$/u.test(matchSymbols),
-  "`\\p{scx=Mro}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Mro}+$/u,
+  matchSymbols,
+  "\\p{scx=Mro}"
 );
-assert(
-  /^\p{scx=Mroo}+$/u.test(matchSymbols),
-  "`\\p{scx=Mroo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Mroo}+$/u,
+  matchSymbols,
+  "\\p{scx=Mroo}"
 );
 
 const nonMatchSymbols = buildString({
@@ -50,19 +54,23 @@ const nonMatchSymbols = buildString({
     [0x016A70, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Mro}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Mro}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Mro}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Mro}"
 );
-assert(
-  /^\P{Script_Extensions=Mroo}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Mroo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Mroo}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Mroo}"
 );
-assert(
-  /^\P{scx=Mro}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Mro}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Mro}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Mro}"
 );
-assert(
-  /^\P{scx=Mroo}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Mroo}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Mroo}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Mroo}"
 );

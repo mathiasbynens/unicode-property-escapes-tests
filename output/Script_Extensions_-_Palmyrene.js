@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x010860, 0x01087F]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Palmyrene}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Palmyrene}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Palmyrene}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Palmyrene}"
 );
-assert(
-  /^\p{Script_Extensions=Palm}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Palm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Palm}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Palm}"
 );
-assert(
-  /^\p{scx=Palmyrene}+$/u.test(matchSymbols),
-  "`\\p{scx=Palmyrene}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Palmyrene}+$/u,
+  matchSymbols,
+  "\\p{scx=Palmyrene}"
 );
-assert(
-  /^\p{scx=Palm}+$/u.test(matchSymbols),
-  "`\\p{scx=Palm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Palm}+$/u,
+  matchSymbols,
+  "\\p{scx=Palm}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x010880, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Palmyrene}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Palmyrene}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Palmyrene}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Palmyrene}"
 );
-assert(
-  /^\P{Script_Extensions=Palm}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Palm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Palm}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Palm}"
 );
-assert(
-  /^\P{scx=Palmyrene}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Palmyrene}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Palmyrene}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Palmyrene}"
 );
-assert(
-  /^\P{scx=Palm}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Palm}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Palm}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Palm}"
 );

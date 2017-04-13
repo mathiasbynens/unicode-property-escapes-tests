@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -26,21 +26,25 @@ const matchSymbols = buildString({
     [0x0111D0, 0x0111DF]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Sharada}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Sharada}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Sharada}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Sharada}"
 );
-assert(
-  /^\p{Script_Extensions=Shrd}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Shrd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Shrd}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Shrd}"
 );
-assert(
-  /^\p{scx=Sharada}+$/u.test(matchSymbols),
-  "`\\p{scx=Sharada}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Sharada}+$/u,
+  matchSymbols,
+  "\\p{scx=Sharada}"
 );
-assert(
-  /^\p{scx=Shrd}+$/u.test(matchSymbols),
-  "`\\p{scx=Shrd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Shrd}+$/u,
+  matchSymbols,
+  "\\p{scx=Shrd}"
 );
 
 const nonMatchSymbols = buildString({
@@ -59,19 +63,23 @@ const nonMatchSymbols = buildString({
     [0x0111E0, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Sharada}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Sharada}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Sharada}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Sharada}"
 );
-assert(
-  /^\P{Script_Extensions=Shrd}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Shrd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Shrd}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Shrd}"
 );
-assert(
-  /^\P{scx=Sharada}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Sharada}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Sharada}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Sharada}"
 );
-assert(
-  /^\P{scx=Shrd}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Shrd}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Shrd}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Shrd}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x010530, 0x010563]
   ]
 });
-assert(
-  /^\p{Script=Caucasian_Albanian}+$/u.test(matchSymbols),
-  "`\\p{Script=Caucasian_Albanian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Caucasian_Albanian}+$/u,
+  matchSymbols,
+  "\\p{Script=Caucasian_Albanian}"
 );
-assert(
-  /^\p{Script=Aghb}+$/u.test(matchSymbols),
-  "`\\p{Script=Aghb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Aghb}+$/u,
+  matchSymbols,
+  "\\p{Script=Aghb}"
 );
-assert(
-  /^\p{sc=Caucasian_Albanian}+$/u.test(matchSymbols),
-  "`\\p{sc=Caucasian_Albanian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Caucasian_Albanian}+$/u,
+  matchSymbols,
+  "\\p{sc=Caucasian_Albanian}"
 );
-assert(
-  /^\p{sc=Aghb}+$/u.test(matchSymbols),
-  "`\\p{sc=Aghb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Aghb}+$/u,
+  matchSymbols,
+  "\\p{sc=Aghb}"
 );
 
 const nonMatchSymbols = buildString({
@@ -48,19 +52,23 @@ const nonMatchSymbols = buildString({
     [0x010570, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Caucasian_Albanian}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Caucasian_Albanian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Caucasian_Albanian}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Caucasian_Albanian}"
 );
-assert(
-  /^\P{Script=Aghb}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Aghb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Aghb}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Aghb}"
 );
-assert(
-  /^\P{sc=Caucasian_Albanian}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Caucasian_Albanian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Caucasian_Albanian}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Caucasian_Albanian}"
 );
-assert(
-  /^\P{sc=Aghb}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Aghb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Aghb}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Aghb}"
 );

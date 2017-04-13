@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -23,21 +23,25 @@ const matchSymbols = buildString({
     [0x001AA0, 0x001AAD]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Tai_Tham}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Tai_Tham}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Tai_Tham}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Tai_Tham}"
 );
-assert(
-  /^\p{Script_Extensions=Lana}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Lana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Lana}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Lana}"
 );
-assert(
-  /^\p{scx=Tai_Tham}+$/u.test(matchSymbols),
-  "`\\p{scx=Tai_Tham}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Tai_Tham}+$/u,
+  matchSymbols,
+  "\\p{scx=Tai_Tham}"
 );
-assert(
-  /^\p{scx=Lana}+$/u.test(matchSymbols),
-  "`\\p{scx=Lana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Lana}+$/u,
+  matchSymbols,
+  "\\p{scx=Lana}"
 );
 
 const nonMatchSymbols = buildString({
@@ -54,19 +58,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Tai_Tham}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Tai_Tham}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Tai_Tham}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Tai_Tham}"
 );
-assert(
-  /^\P{Script_Extensions=Lana}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Lana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Lana}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Lana}"
 );
-assert(
-  /^\P{scx=Tai_Tham}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Tai_Tham}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Tai_Tham}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Tai_Tham}"
 );
-assert(
-  /^\P{scx=Lana}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Lana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Lana}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Lana}"
 );

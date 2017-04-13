@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x011AC0, 0x011AF8]
   ]
 });
-assert(
-  /^\p{Script=Pau_Cin_Hau}+$/u.test(matchSymbols),
-  "`\\p{Script=Pau_Cin_Hau}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Pau_Cin_Hau}+$/u,
+  matchSymbols,
+  "\\p{Script=Pau_Cin_Hau}"
 );
-assert(
-  /^\p{Script=Pauc}+$/u.test(matchSymbols),
-  "`\\p{Script=Pauc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Pauc}+$/u,
+  matchSymbols,
+  "\\p{Script=Pauc}"
 );
-assert(
-  /^\p{sc=Pau_Cin_Hau}+$/u.test(matchSymbols),
-  "`\\p{sc=Pau_Cin_Hau}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Pau_Cin_Hau}+$/u,
+  matchSymbols,
+  "\\p{sc=Pau_Cin_Hau}"
 );
-assert(
-  /^\p{sc=Pauc}+$/u.test(matchSymbols),
-  "`\\p{sc=Pauc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Pauc}+$/u,
+  matchSymbols,
+  "\\p{sc=Pauc}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x011AF9, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Pau_Cin_Hau}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Pau_Cin_Hau}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Pau_Cin_Hau}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Pau_Cin_Hau}"
 );
-assert(
-  /^\P{Script=Pauc}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Pauc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Pauc}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Pauc}"
 );
-assert(
-  /^\P{sc=Pau_Cin_Hau}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Pau_Cin_Hau}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Pau_Cin_Hau}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Pau_Cin_Hau}"
 );
-assert(
-  /^\P{sc=Pauc}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Pauc}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Pauc}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Pauc}"
 );

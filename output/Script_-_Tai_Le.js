@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x001970, 0x001974]
   ]
 });
-assert(
-  /^\p{Script=Tai_Le}+$/u.test(matchSymbols),
-  "`\\p{Script=Tai_Le}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Tai_Le}+$/u,
+  matchSymbols,
+  "\\p{Script=Tai_Le}"
 );
-assert(
-  /^\p{Script=Tale}+$/u.test(matchSymbols),
-  "`\\p{Script=Tale}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Tale}+$/u,
+  matchSymbols,
+  "\\p{Script=Tale}"
 );
-assert(
-  /^\p{sc=Tai_Le}+$/u.test(matchSymbols),
-  "`\\p{sc=Tai_Le}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Tai_Le}+$/u,
+  matchSymbols,
+  "\\p{sc=Tai_Le}"
 );
-assert(
-  /^\p{sc=Tale}+$/u.test(matchSymbols),
-  "`\\p{sc=Tale}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Tale}+$/u,
+  matchSymbols,
+  "\\p{sc=Tale}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Tai_Le}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Tai_Le}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Tai_Le}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Tai_Le}"
 );
-assert(
-  /^\P{Script=Tale}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Tale}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Tale}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Tale}"
 );
-assert(
-  /^\P{sc=Tai_Le}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Tai_Le}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Tai_Le}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Tai_Le}"
 );
-assert(
-  /^\P{sc=Tale}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Tale}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Tale}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Tale}"
 );

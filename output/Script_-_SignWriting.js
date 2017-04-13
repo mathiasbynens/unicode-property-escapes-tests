@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x01DAA1, 0x01DAAF]
   ]
 });
-assert(
-  /^\p{Script=SignWriting}+$/u.test(matchSymbols),
-  "`\\p{Script=SignWriting}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=SignWriting}+$/u,
+  matchSymbols,
+  "\\p{Script=SignWriting}"
 );
-assert(
-  /^\p{Script=Sgnw}+$/u.test(matchSymbols),
-  "`\\p{Script=Sgnw}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Sgnw}+$/u,
+  matchSymbols,
+  "\\p{Script=Sgnw}"
 );
-assert(
-  /^\p{sc=SignWriting}+$/u.test(matchSymbols),
-  "`\\p{sc=SignWriting}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=SignWriting}+$/u,
+  matchSymbols,
+  "\\p{sc=SignWriting}"
 );
-assert(
-  /^\p{sc=Sgnw}+$/u.test(matchSymbols),
-  "`\\p{sc=Sgnw}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Sgnw}+$/u,
+  matchSymbols,
+  "\\p{sc=Sgnw}"
 );
 
 const nonMatchSymbols = buildString({
@@ -50,19 +54,23 @@ const nonMatchSymbols = buildString({
     [0x01DAB0, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=SignWriting}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=SignWriting}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=SignWriting}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=SignWriting}"
 );
-assert(
-  /^\P{Script=Sgnw}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Sgnw}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Sgnw}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Sgnw}"
 );
-assert(
-  /^\P{sc=SignWriting}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=SignWriting}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=SignWriting}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=SignWriting}"
 );
-assert(
-  /^\P{sc=Sgnw}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Sgnw}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Sgnw}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Sgnw}"
 );

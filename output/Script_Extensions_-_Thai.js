@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x000E40, 0x000E5B]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Thai}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Thai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Thai}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Thai}"
 );
-assert(
-  /^\p{Script_Extensions=Thai}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Thai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Thai}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Thai}"
 );
-assert(
-  /^\p{scx=Thai}+$/u.test(matchSymbols),
-  "`\\p{scx=Thai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Thai}+$/u,
+  matchSymbols,
+  "\\p{scx=Thai}"
 );
-assert(
-  /^\p{scx=Thai}+$/u.test(matchSymbols),
-  "`\\p{scx=Thai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Thai}+$/u,
+  matchSymbols,
+  "\\p{scx=Thai}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Thai}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Thai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Thai}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Thai}"
 );
-assert(
-  /^\P{Script_Extensions=Thai}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Thai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Thai}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Thai}"
 );
-assert(
-  /^\P{scx=Thai}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Thai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Thai}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Thai}"
 );
-assert(
-  /^\P{scx=Thai}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Thai}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Thai}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Thai}"
 );

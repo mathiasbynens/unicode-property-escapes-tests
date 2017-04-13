@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -627,13 +627,15 @@ const matchSymbols = buildString({
     [0x01E922, 0x01E943]
   ]
 });
-assert(
-  /^\p{Changes_When_Titlecased}+$/u.test(matchSymbols),
-  "`\\p{Changes_When_Titlecased}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Changes_When_Titlecased}+$/u,
+  matchSymbols,
+  "\\p{Changes_When_Titlecased}"
 );
-assert(
-  /^\p{CWT}+$/u.test(matchSymbols),
-  "`\\p{CWT}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{CWT}+$/u,
+  matchSymbols,
+  "\\p{CWT}"
 );
 
 const nonMatchSymbols = buildString({
@@ -1253,11 +1255,13 @@ const nonMatchSymbols = buildString({
     [0x01E944, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Changes_When_Titlecased}+$/u.test(nonMatchSymbols),
-  "`\\P{Changes_When_Titlecased}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Changes_When_Titlecased}+$/u,
+  nonMatchSymbols,
+  "\\P{Changes_When_Titlecased}"
 );
-assert(
-  /^\P{CWT}+$/u.test(nonMatchSymbols),
-  "`\\P{CWT}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{CWT}+$/u,
+  nonMatchSymbols,
+  "\\P{CWT}"
 );

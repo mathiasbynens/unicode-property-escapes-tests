@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x001735, 0x001736]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Tagalog}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Tagalog}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Tagalog}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Tagalog}"
 );
-assert(
-  /^\p{Script_Extensions=Tglg}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Tglg}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Tglg}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Tglg}"
 );
-assert(
-  /^\p{scx=Tagalog}+$/u.test(matchSymbols),
-  "`\\p{scx=Tagalog}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Tagalog}+$/u,
+  matchSymbols,
+  "\\p{scx=Tagalog}"
 );
-assert(
-  /^\p{scx=Tglg}+$/u.test(matchSymbols),
-  "`\\p{scx=Tglg}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Tglg}+$/u,
+  matchSymbols,
+  "\\p{scx=Tglg}"
 );
 
 const nonMatchSymbols = buildString({
@@ -50,19 +54,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Tagalog}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Tagalog}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Tagalog}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Tagalog}"
 );
-assert(
-  /^\P{Script_Extensions=Tglg}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Tglg}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Tglg}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Tglg}"
 );
-assert(
-  /^\P{scx=Tagalog}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Tagalog}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Tagalog}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Tagalog}"
 );
-assert(
-  /^\P{scx=Tglg}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Tglg}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Tglg}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Tglg}"
 );

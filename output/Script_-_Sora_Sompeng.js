@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x0110F0, 0x0110F9]
   ]
 });
-assert(
-  /^\p{Script=Sora_Sompeng}+$/u.test(matchSymbols),
-  "`\\p{Script=Sora_Sompeng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Sora_Sompeng}+$/u,
+  matchSymbols,
+  "\\p{Script=Sora_Sompeng}"
 );
-assert(
-  /^\p{Script=Sora}+$/u.test(matchSymbols),
-  "`\\p{Script=Sora}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Sora}+$/u,
+  matchSymbols,
+  "\\p{Script=Sora}"
 );
-assert(
-  /^\p{sc=Sora_Sompeng}+$/u.test(matchSymbols),
-  "`\\p{sc=Sora_Sompeng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Sora_Sompeng}+$/u,
+  matchSymbols,
+  "\\p{sc=Sora_Sompeng}"
 );
-assert(
-  /^\p{sc=Sora}+$/u.test(matchSymbols),
-  "`\\p{sc=Sora}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Sora}+$/u,
+  matchSymbols,
+  "\\p{sc=Sora}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x0110FA, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Sora_Sompeng}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Sora_Sompeng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Sora_Sompeng}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Sora_Sompeng}"
 );
-assert(
-  /^\P{Script=Sora}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Sora}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Sora}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Sora}"
 );
-assert(
-  /^\P{sc=Sora_Sompeng}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Sora_Sompeng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Sora_Sompeng}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Sora_Sompeng}"
 );
-assert(
-  /^\P{sc=Sora}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Sora}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Sora}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Sora}"
 );

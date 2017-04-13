@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x00A9DE, 0x00A9DF]
   ]
 });
-assert(
-  /^\p{Script=Javanese}+$/u.test(matchSymbols),
-  "`\\p{Script=Javanese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Javanese}+$/u,
+  matchSymbols,
+  "\\p{Script=Javanese}"
 );
-assert(
-  /^\p{Script=Java}+$/u.test(matchSymbols),
-  "`\\p{Script=Java}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Java}+$/u,
+  matchSymbols,
+  "\\p{Script=Java}"
 );
-assert(
-  /^\p{sc=Javanese}+$/u.test(matchSymbols),
-  "`\\p{sc=Javanese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Javanese}+$/u,
+  matchSymbols,
+  "\\p{sc=Javanese}"
 );
-assert(
-  /^\p{sc=Java}+$/u.test(matchSymbols),
-  "`\\p{sc=Java}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Java}+$/u,
+  matchSymbols,
+  "\\p{sc=Java}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Javanese}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Javanese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Javanese}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Javanese}"
 );
-assert(
-  /^\P{Script=Java}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Java}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Java}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Java}"
 );
-assert(
-  /^\P{sc=Javanese}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Javanese}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Javanese}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Javanese}"
 );
-assert(
-  /^\P{sc=Java}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Java}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Java}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Java}"
 );

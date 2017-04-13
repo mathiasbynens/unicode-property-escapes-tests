@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x010450, 0x01047F]
   ]
 });
-assert(
-  /^\p{Script=Shavian}+$/u.test(matchSymbols),
-  "`\\p{Script=Shavian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Shavian}+$/u,
+  matchSymbols,
+  "\\p{Script=Shavian}"
 );
-assert(
-  /^\p{Script=Shaw}+$/u.test(matchSymbols),
-  "`\\p{Script=Shaw}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Shaw}+$/u,
+  matchSymbols,
+  "\\p{Script=Shaw}"
 );
-assert(
-  /^\p{sc=Shavian}+$/u.test(matchSymbols),
-  "`\\p{sc=Shavian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Shavian}+$/u,
+  matchSymbols,
+  "\\p{sc=Shavian}"
 );
-assert(
-  /^\p{sc=Shaw}+$/u.test(matchSymbols),
-  "`\\p{sc=Shaw}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Shaw}+$/u,
+  matchSymbols,
+  "\\p{sc=Shaw}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x010480, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Shavian}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Shavian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Shavian}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Shavian}"
 );
-assert(
-  /^\P{Script=Shaw}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Shaw}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Shaw}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Shaw}"
 );
-assert(
-  /^\P{sc=Shavian}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Shavian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Shavian}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Shavian}"
 );
-assert(
-  /^\P{sc=Shaw}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Shaw}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Shaw}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Shaw}"
 );

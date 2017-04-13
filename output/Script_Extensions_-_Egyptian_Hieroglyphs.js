@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x013000, 0x01342E]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Egyptian_Hieroglyphs}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Egyptian_Hieroglyphs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Egyptian_Hieroglyphs}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Egyptian_Hieroglyphs}"
 );
-assert(
-  /^\p{Script_Extensions=Egyp}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Egyp}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Egyp}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Egyp}"
 );
-assert(
-  /^\p{scx=Egyptian_Hieroglyphs}+$/u.test(matchSymbols),
-  "`\\p{scx=Egyptian_Hieroglyphs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Egyptian_Hieroglyphs}+$/u,
+  matchSymbols,
+  "\\p{scx=Egyptian_Hieroglyphs}"
 );
-assert(
-  /^\p{scx=Egyp}+$/u.test(matchSymbols),
-  "`\\p{scx=Egyp}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Egyp}+$/u,
+  matchSymbols,
+  "\\p{scx=Egyp}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x01342F, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Egyptian_Hieroglyphs}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Egyptian_Hieroglyphs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Egyptian_Hieroglyphs}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Egyptian_Hieroglyphs}"
 );
-assert(
-  /^\P{Script_Extensions=Egyp}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Egyp}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Egyp}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Egyp}"
 );
-assert(
-  /^\P{scx=Egyptian_Hieroglyphs}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Egyptian_Hieroglyphs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Egyptian_Hieroglyphs}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Egyptian_Hieroglyphs}"
 );
-assert(
-  /^\P{scx=Egyp}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Egyp}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Egyp}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Egyp}"
 );

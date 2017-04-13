@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x010980, 0x01099F]
   ]
 });
-assert(
-  /^\p{Script=Meroitic_Hieroglyphs}+$/u.test(matchSymbols),
-  "`\\p{Script=Meroitic_Hieroglyphs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Meroitic_Hieroglyphs}+$/u,
+  matchSymbols,
+  "\\p{Script=Meroitic_Hieroglyphs}"
 );
-assert(
-  /^\p{Script=Mero}+$/u.test(matchSymbols),
-  "`\\p{Script=Mero}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Mero}+$/u,
+  matchSymbols,
+  "\\p{Script=Mero}"
 );
-assert(
-  /^\p{sc=Meroitic_Hieroglyphs}+$/u.test(matchSymbols),
-  "`\\p{sc=Meroitic_Hieroglyphs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Meroitic_Hieroglyphs}+$/u,
+  matchSymbols,
+  "\\p{sc=Meroitic_Hieroglyphs}"
 );
-assert(
-  /^\p{sc=Mero}+$/u.test(matchSymbols),
-  "`\\p{sc=Mero}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Mero}+$/u,
+  matchSymbols,
+  "\\p{sc=Mero}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x0109A0, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Meroitic_Hieroglyphs}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Meroitic_Hieroglyphs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Meroitic_Hieroglyphs}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Meroitic_Hieroglyphs}"
 );
-assert(
-  /^\P{Script=Mero}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Mero}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Mero}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Mero}"
 );
-assert(
-  /^\P{sc=Meroitic_Hieroglyphs}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Meroitic_Hieroglyphs}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Meroitic_Hieroglyphs}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Meroitic_Hieroglyphs}"
 );
-assert(
-  /^\P{sc=Mero}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Mero}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Mero}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Mero}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -24,21 +24,25 @@ const matchSymbols = buildString({
     [0x001944, 0x00194F]
   ]
 });
-assert(
-  /^\p{Script=Limbu}+$/u.test(matchSymbols),
-  "`\\p{Script=Limbu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Limbu}+$/u,
+  matchSymbols,
+  "\\p{Script=Limbu}"
 );
-assert(
-  /^\p{Script=Limb}+$/u.test(matchSymbols),
-  "`\\p{Script=Limb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Limb}+$/u,
+  matchSymbols,
+  "\\p{Script=Limb}"
 );
-assert(
-  /^\p{sc=Limbu}+$/u.test(matchSymbols),
-  "`\\p{sc=Limbu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Limbu}+$/u,
+  matchSymbols,
+  "\\p{sc=Limbu}"
 );
-assert(
-  /^\p{sc=Limb}+$/u.test(matchSymbols),
-  "`\\p{sc=Limb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Limb}+$/u,
+  matchSymbols,
+  "\\p{sc=Limb}"
 );
 
 const nonMatchSymbols = buildString({
@@ -55,19 +59,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Limbu}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Limbu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Limbu}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Limbu}"
 );
-assert(
-  /^\P{Script=Limb}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Limb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Limb}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Limb}"
 );
-assert(
-  /^\P{sc=Limbu}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Limbu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Limbu}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Limbu}"
 );
-assert(
-  /^\P{sc=Limb}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Limb}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Limb}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Limb}"
 );

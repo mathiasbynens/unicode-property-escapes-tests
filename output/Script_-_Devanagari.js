@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -22,21 +22,25 @@ const matchSymbols = buildString({
     [0x00A8E0, 0x00A8FD]
   ]
 });
-assert(
-  /^\p{Script=Devanagari}+$/u.test(matchSymbols),
-  "`\\p{Script=Devanagari}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Devanagari}+$/u,
+  matchSymbols,
+  "\\p{Script=Devanagari}"
 );
-assert(
-  /^\p{Script=Deva}+$/u.test(matchSymbols),
-  "`\\p{Script=Deva}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Deva}+$/u,
+  matchSymbols,
+  "\\p{Script=Deva}"
 );
-assert(
-  /^\p{sc=Devanagari}+$/u.test(matchSymbols),
-  "`\\p{sc=Devanagari}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Devanagari}+$/u,
+  matchSymbols,
+  "\\p{sc=Devanagari}"
 );
-assert(
-  /^\p{sc=Deva}+$/u.test(matchSymbols),
-  "`\\p{sc=Deva}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Deva}+$/u,
+  matchSymbols,
+  "\\p{sc=Deva}"
 );
 
 const nonMatchSymbols = buildString({
@@ -51,19 +55,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Devanagari}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Devanagari}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Devanagari}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Devanagari}"
 );
-assert(
-  /^\P{Script=Deva}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Deva}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Deva}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Deva}"
 );
-assert(
-  /^\P{sc=Devanagari}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Devanagari}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Devanagari}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Devanagari}"
 );
-assert(
-  /^\P{sc=Deva}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Deva}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Deva}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Deva}"
 );

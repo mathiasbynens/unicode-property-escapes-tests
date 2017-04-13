@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,29 +19,35 @@ const matchSymbols = buildString({
   ],
   ranges: []
 });
-assert(
-  /^\p{General_Category=Line_Separator}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Line_Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Line_Separator}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Line_Separator}"
 );
-assert(
-  /^\p{General_Category=Zl}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Zl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Zl}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Zl}"
 );
-assert(
-  /^\p{gc=Line_Separator}+$/u.test(matchSymbols),
-  "`\\p{gc=Line_Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Line_Separator}+$/u,
+  matchSymbols,
+  "\\p{gc=Line_Separator}"
 );
-assert(
-  /^\p{gc=Zl}+$/u.test(matchSymbols),
-  "`\\p{gc=Zl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Zl}+$/u,
+  matchSymbols,
+  "\\p{gc=Zl}"
 );
-assert(
-  /^\p{Line_Separator}+$/u.test(matchSymbols),
-  "`\\p{Line_Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Line_Separator}+$/u,
+  matchSymbols,
+  "\\p{Line_Separator}"
 );
-assert(
-  /^\p{Zl}+$/u.test(matchSymbols),
-  "`\\p{Zl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Zl}+$/u,
+  matchSymbols,
+  "\\p{Zl}"
 );
 
 const nonMatchSymbols = buildString({
@@ -53,27 +59,33 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Line_Separator}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Line_Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Line_Separator}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Line_Separator}"
 );
-assert(
-  /^\P{General_Category=Zl}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Zl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Zl}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Zl}"
 );
-assert(
-  /^\P{gc=Line_Separator}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Line_Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Line_Separator}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Line_Separator}"
 );
-assert(
-  /^\P{gc=Zl}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Zl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Zl}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Zl}"
 );
-assert(
-  /^\P{Line_Separator}+$/u.test(nonMatchSymbols),
-  "`\\P{Line_Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Line_Separator}+$/u,
+  nonMatchSymbols,
+  "\\P{Line_Separator}"
 );
-assert(
-  /^\P{Zl}+$/u.test(nonMatchSymbols),
-  "`\\P{Zl}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Zl}+$/u,
+  nonMatchSymbols,
+  "\\P{Zl}"
 );

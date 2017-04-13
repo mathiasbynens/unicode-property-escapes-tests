@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -651,13 +651,15 @@ const matchSymbols = buildString({
     [0x01F170, 0x01F189]
   ]
 });
-assert(
-  /^\p{Uppercase}+$/u.test(matchSymbols),
-  "`\\p{Uppercase}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Uppercase}+$/u,
+  matchSymbols,
+  "\\p{Uppercase}"
 );
-assert(
-  /^\p{Upper}+$/u.test(matchSymbols),
-  "`\\p{Upper}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Upper}+$/u,
+  matchSymbols,
+  "\\p{Upper}"
 );
 
 const nonMatchSymbols = buildString({
@@ -1301,11 +1303,13 @@ const nonMatchSymbols = buildString({
     [0x01F18A, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Uppercase}+$/u.test(nonMatchSymbols),
-  "`\\P{Uppercase}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Uppercase}+$/u,
+  nonMatchSymbols,
+  "\\P{Uppercase}"
 );
-assert(
-  /^\P{Upper}+$/u.test(nonMatchSymbols),
-  "`\\P{Upper}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Upper}+$/u,
+  nonMatchSymbols,
+  "\\P{Upper}"
 );

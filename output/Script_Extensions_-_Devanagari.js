@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -25,21 +25,25 @@ const matchSymbols = buildString({
     [0x00A8E0, 0x00A8FD]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Devanagari}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Devanagari}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Devanagari}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Devanagari}"
 );
-assert(
-  /^\p{Script_Extensions=Deva}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Deva}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Deva}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Deva}"
 );
-assert(
-  /^\p{scx=Devanagari}+$/u.test(matchSymbols),
-  "`\\p{scx=Devanagari}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Devanagari}+$/u,
+  matchSymbols,
+  "\\p{scx=Devanagari}"
 );
-assert(
-  /^\p{scx=Deva}+$/u.test(matchSymbols),
-  "`\\p{scx=Deva}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Deva}+$/u,
+  matchSymbols,
+  "\\p{scx=Deva}"
 );
 
 const nonMatchSymbols = buildString({
@@ -57,19 +61,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Devanagari}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Devanagari}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Devanagari}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Devanagari}"
 );
-assert(
-  /^\P{Script_Extensions=Deva}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Deva}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Deva}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Deva}"
 );
-assert(
-  /^\P{scx=Devanagari}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Devanagari}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Devanagari}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Devanagari}"
 );
-assert(
-  /^\P{scx=Deva}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Deva}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Deva}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Deva}"
 );

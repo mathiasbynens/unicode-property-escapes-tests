@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x010760, 0x010767]
   ]
 });
-assert(
-  /^\p{Script=Linear_A}+$/u.test(matchSymbols),
-  "`\\p{Script=Linear_A}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Linear_A}+$/u,
+  matchSymbols,
+  "\\p{Script=Linear_A}"
 );
-assert(
-  /^\p{Script=Lina}+$/u.test(matchSymbols),
-  "`\\p{Script=Lina}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Lina}+$/u,
+  matchSymbols,
+  "\\p{Script=Lina}"
 );
-assert(
-  /^\p{sc=Linear_A}+$/u.test(matchSymbols),
-  "`\\p{sc=Linear_A}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Linear_A}+$/u,
+  matchSymbols,
+  "\\p{sc=Linear_A}"
 );
-assert(
-  /^\p{sc=Lina}+$/u.test(matchSymbols),
-  "`\\p{sc=Lina}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Lina}+$/u,
+  matchSymbols,
+  "\\p{sc=Lina}"
 );
 
 const nonMatchSymbols = buildString({
@@ -49,19 +53,23 @@ const nonMatchSymbols = buildString({
     [0x010768, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Linear_A}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Linear_A}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Linear_A}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Linear_A}"
 );
-assert(
-  /^\P{Script=Lina}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Lina}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Lina}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Lina}"
 );
-assert(
-  /^\P{sc=Linear_A}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Linear_A}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Linear_A}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Linear_A}"
 );
-assert(
-  /^\P{sc=Lina}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Lina}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Lina}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Lina}"
 );

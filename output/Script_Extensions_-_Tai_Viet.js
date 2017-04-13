@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x00AADB, 0x00AADF]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Tai_Viet}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Tai_Viet}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Tai_Viet}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Tai_Viet}"
 );
-assert(
-  /^\p{Script_Extensions=Tavt}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Tavt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Tavt}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Tavt}"
 );
-assert(
-  /^\p{scx=Tai_Viet}+$/u.test(matchSymbols),
-  "`\\p{scx=Tai_Viet}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Tai_Viet}+$/u,
+  matchSymbols,
+  "\\p{scx=Tai_Viet}"
 );
-assert(
-  /^\p{scx=Tavt}+$/u.test(matchSymbols),
-  "`\\p{scx=Tavt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Tavt}+$/u,
+  matchSymbols,
+  "\\p{scx=Tavt}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Tai_Viet}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Tai_Viet}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Tai_Viet}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Tai_Viet}"
 );
-assert(
-  /^\P{Script_Extensions=Tavt}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Tavt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Tavt}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Tavt}"
 );
-assert(
-  /^\P{scx=Tai_Viet}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Tai_Viet}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Tai_Viet}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Tai_Viet}"
 );
-assert(
-  /^\P{scx=Tavt}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Tavt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Tavt}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Tavt}"
 );

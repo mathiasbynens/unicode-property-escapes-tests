@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x016AF0, 0x016AF5]
   ]
 });
-assert(
-  /^\p{Script=Bassa_Vah}+$/u.test(matchSymbols),
-  "`\\p{Script=Bassa_Vah}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Bassa_Vah}+$/u,
+  matchSymbols,
+  "\\p{Script=Bassa_Vah}"
 );
-assert(
-  /^\p{Script=Bass}+$/u.test(matchSymbols),
-  "`\\p{Script=Bass}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Bass}+$/u,
+  matchSymbols,
+  "\\p{Script=Bass}"
 );
-assert(
-  /^\p{sc=Bassa_Vah}+$/u.test(matchSymbols),
-  "`\\p{sc=Bassa_Vah}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Bassa_Vah}+$/u,
+  matchSymbols,
+  "\\p{sc=Bassa_Vah}"
 );
-assert(
-  /^\p{sc=Bass}+$/u.test(matchSymbols),
-  "`\\p{sc=Bass}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Bass}+$/u,
+  matchSymbols,
+  "\\p{sc=Bass}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x016AF6, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Bassa_Vah}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Bassa_Vah}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Bassa_Vah}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Bassa_Vah}"
 );
-assert(
-  /^\P{Script=Bass}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Bass}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Bass}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Bass}"
 );
-assert(
-  /^\P{sc=Bassa_Vah}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Bassa_Vah}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Bassa_Vah}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Bassa_Vah}"
 );
-assert(
-  /^\P{sc=Bass}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Bass}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Bass}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Bass}"
 );

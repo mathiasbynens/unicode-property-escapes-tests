@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -28,21 +28,25 @@ const matchSymbols = buildString({
     [0x010837, 0x010838]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Cypriot}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Cypriot}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Cypriot}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Cypriot}"
 );
-assert(
-  /^\p{Script_Extensions=Cprt}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Cprt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Cprt}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Cprt}"
 );
-assert(
-  /^\p{scx=Cypriot}+$/u.test(matchSymbols),
-  "`\\p{scx=Cypriot}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Cypriot}+$/u,
+  matchSymbols,
+  "\\p{scx=Cypriot}"
 );
-assert(
-  /^\p{scx=Cprt}+$/u.test(matchSymbols),
-  "`\\p{scx=Cprt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Cprt}+$/u,
+  matchSymbols,
+  "\\p{scx=Cprt}"
 );
 
 const nonMatchSymbols = buildString({
@@ -63,19 +67,23 @@ const nonMatchSymbols = buildString({
     [0x010840, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Cypriot}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Cypriot}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Cypriot}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Cypriot}"
 );
-assert(
-  /^\P{Script_Extensions=Cprt}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Cprt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Cprt}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Cprt}"
 );
-assert(
-  /^\P{scx=Cypriot}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Cypriot}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Cypriot}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Cypriot}"
 );
-assert(
-  /^\P{scx=Cprt}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Cprt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Cprt}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Cprt}"
 );

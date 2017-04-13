@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -34,21 +34,25 @@ const matchSymbols = buildString({
     [0x011370, 0x011374]
   ]
 });
-assert(
-  /^\p{Script=Grantha}+$/u.test(matchSymbols),
-  "`\\p{Script=Grantha}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Grantha}+$/u,
+  matchSymbols,
+  "\\p{Script=Grantha}"
 );
-assert(
-  /^\p{Script=Gran}+$/u.test(matchSymbols),
-  "`\\p{Script=Gran}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Gran}+$/u,
+  matchSymbols,
+  "\\p{Script=Gran}"
 );
-assert(
-  /^\p{sc=Grantha}+$/u.test(matchSymbols),
-  "`\\p{sc=Grantha}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Grantha}+$/u,
+  matchSymbols,
+  "\\p{sc=Grantha}"
 );
-assert(
-  /^\p{sc=Gran}+$/u.test(matchSymbols),
-  "`\\p{sc=Gran}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Gran}+$/u,
+  matchSymbols,
+  "\\p{sc=Gran}"
 );
 
 const nonMatchSymbols = buildString({
@@ -75,19 +79,23 @@ const nonMatchSymbols = buildString({
     [0x011375, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Grantha}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Grantha}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Grantha}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Grantha}"
 );
-assert(
-  /^\P{Script=Gran}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Gran}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Gran}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Gran}"
 );
-assert(
-  /^\P{sc=Grantha}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Grantha}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Grantha}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Grantha}"
 );
-assert(
-  /^\P{sc=Gran}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Gran}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Gran}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Gran}"
 );

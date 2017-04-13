@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -22,21 +22,25 @@ const matchSymbols = buildString({
     [0x0019DE, 0x0019DF]
   ]
 });
-assert(
-  /^\p{Script_Extensions=New_Tai_Lue}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=New_Tai_Lue}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=New_Tai_Lue}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=New_Tai_Lue}"
 );
-assert(
-  /^\p{Script_Extensions=Talu}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Talu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Talu}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Talu}"
 );
-assert(
-  /^\p{scx=New_Tai_Lue}+$/u.test(matchSymbols),
-  "`\\p{scx=New_Tai_Lue}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=New_Tai_Lue}+$/u,
+  matchSymbols,
+  "\\p{scx=New_Tai_Lue}"
 );
-assert(
-  /^\p{scx=Talu}+$/u.test(matchSymbols),
-  "`\\p{scx=Talu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Talu}+$/u,
+  matchSymbols,
+  "\\p{scx=Talu}"
 );
 
 const nonMatchSymbols = buildString({
@@ -51,19 +55,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=New_Tai_Lue}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=New_Tai_Lue}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=New_Tai_Lue}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=New_Tai_Lue}"
 );
-assert(
-  /^\P{Script_Extensions=Talu}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Talu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Talu}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Talu}"
 );
-assert(
-  /^\P{scx=New_Tai_Lue}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=New_Tai_Lue}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=New_Tai_Lue}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=New_Tai_Lue}"
 );
-assert(
-  /^\P{scx=Talu}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Talu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Talu}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Talu}"
 );

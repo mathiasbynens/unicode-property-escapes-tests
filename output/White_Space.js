@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -29,13 +29,15 @@ const matchSymbols = buildString({
     [0x002028, 0x002029]
   ]
 });
-assert(
-  /^\p{White_Space}+$/u.test(matchSymbols),
-  "`\\p{White_Space}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{White_Space}+$/u,
+  matchSymbols,
+  "\\p{White_Space}"
 );
-assert(
-  /^\p{space}+$/u.test(matchSymbols),
-  "`\\p{space}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{space}+$/u,
+  matchSymbols,
+  "\\p{space}"
 );
 
 const nonMatchSymbols = buildString({
@@ -56,11 +58,13 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{White_Space}+$/u.test(nonMatchSymbols),
-  "`\\P{White_Space}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{White_Space}+$/u,
+  nonMatchSymbols,
+  "\\P{White_Space}"
 );
-assert(
-  /^\P{space}+$/u.test(nonMatchSymbols),
-  "`\\P{space}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{space}+$/u,
+  nonMatchSymbols,
+  "\\P{space}"
 );

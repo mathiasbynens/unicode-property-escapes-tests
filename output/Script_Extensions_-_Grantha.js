@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -44,21 +44,25 @@ const matchSymbols = buildString({
     [0x011370, 0x011374]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Grantha}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Grantha}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Grantha}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Grantha}"
 );
-assert(
-  /^\p{Script_Extensions=Gran}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Gran}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Gran}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Gran}"
 );
-assert(
-  /^\p{scx=Grantha}+$/u.test(matchSymbols),
-  "`\\p{scx=Grantha}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Grantha}+$/u,
+  matchSymbols,
+  "\\p{scx=Grantha}"
 );
-assert(
-  /^\p{scx=Gran}+$/u.test(matchSymbols),
-  "`\\p{scx=Gran}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Gran}+$/u,
+  matchSymbols,
+  "\\p{scx=Gran}"
 );
 
 const nonMatchSymbols = buildString({
@@ -95,19 +99,23 @@ const nonMatchSymbols = buildString({
     [0x011375, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Grantha}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Grantha}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Grantha}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Grantha}"
 );
-assert(
-  /^\P{Script_Extensions=Gran}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Gran}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Gran}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Gran}"
 );
-assert(
-  /^\P{scx=Grantha}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Grantha}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Grantha}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Grantha}"
 );
-assert(
-  /^\P{scx=Gran}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Gran}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Gran}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Gran}"
 );

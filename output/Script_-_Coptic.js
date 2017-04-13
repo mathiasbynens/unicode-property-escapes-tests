@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,29 +21,35 @@ const matchSymbols = buildString({
     [0x002CF9, 0x002CFF]
   ]
 });
-assert(
-  /^\p{Script=Coptic}+$/u.test(matchSymbols),
-  "`\\p{Script=Coptic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Coptic}+$/u,
+  matchSymbols,
+  "\\p{Script=Coptic}"
 );
-assert(
-  /^\p{Script=Copt}+$/u.test(matchSymbols),
-  "`\\p{Script=Copt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Copt}+$/u,
+  matchSymbols,
+  "\\p{Script=Copt}"
 );
-assert(
-  /^\p{Script=Qaac}+$/u.test(matchSymbols),
-  "`\\p{Script=Qaac}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Qaac}+$/u,
+  matchSymbols,
+  "\\p{Script=Qaac}"
 );
-assert(
-  /^\p{sc=Coptic}+$/u.test(matchSymbols),
-  "`\\p{sc=Coptic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Coptic}+$/u,
+  matchSymbols,
+  "\\p{sc=Coptic}"
 );
-assert(
-  /^\p{sc=Copt}+$/u.test(matchSymbols),
-  "`\\p{sc=Copt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Copt}+$/u,
+  matchSymbols,
+  "\\p{sc=Copt}"
 );
-assert(
-  /^\p{sc=Qaac}+$/u.test(matchSymbols),
-  "`\\p{sc=Qaac}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Qaac}+$/u,
+  matchSymbols,
+  "\\p{sc=Qaac}"
 );
 
 const nonMatchSymbols = buildString({
@@ -57,27 +63,33 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Coptic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Coptic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Coptic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Coptic}"
 );
-assert(
-  /^\P{Script=Copt}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Copt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Copt}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Copt}"
 );
-assert(
-  /^\P{Script=Qaac}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Qaac}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Qaac}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Qaac}"
 );
-assert(
-  /^\P{sc=Coptic}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Coptic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Coptic}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Coptic}"
 );
-assert(
-  /^\P{sc=Copt}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Copt}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Copt}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Copt}"
 );
-assert(
-  /^\P{sc=Qaac}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Qaac}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Qaac}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Qaac}"
 );

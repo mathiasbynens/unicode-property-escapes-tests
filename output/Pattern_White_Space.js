@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -24,13 +24,15 @@ const matchSymbols = buildString({
     [0x002028, 0x002029]
   ]
 });
-assert(
-  /^\p{Pattern_White_Space}+$/u.test(matchSymbols),
-  "`\\p{Pattern_White_Space}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Pattern_White_Space}+$/u,
+  matchSymbols,
+  "\\p{Pattern_White_Space}"
 );
-assert(
-  /^\p{Pat_WS}+$/u.test(matchSymbols),
-  "`\\p{Pat_WS}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Pat_WS}+$/u,
+  matchSymbols,
+  "\\p{Pat_WS}"
 );
 
 const nonMatchSymbols = buildString({
@@ -46,11 +48,13 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Pattern_White_Space}+$/u.test(nonMatchSymbols),
-  "`\\P{Pattern_White_Space}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Pattern_White_Space}+$/u,
+  nonMatchSymbols,
+  "\\P{Pattern_White_Space}"
 );
-assert(
-  /^\P{Pat_WS}+$/u.test(nonMatchSymbols),
-  "`\\P{Pat_WS}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Pat_WS}+$/u,
+  nonMatchSymbols,
+  "\\P{Pat_WS}"
 );

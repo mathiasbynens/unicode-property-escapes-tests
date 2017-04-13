@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -41,21 +41,25 @@ const matchSymbols = buildString({
     [0x000BE6, 0x000BFA]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Tamil}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Tamil}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Tamil}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Tamil}"
 );
-assert(
-  /^\p{Script_Extensions=Taml}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Taml}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Taml}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Taml}"
 );
-assert(
-  /^\p{scx=Tamil}+$/u.test(matchSymbols),
-  "`\\p{scx=Tamil}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Tamil}+$/u,
+  matchSymbols,
+  "\\p{scx=Tamil}"
 );
-assert(
-  /^\p{scx=Taml}+$/u.test(matchSymbols),
-  "`\\p{scx=Taml}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Taml}+$/u,
+  matchSymbols,
+  "\\p{scx=Taml}"
 );
 
 const nonMatchSymbols = buildString({
@@ -89,19 +93,23 @@ const nonMatchSymbols = buildString({
     [0x01133D, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Tamil}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Tamil}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Tamil}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Tamil}"
 );
-assert(
-  /^\P{Script_Extensions=Taml}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Taml}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Taml}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Taml}"
 );
-assert(
-  /^\P{scx=Tamil}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Tamil}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Tamil}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Tamil}"
 );
-assert(
-  /^\P{scx=Taml}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Taml}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Taml}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Taml}"
 );

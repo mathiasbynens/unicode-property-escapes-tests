@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -31,21 +31,25 @@ const matchSymbols = buildString({
     [0x000D66, 0x000D7F]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Malayalam}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Malayalam}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Malayalam}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Malayalam}"
 );
-assert(
-  /^\p{Script_Extensions=Mlym}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Mlym}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Mlym}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Mlym}"
 );
-assert(
-  /^\p{scx=Malayalam}+$/u.test(matchSymbols),
-  "`\\p{scx=Malayalam}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Malayalam}+$/u,
+  matchSymbols,
+  "\\p{scx=Malayalam}"
 );
-assert(
-  /^\p{scx=Mlym}+$/u.test(matchSymbols),
-  "`\\p{scx=Mlym}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Mlym}+$/u,
+  matchSymbols,
+  "\\p{scx=Mlym}"
 );
 
 const nonMatchSymbols = buildString({
@@ -69,19 +73,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Malayalam}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Malayalam}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Malayalam}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Malayalam}"
 );
-assert(
-  /^\P{Script_Extensions=Mlym}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Mlym}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Mlym}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Mlym}"
 );
-assert(
-  /^\P{scx=Malayalam}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Malayalam}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Malayalam}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Malayalam}"
 );
-assert(
-  /^\P{scx=Mlym}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Mlym}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Mlym}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Mlym}"
 );

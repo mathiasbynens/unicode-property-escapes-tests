@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x010AEB, 0x010AF6]
   ]
 });
-assert(
-  /^\p{Script=Manichaean}+$/u.test(matchSymbols),
-  "`\\p{Script=Manichaean}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Manichaean}+$/u,
+  matchSymbols,
+  "\\p{Script=Manichaean}"
 );
-assert(
-  /^\p{Script=Mani}+$/u.test(matchSymbols),
-  "`\\p{Script=Mani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Mani}+$/u,
+  matchSymbols,
+  "\\p{Script=Mani}"
 );
-assert(
-  /^\p{sc=Manichaean}+$/u.test(matchSymbols),
-  "`\\p{sc=Manichaean}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Manichaean}+$/u,
+  matchSymbols,
+  "\\p{sc=Manichaean}"
 );
-assert(
-  /^\p{sc=Mani}+$/u.test(matchSymbols),
-  "`\\p{sc=Mani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Mani}+$/u,
+  matchSymbols,
+  "\\p{sc=Mani}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x010AF7, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Manichaean}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Manichaean}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Manichaean}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Manichaean}"
 );
-assert(
-  /^\P{Script=Mani}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Mani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Mani}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Mani}"
 );
-assert(
-  /^\P{sc=Manichaean}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Manichaean}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Manichaean}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Manichaean}"
 );
-assert(
-  /^\P{sc=Mani}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Mani}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Mani}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Mani}"
 );

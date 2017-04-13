@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -24,9 +24,10 @@ const matchSymbols = buildString({
     [0x01F3FB, 0x01F3FF]
   ]
 });
-assert(
-  /^\p{Emoji_Component}+$/u.test(matchSymbols),
-  "`\\p{Emoji_Component}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Emoji_Component}+$/u,
+  matchSymbols,
+  "\\p{Emoji_Component}"
 );
 
 const nonMatchSymbols = buildString({
@@ -42,7 +43,8 @@ const nonMatchSymbols = buildString({
     [0x01F400, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Emoji_Component}+$/u.test(nonMatchSymbols),
-  "`\\P{Emoji_Component}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Emoji_Component}+$/u,
+  nonMatchSymbols,
+  "\\P{Emoji_Component}"
 );

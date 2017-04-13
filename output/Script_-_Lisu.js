@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x00A4D0, 0x00A4FF]
   ]
 });
-assert(
-  /^\p{Script=Lisu}+$/u.test(matchSymbols),
-  "`\\p{Script=Lisu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Lisu}+$/u,
+  matchSymbols,
+  "\\p{Script=Lisu}"
 );
-assert(
-  /^\p{Script=Lisu}+$/u.test(matchSymbols),
-  "`\\p{Script=Lisu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Lisu}+$/u,
+  matchSymbols,
+  "\\p{Script=Lisu}"
 );
-assert(
-  /^\p{sc=Lisu}+$/u.test(matchSymbols),
-  "`\\p{sc=Lisu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Lisu}+$/u,
+  matchSymbols,
+  "\\p{sc=Lisu}"
 );
-assert(
-  /^\p{sc=Lisu}+$/u.test(matchSymbols),
-  "`\\p{sc=Lisu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Lisu}+$/u,
+  matchSymbols,
+  "\\p{sc=Lisu}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Lisu}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Lisu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Lisu}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Lisu}"
 );
-assert(
-  /^\P{Script=Lisu}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Lisu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Lisu}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Lisu}"
 );
-assert(
-  /^\P{sc=Lisu}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Lisu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Lisu}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Lisu}"
 );
-assert(
-  /^\P{sc=Lisu}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Lisu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Lisu}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Lisu}"
 );

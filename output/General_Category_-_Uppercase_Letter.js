@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -646,29 +646,35 @@ const matchSymbols = buildString({
     [0x01E900, 0x01E921]
   ]
 });
-assert(
-  /^\p{General_Category=Uppercase_Letter}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Uppercase_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Uppercase_Letter}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Uppercase_Letter}"
 );
-assert(
-  /^\p{General_Category=Lu}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Lu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Lu}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Lu}"
 );
-assert(
-  /^\p{gc=Uppercase_Letter}+$/u.test(matchSymbols),
-  "`\\p{gc=Uppercase_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Uppercase_Letter}+$/u,
+  matchSymbols,
+  "\\p{gc=Uppercase_Letter}"
 );
-assert(
-  /^\p{gc=Lu}+$/u.test(matchSymbols),
-  "`\\p{gc=Lu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Lu}+$/u,
+  matchSymbols,
+  "\\p{gc=Lu}"
 );
-assert(
-  /^\p{Uppercase_Letter}+$/u.test(matchSymbols),
-  "`\\p{Uppercase_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Uppercase_Letter}+$/u,
+  matchSymbols,
+  "\\p{Uppercase_Letter}"
 );
-assert(
-  /^\p{Lu}+$/u.test(matchSymbols),
-  "`\\p{Lu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Lu}+$/u,
+  matchSymbols,
+  "\\p{Lu}"
 );
 
 const nonMatchSymbols = buildString({
@@ -1307,27 +1313,33 @@ const nonMatchSymbols = buildString({
     [0x01E922, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Uppercase_Letter}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Uppercase_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Uppercase_Letter}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Uppercase_Letter}"
 );
-assert(
-  /^\P{General_Category=Lu}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Lu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Lu}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Lu}"
 );
-assert(
-  /^\P{gc=Uppercase_Letter}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Uppercase_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Uppercase_Letter}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Uppercase_Letter}"
 );
-assert(
-  /^\P{gc=Lu}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Lu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Lu}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Lu}"
 );
-assert(
-  /^\P{Uppercase_Letter}+$/u.test(nonMatchSymbols),
-  "`\\P{Uppercase_Letter}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Uppercase_Letter}+$/u,
+  nonMatchSymbols,
+  "\\P{Uppercase_Letter}"
 );
-assert(
-  /^\P{Lu}+$/u.test(nonMatchSymbols),
-  "`\\P{Lu}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Lu}+$/u,
+  nonMatchSymbols,
+  "\\P{Lu}"
 );

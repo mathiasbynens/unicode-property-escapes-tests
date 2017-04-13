@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -25,21 +25,25 @@ const matchSymbols = buildString({
     [0x01E026, 0x01E02A]
   ]
 });
-assert(
-  /^\p{Script=Glagolitic}+$/u.test(matchSymbols),
-  "`\\p{Script=Glagolitic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Glagolitic}+$/u,
+  matchSymbols,
+  "\\p{Script=Glagolitic}"
 );
-assert(
-  /^\p{Script=Glag}+$/u.test(matchSymbols),
-  "`\\p{Script=Glag}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Glag}+$/u,
+  matchSymbols,
+  "\\p{Script=Glag}"
 );
-assert(
-  /^\p{sc=Glagolitic}+$/u.test(matchSymbols),
-  "`\\p{sc=Glagolitic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Glagolitic}+$/u,
+  matchSymbols,
+  "\\p{sc=Glagolitic}"
 );
-assert(
-  /^\p{sc=Glag}+$/u.test(matchSymbols),
-  "`\\p{sc=Glag}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Glag}+$/u,
+  matchSymbols,
+  "\\p{sc=Glag}"
 );
 
 const nonMatchSymbols = buildString({
@@ -58,19 +62,23 @@ const nonMatchSymbols = buildString({
     [0x01E02B, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Glagolitic}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Glagolitic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Glagolitic}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Glagolitic}"
 );
-assert(
-  /^\P{Script=Glag}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Glag}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Glag}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Glag}"
 );
-assert(
-  /^\P{sc=Glagolitic}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Glagolitic}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Glagolitic}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Glagolitic}"
 );
-assert(
-  /^\P{sc=Glag}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Glag}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Glag}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Glag}"
 );

@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -26,21 +26,25 @@ const matchSymbols = buildString({
     [0x000780, 0x0007B1]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Thaana}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Thaana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Thaana}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Thaana}"
 );
-assert(
-  /^\p{Script_Extensions=Thaa}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Thaa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Thaa}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Thaa}"
 );
-assert(
-  /^\p{scx=Thaana}+$/u.test(matchSymbols),
-  "`\\p{scx=Thaana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Thaana}+$/u,
+  matchSymbols,
+  "\\p{scx=Thaana}"
 );
-assert(
-  /^\p{scx=Thaa}+$/u.test(matchSymbols),
-  "`\\p{scx=Thaa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Thaa}+$/u,
+  matchSymbols,
+  "\\p{scx=Thaa}"
 );
 
 const nonMatchSymbols = buildString({
@@ -58,19 +62,23 @@ const nonMatchSymbols = buildString({
     [0x00FDFE, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Thaana}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Thaana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Thaana}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Thaana}"
 );
-assert(
-  /^\P{Script_Extensions=Thaa}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Thaa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Thaa}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Thaa}"
 );
-assert(
-  /^\P{scx=Thaana}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Thaana}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Thaana}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Thaana}"
 );
-assert(
-  /^\P{scx=Thaa}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Thaa}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Thaa}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Thaa}"
 );

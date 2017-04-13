@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x010920, 0x010939]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Lydian}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Lydian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Lydian}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Lydian}"
 );
-assert(
-  /^\p{Script_Extensions=Lydi}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Lydi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Lydi}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Lydi}"
 );
-assert(
-  /^\p{scx=Lydian}+$/u.test(matchSymbols),
-  "`\\p{scx=Lydian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Lydian}+$/u,
+  matchSymbols,
+  "\\p{scx=Lydian}"
 );
-assert(
-  /^\p{scx=Lydi}+$/u.test(matchSymbols),
-  "`\\p{scx=Lydi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Lydi}+$/u,
+  matchSymbols,
+  "\\p{scx=Lydi}"
 );
 
 const nonMatchSymbols = buildString({
@@ -48,19 +52,23 @@ const nonMatchSymbols = buildString({
     [0x010940, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Lydian}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Lydian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Lydian}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Lydian}"
 );
-assert(
-  /^\P{Script_Extensions=Lydi}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Lydi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Lydi}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Lydi}"
 );
-assert(
-  /^\P{scx=Lydian}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Lydian}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Lydian}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Lydian}"
 );
-assert(
-  /^\P{scx=Lydi}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Lydi}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Lydi}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Lydi}"
 );

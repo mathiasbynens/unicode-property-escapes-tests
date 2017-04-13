@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,29 +19,35 @@ const matchSymbols = buildString({
   ],
   ranges: []
 });
-assert(
-  /^\p{General_Category=Paragraph_Separator}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Paragraph_Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Paragraph_Separator}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Paragraph_Separator}"
 );
-assert(
-  /^\p{General_Category=Zp}+$/u.test(matchSymbols),
-  "`\\p{General_Category=Zp}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{General_Category=Zp}+$/u,
+  matchSymbols,
+  "\\p{General_Category=Zp}"
 );
-assert(
-  /^\p{gc=Paragraph_Separator}+$/u.test(matchSymbols),
-  "`\\p{gc=Paragraph_Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Paragraph_Separator}+$/u,
+  matchSymbols,
+  "\\p{gc=Paragraph_Separator}"
 );
-assert(
-  /^\p{gc=Zp}+$/u.test(matchSymbols),
-  "`\\p{gc=Zp}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{gc=Zp}+$/u,
+  matchSymbols,
+  "\\p{gc=Zp}"
 );
-assert(
-  /^\p{Paragraph_Separator}+$/u.test(matchSymbols),
-  "`\\p{Paragraph_Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Paragraph_Separator}+$/u,
+  matchSymbols,
+  "\\p{Paragraph_Separator}"
 );
-assert(
-  /^\p{Zp}+$/u.test(matchSymbols),
-  "`\\p{Zp}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Zp}+$/u,
+  matchSymbols,
+  "\\p{Zp}"
 );
 
 const nonMatchSymbols = buildString({
@@ -53,27 +59,33 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{General_Category=Paragraph_Separator}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Paragraph_Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Paragraph_Separator}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Paragraph_Separator}"
 );
-assert(
-  /^\P{General_Category=Zp}+$/u.test(nonMatchSymbols),
-  "`\\P{General_Category=Zp}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{General_Category=Zp}+$/u,
+  nonMatchSymbols,
+  "\\P{General_Category=Zp}"
 );
-assert(
-  /^\P{gc=Paragraph_Separator}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Paragraph_Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Paragraph_Separator}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Paragraph_Separator}"
 );
-assert(
-  /^\P{gc=Zp}+$/u.test(nonMatchSymbols),
-  "`\\P{gc=Zp}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{gc=Zp}+$/u,
+  nonMatchSymbols,
+  "\\P{gc=Zp}"
 );
-assert(
-  /^\P{Paragraph_Separator}+$/u.test(nonMatchSymbols),
-  "`\\P{Paragraph_Separator}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Paragraph_Separator}+$/u,
+  nonMatchSymbols,
+  "\\P{Paragraph_Separator}"
 );
-assert(
-  /^\P{Zp}+$/u.test(nonMatchSymbols),
-  "`\\P{Zp}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Zp}+$/u,
+  nonMatchSymbols,
+  "\\P{Zp}"
 );

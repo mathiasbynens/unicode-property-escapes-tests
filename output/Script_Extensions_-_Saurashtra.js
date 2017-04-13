@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x00A8CE, 0x00A8D9]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Saurashtra}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Saurashtra}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Saurashtra}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Saurashtra}"
 );
-assert(
-  /^\p{Script_Extensions=Saur}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Saur}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Saur}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Saur}"
 );
-assert(
-  /^\p{scx=Saurashtra}+$/u.test(matchSymbols),
-  "`\\p{scx=Saurashtra}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Saurashtra}+$/u,
+  matchSymbols,
+  "\\p{scx=Saurashtra}"
 );
-assert(
-  /^\p{scx=Saur}+$/u.test(matchSymbols),
-  "`\\p{scx=Saur}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Saur}+$/u,
+  matchSymbols,
+  "\\p{scx=Saur}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Saurashtra}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Saurashtra}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Saurashtra}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Saurashtra}"
 );
-assert(
-  /^\P{Script_Extensions=Saur}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Saur}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Saur}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Saur}"
 );
-assert(
-  /^\P{scx=Saurashtra}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Saurashtra}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Saurashtra}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Saurashtra}"
 );
-assert(
-  /^\P{scx=Saur}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Saur}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Saur}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Saur}"
 );

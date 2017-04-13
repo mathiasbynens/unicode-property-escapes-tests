@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -20,21 +20,25 @@ const matchSymbols = buildString({
     [0x01E8C7, 0x01E8D6]
   ]
 });
-assert(
-  /^\p{Script_Extensions=Mende_Kikakui}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Mende_Kikakui}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Mende_Kikakui}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Mende_Kikakui}"
 );
-assert(
-  /^\p{Script_Extensions=Mend}+$/u.test(matchSymbols),
-  "`\\p{Script_Extensions=Mend}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script_Extensions=Mend}+$/u,
+  matchSymbols,
+  "\\p{Script_Extensions=Mend}"
 );
-assert(
-  /^\p{scx=Mende_Kikakui}+$/u.test(matchSymbols),
-  "`\\p{scx=Mende_Kikakui}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Mende_Kikakui}+$/u,
+  matchSymbols,
+  "\\p{scx=Mende_Kikakui}"
 );
-assert(
-  /^\p{scx=Mend}+$/u.test(matchSymbols),
-  "`\\p{scx=Mend}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{scx=Mend}+$/u,
+  matchSymbols,
+  "\\p{scx=Mend}"
 );
 
 const nonMatchSymbols = buildString({
@@ -47,19 +51,23 @@ const nonMatchSymbols = buildString({
     [0x01E8D7, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script_Extensions=Mende_Kikakui}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Mende_Kikakui}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Mende_Kikakui}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Mende_Kikakui}"
 );
-assert(
-  /^\P{Script_Extensions=Mend}+$/u.test(nonMatchSymbols),
-  "`\\P{Script_Extensions=Mend}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script_Extensions=Mend}+$/u,
+  nonMatchSymbols,
+  "\\P{Script_Extensions=Mend}"
 );
-assert(
-  /^\P{scx=Mende_Kikakui}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Mende_Kikakui}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Mende_Kikakui}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Mende_Kikakui}"
 );
-assert(
-  /^\P{scx=Mend}+$/u.test(nonMatchSymbols),
-  "`\\P{scx=Mend}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{scx=Mend}+$/u,
+  nonMatchSymbols,
+  "\\P{scx=Mend}"
 );

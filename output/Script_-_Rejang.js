@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -21,21 +21,25 @@ const matchSymbols = buildString({
     [0x00A930, 0x00A953]
   ]
 });
-assert(
-  /^\p{Script=Rejang}+$/u.test(matchSymbols),
-  "`\\p{Script=Rejang}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Rejang}+$/u,
+  matchSymbols,
+  "\\p{Script=Rejang}"
 );
-assert(
-  /^\p{Script=Rjng}+$/u.test(matchSymbols),
-  "`\\p{Script=Rjng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Rjng}+$/u,
+  matchSymbols,
+  "\\p{Script=Rjng}"
 );
-assert(
-  /^\p{sc=Rejang}+$/u.test(matchSymbols),
-  "`\\p{sc=Rejang}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Rejang}+$/u,
+  matchSymbols,
+  "\\p{sc=Rejang}"
 );
-assert(
-  /^\p{sc=Rjng}+$/u.test(matchSymbols),
-  "`\\p{sc=Rjng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Rjng}+$/u,
+  matchSymbols,
+  "\\p{sc=Rjng}"
 );
 
 const nonMatchSymbols = buildString({
@@ -48,19 +52,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Rejang}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Rejang}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Rejang}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Rejang}"
 );
-assert(
-  /^\P{Script=Rjng}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Rjng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Rjng}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Rjng}"
 );
-assert(
-  /^\P{sc=Rejang}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Rejang}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Rejang}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Rejang}"
 );
-assert(
-  /^\P{sc=Rjng}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Rjng}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Rjng}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Rjng}"
 );

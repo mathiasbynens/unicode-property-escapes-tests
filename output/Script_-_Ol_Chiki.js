@@ -10,7 +10,7 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
-includes: [buildString.js]
+includes: [regExpUtils.js]
 ---*/
 
 const matchSymbols = buildString({
@@ -19,21 +19,25 @@ const matchSymbols = buildString({
     [0x001C50, 0x001C7F]
   ]
 });
-assert(
-  /^\p{Script=Ol_Chiki}+$/u.test(matchSymbols),
-  "`\\p{Script=Ol_Chiki}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Ol_Chiki}+$/u,
+  matchSymbols,
+  "\\p{Script=Ol_Chiki}"
 );
-assert(
-  /^\p{Script=Olck}+$/u.test(matchSymbols),
-  "`\\p{Script=Olck}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{Script=Olck}+$/u,
+  matchSymbols,
+  "\\p{Script=Olck}"
 );
-assert(
-  /^\p{sc=Ol_Chiki}+$/u.test(matchSymbols),
-  "`\\p{sc=Ol_Chiki}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Ol_Chiki}+$/u,
+  matchSymbols,
+  "\\p{sc=Ol_Chiki}"
 );
-assert(
-  /^\p{sc=Olck}+$/u.test(matchSymbols),
-  "`\\p{sc=Olck}` matches all proper symbols"
+testPropertyEscapes(
+  /^\p{sc=Olck}+$/u,
+  matchSymbols,
+  "\\p{sc=Olck}"
 );
 
 const nonMatchSymbols = buildString({
@@ -45,19 +49,23 @@ const nonMatchSymbols = buildString({
     [0x00E000, 0x10FFFF]
   ]
 });
-assert(
-  /^\P{Script=Ol_Chiki}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Ol_Chiki}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Ol_Chiki}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Ol_Chiki}"
 );
-assert(
-  /^\P{Script=Olck}+$/u.test(nonMatchSymbols),
-  "`\\P{Script=Olck}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{Script=Olck}+$/u,
+  nonMatchSymbols,
+  "\\P{Script=Olck}"
 );
-assert(
-  /^\P{sc=Ol_Chiki}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Ol_Chiki}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Ol_Chiki}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Ol_Chiki}"
 );
-assert(
-  /^\P{sc=Olck}+$/u.test(nonMatchSymbols),
-  "`\\P{sc=Olck}` matches all proper symbols"
+testPropertyEscapes(
+  /^\P{sc=Olck}+$/u,
+  nonMatchSymbols,
+  "\\P{sc=Olck}"
 );

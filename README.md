@@ -13,7 +13,7 @@ npm install
 npm run build
 ```
 
-The `output` directory holds the generated test files, ready to be upstreamed to test262’s `test/built-ins/RegExp/property-escapes/` directory.
+The `output` directory holds the generated test files, ready to be upstreamed to [Test262’s `test/built-ins/RegExp/property-escapes/` directory](https://github.com/tc39/test262/tree/master/test/built-ins/RegExp/property-escapes).
 
 To run the tests in V8 using [`test262-harness`](https://github.com/bterlson/test262-harness):
 

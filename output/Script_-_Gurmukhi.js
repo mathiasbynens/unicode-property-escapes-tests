@@ -10,102 +10,86 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x000A3C,
-		0x000A51,
-		0x000A5E
-	],
-	ranges: [
-		[0x000A01, 0x000A03],
-		[0x000A05, 0x000A0A],
-		[0x000A0F, 0x000A10],
-		[0x000A13, 0x000A28],
-		[0x000A2A, 0x000A30],
-		[0x000A32, 0x000A33],
-		[0x000A35, 0x000A36],
-		[0x000A38, 0x000A39],
-		[0x000A3E, 0x000A42],
-		[0x000A47, 0x000A48],
-		[0x000A4B, 0x000A4D],
-		[0x000A59, 0x000A5C],
-		[0x000A66, 0x000A75]
-	]
+  loneCodePoints: [
+    0x000A3C,
+    0x000A51,
+    0x000A5E
+  ],
+  ranges: [
+    [0x000A01, 0x000A03],
+    [0x000A05, 0x000A0A],
+    [0x000A0F, 0x000A10],
+    [0x000A13, 0x000A28],
+    [0x000A2A, 0x000A30],
+    [0x000A32, 0x000A33],
+    [0x000A35, 0x000A36],
+    [0x000A38, 0x000A39],
+    [0x000A3E, 0x000A42],
+    [0x000A47, 0x000A48],
+    [0x000A4B, 0x000A4D],
+    [0x000A59, 0x000A5C],
+    [0x000A66, 0x000A75]
+  ]
 });
 assert(
-	/^\p{Script=Gurmukhi}+$/u.test(matchSymbols),
-	"`\\p{Script=Gurmukhi}` matches all proper symbols"
+  /^\p{Script=Gurmukhi}+$/u.test(matchSymbols),
+  "`\\p{Script=Gurmukhi}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Guru}+$/u.test(matchSymbols),
-	"`\\p{Script=Guru}` matches all proper symbols"
+  /^\p{Script=Guru}+$/u.test(matchSymbols),
+  "`\\p{Script=Guru}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Gurmukhi}+$/u.test(matchSymbols),
-	"`\\p{sc=Gurmukhi}` matches all proper symbols"
+  /^\p{sc=Gurmukhi}+$/u.test(matchSymbols),
+  "`\\p{sc=Gurmukhi}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Guru}+$/u.test(matchSymbols),
-	"`\\p{sc=Guru}` matches all proper symbols"
+  /^\p{sc=Guru}+$/u.test(matchSymbols),
+  "`\\p{sc=Guru}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x000A04,
-		0x000A29,
-		0x000A31,
-		0x000A34,
-		0x000A37,
-		0x000A3D,
-		0x000A5D
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x000A00],
-		[0x000A0B, 0x000A0E],
-		[0x000A11, 0x000A12],
-		[0x000A3A, 0x000A3B],
-		[0x000A43, 0x000A46],
-		[0x000A49, 0x000A4A],
-		[0x000A4E, 0x000A50],
-		[0x000A52, 0x000A58],
-		[0x000A5F, 0x000A65],
-		[0x000A76, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x000A04,
+    0x000A29,
+    0x000A31,
+    0x000A34,
+    0x000A37,
+    0x000A3D,
+    0x000A5D
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x000A00],
+    [0x000A0B, 0x000A0E],
+    [0x000A11, 0x000A12],
+    [0x000A3A, 0x000A3B],
+    [0x000A43, 0x000A46],
+    [0x000A49, 0x000A4A],
+    [0x000A4E, 0x000A50],
+    [0x000A52, 0x000A58],
+    [0x000A5F, 0x000A65],
+    [0x000A76, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Gurmukhi}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Gurmukhi}` matches all proper symbols"
+  /^\P{Script=Gurmukhi}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Gurmukhi}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Guru}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Guru}` matches all proper symbols"
+  /^\P{Script=Guru}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Guru}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Gurmukhi}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Gurmukhi}` matches all proper symbols"
+  /^\P{sc=Gurmukhi}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Gurmukhi}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Guru}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Guru}` matches all proper symbols"
+  /^\P{sc=Guru}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Guru}` matches all proper symbols"
 );

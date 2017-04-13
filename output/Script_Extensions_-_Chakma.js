@@ -10,77 +10,61 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x0009E6, 0x0009EF],
-		[0x001040, 0x001049],
-		[0x011100, 0x011134],
-		[0x011136, 0x011143]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x0009E6, 0x0009EF],
+    [0x001040, 0x001049],
+    [0x011100, 0x011134],
+    [0x011136, 0x011143]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Chakma}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Chakma}` matches all proper symbols"
+  /^\p{Script_Extensions=Chakma}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Chakma}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Cakm}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Cakm}` matches all proper symbols"
+  /^\p{Script_Extensions=Cakm}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Cakm}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Chakma}+$/u.test(matchSymbols),
-	"`\\p{scx=Chakma}` matches all proper symbols"
+  /^\p{scx=Chakma}+$/u.test(matchSymbols),
+  "`\\p{scx=Chakma}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Cakm}+$/u.test(matchSymbols),
-	"`\\p{scx=Cakm}` matches all proper symbols"
+  /^\p{scx=Cakm}+$/u.test(matchSymbols),
+  "`\\p{scx=Cakm}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x011135
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x0009E5],
-		[0x0009F0, 0x00103F],
-		[0x00104A, 0x00DBFF],
-		[0x00E000, 0x0110FF],
-		[0x011144, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x011135
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x0009E5],
+    [0x0009F0, 0x00103F],
+    [0x00104A, 0x00DBFF],
+    [0x00E000, 0x0110FF],
+    [0x011144, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Chakma}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Chakma}` matches all proper symbols"
+  /^\P{Script_Extensions=Chakma}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Chakma}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Cakm}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Cakm}` matches all proper symbols"
+  /^\P{Script_Extensions=Cakm}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Cakm}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Chakma}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Chakma}` matches all proper symbols"
+  /^\P{scx=Chakma}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Chakma}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Cakm}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Cakm}` matches all proper symbols"
+  /^\P{scx=Cakm}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Cakm}` matches all proper symbols"
 );

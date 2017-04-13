@@ -10,74 +10,58 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00AAE0, 0x00AAF6],
-		[0x00ABC0, 0x00ABED],
-		[0x00ABF0, 0x00ABF9]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00AAE0, 0x00AAF6],
+    [0x00ABC0, 0x00ABED],
+    [0x00ABF0, 0x00ABF9]
+  ]
 });
 assert(
-	/^\p{Script=Meetei_Mayek}+$/u.test(matchSymbols),
-	"`\\p{Script=Meetei_Mayek}` matches all proper symbols"
+  /^\p{Script=Meetei_Mayek}+$/u.test(matchSymbols),
+  "`\\p{Script=Meetei_Mayek}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Mtei}+$/u.test(matchSymbols),
-	"`\\p{Script=Mtei}` matches all proper symbols"
+  /^\p{Script=Mtei}+$/u.test(matchSymbols),
+  "`\\p{Script=Mtei}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Meetei_Mayek}+$/u.test(matchSymbols),
-	"`\\p{sc=Meetei_Mayek}` matches all proper symbols"
+  /^\p{sc=Meetei_Mayek}+$/u.test(matchSymbols),
+  "`\\p{sc=Meetei_Mayek}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Mtei}+$/u.test(matchSymbols),
-	"`\\p{sc=Mtei}` matches all proper symbols"
+  /^\p{sc=Mtei}+$/u.test(matchSymbols),
+  "`\\p{sc=Mtei}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00AADF],
-		[0x00AAF7, 0x00ABBF],
-		[0x00ABEE, 0x00ABEF],
-		[0x00ABFA, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00AADF],
+    [0x00AAF7, 0x00ABBF],
+    [0x00ABEE, 0x00ABEF],
+    [0x00ABFA, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Meetei_Mayek}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Meetei_Mayek}` matches all proper symbols"
+  /^\P{Script=Meetei_Mayek}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Meetei_Mayek}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Mtei}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Mtei}` matches all proper symbols"
+  /^\P{Script=Mtei}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Mtei}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Meetei_Mayek}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Meetei_Mayek}` matches all proper symbols"
+  /^\P{sc=Meetei_Mayek}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Meetei_Mayek}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Mtei}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Mtei}` matches all proper symbols"
+  /^\P{sc=Mtei}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Mtei}` matches all proper symbols"
 );

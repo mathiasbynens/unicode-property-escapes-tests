@@ -10,74 +10,58 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x001C00, 0x001C37],
-		[0x001C3B, 0x001C49],
-		[0x001C4D, 0x001C4F]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x001C00, 0x001C37],
+    [0x001C3B, 0x001C49],
+    [0x001C4D, 0x001C4F]
+  ]
 });
 assert(
-	/^\p{Script=Lepcha}+$/u.test(matchSymbols),
-	"`\\p{Script=Lepcha}` matches all proper symbols"
+  /^\p{Script=Lepcha}+$/u.test(matchSymbols),
+  "`\\p{Script=Lepcha}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Lepc}+$/u.test(matchSymbols),
-	"`\\p{Script=Lepc}` matches all proper symbols"
+  /^\p{Script=Lepc}+$/u.test(matchSymbols),
+  "`\\p{Script=Lepc}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Lepcha}+$/u.test(matchSymbols),
-	"`\\p{sc=Lepcha}` matches all proper symbols"
+  /^\p{sc=Lepcha}+$/u.test(matchSymbols),
+  "`\\p{sc=Lepcha}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Lepc}+$/u.test(matchSymbols),
-	"`\\p{sc=Lepc}` matches all proper symbols"
+  /^\p{sc=Lepc}+$/u.test(matchSymbols),
+  "`\\p{sc=Lepc}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x001BFF],
-		[0x001C38, 0x001C3A],
-		[0x001C4A, 0x001C4C],
-		[0x001C50, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x001BFF],
+    [0x001C38, 0x001C3A],
+    [0x001C4A, 0x001C4C],
+    [0x001C50, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Lepcha}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Lepcha}` matches all proper symbols"
+  /^\P{Script=Lepcha}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Lepcha}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Lepc}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Lepc}` matches all proper symbols"
+  /^\P{Script=Lepc}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Lepc}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Lepcha}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Lepcha}` matches all proper symbols"
+  /^\P{sc=Lepcha}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Lepcha}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Lepc}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Lepc}` matches all proper symbols"
+  /^\P{sc=Lepc}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Lepc}` matches all proper symbols"
 );

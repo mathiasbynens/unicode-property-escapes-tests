@@ -10,72 +10,56 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x001BC0, 0x001BF3],
-		[0x001BFC, 0x001BFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x001BC0, 0x001BF3],
+    [0x001BFC, 0x001BFF]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Batak}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Batak}` matches all proper symbols"
+  /^\p{Script_Extensions=Batak}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Batak}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Batk}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Batk}` matches all proper symbols"
+  /^\p{Script_Extensions=Batk}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Batk}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Batak}+$/u.test(matchSymbols),
-	"`\\p{scx=Batak}` matches all proper symbols"
+  /^\p{scx=Batak}+$/u.test(matchSymbols),
+  "`\\p{scx=Batak}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Batk}+$/u.test(matchSymbols),
-	"`\\p{scx=Batk}` matches all proper symbols"
+  /^\p{scx=Batk}+$/u.test(matchSymbols),
+  "`\\p{scx=Batk}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x001BBF],
-		[0x001BF4, 0x001BFB],
-		[0x001C00, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x001BBF],
+    [0x001BF4, 0x001BFB],
+    [0x001C00, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Batak}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Batak}` matches all proper symbols"
+  /^\P{Script_Extensions=Batak}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Batak}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Batk}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Batk}` matches all proper symbols"
+  /^\P{Script_Extensions=Batk}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Batk}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Batak}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Batak}` matches all proper symbols"
+  /^\P{scx=Batak}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Batak}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Batk}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Batk}` matches all proper symbols"
+  /^\P{scx=Batk}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Batk}` matches all proper symbols"
 );

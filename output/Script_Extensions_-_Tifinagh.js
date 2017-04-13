@@ -10,75 +10,59 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x002D7F
-	],
-	ranges: [
-		[0x002D30, 0x002D67],
-		[0x002D6F, 0x002D70]
-	]
+  loneCodePoints: [
+    0x002D7F
+  ],
+  ranges: [
+    [0x002D30, 0x002D67],
+    [0x002D6F, 0x002D70]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Tifinagh}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Tifinagh}` matches all proper symbols"
+  /^\p{Script_Extensions=Tifinagh}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Tifinagh}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Tfng}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Tfng}` matches all proper symbols"
+  /^\p{Script_Extensions=Tfng}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Tfng}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Tifinagh}+$/u.test(matchSymbols),
-	"`\\p{scx=Tifinagh}` matches all proper symbols"
+  /^\p{scx=Tifinagh}+$/u.test(matchSymbols),
+  "`\\p{scx=Tifinagh}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Tfng}+$/u.test(matchSymbols),
-	"`\\p{scx=Tfng}` matches all proper symbols"
+  /^\p{scx=Tfng}+$/u.test(matchSymbols),
+  "`\\p{scx=Tfng}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x002D2F],
-		[0x002D68, 0x002D6E],
-		[0x002D71, 0x002D7E],
-		[0x002D80, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x002D2F],
+    [0x002D68, 0x002D6E],
+    [0x002D71, 0x002D7E],
+    [0x002D80, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Tifinagh}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Tifinagh}` matches all proper symbols"
+  /^\P{Script_Extensions=Tifinagh}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Tifinagh}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Tfng}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Tfng}` matches all proper symbols"
+  /^\P{Script_Extensions=Tfng}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Tfng}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Tifinagh}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Tifinagh}` matches all proper symbols"
+  /^\P{scx=Tifinagh}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Tifinagh}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Tfng}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Tfng}` matches all proper symbols"
+  /^\P{scx=Tfng}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Tfng}` matches all proper symbols"
 );

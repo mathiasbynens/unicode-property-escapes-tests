@@ -10,63 +10,47 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x000020,
-		0x000085
-	],
-	ranges: [
-		[0x000009, 0x00000D],
-		[0x00200E, 0x00200F],
-		[0x002028, 0x002029]
-	]
+  loneCodePoints: [
+    0x000020,
+    0x000085
+  ],
+  ranges: [
+    [0x000009, 0x00000D],
+    [0x00200E, 0x00200F],
+    [0x002028, 0x002029]
+  ]
 });
 assert(
-	/^\p{Pattern_White_Space}+$/u.test(matchSymbols),
-	"`\\p{Pattern_White_Space}` matches all proper symbols"
+  /^\p{Pattern_White_Space}+$/u.test(matchSymbols),
+  "`\\p{Pattern_White_Space}` matches all proper symbols"
 );
 assert(
-	/^\p{Pat_WS}+$/u.test(matchSymbols),
-	"`\\p{Pat_WS}` matches all proper symbols"
+  /^\p{Pat_WS}+$/u.test(matchSymbols),
+  "`\\p{Pat_WS}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x000008],
-		[0x00000E, 0x00001F],
-		[0x000021, 0x000084],
-		[0x000086, 0x00200D],
-		[0x002010, 0x002027],
-		[0x00202A, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x000008],
+    [0x00000E, 0x00001F],
+    [0x000021, 0x000084],
+    [0x000086, 0x00200D],
+    [0x002010, 0x002027],
+    [0x00202A, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Pattern_White_Space}+$/u.test(nonMatchSymbols),
-	"`\\P{Pattern_White_Space}` matches all proper symbols"
+  /^\P{Pattern_White_Space}+$/u.test(nonMatchSymbols),
+  "`\\P{Pattern_White_Space}` matches all proper symbols"
 );
 assert(
-	/^\P{Pat_WS}+$/u.test(nonMatchSymbols),
-	"`\\P{Pat_WS}` matches all proper symbols"
+  /^\P{Pat_WS}+$/u.test(nonMatchSymbols),
+  "`\\P{Pat_WS}` matches all proper symbols"
 );

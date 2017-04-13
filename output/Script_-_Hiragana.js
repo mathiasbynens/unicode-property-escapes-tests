@@ -10,77 +10,61 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x01B001,
-		0x01F200
-	],
-	ranges: [
-		[0x003041, 0x003096],
-		[0x00309D, 0x00309F]
-	]
+  loneCodePoints: [
+    0x01B001,
+    0x01F200
+  ],
+  ranges: [
+    [0x003041, 0x003096],
+    [0x00309D, 0x00309F]
+  ]
 });
 assert(
-	/^\p{Script=Hiragana}+$/u.test(matchSymbols),
-	"`\\p{Script=Hiragana}` matches all proper symbols"
+  /^\p{Script=Hiragana}+$/u.test(matchSymbols),
+  "`\\p{Script=Hiragana}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Hira}+$/u.test(matchSymbols),
-	"`\\p{Script=Hira}` matches all proper symbols"
+  /^\p{Script=Hira}+$/u.test(matchSymbols),
+  "`\\p{Script=Hira}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Hiragana}+$/u.test(matchSymbols),
-	"`\\p{sc=Hiragana}` matches all proper symbols"
+  /^\p{sc=Hiragana}+$/u.test(matchSymbols),
+  "`\\p{sc=Hiragana}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Hira}+$/u.test(matchSymbols),
-	"`\\p{sc=Hira}` matches all proper symbols"
+  /^\p{sc=Hira}+$/u.test(matchSymbols),
+  "`\\p{sc=Hira}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x003040],
-		[0x003097, 0x00309C],
-		[0x0030A0, 0x00DBFF],
-		[0x00E000, 0x01B000],
-		[0x01B002, 0x01F1FF],
-		[0x01F201, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x003040],
+    [0x003097, 0x00309C],
+    [0x0030A0, 0x00DBFF],
+    [0x00E000, 0x01B000],
+    [0x01B002, 0x01F1FF],
+    [0x01F201, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Hiragana}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Hiragana}` matches all proper symbols"
+  /^\P{Script=Hiragana}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Hiragana}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Hira}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Hira}` matches all proper symbols"
+  /^\P{Script=Hira}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Hira}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Hiragana}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Hiragana}` matches all proper symbols"
+  /^\P{sc=Hiragana}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Hiragana}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Hira}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Hira}` matches all proper symbols"
+  /^\P{sc=Hira}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Hira}` matches all proper symbols"
 );

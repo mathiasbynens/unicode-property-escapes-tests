@@ -10,70 +10,54 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x0102A0, 0x0102D0]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x0102A0, 0x0102D0]
+  ]
 });
 assert(
-	/^\p{Script=Carian}+$/u.test(matchSymbols),
-	"`\\p{Script=Carian}` matches all proper symbols"
+  /^\p{Script=Carian}+$/u.test(matchSymbols),
+  "`\\p{Script=Carian}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Cari}+$/u.test(matchSymbols),
-	"`\\p{Script=Cari}` matches all proper symbols"
+  /^\p{Script=Cari}+$/u.test(matchSymbols),
+  "`\\p{Script=Cari}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Carian}+$/u.test(matchSymbols),
-	"`\\p{sc=Carian}` matches all proper symbols"
+  /^\p{sc=Carian}+$/u.test(matchSymbols),
+  "`\\p{sc=Carian}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Cari}+$/u.test(matchSymbols),
-	"`\\p{sc=Cari}` matches all proper symbols"
+  /^\p{sc=Cari}+$/u.test(matchSymbols),
+  "`\\p{sc=Cari}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00DBFF],
-		[0x00E000, 0x01029F],
-		[0x0102D1, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00DBFF],
+    [0x00E000, 0x01029F],
+    [0x0102D1, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Carian}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Carian}` matches all proper symbols"
+  /^\P{Script=Carian}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Carian}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Cari}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Cari}` matches all proper symbols"
+  /^\P{Script=Cari}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Cari}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Carian}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Carian}` matches all proper symbols"
+  /^\P{sc=Carian}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Carian}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Cari}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Cari}` matches all proper symbols"
+  /^\P{sc=Cari}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Cari}` matches all proper symbols"
 );

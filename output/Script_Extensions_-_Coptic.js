@@ -10,92 +10,76 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x0003E2, 0x0003EF],
-		[0x002C80, 0x002CF3],
-		[0x002CF9, 0x002CFF],
-		[0x0102E0, 0x0102FB]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x0003E2, 0x0003EF],
+    [0x002C80, 0x002CF3],
+    [0x002CF9, 0x002CFF],
+    [0x0102E0, 0x0102FB]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Coptic}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Coptic}` matches all proper symbols"
+  /^\p{Script_Extensions=Coptic}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Coptic}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Copt}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Copt}` matches all proper symbols"
+  /^\p{Script_Extensions=Copt}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Copt}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Qaac}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Qaac}` matches all proper symbols"
+  /^\p{Script_Extensions=Qaac}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Qaac}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Coptic}+$/u.test(matchSymbols),
-	"`\\p{scx=Coptic}` matches all proper symbols"
+  /^\p{scx=Coptic}+$/u.test(matchSymbols),
+  "`\\p{scx=Coptic}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Copt}+$/u.test(matchSymbols),
-	"`\\p{scx=Copt}` matches all proper symbols"
+  /^\p{scx=Copt}+$/u.test(matchSymbols),
+  "`\\p{scx=Copt}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Qaac}+$/u.test(matchSymbols),
-	"`\\p{scx=Qaac}` matches all proper symbols"
+  /^\p{scx=Qaac}+$/u.test(matchSymbols),
+  "`\\p{scx=Qaac}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x0003E1],
-		[0x0003F0, 0x002C7F],
-		[0x002CF4, 0x002CF8],
-		[0x002D00, 0x00DBFF],
-		[0x00E000, 0x0102DF],
-		[0x0102FC, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x0003E1],
+    [0x0003F0, 0x002C7F],
+    [0x002CF4, 0x002CF8],
+    [0x002D00, 0x00DBFF],
+    [0x00E000, 0x0102DF],
+    [0x0102FC, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Coptic}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Coptic}` matches all proper symbols"
+  /^\P{Script_Extensions=Coptic}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Coptic}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Copt}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Copt}` matches all proper symbols"
+  /^\P{Script_Extensions=Copt}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Copt}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Qaac}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Qaac}` matches all proper symbols"
+  /^\P{Script_Extensions=Qaac}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Qaac}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Coptic}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Coptic}` matches all proper symbols"
+  /^\P{scx=Coptic}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Coptic}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Copt}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Copt}` matches all proper symbols"
+  /^\P{scx=Copt}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Copt}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Qaac}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Qaac}` matches all proper symbols"
+  /^\P{scx=Qaac}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Qaac}` matches all proper symbols"
 );

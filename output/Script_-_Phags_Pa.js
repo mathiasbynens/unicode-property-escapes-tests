@@ -10,70 +10,54 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00A840, 0x00A877]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00A840, 0x00A877]
+  ]
 });
 assert(
-	/^\p{Script=Phags_Pa}+$/u.test(matchSymbols),
-	"`\\p{Script=Phags_Pa}` matches all proper symbols"
+  /^\p{Script=Phags_Pa}+$/u.test(matchSymbols),
+  "`\\p{Script=Phags_Pa}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Phag}+$/u.test(matchSymbols),
-	"`\\p{Script=Phag}` matches all proper symbols"
+  /^\p{Script=Phag}+$/u.test(matchSymbols),
+  "`\\p{Script=Phag}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Phags_Pa}+$/u.test(matchSymbols),
-	"`\\p{sc=Phags_Pa}` matches all proper symbols"
+  /^\p{sc=Phags_Pa}+$/u.test(matchSymbols),
+  "`\\p{sc=Phags_Pa}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Phag}+$/u.test(matchSymbols),
-	"`\\p{sc=Phag}` matches all proper symbols"
+  /^\p{sc=Phag}+$/u.test(matchSymbols),
+  "`\\p{sc=Phag}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00A83F],
-		[0x00A878, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00A83F],
+    [0x00A878, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Phags_Pa}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Phags_Pa}` matches all proper symbols"
+  /^\P{Script=Phags_Pa}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Phags_Pa}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Phag}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Phag}` matches all proper symbols"
+  /^\P{Script=Phag}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Phag}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Phags_Pa}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Phags_Pa}` matches all proper symbols"
+  /^\P{sc=Phags_Pa}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Phags_Pa}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Phag}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Phag}` matches all proper symbols"
+  /^\P{sc=Phag}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Phag}` matches all proper symbols"
 );

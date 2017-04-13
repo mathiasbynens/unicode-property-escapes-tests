@@ -10,86 +10,70 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x002029
-	],
-	ranges: []
+  loneCodePoints: [
+    0x002029
+  ],
+  ranges: []
 });
 assert(
-	/^\p{General_Category=Paragraph_Separator}+$/u.test(matchSymbols),
-	"`\\p{General_Category=Paragraph_Separator}` matches all proper symbols"
+  /^\p{General_Category=Paragraph_Separator}+$/u.test(matchSymbols),
+  "`\\p{General_Category=Paragraph_Separator}` matches all proper symbols"
 );
 assert(
-	/^\p{General_Category=Zp}+$/u.test(matchSymbols),
-	"`\\p{General_Category=Zp}` matches all proper symbols"
+  /^\p{General_Category=Zp}+$/u.test(matchSymbols),
+  "`\\p{General_Category=Zp}` matches all proper symbols"
 );
 assert(
-	/^\p{gc=Paragraph_Separator}+$/u.test(matchSymbols),
-	"`\\p{gc=Paragraph_Separator}` matches all proper symbols"
+  /^\p{gc=Paragraph_Separator}+$/u.test(matchSymbols),
+  "`\\p{gc=Paragraph_Separator}` matches all proper symbols"
 );
 assert(
-	/^\p{gc=Zp}+$/u.test(matchSymbols),
-	"`\\p{gc=Zp}` matches all proper symbols"
+  /^\p{gc=Zp}+$/u.test(matchSymbols),
+  "`\\p{gc=Zp}` matches all proper symbols"
 );
 assert(
-	/^\p{Paragraph_Separator}+$/u.test(matchSymbols),
-	"`\\p{Paragraph_Separator}` matches all proper symbols"
+  /^\p{Paragraph_Separator}+$/u.test(matchSymbols),
+  "`\\p{Paragraph_Separator}` matches all proper symbols"
 );
 assert(
-	/^\p{Zp}+$/u.test(matchSymbols),
-	"`\\p{Zp}` matches all proper symbols"
+  /^\p{Zp}+$/u.test(matchSymbols),
+  "`\\p{Zp}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x002028],
-		[0x00202A, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x002028],
+    [0x00202A, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{General_Category=Paragraph_Separator}+$/u.test(nonMatchSymbols),
-	"`\\P{General_Category=Paragraph_Separator}` matches all proper symbols"
+  /^\P{General_Category=Paragraph_Separator}+$/u.test(nonMatchSymbols),
+  "`\\P{General_Category=Paragraph_Separator}` matches all proper symbols"
 );
 assert(
-	/^\P{General_Category=Zp}+$/u.test(nonMatchSymbols),
-	"`\\P{General_Category=Zp}` matches all proper symbols"
+  /^\P{General_Category=Zp}+$/u.test(nonMatchSymbols),
+  "`\\P{General_Category=Zp}` matches all proper symbols"
 );
 assert(
-	/^\P{gc=Paragraph_Separator}+$/u.test(nonMatchSymbols),
-	"`\\P{gc=Paragraph_Separator}` matches all proper symbols"
+  /^\P{gc=Paragraph_Separator}+$/u.test(nonMatchSymbols),
+  "`\\P{gc=Paragraph_Separator}` matches all proper symbols"
 );
 assert(
-	/^\P{gc=Zp}+$/u.test(nonMatchSymbols),
-	"`\\P{gc=Zp}` matches all proper symbols"
+  /^\P{gc=Zp}+$/u.test(nonMatchSymbols),
+  "`\\P{gc=Zp}` matches all proper symbols"
 );
 assert(
-	/^\P{Paragraph_Separator}+$/u.test(nonMatchSymbols),
-	"`\\P{Paragraph_Separator}` matches all proper symbols"
+  /^\P{Paragraph_Separator}+$/u.test(nonMatchSymbols),
+  "`\\P{Paragraph_Separator}` matches all proper symbols"
 );
 assert(
-	/^\P{Zp}+$/u.test(nonMatchSymbols),
-	"`\\P{Zp}` matches all proper symbols"
+  /^\P{Zp}+$/u.test(nonMatchSymbols),
+  "`\\P{Zp}` matches all proper symbols"
 );

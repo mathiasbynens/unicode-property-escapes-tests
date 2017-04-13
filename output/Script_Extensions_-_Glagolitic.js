@@ -10,92 +10,76 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x000484,
-		0x000487,
-		0x002E43,
-		0x00A66F
-	],
-	ranges: [
-		[0x002C00, 0x002C2E],
-		[0x002C30, 0x002C5E],
-		[0x01E000, 0x01E006],
-		[0x01E008, 0x01E018],
-		[0x01E01B, 0x01E021],
-		[0x01E023, 0x01E024],
-		[0x01E026, 0x01E02A]
-	]
+  loneCodePoints: [
+    0x000484,
+    0x000487,
+    0x002E43,
+    0x00A66F
+  ],
+  ranges: [
+    [0x002C00, 0x002C2E],
+    [0x002C30, 0x002C5E],
+    [0x01E000, 0x01E006],
+    [0x01E008, 0x01E018],
+    [0x01E01B, 0x01E021],
+    [0x01E023, 0x01E024],
+    [0x01E026, 0x01E02A]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Glagolitic}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Glagolitic}` matches all proper symbols"
+  /^\p{Script_Extensions=Glagolitic}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Glagolitic}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Glag}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Glag}` matches all proper symbols"
+  /^\p{Script_Extensions=Glag}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Glag}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Glagolitic}+$/u.test(matchSymbols),
-	"`\\p{scx=Glagolitic}` matches all proper symbols"
+  /^\p{scx=Glagolitic}+$/u.test(matchSymbols),
+  "`\\p{scx=Glagolitic}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Glag}+$/u.test(matchSymbols),
-	"`\\p{scx=Glag}` matches all proper symbols"
+  /^\p{scx=Glag}+$/u.test(matchSymbols),
+  "`\\p{scx=Glag}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x002C2F,
-		0x01E007,
-		0x01E022,
-		0x01E025
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x000483],
-		[0x000485, 0x000486],
-		[0x000488, 0x002BFF],
-		[0x002C5F, 0x002E42],
-		[0x002E44, 0x00A66E],
-		[0x00A670, 0x00DBFF],
-		[0x00E000, 0x01DFFF],
-		[0x01E019, 0x01E01A],
-		[0x01E02B, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x002C2F,
+    0x01E007,
+    0x01E022,
+    0x01E025
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x000483],
+    [0x000485, 0x000486],
+    [0x000488, 0x002BFF],
+    [0x002C5F, 0x002E42],
+    [0x002E44, 0x00A66E],
+    [0x00A670, 0x00DBFF],
+    [0x00E000, 0x01DFFF],
+    [0x01E019, 0x01E01A],
+    [0x01E02B, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Glagolitic}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Glagolitic}` matches all proper symbols"
+  /^\P{Script_Extensions=Glagolitic}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Glagolitic}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Glag}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Glag}` matches all proper symbols"
+  /^\P{Script_Extensions=Glag}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Glag}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Glagolitic}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Glagolitic}` matches all proper symbols"
+  /^\P{scx=Glagolitic}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Glagolitic}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Glag}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Glag}` matches all proper symbols"
+  /^\P{scx=Glag}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Glag}` matches all proper symbols"
 );

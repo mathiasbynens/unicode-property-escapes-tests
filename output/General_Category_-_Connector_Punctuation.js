@@ -10,97 +10,81 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x00005F,
-		0x002054,
-		0x00FF3F
-	],
-	ranges: [
-		[0x00203F, 0x002040],
-		[0x00FE33, 0x00FE34],
-		[0x00FE4D, 0x00FE4F]
-	]
+  loneCodePoints: [
+    0x00005F,
+    0x002054,
+    0x00FF3F
+  ],
+  ranges: [
+    [0x00203F, 0x002040],
+    [0x00FE33, 0x00FE34],
+    [0x00FE4D, 0x00FE4F]
+  ]
 });
 assert(
-	/^\p{General_Category=Connector_Punctuation}+$/u.test(matchSymbols),
-	"`\\p{General_Category=Connector_Punctuation}` matches all proper symbols"
+  /^\p{General_Category=Connector_Punctuation}+$/u.test(matchSymbols),
+  "`\\p{General_Category=Connector_Punctuation}` matches all proper symbols"
 );
 assert(
-	/^\p{General_Category=Pc}+$/u.test(matchSymbols),
-	"`\\p{General_Category=Pc}` matches all proper symbols"
+  /^\p{General_Category=Pc}+$/u.test(matchSymbols),
+  "`\\p{General_Category=Pc}` matches all proper symbols"
 );
 assert(
-	/^\p{gc=Connector_Punctuation}+$/u.test(matchSymbols),
-	"`\\p{gc=Connector_Punctuation}` matches all proper symbols"
+  /^\p{gc=Connector_Punctuation}+$/u.test(matchSymbols),
+  "`\\p{gc=Connector_Punctuation}` matches all proper symbols"
 );
 assert(
-	/^\p{gc=Pc}+$/u.test(matchSymbols),
-	"`\\p{gc=Pc}` matches all proper symbols"
+  /^\p{gc=Pc}+$/u.test(matchSymbols),
+  "`\\p{gc=Pc}` matches all proper symbols"
 );
 assert(
-	/^\p{Connector_Punctuation}+$/u.test(matchSymbols),
-	"`\\p{Connector_Punctuation}` matches all proper symbols"
+  /^\p{Connector_Punctuation}+$/u.test(matchSymbols),
+  "`\\p{Connector_Punctuation}` matches all proper symbols"
 );
 assert(
-	/^\p{Pc}+$/u.test(matchSymbols),
-	"`\\p{Pc}` matches all proper symbols"
+  /^\p{Pc}+$/u.test(matchSymbols),
+  "`\\p{Pc}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00005E],
-		[0x000060, 0x00203E],
-		[0x002041, 0x002053],
-		[0x002055, 0x00DBFF],
-		[0x00E000, 0x00FE32],
-		[0x00FE35, 0x00FE4C],
-		[0x00FE50, 0x00FF3E],
-		[0x00FF40, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00005E],
+    [0x000060, 0x00203E],
+    [0x002041, 0x002053],
+    [0x002055, 0x00DBFF],
+    [0x00E000, 0x00FE32],
+    [0x00FE35, 0x00FE4C],
+    [0x00FE50, 0x00FF3E],
+    [0x00FF40, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{General_Category=Connector_Punctuation}+$/u.test(nonMatchSymbols),
-	"`\\P{General_Category=Connector_Punctuation}` matches all proper symbols"
+  /^\P{General_Category=Connector_Punctuation}+$/u.test(nonMatchSymbols),
+  "`\\P{General_Category=Connector_Punctuation}` matches all proper symbols"
 );
 assert(
-	/^\P{General_Category=Pc}+$/u.test(nonMatchSymbols),
-	"`\\P{General_Category=Pc}` matches all proper symbols"
+  /^\P{General_Category=Pc}+$/u.test(nonMatchSymbols),
+  "`\\P{General_Category=Pc}` matches all proper symbols"
 );
 assert(
-	/^\P{gc=Connector_Punctuation}+$/u.test(nonMatchSymbols),
-	"`\\P{gc=Connector_Punctuation}` matches all proper symbols"
+  /^\P{gc=Connector_Punctuation}+$/u.test(nonMatchSymbols),
+  "`\\P{gc=Connector_Punctuation}` matches all proper symbols"
 );
 assert(
-	/^\P{gc=Pc}+$/u.test(nonMatchSymbols),
-	"`\\P{gc=Pc}` matches all proper symbols"
+  /^\P{gc=Pc}+$/u.test(nonMatchSymbols),
+  "`\\P{gc=Pc}` matches all proper symbols"
 );
 assert(
-	/^\P{Connector_Punctuation}+$/u.test(nonMatchSymbols),
-	"`\\P{Connector_Punctuation}` matches all proper symbols"
+  /^\P{Connector_Punctuation}+$/u.test(nonMatchSymbols),
+  "`\\P{Connector_Punctuation}` matches all proper symbols"
 );
 assert(
-	/^\P{Pc}+$/u.test(nonMatchSymbols),
-	"`\\P{Pc}` matches all proper symbols"
+  /^\P{Pc}+$/u.test(nonMatchSymbols),
+  "`\\P{Pc}` matches all proper symbols"
 );

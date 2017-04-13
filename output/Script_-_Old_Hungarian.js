@@ -10,74 +10,58 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x010C80, 0x010CB2],
-		[0x010CC0, 0x010CF2],
-		[0x010CFA, 0x010CFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x010C80, 0x010CB2],
+    [0x010CC0, 0x010CF2],
+    [0x010CFA, 0x010CFF]
+  ]
 });
 assert(
-	/^\p{Script=Old_Hungarian}+$/u.test(matchSymbols),
-	"`\\p{Script=Old_Hungarian}` matches all proper symbols"
+  /^\p{Script=Old_Hungarian}+$/u.test(matchSymbols),
+  "`\\p{Script=Old_Hungarian}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Hung}+$/u.test(matchSymbols),
-	"`\\p{Script=Hung}` matches all proper symbols"
+  /^\p{Script=Hung}+$/u.test(matchSymbols),
+  "`\\p{Script=Hung}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Old_Hungarian}+$/u.test(matchSymbols),
-	"`\\p{sc=Old_Hungarian}` matches all proper symbols"
+  /^\p{sc=Old_Hungarian}+$/u.test(matchSymbols),
+  "`\\p{sc=Old_Hungarian}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Hung}+$/u.test(matchSymbols),
-	"`\\p{sc=Hung}` matches all proper symbols"
+  /^\p{sc=Hung}+$/u.test(matchSymbols),
+  "`\\p{sc=Hung}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00DBFF],
-		[0x00E000, 0x010C7F],
-		[0x010CB3, 0x010CBF],
-		[0x010CF3, 0x010CF9],
-		[0x010D00, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00DBFF],
+    [0x00E000, 0x010C7F],
+    [0x010CB3, 0x010CBF],
+    [0x010CF3, 0x010CF9],
+    [0x010D00, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Old_Hungarian}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Old_Hungarian}` matches all proper symbols"
+  /^\P{Script=Old_Hungarian}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Old_Hungarian}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Hung}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Hung}` matches all proper symbols"
+  /^\P{Script=Hung}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Hung}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Old_Hungarian}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Old_Hungarian}` matches all proper symbols"
+  /^\P{sc=Old_Hungarian}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Old_Hungarian}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Hung}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Hung}` matches all proper symbols"
+  /^\P{sc=Hung}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Hung}` matches all proper symbols"
 );

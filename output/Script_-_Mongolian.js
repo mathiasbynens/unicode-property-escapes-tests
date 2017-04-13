@@ -10,84 +10,68 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x001804
-	],
-	ranges: [
-		[0x001800, 0x001801],
-		[0x001806, 0x00180E],
-		[0x001810, 0x001819],
-		[0x001820, 0x001877],
-		[0x001880, 0x0018AA],
-		[0x011660, 0x01166C]
-	]
+  loneCodePoints: [
+    0x001804
+  ],
+  ranges: [
+    [0x001800, 0x001801],
+    [0x001806, 0x00180E],
+    [0x001810, 0x001819],
+    [0x001820, 0x001877],
+    [0x001880, 0x0018AA],
+    [0x011660, 0x01166C]
+  ]
 });
 assert(
-	/^\p{Script=Mongolian}+$/u.test(matchSymbols),
-	"`\\p{Script=Mongolian}` matches all proper symbols"
+  /^\p{Script=Mongolian}+$/u.test(matchSymbols),
+  "`\\p{Script=Mongolian}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Mong}+$/u.test(matchSymbols),
-	"`\\p{Script=Mong}` matches all proper symbols"
+  /^\p{Script=Mong}+$/u.test(matchSymbols),
+  "`\\p{Script=Mong}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Mongolian}+$/u.test(matchSymbols),
-	"`\\p{sc=Mongolian}` matches all proper symbols"
+  /^\p{sc=Mongolian}+$/u.test(matchSymbols),
+  "`\\p{sc=Mongolian}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Mong}+$/u.test(matchSymbols),
-	"`\\p{sc=Mong}` matches all proper symbols"
+  /^\p{sc=Mong}+$/u.test(matchSymbols),
+  "`\\p{sc=Mong}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x001805,
-		0x00180F
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x0017FF],
-		[0x001802, 0x001803],
-		[0x00181A, 0x00181F],
-		[0x001878, 0x00187F],
-		[0x0018AB, 0x00DBFF],
-		[0x00E000, 0x01165F],
-		[0x01166D, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x001805,
+    0x00180F
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x0017FF],
+    [0x001802, 0x001803],
+    [0x00181A, 0x00181F],
+    [0x001878, 0x00187F],
+    [0x0018AB, 0x00DBFF],
+    [0x00E000, 0x01165F],
+    [0x01166D, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Mongolian}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Mongolian}` matches all proper symbols"
+  /^\P{Script=Mongolian}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Mongolian}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Mong}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Mong}` matches all proper symbols"
+  /^\P{Script=Mong}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Mong}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Mongolian}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Mongolian}` matches all proper symbols"
+  /^\P{sc=Mongolian}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Mongolian}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Mong}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Mong}` matches all proper symbols"
+  /^\P{sc=Mong}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Mong}` matches all proper symbols"
 );

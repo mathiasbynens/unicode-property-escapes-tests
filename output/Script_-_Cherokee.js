@@ -10,74 +10,58 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x0013A0, 0x0013F5],
-		[0x0013F8, 0x0013FD],
-		[0x00AB70, 0x00ABBF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x0013A0, 0x0013F5],
+    [0x0013F8, 0x0013FD],
+    [0x00AB70, 0x00ABBF]
+  ]
 });
 assert(
-	/^\p{Script=Cherokee}+$/u.test(matchSymbols),
-	"`\\p{Script=Cherokee}` matches all proper symbols"
+  /^\p{Script=Cherokee}+$/u.test(matchSymbols),
+  "`\\p{Script=Cherokee}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Cher}+$/u.test(matchSymbols),
-	"`\\p{Script=Cher}` matches all proper symbols"
+  /^\p{Script=Cher}+$/u.test(matchSymbols),
+  "`\\p{Script=Cher}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Cherokee}+$/u.test(matchSymbols),
-	"`\\p{sc=Cherokee}` matches all proper symbols"
+  /^\p{sc=Cherokee}+$/u.test(matchSymbols),
+  "`\\p{sc=Cherokee}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Cher}+$/u.test(matchSymbols),
-	"`\\p{sc=Cher}` matches all proper symbols"
+  /^\p{sc=Cher}+$/u.test(matchSymbols),
+  "`\\p{sc=Cher}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00139F],
-		[0x0013F6, 0x0013F7],
-		[0x0013FE, 0x00AB6F],
-		[0x00ABC0, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00139F],
+    [0x0013F6, 0x0013F7],
+    [0x0013FE, 0x00AB6F],
+    [0x00ABC0, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Cherokee}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Cherokee}` matches all proper symbols"
+  /^\P{Script=Cherokee}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Cherokee}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Cher}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Cher}` matches all proper symbols"
+  /^\P{Script=Cher}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Cher}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Cherokee}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Cherokee}` matches all proper symbols"
+  /^\P{sc=Cherokee}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Cherokee}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Cher}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Cher}` matches all proper symbols"
+  /^\P{sc=Cher}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Cher}` matches all proper symbols"
 );

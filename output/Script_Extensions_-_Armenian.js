@@ -10,81 +10,65 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x000531, 0x000556],
-		[0x000559, 0x00055F],
-		[0x000561, 0x000587],
-		[0x000589, 0x00058A],
-		[0x00058D, 0x00058F],
-		[0x00FB13, 0x00FB17]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x000531, 0x000556],
+    [0x000559, 0x00055F],
+    [0x000561, 0x000587],
+    [0x000589, 0x00058A],
+    [0x00058D, 0x00058F],
+    [0x00FB13, 0x00FB17]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Armenian}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Armenian}` matches all proper symbols"
+  /^\p{Script_Extensions=Armenian}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Armenian}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Armn}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Armn}` matches all proper symbols"
+  /^\p{Script_Extensions=Armn}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Armn}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Armenian}+$/u.test(matchSymbols),
-	"`\\p{scx=Armenian}` matches all proper symbols"
+  /^\p{scx=Armenian}+$/u.test(matchSymbols),
+  "`\\p{scx=Armenian}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Armn}+$/u.test(matchSymbols),
-	"`\\p{scx=Armn}` matches all proper symbols"
+  /^\p{scx=Armn}+$/u.test(matchSymbols),
+  "`\\p{scx=Armn}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x000560,
-		0x000588
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x000530],
-		[0x000557, 0x000558],
-		[0x00058B, 0x00058C],
-		[0x000590, 0x00DBFF],
-		[0x00E000, 0x00FB12],
-		[0x00FB18, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x000560,
+    0x000588
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x000530],
+    [0x000557, 0x000558],
+    [0x00058B, 0x00058C],
+    [0x000590, 0x00DBFF],
+    [0x00E000, 0x00FB12],
+    [0x00FB18, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Armenian}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Armenian}` matches all proper symbols"
+  /^\P{Script_Extensions=Armenian}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Armenian}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Armn}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Armn}` matches all proper symbols"
+  /^\P{Script_Extensions=Armn}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Armn}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Armenian}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Armenian}` matches all proper symbols"
+  /^\P{scx=Armenian}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Armenian}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Armn}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Armn}` matches all proper symbols"
+  /^\P{scx=Armn}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Armn}` matches all proper symbols"
 );

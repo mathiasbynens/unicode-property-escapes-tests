@@ -10,95 +10,79 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x000C00, 0x000C03],
-		[0x000C05, 0x000C0C],
-		[0x000C0E, 0x000C10],
-		[0x000C12, 0x000C28],
-		[0x000C2A, 0x000C39],
-		[0x000C3D, 0x000C44],
-		[0x000C46, 0x000C48],
-		[0x000C4A, 0x000C4D],
-		[0x000C55, 0x000C56],
-		[0x000C58, 0x000C5A],
-		[0x000C60, 0x000C63],
-		[0x000C66, 0x000C6F],
-		[0x000C78, 0x000C7F]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x000C00, 0x000C03],
+    [0x000C05, 0x000C0C],
+    [0x000C0E, 0x000C10],
+    [0x000C12, 0x000C28],
+    [0x000C2A, 0x000C39],
+    [0x000C3D, 0x000C44],
+    [0x000C46, 0x000C48],
+    [0x000C4A, 0x000C4D],
+    [0x000C55, 0x000C56],
+    [0x000C58, 0x000C5A],
+    [0x000C60, 0x000C63],
+    [0x000C66, 0x000C6F],
+    [0x000C78, 0x000C7F]
+  ]
 });
 assert(
-	/^\p{Script=Telugu}+$/u.test(matchSymbols),
-	"`\\p{Script=Telugu}` matches all proper symbols"
+  /^\p{Script=Telugu}+$/u.test(matchSymbols),
+  "`\\p{Script=Telugu}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Telu}+$/u.test(matchSymbols),
-	"`\\p{Script=Telu}` matches all proper symbols"
+  /^\p{Script=Telu}+$/u.test(matchSymbols),
+  "`\\p{Script=Telu}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Telugu}+$/u.test(matchSymbols),
-	"`\\p{sc=Telugu}` matches all proper symbols"
+  /^\p{sc=Telugu}+$/u.test(matchSymbols),
+  "`\\p{sc=Telugu}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Telu}+$/u.test(matchSymbols),
-	"`\\p{sc=Telu}` matches all proper symbols"
+  /^\p{sc=Telu}+$/u.test(matchSymbols),
+  "`\\p{sc=Telu}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x000C04,
-		0x000C0D,
-		0x000C11,
-		0x000C29,
-		0x000C45,
-		0x000C49,
-		0x000C57
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x000BFF],
-		[0x000C3A, 0x000C3C],
-		[0x000C4E, 0x000C54],
-		[0x000C5B, 0x000C5F],
-		[0x000C64, 0x000C65],
-		[0x000C70, 0x000C77],
-		[0x000C80, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x000C04,
+    0x000C0D,
+    0x000C11,
+    0x000C29,
+    0x000C45,
+    0x000C49,
+    0x000C57
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x000BFF],
+    [0x000C3A, 0x000C3C],
+    [0x000C4E, 0x000C54],
+    [0x000C5B, 0x000C5F],
+    [0x000C64, 0x000C65],
+    [0x000C70, 0x000C77],
+    [0x000C80, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Telugu}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Telugu}` matches all proper symbols"
+  /^\P{Script=Telugu}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Telugu}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Telu}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Telu}` matches all proper symbols"
+  /^\P{Script=Telu}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Telu}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Telugu}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Telugu}` matches all proper symbols"
+  /^\P{sc=Telugu}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Telugu}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Telu}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Telu}` matches all proper symbols"
+  /^\P{sc=Telu}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Telu}` matches all proper symbols"
 );

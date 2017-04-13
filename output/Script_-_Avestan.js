@@ -10,72 +10,56 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x010B00, 0x010B35],
-		[0x010B39, 0x010B3F]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x010B00, 0x010B35],
+    [0x010B39, 0x010B3F]
+  ]
 });
 assert(
-	/^\p{Script=Avestan}+$/u.test(matchSymbols),
-	"`\\p{Script=Avestan}` matches all proper symbols"
+  /^\p{Script=Avestan}+$/u.test(matchSymbols),
+  "`\\p{Script=Avestan}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Avst}+$/u.test(matchSymbols),
-	"`\\p{Script=Avst}` matches all proper symbols"
+  /^\p{Script=Avst}+$/u.test(matchSymbols),
+  "`\\p{Script=Avst}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Avestan}+$/u.test(matchSymbols),
-	"`\\p{sc=Avestan}` matches all proper symbols"
+  /^\p{sc=Avestan}+$/u.test(matchSymbols),
+  "`\\p{sc=Avestan}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Avst}+$/u.test(matchSymbols),
-	"`\\p{sc=Avst}` matches all proper symbols"
+  /^\p{sc=Avst}+$/u.test(matchSymbols),
+  "`\\p{sc=Avst}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00DBFF],
-		[0x00E000, 0x010AFF],
-		[0x010B36, 0x010B38],
-		[0x010B40, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00DBFF],
+    [0x00E000, 0x010AFF],
+    [0x010B36, 0x010B38],
+    [0x010B40, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Avestan}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Avestan}` matches all proper symbols"
+  /^\P{Script=Avestan}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Avestan}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Avst}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Avst}` matches all proper symbols"
+  /^\P{Script=Avst}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Avst}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Avestan}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Avestan}` matches all proper symbols"
+  /^\P{sc=Avestan}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Avestan}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Avst}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Avst}` matches all proper symbols"
+  /^\P{sc=Avst}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Avst}` matches all proper symbols"
 );

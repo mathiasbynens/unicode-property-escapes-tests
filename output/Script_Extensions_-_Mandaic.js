@@ -10,75 +10,59 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x000640,
-		0x00085E
-	],
-	ranges: [
-		[0x000840, 0x00085B]
-	]
+  loneCodePoints: [
+    0x000640,
+    0x00085E
+  ],
+  ranges: [
+    [0x000840, 0x00085B]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Mandaic}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Mandaic}` matches all proper symbols"
+  /^\p{Script_Extensions=Mandaic}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Mandaic}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Mand}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Mand}` matches all proper symbols"
+  /^\p{Script_Extensions=Mand}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Mand}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Mandaic}+$/u.test(matchSymbols),
-	"`\\p{scx=Mandaic}` matches all proper symbols"
+  /^\p{scx=Mandaic}+$/u.test(matchSymbols),
+  "`\\p{scx=Mandaic}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Mand}+$/u.test(matchSymbols),
-	"`\\p{scx=Mand}` matches all proper symbols"
+  /^\p{scx=Mand}+$/u.test(matchSymbols),
+  "`\\p{scx=Mand}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00063F],
-		[0x000641, 0x00083F],
-		[0x00085C, 0x00085D],
-		[0x00085F, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00063F],
+    [0x000641, 0x00083F],
+    [0x00085C, 0x00085D],
+    [0x00085F, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Mandaic}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Mandaic}` matches all proper symbols"
+  /^\P{Script_Extensions=Mandaic}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Mandaic}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Mand}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Mand}` matches all proper symbols"
+  /^\P{Script_Extensions=Mand}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Mand}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Mandaic}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Mandaic}` matches all proper symbols"
+  /^\P{scx=Mandaic}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Mandaic}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Mand}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Mand}` matches all proper symbols"
+  /^\P{scx=Mand}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Mand}` matches all proper symbols"
 );

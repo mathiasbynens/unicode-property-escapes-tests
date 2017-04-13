@@ -10,74 +10,58 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00A980, 0x00A9CD],
-		[0x00A9D0, 0x00A9D9],
-		[0x00A9DE, 0x00A9DF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00A980, 0x00A9CD],
+    [0x00A9D0, 0x00A9D9],
+    [0x00A9DE, 0x00A9DF]
+  ]
 });
 assert(
-	/^\p{Script=Javanese}+$/u.test(matchSymbols),
-	"`\\p{Script=Javanese}` matches all proper symbols"
+  /^\p{Script=Javanese}+$/u.test(matchSymbols),
+  "`\\p{Script=Javanese}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Java}+$/u.test(matchSymbols),
-	"`\\p{Script=Java}` matches all proper symbols"
+  /^\p{Script=Java}+$/u.test(matchSymbols),
+  "`\\p{Script=Java}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Javanese}+$/u.test(matchSymbols),
-	"`\\p{sc=Javanese}` matches all proper symbols"
+  /^\p{sc=Javanese}+$/u.test(matchSymbols),
+  "`\\p{sc=Javanese}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Java}+$/u.test(matchSymbols),
-	"`\\p{sc=Java}` matches all proper symbols"
+  /^\p{sc=Java}+$/u.test(matchSymbols),
+  "`\\p{sc=Java}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00A97F],
-		[0x00A9CE, 0x00A9CF],
-		[0x00A9DA, 0x00A9DD],
-		[0x00A9E0, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00A97F],
+    [0x00A9CE, 0x00A9CF],
+    [0x00A9DA, 0x00A9DD],
+    [0x00A9E0, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Javanese}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Javanese}` matches all proper symbols"
+  /^\P{Script=Javanese}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Javanese}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Java}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Java}` matches all proper symbols"
+  /^\P{Script=Java}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Java}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Javanese}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Javanese}` matches all proper symbols"
+  /^\P{sc=Javanese}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Javanese}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Java}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Java}` matches all proper symbols"
+  /^\P{sc=Java}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Java}` matches all proper symbols"
 );

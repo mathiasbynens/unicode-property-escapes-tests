@@ -10,77 +10,61 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x001735, 0x001736],
-		[0x001760, 0x00176C],
-		[0x00176E, 0x001770],
-		[0x001772, 0x001773]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x001735, 0x001736],
+    [0x001760, 0x00176C],
+    [0x00176E, 0x001770],
+    [0x001772, 0x001773]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Tagbanwa}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Tagbanwa}` matches all proper symbols"
+  /^\p{Script_Extensions=Tagbanwa}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Tagbanwa}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Tagb}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Tagb}` matches all proper symbols"
+  /^\p{Script_Extensions=Tagb}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Tagb}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Tagbanwa}+$/u.test(matchSymbols),
-	"`\\p{scx=Tagbanwa}` matches all proper symbols"
+  /^\p{scx=Tagbanwa}+$/u.test(matchSymbols),
+  "`\\p{scx=Tagbanwa}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Tagb}+$/u.test(matchSymbols),
-	"`\\p{scx=Tagb}` matches all proper symbols"
+  /^\p{scx=Tagb}+$/u.test(matchSymbols),
+  "`\\p{scx=Tagb}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x00176D,
-		0x001771
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x001734],
-		[0x001737, 0x00175F],
-		[0x001774, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x00176D,
+    0x001771
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x001734],
+    [0x001737, 0x00175F],
+    [0x001774, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Tagbanwa}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Tagbanwa}` matches all proper symbols"
+  /^\P{Script_Extensions=Tagbanwa}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Tagbanwa}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Tagb}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Tagb}` matches all proper symbols"
+  /^\P{Script_Extensions=Tagb}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Tagb}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Tagbanwa}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Tagbanwa}` matches all proper symbols"
+  /^\P{scx=Tagbanwa}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Tagbanwa}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Tagb}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Tagb}` matches all proper symbols"
+  /^\P{scx=Tagb}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Tagb}` matches all proper symbols"
 );

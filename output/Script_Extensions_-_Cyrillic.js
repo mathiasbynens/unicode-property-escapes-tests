@@ -10,85 +10,69 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x001D2B,
-		0x001D78,
-		0x002E43
-	],
-	ranges: [
-		[0x000400, 0x00052F],
-		[0x001C80, 0x001C88],
-		[0x002DE0, 0x002DFF],
-		[0x00A640, 0x00A69F],
-		[0x00FE2E, 0x00FE2F]
-	]
+  loneCodePoints: [
+    0x001D2B,
+    0x001D78,
+    0x002E43
+  ],
+  ranges: [
+    [0x000400, 0x00052F],
+    [0x001C80, 0x001C88],
+    [0x002DE0, 0x002DFF],
+    [0x00A640, 0x00A69F],
+    [0x00FE2E, 0x00FE2F]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Cyrillic}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Cyrillic}` matches all proper symbols"
+  /^\p{Script_Extensions=Cyrillic}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Cyrillic}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Cyrl}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Cyrl}` matches all proper symbols"
+  /^\p{Script_Extensions=Cyrl}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Cyrl}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Cyrillic}+$/u.test(matchSymbols),
-	"`\\p{scx=Cyrillic}` matches all proper symbols"
+  /^\p{scx=Cyrillic}+$/u.test(matchSymbols),
+  "`\\p{scx=Cyrillic}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Cyrl}+$/u.test(matchSymbols),
-	"`\\p{scx=Cyrl}` matches all proper symbols"
+  /^\p{scx=Cyrl}+$/u.test(matchSymbols),
+  "`\\p{scx=Cyrl}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x0003FF],
-		[0x000530, 0x001C7F],
-		[0x001C89, 0x001D2A],
-		[0x001D2C, 0x001D77],
-		[0x001D79, 0x002DDF],
-		[0x002E00, 0x002E42],
-		[0x002E44, 0x00A63F],
-		[0x00A6A0, 0x00DBFF],
-		[0x00E000, 0x00FE2D],
-		[0x00FE30, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x0003FF],
+    [0x000530, 0x001C7F],
+    [0x001C89, 0x001D2A],
+    [0x001D2C, 0x001D77],
+    [0x001D79, 0x002DDF],
+    [0x002E00, 0x002E42],
+    [0x002E44, 0x00A63F],
+    [0x00A6A0, 0x00DBFF],
+    [0x00E000, 0x00FE2D],
+    [0x00FE30, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Cyrillic}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Cyrillic}` matches all proper symbols"
+  /^\P{Script_Extensions=Cyrillic}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Cyrillic}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Cyrl}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Cyrl}` matches all proper symbols"
+  /^\P{Script_Extensions=Cyrl}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Cyrl}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Cyrillic}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Cyrillic}` matches all proper symbols"
+  /^\P{scx=Cyrillic}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Cyrillic}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Cyrl}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Cyrl}` matches all proper symbols"
+  /^\P{scx=Cyrl}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Cyrl}` matches all proper symbols"
 );

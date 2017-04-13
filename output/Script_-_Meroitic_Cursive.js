@@ -10,74 +10,58 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x0109A0, 0x0109B7],
-		[0x0109BC, 0x0109CF],
-		[0x0109D2, 0x0109FF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x0109A0, 0x0109B7],
+    [0x0109BC, 0x0109CF],
+    [0x0109D2, 0x0109FF]
+  ]
 });
 assert(
-	/^\p{Script=Meroitic_Cursive}+$/u.test(matchSymbols),
-	"`\\p{Script=Meroitic_Cursive}` matches all proper symbols"
+  /^\p{Script=Meroitic_Cursive}+$/u.test(matchSymbols),
+  "`\\p{Script=Meroitic_Cursive}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Merc}+$/u.test(matchSymbols),
-	"`\\p{Script=Merc}` matches all proper symbols"
+  /^\p{Script=Merc}+$/u.test(matchSymbols),
+  "`\\p{Script=Merc}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Meroitic_Cursive}+$/u.test(matchSymbols),
-	"`\\p{sc=Meroitic_Cursive}` matches all proper symbols"
+  /^\p{sc=Meroitic_Cursive}+$/u.test(matchSymbols),
+  "`\\p{sc=Meroitic_Cursive}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Merc}+$/u.test(matchSymbols),
-	"`\\p{sc=Merc}` matches all proper symbols"
+  /^\p{sc=Merc}+$/u.test(matchSymbols),
+  "`\\p{sc=Merc}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00DBFF],
-		[0x00E000, 0x01099F],
-		[0x0109B8, 0x0109BB],
-		[0x0109D0, 0x0109D1],
-		[0x010A00, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00DBFF],
+    [0x00E000, 0x01099F],
+    [0x0109B8, 0x0109BB],
+    [0x0109D0, 0x0109D1],
+    [0x010A00, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Meroitic_Cursive}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Meroitic_Cursive}` matches all proper symbols"
+  /^\P{Script=Meroitic_Cursive}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Meroitic_Cursive}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Merc}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Merc}` matches all proper symbols"
+  /^\P{Script=Merc}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Merc}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Meroitic_Cursive}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Meroitic_Cursive}` matches all proper symbols"
+  /^\P{sc=Meroitic_Cursive}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Meroitic_Cursive}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Merc}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Merc}` matches all proper symbols"
+  /^\P{sc=Merc}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Merc}` matches all proper symbols"
 );

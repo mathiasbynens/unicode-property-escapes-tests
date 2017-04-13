@@ -10,72 +10,56 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x010480, 0x01049D],
-		[0x0104A0, 0x0104A9]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x010480, 0x01049D],
+    [0x0104A0, 0x0104A9]
+  ]
 });
 assert(
-	/^\p{Script=Osmanya}+$/u.test(matchSymbols),
-	"`\\p{Script=Osmanya}` matches all proper symbols"
+  /^\p{Script=Osmanya}+$/u.test(matchSymbols),
+  "`\\p{Script=Osmanya}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Osma}+$/u.test(matchSymbols),
-	"`\\p{Script=Osma}` matches all proper symbols"
+  /^\p{Script=Osma}+$/u.test(matchSymbols),
+  "`\\p{Script=Osma}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Osmanya}+$/u.test(matchSymbols),
-	"`\\p{sc=Osmanya}` matches all proper symbols"
+  /^\p{sc=Osmanya}+$/u.test(matchSymbols),
+  "`\\p{sc=Osmanya}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Osma}+$/u.test(matchSymbols),
-	"`\\p{sc=Osma}` matches all proper symbols"
+  /^\p{sc=Osma}+$/u.test(matchSymbols),
+  "`\\p{sc=Osma}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00DBFF],
-		[0x00E000, 0x01047F],
-		[0x01049E, 0x01049F],
-		[0x0104AA, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00DBFF],
+    [0x00E000, 0x01047F],
+    [0x01049E, 0x01049F],
+    [0x0104AA, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Osmanya}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Osmanya}` matches all proper symbols"
+  /^\P{Script=Osmanya}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Osmanya}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Osma}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Osma}` matches all proper symbols"
+  /^\P{Script=Osma}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Osma}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Osmanya}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Osmanya}` matches all proper symbols"
+  /^\P{sc=Osmanya}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Osmanya}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Osma}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Osma}` matches all proper symbols"
+  /^\P{sc=Osma}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Osma}` matches all proper symbols"
 );

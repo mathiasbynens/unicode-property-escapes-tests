@@ -10,88 +10,72 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x010808,
-		0x01083C,
-		0x01083F
-	],
-	ranges: [
-		[0x010100, 0x010102],
-		[0x010107, 0x010133],
-		[0x010137, 0x01013F],
-		[0x010800, 0x010805],
-		[0x01080A, 0x010835],
-		[0x010837, 0x010838]
-	]
+  loneCodePoints: [
+    0x010808,
+    0x01083C,
+    0x01083F
+  ],
+  ranges: [
+    [0x010100, 0x010102],
+    [0x010107, 0x010133],
+    [0x010137, 0x01013F],
+    [0x010800, 0x010805],
+    [0x01080A, 0x010835],
+    [0x010837, 0x010838]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Cypriot}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Cypriot}` matches all proper symbols"
+  /^\p{Script_Extensions=Cypriot}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Cypriot}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Cprt}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Cprt}` matches all proper symbols"
+  /^\p{Script_Extensions=Cprt}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Cprt}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Cypriot}+$/u.test(matchSymbols),
-	"`\\p{scx=Cypriot}` matches all proper symbols"
+  /^\p{scx=Cypriot}+$/u.test(matchSymbols),
+  "`\\p{scx=Cypriot}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Cprt}+$/u.test(matchSymbols),
-	"`\\p{scx=Cprt}` matches all proper symbols"
+  /^\p{scx=Cprt}+$/u.test(matchSymbols),
+  "`\\p{scx=Cprt}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x010809,
-		0x010836
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00DBFF],
-		[0x00E000, 0x0100FF],
-		[0x010103, 0x010106],
-		[0x010134, 0x010136],
-		[0x010140, 0x0107FF],
-		[0x010806, 0x010807],
-		[0x010839, 0x01083B],
-		[0x01083D, 0x01083E],
-		[0x010840, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x010809,
+    0x010836
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00DBFF],
+    [0x00E000, 0x0100FF],
+    [0x010103, 0x010106],
+    [0x010134, 0x010136],
+    [0x010140, 0x0107FF],
+    [0x010806, 0x010807],
+    [0x010839, 0x01083B],
+    [0x01083D, 0x01083E],
+    [0x010840, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Cypriot}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Cypriot}` matches all proper symbols"
+  /^\P{Script_Extensions=Cypriot}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Cypriot}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Cprt}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Cprt}` matches all proper symbols"
+  /^\P{Script_Extensions=Cprt}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Cprt}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Cypriot}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Cypriot}` matches all proper symbols"
+  /^\P{scx=Cypriot}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Cypriot}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Cprt}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Cprt}` matches all proper symbols"
+  /^\P{scx=Cprt}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Cprt}` matches all proper symbols"
 );

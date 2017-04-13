@@ -10,77 +10,61 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x00A92E
-	],
-	ranges: [
-		[0x001000, 0x00109F],
-		[0x00A9E0, 0x00A9FE],
-		[0x00AA60, 0x00AA7F]
-	]
+  loneCodePoints: [
+    0x00A92E
+  ],
+  ranges: [
+    [0x001000, 0x00109F],
+    [0x00A9E0, 0x00A9FE],
+    [0x00AA60, 0x00AA7F]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Myanmar}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Myanmar}` matches all proper symbols"
+  /^\p{Script_Extensions=Myanmar}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Myanmar}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Mymr}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Mymr}` matches all proper symbols"
+  /^\p{Script_Extensions=Mymr}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Mymr}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Myanmar}+$/u.test(matchSymbols),
-	"`\\p{scx=Myanmar}` matches all proper symbols"
+  /^\p{scx=Myanmar}+$/u.test(matchSymbols),
+  "`\\p{scx=Myanmar}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Mymr}+$/u.test(matchSymbols),
-	"`\\p{scx=Mymr}` matches all proper symbols"
+  /^\p{scx=Mymr}+$/u.test(matchSymbols),
+  "`\\p{scx=Mymr}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x000FFF],
-		[0x0010A0, 0x00A92D],
-		[0x00A92F, 0x00A9DF],
-		[0x00A9FF, 0x00AA5F],
-		[0x00AA80, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x000FFF],
+    [0x0010A0, 0x00A92D],
+    [0x00A92F, 0x00A9DF],
+    [0x00A9FF, 0x00AA5F],
+    [0x00AA80, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Myanmar}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Myanmar}` matches all proper symbols"
+  /^\P{Script_Extensions=Myanmar}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Myanmar}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Mymr}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Mymr}` matches all proper symbols"
+  /^\P{Script_Extensions=Mymr}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Mymr}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Myanmar}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Myanmar}` matches all proper symbols"
+  /^\P{scx=Myanmar}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Myanmar}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Mymr}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Mymr}` matches all proper symbols"
+  /^\P{scx=Mymr}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Mymr}` matches all proper symbols"
 );

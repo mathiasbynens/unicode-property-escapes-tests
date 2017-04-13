@@ -10,79 +10,63 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x001A20, 0x001A5E],
-		[0x001A60, 0x001A7C],
-		[0x001A7F, 0x001A89],
-		[0x001A90, 0x001A99],
-		[0x001AA0, 0x001AAD]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x001A20, 0x001A5E],
+    [0x001A60, 0x001A7C],
+    [0x001A7F, 0x001A89],
+    [0x001A90, 0x001A99],
+    [0x001AA0, 0x001AAD]
+  ]
 });
 assert(
-	/^\p{Script=Tai_Tham}+$/u.test(matchSymbols),
-	"`\\p{Script=Tai_Tham}` matches all proper symbols"
+  /^\p{Script=Tai_Tham}+$/u.test(matchSymbols),
+  "`\\p{Script=Tai_Tham}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Lana}+$/u.test(matchSymbols),
-	"`\\p{Script=Lana}` matches all proper symbols"
+  /^\p{Script=Lana}+$/u.test(matchSymbols),
+  "`\\p{Script=Lana}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Tai_Tham}+$/u.test(matchSymbols),
-	"`\\p{sc=Tai_Tham}` matches all proper symbols"
+  /^\p{sc=Tai_Tham}+$/u.test(matchSymbols),
+  "`\\p{sc=Tai_Tham}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Lana}+$/u.test(matchSymbols),
-	"`\\p{sc=Lana}` matches all proper symbols"
+  /^\p{sc=Lana}+$/u.test(matchSymbols),
+  "`\\p{sc=Lana}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x001A5F
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x001A1F],
-		[0x001A7D, 0x001A7E],
-		[0x001A8A, 0x001A8F],
-		[0x001A9A, 0x001A9F],
-		[0x001AAE, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x001A5F
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x001A1F],
+    [0x001A7D, 0x001A7E],
+    [0x001A8A, 0x001A8F],
+    [0x001A9A, 0x001A9F],
+    [0x001AAE, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Tai_Tham}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Tai_Tham}` matches all proper symbols"
+  /^\P{Script=Tai_Tham}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Tai_Tham}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Lana}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Lana}` matches all proper symbols"
+  /^\P{Script=Lana}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Lana}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Tai_Tham}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Tai_Tham}` matches all proper symbols"
+  /^\P{sc=Tai_Tham}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Tai_Tham}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Lana}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Lana}` matches all proper symbols"
+  /^\P{sc=Lana}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Lana}` matches all proper symbols"
 );

@@ -10,75 +10,59 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x016A40, 0x016A5E],
-		[0x016A60, 0x016A69],
-		[0x016A6E, 0x016A6F]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x016A40, 0x016A5E],
+    [0x016A60, 0x016A69],
+    [0x016A6E, 0x016A6F]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Mro}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Mro}` matches all proper symbols"
+  /^\p{Script_Extensions=Mro}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Mro}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Mroo}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Mroo}` matches all proper symbols"
+  /^\p{Script_Extensions=Mroo}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Mroo}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Mro}+$/u.test(matchSymbols),
-	"`\\p{scx=Mro}` matches all proper symbols"
+  /^\p{scx=Mro}+$/u.test(matchSymbols),
+  "`\\p{scx=Mro}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Mroo}+$/u.test(matchSymbols),
-	"`\\p{scx=Mroo}` matches all proper symbols"
+  /^\p{scx=Mroo}+$/u.test(matchSymbols),
+  "`\\p{scx=Mroo}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x016A5F
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00DBFF],
-		[0x00E000, 0x016A3F],
-		[0x016A6A, 0x016A6D],
-		[0x016A70, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x016A5F
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00DBFF],
+    [0x00E000, 0x016A3F],
+    [0x016A6A, 0x016A6D],
+    [0x016A70, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Mro}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Mro}` matches all proper symbols"
+  /^\P{Script_Extensions=Mro}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Mro}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Mroo}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Mroo}` matches all proper symbols"
+  /^\P{Script_Extensions=Mroo}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Mroo}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Mro}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Mro}` matches all proper symbols"
+  /^\P{scx=Mro}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Mro}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Mroo}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Mroo}` matches all proper symbols"
+  /^\P{scx=Mroo}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Mroo}` matches all proper symbols"
 );

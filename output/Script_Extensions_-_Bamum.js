@@ -10,72 +10,56 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00A6A0, 0x00A6F7],
-		[0x016800, 0x016A38]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00A6A0, 0x00A6F7],
+    [0x016800, 0x016A38]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Bamum}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Bamum}` matches all proper symbols"
+  /^\p{Script_Extensions=Bamum}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Bamum}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Bamu}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Bamu}` matches all proper symbols"
+  /^\p{Script_Extensions=Bamu}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Bamu}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Bamum}+$/u.test(matchSymbols),
-	"`\\p{scx=Bamum}` matches all proper symbols"
+  /^\p{scx=Bamum}+$/u.test(matchSymbols),
+  "`\\p{scx=Bamum}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Bamu}+$/u.test(matchSymbols),
-	"`\\p{scx=Bamu}` matches all proper symbols"
+  /^\p{scx=Bamu}+$/u.test(matchSymbols),
+  "`\\p{scx=Bamu}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00A69F],
-		[0x00A6F8, 0x00DBFF],
-		[0x00E000, 0x0167FF],
-		[0x016A39, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00A69F],
+    [0x00A6F8, 0x00DBFF],
+    [0x00E000, 0x0167FF],
+    [0x016A39, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Bamum}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Bamum}` matches all proper symbols"
+  /^\P{Script_Extensions=Bamum}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Bamum}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Bamu}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Bamu}` matches all proper symbols"
+  /^\P{Script_Extensions=Bamu}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Bamu}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Bamum}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Bamum}` matches all proper symbols"
+  /^\P{scx=Bamum}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Bamum}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Bamu}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Bamu}` matches all proper symbols"
+  /^\P{scx=Bamu}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Bamu}` matches all proper symbols"
 );

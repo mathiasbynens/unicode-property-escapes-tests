@@ -10,80 +10,64 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x001940
-	],
-	ranges: [
-		[0x001900, 0x00191E],
-		[0x001920, 0x00192B],
-		[0x001930, 0x00193B],
-		[0x001944, 0x00194F]
-	]
+  loneCodePoints: [
+    0x001940
+  ],
+  ranges: [
+    [0x001900, 0x00191E],
+    [0x001920, 0x00192B],
+    [0x001930, 0x00193B],
+    [0x001944, 0x00194F]
+  ]
 });
 assert(
-	/^\p{Script=Limbu}+$/u.test(matchSymbols),
-	"`\\p{Script=Limbu}` matches all proper symbols"
+  /^\p{Script=Limbu}+$/u.test(matchSymbols),
+  "`\\p{Script=Limbu}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Limb}+$/u.test(matchSymbols),
-	"`\\p{Script=Limb}` matches all proper symbols"
+  /^\p{Script=Limb}+$/u.test(matchSymbols),
+  "`\\p{Script=Limb}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Limbu}+$/u.test(matchSymbols),
-	"`\\p{sc=Limbu}` matches all proper symbols"
+  /^\p{sc=Limbu}+$/u.test(matchSymbols),
+  "`\\p{sc=Limbu}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Limb}+$/u.test(matchSymbols),
-	"`\\p{sc=Limb}` matches all proper symbols"
+  /^\p{sc=Limb}+$/u.test(matchSymbols),
+  "`\\p{sc=Limb}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x00191F
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x0018FF],
-		[0x00192C, 0x00192F],
-		[0x00193C, 0x00193F],
-		[0x001941, 0x001943],
-		[0x001950, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x00191F
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x0018FF],
+    [0x00192C, 0x00192F],
+    [0x00193C, 0x00193F],
+    [0x001941, 0x001943],
+    [0x001950, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Limbu}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Limbu}` matches all proper symbols"
+  /^\P{Script=Limbu}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Limbu}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Limb}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Limb}` matches all proper symbols"
+  /^\P{Script=Limb}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Limb}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Limbu}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Limbu}` matches all proper symbols"
+  /^\P{sc=Limbu}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Limbu}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Limb}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Limb}` matches all proper symbols"
+  /^\P{sc=Limb}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Limb}` matches all proper symbols"
 );

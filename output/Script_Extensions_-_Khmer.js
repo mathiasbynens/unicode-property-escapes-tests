@@ -10,76 +10,60 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x001780, 0x0017DD],
-		[0x0017E0, 0x0017E9],
-		[0x0017F0, 0x0017F9],
-		[0x0019E0, 0x0019FF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x001780, 0x0017DD],
+    [0x0017E0, 0x0017E9],
+    [0x0017F0, 0x0017F9],
+    [0x0019E0, 0x0019FF]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Khmer}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Khmer}` matches all proper symbols"
+  /^\p{Script_Extensions=Khmer}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Khmer}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Khmr}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Khmr}` matches all proper symbols"
+  /^\p{Script_Extensions=Khmr}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Khmr}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Khmer}+$/u.test(matchSymbols),
-	"`\\p{scx=Khmer}` matches all proper symbols"
+  /^\p{scx=Khmer}+$/u.test(matchSymbols),
+  "`\\p{scx=Khmer}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Khmr}+$/u.test(matchSymbols),
-	"`\\p{scx=Khmr}` matches all proper symbols"
+  /^\p{scx=Khmr}+$/u.test(matchSymbols),
+  "`\\p{scx=Khmr}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00177F],
-		[0x0017DE, 0x0017DF],
-		[0x0017EA, 0x0017EF],
-		[0x0017FA, 0x0019DF],
-		[0x001A00, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00177F],
+    [0x0017DE, 0x0017DF],
+    [0x0017EA, 0x0017EF],
+    [0x0017FA, 0x0019DF],
+    [0x001A00, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Khmer}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Khmer}` matches all proper symbols"
+  /^\P{Script_Extensions=Khmer}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Khmer}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Khmr}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Khmr}` matches all proper symbols"
+  /^\P{Script_Extensions=Khmr}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Khmr}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Khmer}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Khmer}` matches all proper symbols"
+  /^\P{scx=Khmer}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Khmer}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Khmr}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Khmr}` matches all proper symbols"
+  /^\P{scx=Khmr}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Khmr}` matches all proper symbols"
 );

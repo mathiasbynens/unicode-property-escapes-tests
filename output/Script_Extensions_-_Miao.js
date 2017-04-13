@@ -10,74 +10,58 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x016F00, 0x016F44],
-		[0x016F50, 0x016F7E],
-		[0x016F8F, 0x016F9F]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x016F00, 0x016F44],
+    [0x016F50, 0x016F7E],
+    [0x016F8F, 0x016F9F]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Miao}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Miao}` matches all proper symbols"
+  /^\p{Script_Extensions=Miao}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Miao}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Plrd}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Plrd}` matches all proper symbols"
+  /^\p{Script_Extensions=Plrd}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Plrd}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Miao}+$/u.test(matchSymbols),
-	"`\\p{scx=Miao}` matches all proper symbols"
+  /^\p{scx=Miao}+$/u.test(matchSymbols),
+  "`\\p{scx=Miao}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Plrd}+$/u.test(matchSymbols),
-	"`\\p{scx=Plrd}` matches all proper symbols"
+  /^\p{scx=Plrd}+$/u.test(matchSymbols),
+  "`\\p{scx=Plrd}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00DBFF],
-		[0x00E000, 0x016EFF],
-		[0x016F45, 0x016F4F],
-		[0x016F7F, 0x016F8E],
-		[0x016FA0, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00DBFF],
+    [0x00E000, 0x016EFF],
+    [0x016F45, 0x016F4F],
+    [0x016F7F, 0x016F8E],
+    [0x016FA0, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Miao}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Miao}` matches all proper symbols"
+  /^\P{Script_Extensions=Miao}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Miao}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Plrd}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Plrd}` matches all proper symbols"
+  /^\P{Script_Extensions=Plrd}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Plrd}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Miao}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Miao}` matches all proper symbols"
+  /^\P{scx=Miao}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Miao}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Plrd}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Plrd}` matches all proper symbols"
+  /^\P{scx=Plrd}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Plrd}` matches all proper symbols"
 );

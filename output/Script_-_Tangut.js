@@ -10,75 +10,59 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x016FE0
-	],
-	ranges: [
-		[0x017000, 0x0187EC],
-		[0x018800, 0x018AF2]
-	]
+  loneCodePoints: [
+    0x016FE0
+  ],
+  ranges: [
+    [0x017000, 0x0187EC],
+    [0x018800, 0x018AF2]
+  ]
 });
 assert(
-	/^\p{Script=Tangut}+$/u.test(matchSymbols),
-	"`\\p{Script=Tangut}` matches all proper symbols"
+  /^\p{Script=Tangut}+$/u.test(matchSymbols),
+  "`\\p{Script=Tangut}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Tang}+$/u.test(matchSymbols),
-	"`\\p{Script=Tang}` matches all proper symbols"
+  /^\p{Script=Tang}+$/u.test(matchSymbols),
+  "`\\p{Script=Tang}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Tangut}+$/u.test(matchSymbols),
-	"`\\p{sc=Tangut}` matches all proper symbols"
+  /^\p{sc=Tangut}+$/u.test(matchSymbols),
+  "`\\p{sc=Tangut}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Tang}+$/u.test(matchSymbols),
-	"`\\p{sc=Tang}` matches all proper symbols"
+  /^\p{sc=Tang}+$/u.test(matchSymbols),
+  "`\\p{sc=Tang}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00DBFF],
-		[0x00E000, 0x016FDF],
-		[0x016FE1, 0x016FFF],
-		[0x0187ED, 0x0187FF],
-		[0x018AF3, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00DBFF],
+    [0x00E000, 0x016FDF],
+    [0x016FE1, 0x016FFF],
+    [0x0187ED, 0x0187FF],
+    [0x018AF3, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Tangut}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Tangut}` matches all proper symbols"
+  /^\P{Script=Tangut}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Tangut}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Tang}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Tang}` matches all proper symbols"
+  /^\P{Script=Tang}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Tang}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Tangut}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Tangut}` matches all proper symbols"
+  /^\P{sc=Tangut}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Tangut}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Tang}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Tang}` matches all proper symbols"
+  /^\P{sc=Tang}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Tang}` matches all proper symbols"
 );

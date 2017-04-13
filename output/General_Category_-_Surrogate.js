@@ -10,86 +10,70 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x00D800, 0x00DBFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x00D800, 0x00DBFF]
+  ]
 });
 assert(
-	/^\p{General_Category=Surrogate}+$/u.test(matchSymbols),
-	"`\\p{General_Category=Surrogate}` matches all proper symbols"
+  /^\p{General_Category=Surrogate}+$/u.test(matchSymbols),
+  "`\\p{General_Category=Surrogate}` matches all proper symbols"
 );
 assert(
-	/^\p{General_Category=Cs}+$/u.test(matchSymbols),
-	"`\\p{General_Category=Cs}` matches all proper symbols"
+  /^\p{General_Category=Cs}+$/u.test(matchSymbols),
+  "`\\p{General_Category=Cs}` matches all proper symbols"
 );
 assert(
-	/^\p{gc=Surrogate}+$/u.test(matchSymbols),
-	"`\\p{gc=Surrogate}` matches all proper symbols"
+  /^\p{gc=Surrogate}+$/u.test(matchSymbols),
+  "`\\p{gc=Surrogate}` matches all proper symbols"
 );
 assert(
-	/^\p{gc=Cs}+$/u.test(matchSymbols),
-	"`\\p{gc=Cs}` matches all proper symbols"
+  /^\p{gc=Cs}+$/u.test(matchSymbols),
+  "`\\p{gc=Cs}` matches all proper symbols"
 );
 assert(
-	/^\p{Surrogate}+$/u.test(matchSymbols),
-	"`\\p{Surrogate}` matches all proper symbols"
+  /^\p{Surrogate}+$/u.test(matchSymbols),
+  "`\\p{Surrogate}` matches all proper symbols"
 );
 assert(
-	/^\p{Cs}+$/u.test(matchSymbols),
-	"`\\p{Cs}` matches all proper symbols"
+  /^\p{Cs}+$/u.test(matchSymbols),
+  "`\\p{Cs}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00D7FF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00D7FF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{General_Category=Surrogate}+$/u.test(nonMatchSymbols),
-	"`\\P{General_Category=Surrogate}` matches all proper symbols"
+  /^\P{General_Category=Surrogate}+$/u.test(nonMatchSymbols),
+  "`\\P{General_Category=Surrogate}` matches all proper symbols"
 );
 assert(
-	/^\P{General_Category=Cs}+$/u.test(nonMatchSymbols),
-	"`\\P{General_Category=Cs}` matches all proper symbols"
+  /^\P{General_Category=Cs}+$/u.test(nonMatchSymbols),
+  "`\\P{General_Category=Cs}` matches all proper symbols"
 );
 assert(
-	/^\P{gc=Surrogate}+$/u.test(nonMatchSymbols),
-	"`\\P{gc=Surrogate}` matches all proper symbols"
+  /^\P{gc=Surrogate}+$/u.test(nonMatchSymbols),
+  "`\\P{gc=Surrogate}` matches all proper symbols"
 );
 assert(
-	/^\P{gc=Cs}+$/u.test(nonMatchSymbols),
-	"`\\P{gc=Cs}` matches all proper symbols"
+  /^\P{gc=Cs}+$/u.test(nonMatchSymbols),
+  "`\\P{gc=Cs}` matches all proper symbols"
 );
 assert(
-	/^\P{Surrogate}+$/u.test(nonMatchSymbols),
-	"`\\P{Surrogate}` matches all proper symbols"
+  /^\P{Surrogate}+$/u.test(nonMatchSymbols),
+  "`\\P{Surrogate}` matches all proper symbols"
 );
 assert(
-	/^\P{Cs}+$/u.test(nonMatchSymbols),
-	"`\\P{Cs}` matches all proper symbols"
+  /^\P{Cs}+$/u.test(nonMatchSymbols),
+  "`\\P{Cs}` matches all proper symbols"
 );

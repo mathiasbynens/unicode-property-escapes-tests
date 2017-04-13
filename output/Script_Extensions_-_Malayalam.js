@@ -10,94 +10,78 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x001CDA
-	],
-	ranges: [
-		[0x000951, 0x000952],
-		[0x000964, 0x000965],
-		[0x000D01, 0x000D03],
-		[0x000D05, 0x000D0C],
-		[0x000D0E, 0x000D10],
-		[0x000D12, 0x000D3A],
-		[0x000D3D, 0x000D44],
-		[0x000D46, 0x000D48],
-		[0x000D4A, 0x000D4F],
-		[0x000D54, 0x000D63],
-		[0x000D66, 0x000D7F]
-	]
+  loneCodePoints: [
+    0x001CDA
+  ],
+  ranges: [
+    [0x000951, 0x000952],
+    [0x000964, 0x000965],
+    [0x000D01, 0x000D03],
+    [0x000D05, 0x000D0C],
+    [0x000D0E, 0x000D10],
+    [0x000D12, 0x000D3A],
+    [0x000D3D, 0x000D44],
+    [0x000D46, 0x000D48],
+    [0x000D4A, 0x000D4F],
+    [0x000D54, 0x000D63],
+    [0x000D66, 0x000D7F]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Malayalam}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Malayalam}` matches all proper symbols"
+  /^\p{Script_Extensions=Malayalam}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Malayalam}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Mlym}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Mlym}` matches all proper symbols"
+  /^\p{Script_Extensions=Mlym}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Mlym}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Malayalam}+$/u.test(matchSymbols),
-	"`\\p{scx=Malayalam}` matches all proper symbols"
+  /^\p{scx=Malayalam}+$/u.test(matchSymbols),
+  "`\\p{scx=Malayalam}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Mlym}+$/u.test(matchSymbols),
-	"`\\p{scx=Mlym}` matches all proper symbols"
+  /^\p{scx=Mlym}+$/u.test(matchSymbols),
+  "`\\p{scx=Mlym}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x000D04,
-		0x000D0D,
-		0x000D11,
-		0x000D45,
-		0x000D49
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x000950],
-		[0x000953, 0x000963],
-		[0x000966, 0x000D00],
-		[0x000D3B, 0x000D3C],
-		[0x000D50, 0x000D53],
-		[0x000D64, 0x000D65],
-		[0x000D80, 0x001CD9],
-		[0x001CDB, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x000D04,
+    0x000D0D,
+    0x000D11,
+    0x000D45,
+    0x000D49
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x000950],
+    [0x000953, 0x000963],
+    [0x000966, 0x000D00],
+    [0x000D3B, 0x000D3C],
+    [0x000D50, 0x000D53],
+    [0x000D64, 0x000D65],
+    [0x000D80, 0x001CD9],
+    [0x001CDB, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Malayalam}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Malayalam}` matches all proper symbols"
+  /^\P{Script_Extensions=Malayalam}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Malayalam}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Mlym}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Mlym}` matches all proper symbols"
+  /^\P{Script_Extensions=Mlym}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Mlym}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Malayalam}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Malayalam}` matches all proper symbols"
+  /^\P{scx=Malayalam}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Malayalam}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Mlym}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Mlym}` matches all proper symbols"
+  /^\P{scx=Mlym}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Mlym}` matches all proper symbols"
 );

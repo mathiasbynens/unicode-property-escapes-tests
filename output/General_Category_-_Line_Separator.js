@@ -10,86 +10,70 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x002028
-	],
-	ranges: []
+  loneCodePoints: [
+    0x002028
+  ],
+  ranges: []
 });
 assert(
-	/^\p{General_Category=Line_Separator}+$/u.test(matchSymbols),
-	"`\\p{General_Category=Line_Separator}` matches all proper symbols"
+  /^\p{General_Category=Line_Separator}+$/u.test(matchSymbols),
+  "`\\p{General_Category=Line_Separator}` matches all proper symbols"
 );
 assert(
-	/^\p{General_Category=Zl}+$/u.test(matchSymbols),
-	"`\\p{General_Category=Zl}` matches all proper symbols"
+  /^\p{General_Category=Zl}+$/u.test(matchSymbols),
+  "`\\p{General_Category=Zl}` matches all proper symbols"
 );
 assert(
-	/^\p{gc=Line_Separator}+$/u.test(matchSymbols),
-	"`\\p{gc=Line_Separator}` matches all proper symbols"
+  /^\p{gc=Line_Separator}+$/u.test(matchSymbols),
+  "`\\p{gc=Line_Separator}` matches all proper symbols"
 );
 assert(
-	/^\p{gc=Zl}+$/u.test(matchSymbols),
-	"`\\p{gc=Zl}` matches all proper symbols"
+  /^\p{gc=Zl}+$/u.test(matchSymbols),
+  "`\\p{gc=Zl}` matches all proper symbols"
 );
 assert(
-	/^\p{Line_Separator}+$/u.test(matchSymbols),
-	"`\\p{Line_Separator}` matches all proper symbols"
+  /^\p{Line_Separator}+$/u.test(matchSymbols),
+  "`\\p{Line_Separator}` matches all proper symbols"
 );
 assert(
-	/^\p{Zl}+$/u.test(matchSymbols),
-	"`\\p{Zl}` matches all proper symbols"
+  /^\p{Zl}+$/u.test(matchSymbols),
+  "`\\p{Zl}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x002027],
-		[0x002029, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x002027],
+    [0x002029, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{General_Category=Line_Separator}+$/u.test(nonMatchSymbols),
-	"`\\P{General_Category=Line_Separator}` matches all proper symbols"
+  /^\P{General_Category=Line_Separator}+$/u.test(nonMatchSymbols),
+  "`\\P{General_Category=Line_Separator}` matches all proper symbols"
 );
 assert(
-	/^\P{General_Category=Zl}+$/u.test(nonMatchSymbols),
-	"`\\P{General_Category=Zl}` matches all proper symbols"
+  /^\P{General_Category=Zl}+$/u.test(nonMatchSymbols),
+  "`\\P{General_Category=Zl}` matches all proper symbols"
 );
 assert(
-	/^\P{gc=Line_Separator}+$/u.test(nonMatchSymbols),
-	"`\\P{gc=Line_Separator}` matches all proper symbols"
+  /^\P{gc=Line_Separator}+$/u.test(nonMatchSymbols),
+  "`\\P{gc=Line_Separator}` matches all proper symbols"
 );
 assert(
-	/^\P{gc=Zl}+$/u.test(nonMatchSymbols),
-	"`\\P{gc=Zl}` matches all proper symbols"
+  /^\P{gc=Zl}+$/u.test(nonMatchSymbols),
+  "`\\P{gc=Zl}` matches all proper symbols"
 );
 assert(
-	/^\P{Line_Separator}+$/u.test(nonMatchSymbols),
-	"`\\P{Line_Separator}` matches all proper symbols"
+  /^\P{Line_Separator}+$/u.test(nonMatchSymbols),
+  "`\\P{Line_Separator}` matches all proper symbols"
 );
 assert(
-	/^\P{Zl}+$/u.test(nonMatchSymbols),
-	"`\\P{Zl}` matches all proper symbols"
+  /^\P{Zl}+$/u.test(nonMatchSymbols),
+  "`\\P{Zl}` matches all proper symbols"
 );

@@ -10,70 +10,54 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x002800, 0x0028FF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x002800, 0x0028FF]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Braille}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Braille}` matches all proper symbols"
+  /^\p{Script_Extensions=Braille}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Braille}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Brai}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Brai}` matches all proper symbols"
+  /^\p{Script_Extensions=Brai}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Brai}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Braille}+$/u.test(matchSymbols),
-	"`\\p{scx=Braille}` matches all proper symbols"
+  /^\p{scx=Braille}+$/u.test(matchSymbols),
+  "`\\p{scx=Braille}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Brai}+$/u.test(matchSymbols),
-	"`\\p{scx=Brai}` matches all proper symbols"
+  /^\p{scx=Brai}+$/u.test(matchSymbols),
+  "`\\p{scx=Brai}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x0027FF],
-		[0x002900, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x0027FF],
+    [0x002900, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Braille}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Braille}` matches all proper symbols"
+  /^\P{Script_Extensions=Braille}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Braille}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Brai}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Brai}` matches all proper symbols"
+  /^\P{Script_Extensions=Brai}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Brai}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Braille}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Braille}` matches all proper symbols"
+  /^\P{scx=Braille}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Braille}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Brai}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Brai}` matches all proper symbols"
+  /^\P{scx=Brai}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Brai}` matches all proper symbols"
 );

@@ -10,111 +10,95 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x000000, 0x00001F],
-		[0x00007F, 0x00009F]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x000000, 0x00001F],
+    [0x00007F, 0x00009F]
+  ]
 });
 assert(
-	/^\p{General_Category=Control}+$/u.test(matchSymbols),
-	"`\\p{General_Category=Control}` matches all proper symbols"
+  /^\p{General_Category=Control}+$/u.test(matchSymbols),
+  "`\\p{General_Category=Control}` matches all proper symbols"
 );
 assert(
-	/^\p{General_Category=Cc}+$/u.test(matchSymbols),
-	"`\\p{General_Category=Cc}` matches all proper symbols"
+  /^\p{General_Category=Cc}+$/u.test(matchSymbols),
+  "`\\p{General_Category=Cc}` matches all proper symbols"
 );
 assert(
-	/^\p{General_Category=cntrl}+$/u.test(matchSymbols),
-	"`\\p{General_Category=cntrl}` matches all proper symbols"
+  /^\p{General_Category=cntrl}+$/u.test(matchSymbols),
+  "`\\p{General_Category=cntrl}` matches all proper symbols"
 );
 assert(
-	/^\p{gc=Control}+$/u.test(matchSymbols),
-	"`\\p{gc=Control}` matches all proper symbols"
+  /^\p{gc=Control}+$/u.test(matchSymbols),
+  "`\\p{gc=Control}` matches all proper symbols"
 );
 assert(
-	/^\p{gc=Cc}+$/u.test(matchSymbols),
-	"`\\p{gc=Cc}` matches all proper symbols"
+  /^\p{gc=Cc}+$/u.test(matchSymbols),
+  "`\\p{gc=Cc}` matches all proper symbols"
 );
 assert(
-	/^\p{gc=cntrl}+$/u.test(matchSymbols),
-	"`\\p{gc=cntrl}` matches all proper symbols"
+  /^\p{gc=cntrl}+$/u.test(matchSymbols),
+  "`\\p{gc=cntrl}` matches all proper symbols"
 );
 assert(
-	/^\p{Control}+$/u.test(matchSymbols),
-	"`\\p{Control}` matches all proper symbols"
+  /^\p{Control}+$/u.test(matchSymbols),
+  "`\\p{Control}` matches all proper symbols"
 );
 assert(
-	/^\p{Cc}+$/u.test(matchSymbols),
-	"`\\p{Cc}` matches all proper symbols"
+  /^\p{Cc}+$/u.test(matchSymbols),
+  "`\\p{Cc}` matches all proper symbols"
 );
 assert(
-	/^\p{cntrl}+$/u.test(matchSymbols),
-	"`\\p{cntrl}` matches all proper symbols"
+  /^\p{cntrl}+$/u.test(matchSymbols),
+  "`\\p{cntrl}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000020, 0x00007E],
-		[0x0000A0, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000020, 0x00007E],
+    [0x0000A0, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{General_Category=Control}+$/u.test(nonMatchSymbols),
-	"`\\P{General_Category=Control}` matches all proper symbols"
+  /^\P{General_Category=Control}+$/u.test(nonMatchSymbols),
+  "`\\P{General_Category=Control}` matches all proper symbols"
 );
 assert(
-	/^\P{General_Category=Cc}+$/u.test(nonMatchSymbols),
-	"`\\P{General_Category=Cc}` matches all proper symbols"
+  /^\P{General_Category=Cc}+$/u.test(nonMatchSymbols),
+  "`\\P{General_Category=Cc}` matches all proper symbols"
 );
 assert(
-	/^\P{General_Category=cntrl}+$/u.test(nonMatchSymbols),
-	"`\\P{General_Category=cntrl}` matches all proper symbols"
+  /^\P{General_Category=cntrl}+$/u.test(nonMatchSymbols),
+  "`\\P{General_Category=cntrl}` matches all proper symbols"
 );
 assert(
-	/^\P{gc=Control}+$/u.test(nonMatchSymbols),
-	"`\\P{gc=Control}` matches all proper symbols"
+  /^\P{gc=Control}+$/u.test(nonMatchSymbols),
+  "`\\P{gc=Control}` matches all proper symbols"
 );
 assert(
-	/^\P{gc=Cc}+$/u.test(nonMatchSymbols),
-	"`\\P{gc=Cc}` matches all proper symbols"
+  /^\P{gc=Cc}+$/u.test(nonMatchSymbols),
+  "`\\P{gc=Cc}` matches all proper symbols"
 );
 assert(
-	/^\P{gc=cntrl}+$/u.test(nonMatchSymbols),
-	"`\\P{gc=cntrl}` matches all proper symbols"
+  /^\P{gc=cntrl}+$/u.test(nonMatchSymbols),
+  "`\\P{gc=cntrl}` matches all proper symbols"
 );
 assert(
-	/^\P{Control}+$/u.test(nonMatchSymbols),
-	"`\\P{Control}` matches all proper symbols"
+  /^\P{Control}+$/u.test(nonMatchSymbols),
+  "`\\P{Control}` matches all proper symbols"
 );
 assert(
-	/^\P{Cc}+$/u.test(nonMatchSymbols),
-	"`\\P{Cc}` matches all proper symbols"
+  /^\P{Cc}+$/u.test(nonMatchSymbols),
+  "`\\P{Cc}` matches all proper symbols"
 );
 assert(
-	/^\P{cntrl}+$/u.test(nonMatchSymbols),
-	"`\\P{cntrl}` matches all proper symbols"
+  /^\P{cntrl}+$/u.test(nonMatchSymbols),
+  "`\\P{cntrl}` matches all proper symbols"
 );

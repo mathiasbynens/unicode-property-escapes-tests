@@ -10,75 +10,59 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x011C70, 0x011C8F],
-		[0x011C92, 0x011CA7],
-		[0x011CA9, 0x011CB6]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x011C70, 0x011C8F],
+    [0x011C92, 0x011CA7],
+    [0x011CA9, 0x011CB6]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Marchen}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Marchen}` matches all proper symbols"
+  /^\p{Script_Extensions=Marchen}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Marchen}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Marc}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Marc}` matches all proper symbols"
+  /^\p{Script_Extensions=Marc}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Marc}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Marchen}+$/u.test(matchSymbols),
-	"`\\p{scx=Marchen}` matches all proper symbols"
+  /^\p{scx=Marchen}+$/u.test(matchSymbols),
+  "`\\p{scx=Marchen}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Marc}+$/u.test(matchSymbols),
-	"`\\p{scx=Marc}` matches all proper symbols"
+  /^\p{scx=Marc}+$/u.test(matchSymbols),
+  "`\\p{scx=Marc}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x011CA8
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00DBFF],
-		[0x00E000, 0x011C6F],
-		[0x011C90, 0x011C91],
-		[0x011CB7, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x011CA8
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00DBFF],
+    [0x00E000, 0x011C6F],
+    [0x011C90, 0x011C91],
+    [0x011CB7, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Marchen}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Marchen}` matches all proper symbols"
+  /^\P{Script_Extensions=Marchen}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Marchen}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Marc}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Marc}` matches all proper symbols"
+  /^\P{Script_Extensions=Marc}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Marc}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Marchen}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Marchen}` matches all proper symbols"
+  /^\P{scx=Marchen}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Marchen}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Marc}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Marc}` matches all proper symbols"
+  /^\P{scx=Marc}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Marc}` matches all proper symbols"
 );

@@ -10,72 +10,56 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00A000, 0x00A48C],
-		[0x00A490, 0x00A4C6]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00A000, 0x00A48C],
+    [0x00A490, 0x00A4C6]
+  ]
 });
 assert(
-	/^\p{Script=Yi}+$/u.test(matchSymbols),
-	"`\\p{Script=Yi}` matches all proper symbols"
+  /^\p{Script=Yi}+$/u.test(matchSymbols),
+  "`\\p{Script=Yi}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Yiii}+$/u.test(matchSymbols),
-	"`\\p{Script=Yiii}` matches all proper symbols"
+  /^\p{Script=Yiii}+$/u.test(matchSymbols),
+  "`\\p{Script=Yiii}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Yi}+$/u.test(matchSymbols),
-	"`\\p{sc=Yi}` matches all proper symbols"
+  /^\p{sc=Yi}+$/u.test(matchSymbols),
+  "`\\p{sc=Yi}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Yiii}+$/u.test(matchSymbols),
-	"`\\p{sc=Yiii}` matches all proper symbols"
+  /^\p{sc=Yiii}+$/u.test(matchSymbols),
+  "`\\p{sc=Yiii}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x009FFF],
-		[0x00A48D, 0x00A48F],
-		[0x00A4C7, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x009FFF],
+    [0x00A48D, 0x00A48F],
+    [0x00A4C7, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Yi}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Yi}` matches all proper symbols"
+  /^\P{Script=Yi}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Yi}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Yiii}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Yiii}` matches all proper symbols"
+  /^\P{Script=Yiii}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Yiii}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Yi}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Yi}` matches all proper symbols"
+  /^\P{sc=Yi}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Yi}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Yiii}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Yiii}` matches all proper symbols"
+  /^\P{sc=Yiii}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Yiii}` matches all proper symbols"
 );

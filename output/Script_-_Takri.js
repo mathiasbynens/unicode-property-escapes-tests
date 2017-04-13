@@ -10,72 +10,56 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x011680, 0x0116B7],
-		[0x0116C0, 0x0116C9]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x011680, 0x0116B7],
+    [0x0116C0, 0x0116C9]
+  ]
 });
 assert(
-	/^\p{Script=Takri}+$/u.test(matchSymbols),
-	"`\\p{Script=Takri}` matches all proper symbols"
+  /^\p{Script=Takri}+$/u.test(matchSymbols),
+  "`\\p{Script=Takri}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Takr}+$/u.test(matchSymbols),
-	"`\\p{Script=Takr}` matches all proper symbols"
+  /^\p{Script=Takr}+$/u.test(matchSymbols),
+  "`\\p{Script=Takr}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Takri}+$/u.test(matchSymbols),
-	"`\\p{sc=Takri}` matches all proper symbols"
+  /^\p{sc=Takri}+$/u.test(matchSymbols),
+  "`\\p{sc=Takri}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Takr}+$/u.test(matchSymbols),
-	"`\\p{sc=Takr}` matches all proper symbols"
+  /^\p{sc=Takr}+$/u.test(matchSymbols),
+  "`\\p{sc=Takr}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00DBFF],
-		[0x00E000, 0x01167F],
-		[0x0116B8, 0x0116BF],
-		[0x0116CA, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00DBFF],
+    [0x00E000, 0x01167F],
+    [0x0116B8, 0x0116BF],
+    [0x0116CA, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Takri}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Takri}` matches all proper symbols"
+  /^\P{Script=Takri}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Takri}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Takr}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Takr}` matches all proper symbols"
+  /^\P{Script=Takr}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Takr}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Takri}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Takri}` matches all proper symbols"
+  /^\P{sc=Takri}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Takri}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Takr}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Takr}` matches all proper symbols"
+  /^\P{sc=Takr}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Takr}` matches all proper symbols"
 );

@@ -10,108 +10,92 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x0000AB,
-		0x002018,
-		0x00201F,
-		0x002039,
-		0x002E02,
-		0x002E04,
-		0x002E09,
-		0x002E0C,
-		0x002E1C,
-		0x002E20
-	],
-	ranges: [
-		[0x00201B, 0x00201C]
-	]
+  loneCodePoints: [
+    0x0000AB,
+    0x002018,
+    0x00201F,
+    0x002039,
+    0x002E02,
+    0x002E04,
+    0x002E09,
+    0x002E0C,
+    0x002E1C,
+    0x002E20
+  ],
+  ranges: [
+    [0x00201B, 0x00201C]
+  ]
 });
 assert(
-	/^\p{General_Category=Initial_Punctuation}+$/u.test(matchSymbols),
-	"`\\p{General_Category=Initial_Punctuation}` matches all proper symbols"
+  /^\p{General_Category=Initial_Punctuation}+$/u.test(matchSymbols),
+  "`\\p{General_Category=Initial_Punctuation}` matches all proper symbols"
 );
 assert(
-	/^\p{General_Category=Pi}+$/u.test(matchSymbols),
-	"`\\p{General_Category=Pi}` matches all proper symbols"
+  /^\p{General_Category=Pi}+$/u.test(matchSymbols),
+  "`\\p{General_Category=Pi}` matches all proper symbols"
 );
 assert(
-	/^\p{gc=Initial_Punctuation}+$/u.test(matchSymbols),
-	"`\\p{gc=Initial_Punctuation}` matches all proper symbols"
+  /^\p{gc=Initial_Punctuation}+$/u.test(matchSymbols),
+  "`\\p{gc=Initial_Punctuation}` matches all proper symbols"
 );
 assert(
-	/^\p{gc=Pi}+$/u.test(matchSymbols),
-	"`\\p{gc=Pi}` matches all proper symbols"
+  /^\p{gc=Pi}+$/u.test(matchSymbols),
+  "`\\p{gc=Pi}` matches all proper symbols"
 );
 assert(
-	/^\p{Initial_Punctuation}+$/u.test(matchSymbols),
-	"`\\p{Initial_Punctuation}` matches all proper symbols"
+  /^\p{Initial_Punctuation}+$/u.test(matchSymbols),
+  "`\\p{Initial_Punctuation}` matches all proper symbols"
 );
 assert(
-	/^\p{Pi}+$/u.test(matchSymbols),
-	"`\\p{Pi}` matches all proper symbols"
+  /^\p{Pi}+$/u.test(matchSymbols),
+  "`\\p{Pi}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x002E03
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x0000AA],
-		[0x0000AC, 0x002017],
-		[0x002019, 0x00201A],
-		[0x00201D, 0x00201E],
-		[0x002020, 0x002038],
-		[0x00203A, 0x002E01],
-		[0x002E05, 0x002E08],
-		[0x002E0A, 0x002E0B],
-		[0x002E0D, 0x002E1B],
-		[0x002E1D, 0x002E1F],
-		[0x002E21, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x002E03
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x0000AA],
+    [0x0000AC, 0x002017],
+    [0x002019, 0x00201A],
+    [0x00201D, 0x00201E],
+    [0x002020, 0x002038],
+    [0x00203A, 0x002E01],
+    [0x002E05, 0x002E08],
+    [0x002E0A, 0x002E0B],
+    [0x002E0D, 0x002E1B],
+    [0x002E1D, 0x002E1F],
+    [0x002E21, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{General_Category=Initial_Punctuation}+$/u.test(nonMatchSymbols),
-	"`\\P{General_Category=Initial_Punctuation}` matches all proper symbols"
+  /^\P{General_Category=Initial_Punctuation}+$/u.test(nonMatchSymbols),
+  "`\\P{General_Category=Initial_Punctuation}` matches all proper symbols"
 );
 assert(
-	/^\P{General_Category=Pi}+$/u.test(nonMatchSymbols),
-	"`\\P{General_Category=Pi}` matches all proper symbols"
+  /^\P{General_Category=Pi}+$/u.test(nonMatchSymbols),
+  "`\\P{General_Category=Pi}` matches all proper symbols"
 );
 assert(
-	/^\P{gc=Initial_Punctuation}+$/u.test(nonMatchSymbols),
-	"`\\P{gc=Initial_Punctuation}` matches all proper symbols"
+  /^\P{gc=Initial_Punctuation}+$/u.test(nonMatchSymbols),
+  "`\\P{gc=Initial_Punctuation}` matches all proper symbols"
 );
 assert(
-	/^\P{gc=Pi}+$/u.test(nonMatchSymbols),
-	"`\\P{gc=Pi}` matches all proper symbols"
+  /^\P{gc=Pi}+$/u.test(nonMatchSymbols),
+  "`\\P{gc=Pi}` matches all proper symbols"
 );
 assert(
-	/^\P{Initial_Punctuation}+$/u.test(nonMatchSymbols),
-	"`\\P{Initial_Punctuation}` matches all proper symbols"
+  /^\P{Initial_Punctuation}+$/u.test(nonMatchSymbols),
+  "`\\P{Initial_Punctuation}` matches all proper symbols"
 );
 assert(
-	/^\P{Pi}+$/u.test(nonMatchSymbols),
-	"`\\P{Pi}` matches all proper symbols"
+  /^\P{Pi}+$/u.test(nonMatchSymbols),
+  "`\\P{Pi}` matches all proper symbols"
 );

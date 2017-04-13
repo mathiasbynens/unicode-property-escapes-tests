@@ -10,88 +10,72 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x00FB3E
-	],
-	ranges: [
-		[0x000591, 0x0005C7],
-		[0x0005D0, 0x0005EA],
-		[0x0005F0, 0x0005F4],
-		[0x00FB1D, 0x00FB36],
-		[0x00FB38, 0x00FB3C],
-		[0x00FB40, 0x00FB41],
-		[0x00FB43, 0x00FB44],
-		[0x00FB46, 0x00FB4F]
-	]
+  loneCodePoints: [
+    0x00FB3E
+  ],
+  ranges: [
+    [0x000591, 0x0005C7],
+    [0x0005D0, 0x0005EA],
+    [0x0005F0, 0x0005F4],
+    [0x00FB1D, 0x00FB36],
+    [0x00FB38, 0x00FB3C],
+    [0x00FB40, 0x00FB41],
+    [0x00FB43, 0x00FB44],
+    [0x00FB46, 0x00FB4F]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Hebrew}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Hebrew}` matches all proper symbols"
+  /^\p{Script_Extensions=Hebrew}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Hebrew}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Hebr}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Hebr}` matches all proper symbols"
+  /^\p{Script_Extensions=Hebr}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Hebr}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Hebrew}+$/u.test(matchSymbols),
-	"`\\p{scx=Hebrew}` matches all proper symbols"
+  /^\p{scx=Hebrew}+$/u.test(matchSymbols),
+  "`\\p{scx=Hebrew}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Hebr}+$/u.test(matchSymbols),
-	"`\\p{scx=Hebr}` matches all proper symbols"
+  /^\p{scx=Hebr}+$/u.test(matchSymbols),
+  "`\\p{scx=Hebr}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x00FB37,
-		0x00FB3D,
-		0x00FB3F,
-		0x00FB42,
-		0x00FB45
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x000590],
-		[0x0005C8, 0x0005CF],
-		[0x0005EB, 0x0005EF],
-		[0x0005F5, 0x00DBFF],
-		[0x00E000, 0x00FB1C],
-		[0x00FB50, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x00FB37,
+    0x00FB3D,
+    0x00FB3F,
+    0x00FB42,
+    0x00FB45
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x000590],
+    [0x0005C8, 0x0005CF],
+    [0x0005EB, 0x0005EF],
+    [0x0005F5, 0x00DBFF],
+    [0x00E000, 0x00FB1C],
+    [0x00FB50, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Hebrew}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Hebrew}` matches all proper symbols"
+  /^\P{Script_Extensions=Hebrew}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Hebrew}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Hebr}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Hebr}` matches all proper symbols"
+  /^\P{Script_Extensions=Hebr}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Hebr}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Hebrew}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Hebrew}` matches all proper symbols"
+  /^\P{scx=Hebrew}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Hebrew}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Hebr}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Hebr}` matches all proper symbols"
+  /^\P{scx=Hebr}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Hebr}` matches all proper symbols"
 );

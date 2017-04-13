@@ -10,75 +10,59 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x00A9CF
-	],
-	ranges: [
-		[0x001A00, 0x001A1B],
-		[0x001A1E, 0x001A1F]
-	]
+  loneCodePoints: [
+    0x00A9CF
+  ],
+  ranges: [
+    [0x001A00, 0x001A1B],
+    [0x001A1E, 0x001A1F]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Buginese}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Buginese}` matches all proper symbols"
+  /^\p{Script_Extensions=Buginese}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Buginese}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Bugi}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Bugi}` matches all proper symbols"
+  /^\p{Script_Extensions=Bugi}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Bugi}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Buginese}+$/u.test(matchSymbols),
-	"`\\p{scx=Buginese}` matches all proper symbols"
+  /^\p{scx=Buginese}+$/u.test(matchSymbols),
+  "`\\p{scx=Buginese}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Bugi}+$/u.test(matchSymbols),
-	"`\\p{scx=Bugi}` matches all proper symbols"
+  /^\p{scx=Bugi}+$/u.test(matchSymbols),
+  "`\\p{scx=Bugi}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x0019FF],
-		[0x001A1C, 0x001A1D],
-		[0x001A20, 0x00A9CE],
-		[0x00A9D0, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x0019FF],
+    [0x001A1C, 0x001A1D],
+    [0x001A20, 0x00A9CE],
+    [0x00A9D0, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Buginese}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Buginese}` matches all proper symbols"
+  /^\P{Script_Extensions=Buginese}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Buginese}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Bugi}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Bugi}` matches all proper symbols"
+  /^\P{Script_Extensions=Bugi}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Bugi}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Buginese}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Buginese}` matches all proper symbols"
+  /^\P{scx=Buginese}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Buginese}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Bugi}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Bugi}` matches all proper symbols"
+  /^\P{scx=Bugi}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Bugi}` matches all proper symbols"
 );

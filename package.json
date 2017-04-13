@@ -2,8 +2,9 @@
   "name": "unicode-property-escapes-tests",
   "private": true,
   "scripts": {
-    "build": "rm -rf -- output/ && mkdir output/ && node build.js",
-    "test": "npm run build"
+    "clean": "rm -rf output && mkdir output",
+    "build": "npm run clean && node build.js",
+    "test": "node test.js"
   },
   "devDependencies": {
     "jsesc": "^2.5.0",

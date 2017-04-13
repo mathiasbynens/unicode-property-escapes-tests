@@ -10,70 +10,54 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x010860, 0x01087F]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x010860, 0x01087F]
+  ]
 });
 assert(
-	/^\p{Script=Palmyrene}+$/u.test(matchSymbols),
-	"`\\p{Script=Palmyrene}` matches all proper symbols"
+  /^\p{Script=Palmyrene}+$/u.test(matchSymbols),
+  "`\\p{Script=Palmyrene}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Palm}+$/u.test(matchSymbols),
-	"`\\p{Script=Palm}` matches all proper symbols"
+  /^\p{Script=Palm}+$/u.test(matchSymbols),
+  "`\\p{Script=Palm}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Palmyrene}+$/u.test(matchSymbols),
-	"`\\p{sc=Palmyrene}` matches all proper symbols"
+  /^\p{sc=Palmyrene}+$/u.test(matchSymbols),
+  "`\\p{sc=Palmyrene}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Palm}+$/u.test(matchSymbols),
-	"`\\p{sc=Palm}` matches all proper symbols"
+  /^\p{sc=Palm}+$/u.test(matchSymbols),
+  "`\\p{sc=Palm}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00DBFF],
-		[0x00E000, 0x01085F],
-		[0x010880, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00DBFF],
+    [0x00E000, 0x01085F],
+    [0x010880, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Palmyrene}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Palmyrene}` matches all proper symbols"
+  /^\P{Script=Palmyrene}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Palmyrene}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Palm}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Palm}` matches all proper symbols"
+  /^\P{Script=Palm}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Palm}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Palmyrene}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Palmyrene}` matches all proper symbols"
+  /^\P{sc=Palmyrene}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Palmyrene}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Palm}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Palm}` matches all proper symbols"
+  /^\P{sc=Palm}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Palm}` matches all proper symbols"
 );

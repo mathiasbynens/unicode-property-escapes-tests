@@ -10,72 +10,56 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x000800, 0x00082D],
-		[0x000830, 0x00083E]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x000800, 0x00082D],
+    [0x000830, 0x00083E]
+  ]
 });
 assert(
-	/^\p{Script=Samaritan}+$/u.test(matchSymbols),
-	"`\\p{Script=Samaritan}` matches all proper symbols"
+  /^\p{Script=Samaritan}+$/u.test(matchSymbols),
+  "`\\p{Script=Samaritan}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Samr}+$/u.test(matchSymbols),
-	"`\\p{Script=Samr}` matches all proper symbols"
+  /^\p{Script=Samr}+$/u.test(matchSymbols),
+  "`\\p{Script=Samr}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Samaritan}+$/u.test(matchSymbols),
-	"`\\p{sc=Samaritan}` matches all proper symbols"
+  /^\p{sc=Samaritan}+$/u.test(matchSymbols),
+  "`\\p{sc=Samaritan}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Samr}+$/u.test(matchSymbols),
-	"`\\p{sc=Samr}` matches all proper symbols"
+  /^\p{sc=Samr}+$/u.test(matchSymbols),
+  "`\\p{sc=Samr}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x0007FF],
-		[0x00082E, 0x00082F],
-		[0x00083F, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x0007FF],
+    [0x00082E, 0x00082F],
+    [0x00083F, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Samaritan}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Samaritan}` matches all proper symbols"
+  /^\P{Script=Samaritan}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Samaritan}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Samr}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Samr}` matches all proper symbols"
+  /^\P{Script=Samr}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Samr}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Samaritan}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Samaritan}` matches all proper symbols"
+  /^\P{sc=Samaritan}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Samaritan}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Samr}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Samr}` matches all proper symbols"
+  /^\P{sc=Samr}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Samr}` matches all proper symbols"
 );

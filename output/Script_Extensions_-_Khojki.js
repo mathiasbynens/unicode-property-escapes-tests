@@ -10,75 +10,59 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x000AE6, 0x000AEF],
-		[0x011200, 0x011211],
-		[0x011213, 0x01123E]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x000AE6, 0x000AEF],
+    [0x011200, 0x011211],
+    [0x011213, 0x01123E]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Khojki}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Khojki}` matches all proper symbols"
+  /^\p{Script_Extensions=Khojki}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Khojki}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Khoj}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Khoj}` matches all proper symbols"
+  /^\p{Script_Extensions=Khoj}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Khoj}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Khojki}+$/u.test(matchSymbols),
-	"`\\p{scx=Khojki}` matches all proper symbols"
+  /^\p{scx=Khojki}+$/u.test(matchSymbols),
+  "`\\p{scx=Khojki}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Khoj}+$/u.test(matchSymbols),
-	"`\\p{scx=Khoj}` matches all proper symbols"
+  /^\p{scx=Khoj}+$/u.test(matchSymbols),
+  "`\\p{scx=Khoj}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x011212
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x000AE5],
-		[0x000AF0, 0x00DBFF],
-		[0x00E000, 0x0111FF],
-		[0x01123F, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x011212
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x000AE5],
+    [0x000AF0, 0x00DBFF],
+    [0x00E000, 0x0111FF],
+    [0x01123F, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Khojki}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Khojki}` matches all proper symbols"
+  /^\P{Script_Extensions=Khojki}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Khojki}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Khoj}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Khoj}` matches all proper symbols"
+  /^\P{Script_Extensions=Khoj}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Khoj}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Khojki}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Khojki}` matches all proper symbols"
+  /^\P{scx=Khojki}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Khojki}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Khoj}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Khoj}` matches all proper symbols"
+  /^\P{scx=Khoj}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Khoj}` matches all proper symbols"
 );

@@ -10,109 +10,93 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x003007,
-		0x010341,
-		0x01034A
-	],
-	ranges: [
-		[0x0016EE, 0x0016F0],
-		[0x002160, 0x002182],
-		[0x002185, 0x002188],
-		[0x003021, 0x003029],
-		[0x003038, 0x00303A],
-		[0x00A6E6, 0x00A6EF],
-		[0x010140, 0x010174],
-		[0x0103D1, 0x0103D5],
-		[0x012400, 0x01246E]
-	]
+  loneCodePoints: [
+    0x003007,
+    0x010341,
+    0x01034A
+  ],
+  ranges: [
+    [0x0016EE, 0x0016F0],
+    [0x002160, 0x002182],
+    [0x002185, 0x002188],
+    [0x003021, 0x003029],
+    [0x003038, 0x00303A],
+    [0x00A6E6, 0x00A6EF],
+    [0x010140, 0x010174],
+    [0x0103D1, 0x0103D5],
+    [0x012400, 0x01246E]
+  ]
 });
 assert(
-	/^\p{General_Category=Letter_Number}+$/u.test(matchSymbols),
-	"`\\p{General_Category=Letter_Number}` matches all proper symbols"
+  /^\p{General_Category=Letter_Number}+$/u.test(matchSymbols),
+  "`\\p{General_Category=Letter_Number}` matches all proper symbols"
 );
 assert(
-	/^\p{General_Category=Nl}+$/u.test(matchSymbols),
-	"`\\p{General_Category=Nl}` matches all proper symbols"
+  /^\p{General_Category=Nl}+$/u.test(matchSymbols),
+  "`\\p{General_Category=Nl}` matches all proper symbols"
 );
 assert(
-	/^\p{gc=Letter_Number}+$/u.test(matchSymbols),
-	"`\\p{gc=Letter_Number}` matches all proper symbols"
+  /^\p{gc=Letter_Number}+$/u.test(matchSymbols),
+  "`\\p{gc=Letter_Number}` matches all proper symbols"
 );
 assert(
-	/^\p{gc=Nl}+$/u.test(matchSymbols),
-	"`\\p{gc=Nl}` matches all proper symbols"
+  /^\p{gc=Nl}+$/u.test(matchSymbols),
+  "`\\p{gc=Nl}` matches all proper symbols"
 );
 assert(
-	/^\p{Letter_Number}+$/u.test(matchSymbols),
-	"`\\p{Letter_Number}` matches all proper symbols"
+  /^\p{Letter_Number}+$/u.test(matchSymbols),
+  "`\\p{Letter_Number}` matches all proper symbols"
 );
 assert(
-	/^\p{Nl}+$/u.test(matchSymbols),
-	"`\\p{Nl}` matches all proper symbols"
+  /^\p{Nl}+$/u.test(matchSymbols),
+  "`\\p{Nl}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x0016ED],
-		[0x0016F1, 0x00215F],
-		[0x002183, 0x002184],
-		[0x002189, 0x003006],
-		[0x003008, 0x003020],
-		[0x00302A, 0x003037],
-		[0x00303B, 0x00A6E5],
-		[0x00A6F0, 0x00DBFF],
-		[0x00E000, 0x01013F],
-		[0x010175, 0x010340],
-		[0x010342, 0x010349],
-		[0x01034B, 0x0103D0],
-		[0x0103D6, 0x0123FF],
-		[0x01246F, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x0016ED],
+    [0x0016F1, 0x00215F],
+    [0x002183, 0x002184],
+    [0x002189, 0x003006],
+    [0x003008, 0x003020],
+    [0x00302A, 0x003037],
+    [0x00303B, 0x00A6E5],
+    [0x00A6F0, 0x00DBFF],
+    [0x00E000, 0x01013F],
+    [0x010175, 0x010340],
+    [0x010342, 0x010349],
+    [0x01034B, 0x0103D0],
+    [0x0103D6, 0x0123FF],
+    [0x01246F, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{General_Category=Letter_Number}+$/u.test(nonMatchSymbols),
-	"`\\P{General_Category=Letter_Number}` matches all proper symbols"
+  /^\P{General_Category=Letter_Number}+$/u.test(nonMatchSymbols),
+  "`\\P{General_Category=Letter_Number}` matches all proper symbols"
 );
 assert(
-	/^\P{General_Category=Nl}+$/u.test(nonMatchSymbols),
-	"`\\P{General_Category=Nl}` matches all proper symbols"
+  /^\P{General_Category=Nl}+$/u.test(nonMatchSymbols),
+  "`\\P{General_Category=Nl}` matches all proper symbols"
 );
 assert(
-	/^\P{gc=Letter_Number}+$/u.test(nonMatchSymbols),
-	"`\\P{gc=Letter_Number}` matches all proper symbols"
+  /^\P{gc=Letter_Number}+$/u.test(nonMatchSymbols),
+  "`\\P{gc=Letter_Number}` matches all proper symbols"
 );
 assert(
-	/^\P{gc=Nl}+$/u.test(nonMatchSymbols),
-	"`\\P{gc=Nl}` matches all proper symbols"
+  /^\P{gc=Nl}+$/u.test(nonMatchSymbols),
+  "`\\P{gc=Nl}` matches all proper symbols"
 );
 assert(
-	/^\P{Letter_Number}+$/u.test(nonMatchSymbols),
-	"`\\P{Letter_Number}` matches all proper symbols"
+  /^\P{Letter_Number}+$/u.test(nonMatchSymbols),
+  "`\\P{Letter_Number}` matches all proper symbols"
 );
 assert(
-	/^\P{Nl}+$/u.test(nonMatchSymbols),
-	"`\\P{Nl}` matches all proper symbols"
+  /^\P{Nl}+$/u.test(nonMatchSymbols),
+  "`\\P{Nl}` matches all proper symbols"
 );

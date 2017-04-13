@@ -10,73 +10,57 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x01056F
-	],
-	ranges: [
-		[0x010530, 0x010563]
-	]
+  loneCodePoints: [
+    0x01056F
+  ],
+  ranges: [
+    [0x010530, 0x010563]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Caucasian_Albanian}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Caucasian_Albanian}` matches all proper symbols"
+  /^\p{Script_Extensions=Caucasian_Albanian}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Caucasian_Albanian}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Aghb}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Aghb}` matches all proper symbols"
+  /^\p{Script_Extensions=Aghb}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Aghb}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Caucasian_Albanian}+$/u.test(matchSymbols),
-	"`\\p{scx=Caucasian_Albanian}` matches all proper symbols"
+  /^\p{scx=Caucasian_Albanian}+$/u.test(matchSymbols),
+  "`\\p{scx=Caucasian_Albanian}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Aghb}+$/u.test(matchSymbols),
-	"`\\p{scx=Aghb}` matches all proper symbols"
+  /^\p{scx=Aghb}+$/u.test(matchSymbols),
+  "`\\p{scx=Aghb}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00DBFF],
-		[0x00E000, 0x01052F],
-		[0x010564, 0x01056E],
-		[0x010570, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00DBFF],
+    [0x00E000, 0x01052F],
+    [0x010564, 0x01056E],
+    [0x010570, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Caucasian_Albanian}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Caucasian_Albanian}` matches all proper symbols"
+  /^\P{Script_Extensions=Caucasian_Albanian}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Caucasian_Albanian}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Aghb}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Aghb}` matches all proper symbols"
+  /^\P{Script_Extensions=Aghb}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Aghb}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Caucasian_Albanian}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Caucasian_Albanian}` matches all proper symbols"
+  /^\P{scx=Caucasian_Albanian}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Caucasian_Albanian}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Aghb}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Aghb}` matches all proper symbols"
+  /^\P{scx=Aghb}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Aghb}` matches all proper symbols"
 );

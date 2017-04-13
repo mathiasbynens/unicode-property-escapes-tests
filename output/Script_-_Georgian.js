@@ -10,86 +10,70 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x0010C7,
-		0x0010CD,
-		0x002D27,
-		0x002D2D
-	],
-	ranges: [
-		[0x0010A0, 0x0010C5],
-		[0x0010D0, 0x0010FA],
-		[0x0010FC, 0x0010FF],
-		[0x002D00, 0x002D25]
-	]
+  loneCodePoints: [
+    0x0010C7,
+    0x0010CD,
+    0x002D27,
+    0x002D2D
+  ],
+  ranges: [
+    [0x0010A0, 0x0010C5],
+    [0x0010D0, 0x0010FA],
+    [0x0010FC, 0x0010FF],
+    [0x002D00, 0x002D25]
+  ]
 });
 assert(
-	/^\p{Script=Georgian}+$/u.test(matchSymbols),
-	"`\\p{Script=Georgian}` matches all proper symbols"
+  /^\p{Script=Georgian}+$/u.test(matchSymbols),
+  "`\\p{Script=Georgian}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Geor}+$/u.test(matchSymbols),
-	"`\\p{Script=Geor}` matches all proper symbols"
+  /^\p{Script=Geor}+$/u.test(matchSymbols),
+  "`\\p{Script=Geor}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Georgian}+$/u.test(matchSymbols),
-	"`\\p{sc=Georgian}` matches all proper symbols"
+  /^\p{sc=Georgian}+$/u.test(matchSymbols),
+  "`\\p{sc=Georgian}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Geor}+$/u.test(matchSymbols),
-	"`\\p{sc=Geor}` matches all proper symbols"
+  /^\p{sc=Geor}+$/u.test(matchSymbols),
+  "`\\p{sc=Geor}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x0010C6,
-		0x0010FB,
-		0x002D26
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00109F],
-		[0x0010C8, 0x0010CC],
-		[0x0010CE, 0x0010CF],
-		[0x001100, 0x002CFF],
-		[0x002D28, 0x002D2C],
-		[0x002D2E, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x0010C6,
+    0x0010FB,
+    0x002D26
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00109F],
+    [0x0010C8, 0x0010CC],
+    [0x0010CE, 0x0010CF],
+    [0x001100, 0x002CFF],
+    [0x002D28, 0x002D2C],
+    [0x002D2E, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Georgian}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Georgian}` matches all proper symbols"
+  /^\P{Script=Georgian}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Georgian}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Geor}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Geor}` matches all proper symbols"
+  /^\P{Script=Geor}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Geor}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Georgian}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Georgian}` matches all proper symbols"
+  /^\P{sc=Georgian}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Georgian}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Geor}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Geor}` matches all proper symbols"
+  /^\P{sc=Geor}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Geor}` matches all proper symbols"
 );

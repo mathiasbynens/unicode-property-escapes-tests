@@ -10,73 +10,57 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x01093F
-	],
-	ranges: [
-		[0x010920, 0x010939]
-	]
+  loneCodePoints: [
+    0x01093F
+  ],
+  ranges: [
+    [0x010920, 0x010939]
+  ]
 });
 assert(
-	/^\p{Script=Lydian}+$/u.test(matchSymbols),
-	"`\\p{Script=Lydian}` matches all proper symbols"
+  /^\p{Script=Lydian}+$/u.test(matchSymbols),
+  "`\\p{Script=Lydian}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Lydi}+$/u.test(matchSymbols),
-	"`\\p{Script=Lydi}` matches all proper symbols"
+  /^\p{Script=Lydi}+$/u.test(matchSymbols),
+  "`\\p{Script=Lydi}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Lydian}+$/u.test(matchSymbols),
-	"`\\p{sc=Lydian}` matches all proper symbols"
+  /^\p{sc=Lydian}+$/u.test(matchSymbols),
+  "`\\p{sc=Lydian}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Lydi}+$/u.test(matchSymbols),
-	"`\\p{sc=Lydi}` matches all proper symbols"
+  /^\p{sc=Lydi}+$/u.test(matchSymbols),
+  "`\\p{sc=Lydi}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00DBFF],
-		[0x00E000, 0x01091F],
-		[0x01093A, 0x01093E],
-		[0x010940, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00DBFF],
+    [0x00E000, 0x01091F],
+    [0x01093A, 0x01093E],
+    [0x010940, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Lydian}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Lydian}` matches all proper symbols"
+  /^\P{Script=Lydian}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Lydian}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Lydi}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Lydi}` matches all proper symbols"
+  /^\P{Script=Lydi}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Lydi}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Lydian}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Lydian}` matches all proper symbols"
+  /^\P{sc=Lydian}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Lydian}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Lydi}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Lydi}` matches all proper symbols"
+  /^\P{sc=Lydi}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Lydi}` matches all proper symbols"
 );

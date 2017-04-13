@@ -10,83 +10,67 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x010000, 0x01000B],
-		[0x01000D, 0x010026],
-		[0x010028, 0x01003A],
-		[0x01003C, 0x01003D],
-		[0x01003F, 0x01004D],
-		[0x010050, 0x01005D],
-		[0x010080, 0x0100FA]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x010000, 0x01000B],
+    [0x01000D, 0x010026],
+    [0x010028, 0x01003A],
+    [0x01003C, 0x01003D],
+    [0x01003F, 0x01004D],
+    [0x010050, 0x01005D],
+    [0x010080, 0x0100FA]
+  ]
 });
 assert(
-	/^\p{Script=Linear_B}+$/u.test(matchSymbols),
-	"`\\p{Script=Linear_B}` matches all proper symbols"
+  /^\p{Script=Linear_B}+$/u.test(matchSymbols),
+  "`\\p{Script=Linear_B}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Linb}+$/u.test(matchSymbols),
-	"`\\p{Script=Linb}` matches all proper symbols"
+  /^\p{Script=Linb}+$/u.test(matchSymbols),
+  "`\\p{Script=Linb}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Linear_B}+$/u.test(matchSymbols),
-	"`\\p{sc=Linear_B}` matches all proper symbols"
+  /^\p{sc=Linear_B}+$/u.test(matchSymbols),
+  "`\\p{sc=Linear_B}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Linb}+$/u.test(matchSymbols),
-	"`\\p{sc=Linb}` matches all proper symbols"
+  /^\p{sc=Linb}+$/u.test(matchSymbols),
+  "`\\p{sc=Linb}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x01000C,
-		0x010027,
-		0x01003B,
-		0x01003E
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00DBFF],
-		[0x00E000, 0x00FFFF],
-		[0x01004E, 0x01004F],
-		[0x01005E, 0x01007F],
-		[0x0100FB, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x01000C,
+    0x010027,
+    0x01003B,
+    0x01003E
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00DBFF],
+    [0x00E000, 0x00FFFF],
+    [0x01004E, 0x01004F],
+    [0x01005E, 0x01007F],
+    [0x0100FB, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Linear_B}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Linear_B}` matches all proper symbols"
+  /^\P{Script=Linear_B}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Linear_B}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Linb}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Linb}` matches all proper symbols"
+  /^\P{Script=Linb}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Linb}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Linear_B}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Linear_B}` matches all proper symbols"
+  /^\P{sc=Linear_B}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Linear_B}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Linb}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Linb}` matches all proper symbols"
+  /^\P{sc=Linb}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Linb}` matches all proper symbols"
 );

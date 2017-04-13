@@ -10,72 +10,56 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x001950, 0x00196D],
-		[0x001970, 0x001974]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x001950, 0x00196D],
+    [0x001970, 0x001974]
+  ]
 });
 assert(
-	/^\p{Script=Tai_Le}+$/u.test(matchSymbols),
-	"`\\p{Script=Tai_Le}` matches all proper symbols"
+  /^\p{Script=Tai_Le}+$/u.test(matchSymbols),
+  "`\\p{Script=Tai_Le}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Tale}+$/u.test(matchSymbols),
-	"`\\p{Script=Tale}` matches all proper symbols"
+  /^\p{Script=Tale}+$/u.test(matchSymbols),
+  "`\\p{Script=Tale}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Tai_Le}+$/u.test(matchSymbols),
-	"`\\p{sc=Tai_Le}` matches all proper symbols"
+  /^\p{sc=Tai_Le}+$/u.test(matchSymbols),
+  "`\\p{sc=Tai_Le}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Tale}+$/u.test(matchSymbols),
-	"`\\p{sc=Tale}` matches all proper symbols"
+  /^\p{sc=Tale}+$/u.test(matchSymbols),
+  "`\\p{sc=Tale}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00194F],
-		[0x00196E, 0x00196F],
-		[0x001975, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00194F],
+    [0x00196E, 0x00196F],
+    [0x001975, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Tai_Le}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Tai_Le}` matches all proper symbols"
+  /^\P{Script=Tai_Le}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Tai_Le}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Tale}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Tale}` matches all proper symbols"
+  /^\P{Script=Tale}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Tale}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Tai_Le}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Tai_Le}` matches all proper symbols"
+  /^\P{sc=Tai_Le}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Tai_Le}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Tale}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Tale}` matches all proper symbols"
+  /^\P{sc=Tale}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Tale}` matches all proper symbols"
 );

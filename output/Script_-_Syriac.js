@@ -10,75 +10,59 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x000700, 0x00070D],
-		[0x00070F, 0x00074A],
-		[0x00074D, 0x00074F]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x000700, 0x00070D],
+    [0x00070F, 0x00074A],
+    [0x00074D, 0x00074F]
+  ]
 });
 assert(
-	/^\p{Script=Syriac}+$/u.test(matchSymbols),
-	"`\\p{Script=Syriac}` matches all proper symbols"
+  /^\p{Script=Syriac}+$/u.test(matchSymbols),
+  "`\\p{Script=Syriac}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Syrc}+$/u.test(matchSymbols),
-	"`\\p{Script=Syrc}` matches all proper symbols"
+  /^\p{Script=Syrc}+$/u.test(matchSymbols),
+  "`\\p{Script=Syrc}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Syriac}+$/u.test(matchSymbols),
-	"`\\p{sc=Syriac}` matches all proper symbols"
+  /^\p{sc=Syriac}+$/u.test(matchSymbols),
+  "`\\p{sc=Syriac}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Syrc}+$/u.test(matchSymbols),
-	"`\\p{sc=Syrc}` matches all proper symbols"
+  /^\p{sc=Syrc}+$/u.test(matchSymbols),
+  "`\\p{sc=Syrc}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x00070E
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x0006FF],
-		[0x00074B, 0x00074C],
-		[0x000750, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x00070E
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x0006FF],
+    [0x00074B, 0x00074C],
+    [0x000750, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Syriac}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Syriac}` matches all proper symbols"
+  /^\P{Script=Syriac}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Syriac}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Syrc}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Syrc}` matches all proper symbols"
+  /^\P{Script=Syrc}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Syrc}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Syriac}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Syriac}` matches all proper symbols"
+  /^\P{sc=Syriac}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Syriac}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Syrc}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Syrc}` matches all proper symbols"
+  /^\P{sc=Syrc}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Syrc}` matches all proper symbols"
 );

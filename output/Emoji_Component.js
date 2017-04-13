@@ -10,55 +10,39 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x000023,
-		0x00002A
-	],
-	ranges: [
-		[0x000030, 0x000039],
-		[0x01F1E6, 0x01F1FF],
-		[0x01F3FB, 0x01F3FF]
-	]
+  loneCodePoints: [
+    0x000023,
+    0x00002A
+  ],
+  ranges: [
+    [0x000030, 0x000039],
+    [0x01F1E6, 0x01F1FF],
+    [0x01F3FB, 0x01F3FF]
+  ]
 });
 assert(
-	/^\p{Emoji_Component}+$/u.test(matchSymbols),
-	"`\\p{Emoji_Component}` matches all proper symbols"
+  /^\p{Emoji_Component}+$/u.test(matchSymbols),
+  "`\\p{Emoji_Component}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x000022],
-		[0x000024, 0x000029],
-		[0x00002B, 0x00002F],
-		[0x00003A, 0x00DBFF],
-		[0x00E000, 0x01F1E5],
-		[0x01F200, 0x01F3FA],
-		[0x01F400, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x000022],
+    [0x000024, 0x000029],
+    [0x00002B, 0x00002F],
+    [0x00003A, 0x00DBFF],
+    [0x00E000, 0x01F1E5],
+    [0x01F200, 0x01F3FA],
+    [0x01F400, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Emoji_Component}+$/u.test(nonMatchSymbols),
-	"`\\P{Emoji_Component}` matches all proper symbols"
+  /^\P{Emoji_Component}+$/u.test(nonMatchSymbols),
+  "`\\P{Emoji_Component}` matches all proper symbols"
 );

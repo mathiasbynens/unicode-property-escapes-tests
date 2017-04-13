@@ -10,70 +10,54 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x011AC0, 0x011AF8]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x011AC0, 0x011AF8]
+  ]
 });
 assert(
-	/^\p{Script=Pau_Cin_Hau}+$/u.test(matchSymbols),
-	"`\\p{Script=Pau_Cin_Hau}` matches all proper symbols"
+  /^\p{Script=Pau_Cin_Hau}+$/u.test(matchSymbols),
+  "`\\p{Script=Pau_Cin_Hau}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Pauc}+$/u.test(matchSymbols),
-	"`\\p{Script=Pauc}` matches all proper symbols"
+  /^\p{Script=Pauc}+$/u.test(matchSymbols),
+  "`\\p{Script=Pauc}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Pau_Cin_Hau}+$/u.test(matchSymbols),
-	"`\\p{sc=Pau_Cin_Hau}` matches all proper symbols"
+  /^\p{sc=Pau_Cin_Hau}+$/u.test(matchSymbols),
+  "`\\p{sc=Pau_Cin_Hau}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Pauc}+$/u.test(matchSymbols),
-	"`\\p{sc=Pauc}` matches all proper symbols"
+  /^\p{sc=Pauc}+$/u.test(matchSymbols),
+  "`\\p{sc=Pauc}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00DBFF],
-		[0x00E000, 0x011ABF],
-		[0x011AF9, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00DBFF],
+    [0x00E000, 0x011ABF],
+    [0x011AF9, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Pau_Cin_Hau}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Pau_Cin_Hau}` matches all proper symbols"
+  /^\P{Script=Pau_Cin_Hau}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Pau_Cin_Hau}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Pauc}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Pauc}` matches all proper symbols"
+  /^\P{Script=Pauc}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Pauc}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Pau_Cin_Hau}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Pau_Cin_Hau}` matches all proper symbols"
+  /^\P{sc=Pau_Cin_Hau}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Pau_Cin_Hau}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Pauc}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Pauc}` matches all proper symbols"
+  /^\P{sc=Pauc}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Pauc}` matches all proper symbols"
 );

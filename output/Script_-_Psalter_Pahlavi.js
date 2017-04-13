@@ -10,74 +10,58 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x010B80, 0x010B91],
-		[0x010B99, 0x010B9C],
-		[0x010BA9, 0x010BAF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x010B80, 0x010B91],
+    [0x010B99, 0x010B9C],
+    [0x010BA9, 0x010BAF]
+  ]
 });
 assert(
-	/^\p{Script=Psalter_Pahlavi}+$/u.test(matchSymbols),
-	"`\\p{Script=Psalter_Pahlavi}` matches all proper symbols"
+  /^\p{Script=Psalter_Pahlavi}+$/u.test(matchSymbols),
+  "`\\p{Script=Psalter_Pahlavi}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Phlp}+$/u.test(matchSymbols),
-	"`\\p{Script=Phlp}` matches all proper symbols"
+  /^\p{Script=Phlp}+$/u.test(matchSymbols),
+  "`\\p{Script=Phlp}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Psalter_Pahlavi}+$/u.test(matchSymbols),
-	"`\\p{sc=Psalter_Pahlavi}` matches all proper symbols"
+  /^\p{sc=Psalter_Pahlavi}+$/u.test(matchSymbols),
+  "`\\p{sc=Psalter_Pahlavi}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Phlp}+$/u.test(matchSymbols),
-	"`\\p{sc=Phlp}` matches all proper symbols"
+  /^\p{sc=Phlp}+$/u.test(matchSymbols),
+  "`\\p{sc=Phlp}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00DBFF],
-		[0x00E000, 0x010B7F],
-		[0x010B92, 0x010B98],
-		[0x010B9D, 0x010BA8],
-		[0x010BB0, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00DBFF],
+    [0x00E000, 0x010B7F],
+    [0x010B92, 0x010B98],
+    [0x010B9D, 0x010BA8],
+    [0x010BB0, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Psalter_Pahlavi}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Psalter_Pahlavi}` matches all proper symbols"
+  /^\P{Script=Psalter_Pahlavi}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Psalter_Pahlavi}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Phlp}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Phlp}` matches all proper symbols"
+  /^\P{Script=Phlp}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Phlp}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Psalter_Pahlavi}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Psalter_Pahlavi}` matches all proper symbols"
+  /^\P{sc=Psalter_Pahlavi}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Psalter_Pahlavi}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Phlp}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Phlp}` matches all proper symbols"
+  /^\P{sc=Phlp}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Phlp}` matches all proper symbols"
 );

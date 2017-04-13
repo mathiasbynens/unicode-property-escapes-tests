@@ -10,56 +10,40 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x002FF0, 0x002FF1],
-		[0x002FF4, 0x002FFB]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x002FF0, 0x002FF1],
+    [0x002FF4, 0x002FFB]
+  ]
 });
 assert(
-	/^\p{IDS_Binary_Operator}+$/u.test(matchSymbols),
-	"`\\p{IDS_Binary_Operator}` matches all proper symbols"
+  /^\p{IDS_Binary_Operator}+$/u.test(matchSymbols),
+  "`\\p{IDS_Binary_Operator}` matches all proper symbols"
 );
 assert(
-	/^\p{IDSB}+$/u.test(matchSymbols),
-	"`\\p{IDSB}` matches all proper symbols"
+  /^\p{IDSB}+$/u.test(matchSymbols),
+  "`\\p{IDSB}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x002FEF],
-		[0x002FF2, 0x002FF3],
-		[0x002FFC, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x002FEF],
+    [0x002FF2, 0x002FF3],
+    [0x002FFC, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{IDS_Binary_Operator}+$/u.test(nonMatchSymbols),
-	"`\\P{IDS_Binary_Operator}` matches all proper symbols"
+  /^\P{IDS_Binary_Operator}+$/u.test(nonMatchSymbols),
+  "`\\P{IDS_Binary_Operator}` matches all proper symbols"
 );
 assert(
-	/^\P{IDSB}+$/u.test(nonMatchSymbols),
-	"`\\P{IDSB}` matches all proper symbols"
+  /^\P{IDSB}+$/u.test(nonMatchSymbols),
+  "`\\P{IDSB}` matches all proper symbols"
 );

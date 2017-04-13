@@ -10,76 +10,60 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x000964, 0x000965],
-		[0x00A830, 0x00A839],
-		[0x011680, 0x0116B7],
-		[0x0116C0, 0x0116C9]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x000964, 0x000965],
+    [0x00A830, 0x00A839],
+    [0x011680, 0x0116B7],
+    [0x0116C0, 0x0116C9]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Takri}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Takri}` matches all proper symbols"
+  /^\p{Script_Extensions=Takri}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Takri}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Takr}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Takr}` matches all proper symbols"
+  /^\p{Script_Extensions=Takr}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Takr}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Takri}+$/u.test(matchSymbols),
-	"`\\p{scx=Takri}` matches all proper symbols"
+  /^\p{scx=Takri}+$/u.test(matchSymbols),
+  "`\\p{scx=Takri}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Takr}+$/u.test(matchSymbols),
-	"`\\p{scx=Takr}` matches all proper symbols"
+  /^\p{scx=Takr}+$/u.test(matchSymbols),
+  "`\\p{scx=Takr}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x000963],
-		[0x000966, 0x00A82F],
-		[0x00A83A, 0x00DBFF],
-		[0x00E000, 0x01167F],
-		[0x0116B8, 0x0116BF],
-		[0x0116CA, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x000963],
+    [0x000966, 0x00A82F],
+    [0x00A83A, 0x00DBFF],
+    [0x00E000, 0x01167F],
+    [0x0116B8, 0x0116BF],
+    [0x0116CA, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Takri}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Takri}` matches all proper symbols"
+  /^\P{Script_Extensions=Takri}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Takri}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Takr}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Takr}` matches all proper symbols"
+  /^\P{Script_Extensions=Takr}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Takr}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Takri}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Takri}` matches all proper symbols"
+  /^\P{scx=Takri}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Takri}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Takr}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Takr}` matches all proper symbols"
+  /^\P{scx=Takr}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Takr}` matches all proper symbols"
 );

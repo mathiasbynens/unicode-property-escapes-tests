@@ -10,74 +10,58 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x01E900, 0x01E94A],
-		[0x01E950, 0x01E959],
-		[0x01E95E, 0x01E95F]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x01E900, 0x01E94A],
+    [0x01E950, 0x01E959],
+    [0x01E95E, 0x01E95F]
+  ]
 });
 assert(
-	/^\p{Script=Adlam}+$/u.test(matchSymbols),
-	"`\\p{Script=Adlam}` matches all proper symbols"
+  /^\p{Script=Adlam}+$/u.test(matchSymbols),
+  "`\\p{Script=Adlam}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Adlm}+$/u.test(matchSymbols),
-	"`\\p{Script=Adlm}` matches all proper symbols"
+  /^\p{Script=Adlm}+$/u.test(matchSymbols),
+  "`\\p{Script=Adlm}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Adlam}+$/u.test(matchSymbols),
-	"`\\p{sc=Adlam}` matches all proper symbols"
+  /^\p{sc=Adlam}+$/u.test(matchSymbols),
+  "`\\p{sc=Adlam}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Adlm}+$/u.test(matchSymbols),
-	"`\\p{sc=Adlm}` matches all proper symbols"
+  /^\p{sc=Adlm}+$/u.test(matchSymbols),
+  "`\\p{sc=Adlm}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00DBFF],
-		[0x00E000, 0x01E8FF],
-		[0x01E94B, 0x01E94F],
-		[0x01E95A, 0x01E95D],
-		[0x01E960, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00DBFF],
+    [0x00E000, 0x01E8FF],
+    [0x01E94B, 0x01E94F],
+    [0x01E95A, 0x01E95D],
+    [0x01E960, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Adlam}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Adlam}` matches all proper symbols"
+  /^\P{Script=Adlam}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Adlam}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Adlm}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Adlm}` matches all proper symbols"
+  /^\P{Script=Adlm}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Adlm}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Adlam}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Adlam}` matches all proper symbols"
+  /^\P{sc=Adlam}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Adlam}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Adlm}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Adlm}` matches all proper symbols"
+  /^\P{sc=Adlm}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Adlm}` matches all proper symbols"
 );

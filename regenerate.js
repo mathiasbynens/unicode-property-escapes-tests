@@ -44,17 +44,18 @@ regenerate.prototype.toTestCode = function() {
 };
 
 const prettyPrint = ([ loneCodePoints, ranges ]) => {
+	const indent = '  '; // Test 262 uses two-space indents.
 	loneCodePoints = loneCodePoints.map((codePoint) => toHex(codePoint));
 	ranges = ranges.map(
 		(range) => `[${ toHex(range[0]) }, ${ toHex(range[1]) }]`
 	);
 	const loneCodePointsOutput = loneCodePoints.length ?
-		`[\n\t\t${ loneCodePoints.join(',\n\t\t') }\n\t]` :
+		`[\n${indent}${indent}${ loneCodePoints.join(`,\n${indent}${indent}`) }\n${indent}]` :
 		`[]`;
 	const rangesOutput = ranges.length ?
-		`[\n\t\t${ ranges.join(',\n\t\t') }\n\t]` :
+		`[\n${indent}${indent}${ ranges.join(`,\n${indent}${indent}`) }\n${indent}]` :
 		`[]`;
-	return `{\n\tloneCodePoints: ${ loneCodePointsOutput },\n\tranges: ${ rangesOutput }\n}`;
+	return `{\n${indent}loneCodePoints: ${ loneCodePointsOutput },\n${indent}ranges: ${ rangesOutput }\n}`;
 };
 
 module.exports = regenerate;

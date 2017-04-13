@@ -10,72 +10,56 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00AA80, 0x00AAC2],
-		[0x00AADB, 0x00AADF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00AA80, 0x00AAC2],
+    [0x00AADB, 0x00AADF]
+  ]
 });
 assert(
-	/^\p{Script=Tai_Viet}+$/u.test(matchSymbols),
-	"`\\p{Script=Tai_Viet}` matches all proper symbols"
+  /^\p{Script=Tai_Viet}+$/u.test(matchSymbols),
+  "`\\p{Script=Tai_Viet}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Tavt}+$/u.test(matchSymbols),
-	"`\\p{Script=Tavt}` matches all proper symbols"
+  /^\p{Script=Tavt}+$/u.test(matchSymbols),
+  "`\\p{Script=Tavt}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Tai_Viet}+$/u.test(matchSymbols),
-	"`\\p{sc=Tai_Viet}` matches all proper symbols"
+  /^\p{sc=Tai_Viet}+$/u.test(matchSymbols),
+  "`\\p{sc=Tai_Viet}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Tavt}+$/u.test(matchSymbols),
-	"`\\p{sc=Tavt}` matches all proper symbols"
+  /^\p{sc=Tavt}+$/u.test(matchSymbols),
+  "`\\p{sc=Tavt}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00AA7F],
-		[0x00AAC3, 0x00AADA],
-		[0x00AAE0, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00AA7F],
+    [0x00AAC3, 0x00AADA],
+    [0x00AAE0, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Tai_Viet}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Tai_Viet}` matches all proper symbols"
+  /^\P{Script=Tai_Viet}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Tai_Viet}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Tavt}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Tavt}` matches all proper symbols"
+  /^\P{Script=Tavt}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Tavt}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Tai_Viet}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Tai_Viet}` matches all proper symbols"
+  /^\P{sc=Tai_Viet}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Tai_Viet}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Tavt}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Tavt}` matches all proper symbols"
+  /^\P{sc=Tavt}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Tavt}` matches all proper symbols"
 );

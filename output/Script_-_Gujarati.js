@@ -10,98 +10,82 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x000AD0,
-		0x000AF9
-	],
-	ranges: [
-		[0x000A81, 0x000A83],
-		[0x000A85, 0x000A8D],
-		[0x000A8F, 0x000A91],
-		[0x000A93, 0x000AA8],
-		[0x000AAA, 0x000AB0],
-		[0x000AB2, 0x000AB3],
-		[0x000AB5, 0x000AB9],
-		[0x000ABC, 0x000AC5],
-		[0x000AC7, 0x000AC9],
-		[0x000ACB, 0x000ACD],
-		[0x000AE0, 0x000AE3],
-		[0x000AE6, 0x000AF1]
-	]
+  loneCodePoints: [
+    0x000AD0,
+    0x000AF9
+  ],
+  ranges: [
+    [0x000A81, 0x000A83],
+    [0x000A85, 0x000A8D],
+    [0x000A8F, 0x000A91],
+    [0x000A93, 0x000AA8],
+    [0x000AAA, 0x000AB0],
+    [0x000AB2, 0x000AB3],
+    [0x000AB5, 0x000AB9],
+    [0x000ABC, 0x000AC5],
+    [0x000AC7, 0x000AC9],
+    [0x000ACB, 0x000ACD],
+    [0x000AE0, 0x000AE3],
+    [0x000AE6, 0x000AF1]
+  ]
 });
 assert(
-	/^\p{Script=Gujarati}+$/u.test(matchSymbols),
-	"`\\p{Script=Gujarati}` matches all proper symbols"
+  /^\p{Script=Gujarati}+$/u.test(matchSymbols),
+  "`\\p{Script=Gujarati}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Gujr}+$/u.test(matchSymbols),
-	"`\\p{Script=Gujr}` matches all proper symbols"
+  /^\p{Script=Gujr}+$/u.test(matchSymbols),
+  "`\\p{Script=Gujr}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Gujarati}+$/u.test(matchSymbols),
-	"`\\p{sc=Gujarati}` matches all proper symbols"
+  /^\p{sc=Gujarati}+$/u.test(matchSymbols),
+  "`\\p{sc=Gujarati}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Gujr}+$/u.test(matchSymbols),
-	"`\\p{sc=Gujr}` matches all proper symbols"
+  /^\p{sc=Gujr}+$/u.test(matchSymbols),
+  "`\\p{sc=Gujr}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x000A84,
-		0x000A8E,
-		0x000A92,
-		0x000AA9,
-		0x000AB1,
-		0x000AB4,
-		0x000AC6,
-		0x000ACA
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x000A80],
-		[0x000ABA, 0x000ABB],
-		[0x000ACE, 0x000ACF],
-		[0x000AD1, 0x000ADF],
-		[0x000AE4, 0x000AE5],
-		[0x000AF2, 0x000AF8],
-		[0x000AFA, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x000A84,
+    0x000A8E,
+    0x000A92,
+    0x000AA9,
+    0x000AB1,
+    0x000AB4,
+    0x000AC6,
+    0x000ACA
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x000A80],
+    [0x000ABA, 0x000ABB],
+    [0x000ACE, 0x000ACF],
+    [0x000AD1, 0x000ADF],
+    [0x000AE4, 0x000AE5],
+    [0x000AF2, 0x000AF8],
+    [0x000AFA, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Gujarati}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Gujarati}` matches all proper symbols"
+  /^\P{Script=Gujarati}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Gujarati}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Gujr}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Gujr}` matches all proper symbols"
+  /^\P{Script=Gujr}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Gujr}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Gujarati}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Gujarati}` matches all proper symbols"
+  /^\P{sc=Gujarati}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Gujarati}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Gujr}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Gujr}` matches all proper symbols"
+  /^\P{sc=Gujr}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Gujr}` matches all proper symbols"
 );

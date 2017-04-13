@@ -10,70 +10,54 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00A500, 0x00A62B]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00A500, 0x00A62B]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Vai}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Vai}` matches all proper symbols"
+  /^\p{Script_Extensions=Vai}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Vai}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Vaii}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Vaii}` matches all proper symbols"
+  /^\p{Script_Extensions=Vaii}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Vaii}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Vai}+$/u.test(matchSymbols),
-	"`\\p{scx=Vai}` matches all proper symbols"
+  /^\p{scx=Vai}+$/u.test(matchSymbols),
+  "`\\p{scx=Vai}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Vaii}+$/u.test(matchSymbols),
-	"`\\p{scx=Vaii}` matches all proper symbols"
+  /^\p{scx=Vaii}+$/u.test(matchSymbols),
+  "`\\p{scx=Vaii}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00A4FF],
-		[0x00A62C, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00A4FF],
+    [0x00A62C, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Vai}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Vai}` matches all proper symbols"
+  /^\P{Script_Extensions=Vai}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Vai}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Vaii}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Vaii}` matches all proper symbols"
+  /^\P{Script_Extensions=Vaii}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Vaii}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Vai}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Vai}` matches all proper symbols"
+  /^\P{scx=Vai}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Vai}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Vaii}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Vaii}` matches all proper symbols"
+  /^\P{scx=Vaii}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Vaii}` matches all proper symbols"
 );

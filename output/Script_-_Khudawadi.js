@@ -10,72 +10,56 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x0112B0, 0x0112EA],
-		[0x0112F0, 0x0112F9]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x0112B0, 0x0112EA],
+    [0x0112F0, 0x0112F9]
+  ]
 });
 assert(
-	/^\p{Script=Khudawadi}+$/u.test(matchSymbols),
-	"`\\p{Script=Khudawadi}` matches all proper symbols"
+  /^\p{Script=Khudawadi}+$/u.test(matchSymbols),
+  "`\\p{Script=Khudawadi}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Sind}+$/u.test(matchSymbols),
-	"`\\p{Script=Sind}` matches all proper symbols"
+  /^\p{Script=Sind}+$/u.test(matchSymbols),
+  "`\\p{Script=Sind}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Khudawadi}+$/u.test(matchSymbols),
-	"`\\p{sc=Khudawadi}` matches all proper symbols"
+  /^\p{sc=Khudawadi}+$/u.test(matchSymbols),
+  "`\\p{sc=Khudawadi}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Sind}+$/u.test(matchSymbols),
-	"`\\p{sc=Sind}` matches all proper symbols"
+  /^\p{sc=Sind}+$/u.test(matchSymbols),
+  "`\\p{sc=Sind}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00DBFF],
-		[0x00E000, 0x0112AF],
-		[0x0112EB, 0x0112EF],
-		[0x0112FA, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00DBFF],
+    [0x00E000, 0x0112AF],
+    [0x0112EB, 0x0112EF],
+    [0x0112FA, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Khudawadi}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Khudawadi}` matches all proper symbols"
+  /^\P{Script=Khudawadi}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Khudawadi}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Sind}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Sind}` matches all proper symbols"
+  /^\P{Script=Sind}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Sind}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Khudawadi}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Khudawadi}` matches all proper symbols"
+  /^\P{sc=Khudawadi}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Khudawadi}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Sind}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Sind}` matches all proper symbols"
+  /^\P{sc=Sind}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Sind}` matches all proper symbols"
 );

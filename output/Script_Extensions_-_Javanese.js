@@ -10,75 +10,59 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00A980, 0x00A9CD],
-		[0x00A9CF, 0x00A9D9],
-		[0x00A9DE, 0x00A9DF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00A980, 0x00A9CD],
+    [0x00A9CF, 0x00A9D9],
+    [0x00A9DE, 0x00A9DF]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Javanese}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Javanese}` matches all proper symbols"
+  /^\p{Script_Extensions=Javanese}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Javanese}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Java}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Java}` matches all proper symbols"
+  /^\p{Script_Extensions=Java}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Java}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Javanese}+$/u.test(matchSymbols),
-	"`\\p{scx=Javanese}` matches all proper symbols"
+  /^\p{scx=Javanese}+$/u.test(matchSymbols),
+  "`\\p{scx=Javanese}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Java}+$/u.test(matchSymbols),
-	"`\\p{scx=Java}` matches all proper symbols"
+  /^\p{scx=Java}+$/u.test(matchSymbols),
+  "`\\p{scx=Java}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x00A9CE
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00A97F],
-		[0x00A9DA, 0x00A9DD],
-		[0x00A9E0, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x00A9CE
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00A97F],
+    [0x00A9DA, 0x00A9DD],
+    [0x00A9E0, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Javanese}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Javanese}` matches all proper symbols"
+  /^\P{Script_Extensions=Javanese}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Javanese}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Java}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Java}` matches all proper symbols"
+  /^\P{Script_Extensions=Java}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Java}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Javanese}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Javanese}` matches all proper symbols"
+  /^\P{scx=Javanese}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Javanese}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Java}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Java}` matches all proper symbols"
+  /^\P{scx=Java}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Java}` matches all proper symbols"
 );

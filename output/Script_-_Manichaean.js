@@ -10,72 +10,56 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x010AC0, 0x010AE6],
-		[0x010AEB, 0x010AF6]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x010AC0, 0x010AE6],
+    [0x010AEB, 0x010AF6]
+  ]
 });
 assert(
-	/^\p{Script=Manichaean}+$/u.test(matchSymbols),
-	"`\\p{Script=Manichaean}` matches all proper symbols"
+  /^\p{Script=Manichaean}+$/u.test(matchSymbols),
+  "`\\p{Script=Manichaean}` matches all proper symbols"
 );
 assert(
-	/^\p{Script=Mani}+$/u.test(matchSymbols),
-	"`\\p{Script=Mani}` matches all proper symbols"
+  /^\p{Script=Mani}+$/u.test(matchSymbols),
+  "`\\p{Script=Mani}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Manichaean}+$/u.test(matchSymbols),
-	"`\\p{sc=Manichaean}` matches all proper symbols"
+  /^\p{sc=Manichaean}+$/u.test(matchSymbols),
+  "`\\p{sc=Manichaean}` matches all proper symbols"
 );
 assert(
-	/^\p{sc=Mani}+$/u.test(matchSymbols),
-	"`\\p{sc=Mani}` matches all proper symbols"
+  /^\p{sc=Mani}+$/u.test(matchSymbols),
+  "`\\p{sc=Mani}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x00DBFF],
-		[0x00E000, 0x010ABF],
-		[0x010AE7, 0x010AEA],
-		[0x010AF7, 0x10FFFF]
-	]
+  loneCodePoints: [],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x00DBFF],
+    [0x00E000, 0x010ABF],
+    [0x010AE7, 0x010AEA],
+    [0x010AF7, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script=Manichaean}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Manichaean}` matches all proper symbols"
+  /^\P{Script=Manichaean}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Manichaean}` matches all proper symbols"
 );
 assert(
-	/^\P{Script=Mani}+$/u.test(nonMatchSymbols),
-	"`\\P{Script=Mani}` matches all proper symbols"
+  /^\P{Script=Mani}+$/u.test(nonMatchSymbols),
+  "`\\P{Script=Mani}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Manichaean}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Manichaean}` matches all proper symbols"
+  /^\P{sc=Manichaean}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Manichaean}` matches all proper symbols"
 );
 assert(
-	/^\P{sc=Mani}+$/u.test(nonMatchSymbols),
-	"`\\P{sc=Mani}` matches all proper symbols"
+  /^\P{sc=Mani}+$/u.test(nonMatchSymbols),
+  "`\\P{sc=Mani}` matches all proper symbols"
 );

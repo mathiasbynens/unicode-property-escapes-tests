@@ -10,82 +10,66 @@ info: |
   Unicode v9.0.0
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [buildString.js]
 ---*/
 
-const buildString = ({ loneCodePoints, ranges }) => {
-	const CHUNK_SIZE = 10000;
-	let result = String.fromCodePoint(...loneCodePoints);
-	for (const [start, end] of ranges) {
-		const codePoints = [];
-		for (let length = 0, codePoint = start; codePoint <= end; codePoint++) {
-			codePoints[length++] = codePoint;
-			if (length === CHUNK_SIZE) {
-				result += String.fromCodePoint(...codePoints);
-				codePoints.length = length = 0;
-			}
-		}
-		result += String.fromCodePoint(...codePoints);
-	}
-	return result;
-};
-
 const matchSymbols = buildString({
-	loneCodePoints: [
-		0x000965,
-		0x001940
-	],
-	ranges: [
-		[0x001900, 0x00191E],
-		[0x001920, 0x00192B],
-		[0x001930, 0x00193B],
-		[0x001944, 0x00194F]
-	]
+  loneCodePoints: [
+    0x000965,
+    0x001940
+  ],
+  ranges: [
+    [0x001900, 0x00191E],
+    [0x001920, 0x00192B],
+    [0x001930, 0x00193B],
+    [0x001944, 0x00194F]
+  ]
 });
 assert(
-	/^\p{Script_Extensions=Limbu}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Limbu}` matches all proper symbols"
+  /^\p{Script_Extensions=Limbu}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Limbu}` matches all proper symbols"
 );
 assert(
-	/^\p{Script_Extensions=Limb}+$/u.test(matchSymbols),
-	"`\\p{Script_Extensions=Limb}` matches all proper symbols"
+  /^\p{Script_Extensions=Limb}+$/u.test(matchSymbols),
+  "`\\p{Script_Extensions=Limb}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Limbu}+$/u.test(matchSymbols),
-	"`\\p{scx=Limbu}` matches all proper symbols"
+  /^\p{scx=Limbu}+$/u.test(matchSymbols),
+  "`\\p{scx=Limbu}` matches all proper symbols"
 );
 assert(
-	/^\p{scx=Limb}+$/u.test(matchSymbols),
-	"`\\p{scx=Limb}` matches all proper symbols"
+  /^\p{scx=Limb}+$/u.test(matchSymbols),
+  "`\\p{scx=Limb}` matches all proper symbols"
 );
 
 const nonMatchSymbols = buildString({
-	loneCodePoints: [
-		0x00191F
-	],
-	ranges: [
-		[0x00DC00, 0x00DFFF],
-		[0x000000, 0x000964],
-		[0x000966, 0x0018FF],
-		[0x00192C, 0x00192F],
-		[0x00193C, 0x00193F],
-		[0x001941, 0x001943],
-		[0x001950, 0x00DBFF],
-		[0x00E000, 0x10FFFF]
-	]
+  loneCodePoints: [
+    0x00191F
+  ],
+  ranges: [
+    [0x00DC00, 0x00DFFF],
+    [0x000000, 0x000964],
+    [0x000966, 0x0018FF],
+    [0x00192C, 0x00192F],
+    [0x00193C, 0x00193F],
+    [0x001941, 0x001943],
+    [0x001950, 0x00DBFF],
+    [0x00E000, 0x10FFFF]
+  ]
 });
 assert(
-	/^\P{Script_Extensions=Limbu}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Limbu}` matches all proper symbols"
+  /^\P{Script_Extensions=Limbu}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Limbu}` matches all proper symbols"
 );
 assert(
-	/^\P{Script_Extensions=Limb}+$/u.test(nonMatchSymbols),
-	"`\\P{Script_Extensions=Limb}` matches all proper symbols"
+  /^\P{Script_Extensions=Limb}+$/u.test(nonMatchSymbols),
+  "`\\P{Script_Extensions=Limb}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Limbu}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Limbu}` matches all proper symbols"
+  /^\P{scx=Limbu}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Limbu}` matches all proper symbols"
 );
 assert(
-	/^\P{scx=Limb}+$/u.test(nonMatchSymbols),
-	"`\\P{scx=Limb}` matches all proper symbols"
+  /^\P{scx=Limb}+$/u.test(nonMatchSymbols),
+  "`\\P{scx=Limb}` matches all proper symbols"
 );

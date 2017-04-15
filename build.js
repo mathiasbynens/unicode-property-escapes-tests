@@ -4,6 +4,9 @@ const jsesc = require('jsesc');
 const UNICODE_VERSION = require(
 	'regenerate-unicode-properties/unicode-version.js'
 );
+const EMOJI_VERSION = require(
+	'regenerate-unicode-properties/emoji-version.js'
+);
 
 const _template = require('lodash.template');
 const TEST_TEMPLATE = fs.readFileSync('templates/test.template', 'utf8');
@@ -40,6 +43,7 @@ const handleExpression = (property, value, symbols) => {
 		'matchSymbols': matchSymbols,
 		'nonMatchSymbols': nonMatchSymbols,
 		'unicodeVersion': UNICODE_VERSION,
+		'emojiVersion': EMOJI_VERSION,
 	}).replace(/\n{3,}/g, '\n\n').trim() + '\n';
 	fs.writeFileSync(`output/${ outputFile }.js`, output);
 };

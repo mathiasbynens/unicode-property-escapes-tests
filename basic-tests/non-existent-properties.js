@@ -7,10 +7,11 @@ description: >
   Non-existent properties must not be supported in Unicode property escapes.
 esid: sec-static-semantics-unicodematchproperty-p
 features: [regexp-unicode-property-escapes]
+includes: [regExpUtils.js]
 ---*/
 
-assert.throws(SyntaxError, () => /\p{UnknownBinaryProperty}/u);
-assert.throws(SyntaxError, () => /\P{UnknownBinaryProperty}/u);
+assert.throws.early(SyntaxError, "/\\p{UnknownBinaryProperty}/u");
+assert.throws.early(SyntaxError, "/\\P{UnknownBinaryProperty}/u");
 
-assert.throws(SyntaxError, () => /\p{Line_Breakz=Alphabetic}/u);
-assert.throws(SyntaxError, () => /\P{Line_Breakz=Alphabetic}/u);
+assert.throws.early(SyntaxError, "/\\p{Line_Breakz=Alphabetic}/u");
+assert.throws.early(SyntaxError, "/\\P{Line_Breakz=Alphabetic}/u");

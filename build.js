@@ -45,7 +45,7 @@ const handleExpression = (property, value, symbols) => {
 		'unicodeVersion': UNICODE_VERSION,
 		'emojiVersion': EMOJI_VERSION,
 	}).replace(/\n{3,}/g, '\n\n').trim() + '\n';
-	fs.writeFileSync(`output/${ outputFile }.js`, output);
+	fs.writeFileSync(`output/generated/${ outputFile }.js`, output);
 };
 
 const properties = require('regenerate-unicode-properties');

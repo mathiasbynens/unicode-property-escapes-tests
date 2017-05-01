@@ -1,3 +1,6 @@
+# Basic tests that are copied from `basic-tests/*.js`
+output/*.js
+
 # npm error log
 npm-debug.log
 

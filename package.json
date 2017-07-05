@@ -1,18 +1,18 @@
 {
-  "name": "unicode-property-escapes-tests",
-  "private": true,
-  "scripts": {
-    "clean": "rm -rf output && mkdir -p output/generated",
-    "build": "npm run clean && node build.js && cp -r basic-tests/. output",
-    "test": "node test.js"
-  },
-  "devDependencies": {
-    "jsesc": "^2.5.0",
-    "lodash.template": "^4.4.0",
-    "regenerate": "^1.3.2",
-    "regenerate-unicode-properties": "^5.0.7",
-    "string.prototype.padstart": "^3.0.0",
-    "unicode-property-aliases-ecmascript": "^1.0.2",
-    "unicode-property-value-aliases-ecmascript": "^1.0.0"
-  }
+	"name": "unicode-property-escapes-tests",
+	"private": true,
+	"scripts": {
+		"clean": "rm -rf output && mkdir -p output/generated",
+		"build": "npm run clean && node build.js && cp -r basic-tests/. output",
+		"test": "node test.js"
+	},
+	"devDependencies": {
+		"jsesc": "^2.5.1",
+		"lodash.template": "^4.4.0",
+		"regenerate": "^1.3.2",
+		"regenerate-unicode-properties": "^5.1.0",
+		"string.prototype.padstart": "^3.0.0",
+		"unicode-property-aliases-ecmascript": "^1.0.3",
+		"unicode-property-value-aliases-ecmascript": "^1.0.1"
+	}
 }

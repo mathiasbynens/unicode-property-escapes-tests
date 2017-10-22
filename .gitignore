@@ -1,10 +1,8 @@
 # Basic tests that are copied from `basic-tests/*.js`
 output/*.js
 
-# npm error log
-npm-debug.log
-
 # Installed npm modules
+package-lock.json
 node_modules
 
 # Folder view configuration files

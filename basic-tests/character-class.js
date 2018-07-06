@@ -10,12 +10,23 @@ features: [regexp-unicode-property-escapes]
 ---*/
 
 /[\p{Hex}]/u;
-assert.throws(
-  SyntaxError,
-  () => /[\p{Hex}-\uFFFF]/u,
-  // See step 1 of https://tc39.github.io/ecma262/#sec-runtime-semantics-characterrange-abstract-operation.
-  'property escape at start of character class range should throw if it expands to multiple characters'
-);
+
+// https://tc39.github.io/ecma262/#sec-patterns-static-semantics-early-errors
+//
+// NonemptyClassRangesNoDash :: ClassAtomNoDash - ClassAtom ClassRanges
+//
+// It is a Syntax Error if IsCharacterClass of ClassAtomNoDash is true or IsCharacterClass of ClassAtom is true.
+assert.throws.early(SyntaxError, "/[\p{Hex}-\uFFFF]/u");
+assert.throws.early(SyntaxError, "/[\uFFFF-\p{Hex}]/u");
+
+// https://tc39.github.io/ecma262/#sec-patterns-static-semantics-early-errors
+//
+// NonemptyClassRanges :: ClassAtom - ClassAtom ClassRanges
+//
+// It is a Syntax Error if IsCharacterClass of the first ClassAtom is true or IsCharacterClass of the second ClassAtom is true.
+assert.throws.early(SyntaxError, "/[\p{Hex}--]/u");
+assert.throws.early(SyntaxError, "/[--\p{Hex}]/u");
+
 assert.throws.early(SyntaxError, "/[\\p{}]/u");
 assert.throws.early(SyntaxError, "/[\\p{invalid}]/u");
 assert.throws.early(SyntaxError, "/[\\p{]/u");

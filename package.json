@@ -7,12 +7,12 @@
 		"test": "node test.js"
 	},
 	"devDependencies": {
-		"jsesc": "^2.5.1",
+		"jsesc": "^2.5.2",
 		"lodash.template": "^4.4.0",
 		"regenerate": "^1.4.0",
-		"regenerate-unicode-properties": "^7.0.0",
+		"regenerate-unicode-properties": "^8.0.0",
 		"string.prototype.padstart": "^3.0.0",
-		"unicode-property-aliases-ecmascript": "^1.0.4",
-		"unicode-property-value-aliases-ecmascript": "^1.0.3"
+		"unicode-property-aliases-ecmascript": "^1.0.5",
+		"unicode-property-value-aliases-ecmascript": "^1.0.4"
 	}
 }

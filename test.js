@@ -1,7 +1,5 @@
 const assert = require('assert');
 
-require('string.prototype.padstart').shim();
-
 // The script doesn’t export anything, so let’s `eval` it.
 eval(require('fs').readFileSync('./harness/regExpUtils.js', 'utf8'));
 

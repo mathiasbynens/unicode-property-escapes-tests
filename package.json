@@ -7,9 +7,9 @@
 		"test": "node test.js"
 	},
 	"devDependencies": {
-		"jsesc": "^2.5.2",
+		"jsesc": "^3.0.2",
 		"lodash.template": "^4.5.0",
-		"regenerate": "^1.4.0",
+		"regenerate": "^1.4.2",
 		"regenerate-unicode-properties": "^8.2.0",
 		"unicode-property-aliases-ecmascript": "^1.1.0",
 		"unicode-property-value-aliases-ecmascript": "^1.1.0"

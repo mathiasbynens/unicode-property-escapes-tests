@@ -7,6 +7,7 @@
 		"test": "node test.js"
 	},
 	"devDependencies": {
+		"@unicode/unicode-14.0.0": "^1.2.1",
 		"jsesc": "^3.0.2",
 		"lodash.template": "^4.5.0",
 		"regenerate": "^1.4.2",

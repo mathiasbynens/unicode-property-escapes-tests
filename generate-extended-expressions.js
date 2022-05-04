@@ -32,6 +32,18 @@ const parts = [
 		expression: String.raw`\q{0|2|4|9\uFE0F\u20E3}`,
 		strings: new Set(['0', '2', '4', '9\uFE0F\u20E3']),
 	},
+	// A lone character.
+	{
+		description: 'character',
+		expression: '_',
+		strings: new Set(['_']),
+	},
+	// A character class escape character.
+	{
+		description: 'character-class-escape',
+		expression: String.raw`\d`,
+		strings: new Set(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']),
+	},
 ];
 
 const DEFAULT_NON_MATCH_STRINGS = [

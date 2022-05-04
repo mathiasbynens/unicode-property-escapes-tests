@@ -2,7 +2,7 @@
 	"name": "unicode-property-escapes-tests",
 	"private": true,
 	"scripts": {
-		"clean": "rm -rf output && mkdir -p output/generated/strings",
+		"clean": "rm -rf output && mkdir -p output/generated/{strings,extended-character-classes}",
 		"build": "npm run clean && node build.js && cp -r basic-tests/. output",
 		"test": "node test.js"
 	},

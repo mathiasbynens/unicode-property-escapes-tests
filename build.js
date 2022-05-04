@@ -41,11 +41,16 @@ const createPropertyOfStringsNegativeUTest = template(
 	fs.readFileSync('templates/property-of-strings-negative-u.template', 'utf8'),
 	templateOptions
 );
+const createExtendedCharacterClassTest = template(
+	fs.readFileSync('templates/extended-character-class.template', 'utf8'),
+	templateOptions
+);
 
 const regenerate = require('./regenerate.js');
 const UNICODE_SET = regenerate().addRange(0x0, 0x10FFFF);
 
 const generateExpressions = require('./generate-expressions.js');
+const generateExtendedCharacterClassExpressions = require('./generate-extended-expressions.js');
 
 const handleExpression = (property, value, symbols) => {
 	const expressions = generateExpressions(property, value);
@@ -151,4 +156,17 @@ const propertiesOfStrings = require('@unicode/unicode-14.0.0').Sequence_Property
 for (const property of propertiesOfStrings) {
 	const strings = require(`@unicode/unicode-14.0.0/Sequence_Property/${property}/index.js`);
 	handlePropertyOfStrings(property, strings);
+}
+
+const extendedExpressions = generateExtendedCharacterClassExpressions();
+for (const extendedExpression of extendedExpressions) {
+	const output = createExtendedCharacterClassTest({
+		expression: extendedExpression.expression,
+		matchStrings: extendedExpression.matchStrings,
+		nonMatchStrings: extendedExpression.nonMatchStrings,
+		hasPropertyEscape: extendedExpression.description.includes('property-'),
+		unicodeVersion: UNICODE_VERSION,
+		stringify: stringify,
+	}).trim() + '\n';
+	fs.writeFileSync(`output/generated/extended-character-classes/${extendedExpression.description}.js`, output);
 }

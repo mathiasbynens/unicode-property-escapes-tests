@@ -7,7 +7,7 @@ const mix = (properties, values) => {
 	const expressions = [];
 	for (const property of properties) {
 		for (const value of values) {
-			expressions.push(`${ property }=${ value }`);
+			expressions.push(`${property}=${value}`);
 		}
 	}
 	return expressions;

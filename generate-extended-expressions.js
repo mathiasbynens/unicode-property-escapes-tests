@@ -20,15 +20,15 @@ const parts = [
 		expression: String.raw`\p{Emoji_Keycap_Sequence}`,
 		strings: new Set(require('@unicode/unicode-14.0.0/Sequence_Property/Emoji_Keycap_Sequence/index.js')),
 	},
-	// A character class not containing a string literal.
+	// A (nested) character class.
 	{
 		description: 'character-class',
 		expression: String.raw`[0-9]`,
 		strings: new Set(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']),
 	},
-	// A character class containing a string literal.
+	// A string literal.
 	{
-		description: 'character-class-containing-string-literal',
+		description: 'string-literal',
 		expression: String.raw`\q{0|2|4|9\uFE0F\u20E3}`,
 		strings: new Set(['0', '2', '4', '9\uFE0F\u20E3']),
 	},

@@ -47,11 +47,13 @@ const parts = [
 ];
 
 const DEFAULT_NON_MATCH_STRINGS = [
-	'\u2603',        // snowman
-	'6\uFE0F\u20E3', // Emoji_Keycap_Sequence
-	'7',             // ASCII_Hex_Digit + [0-9]
-	'9\uFE0F\u20E3', // Emoji_Keycap_Sequence used in string literal
-	'C',             // ASCII_Hex_Digit
+	'\u2603',             // snowman
+	'\u{1D306}',          // astral character
+	'\u{1F1E7}\u{1F1EA}', // string consisting of multiple astral characters
+	'6\uFE0F\u20E3',      // Emoji_Keycap_Sequence
+	'7',                  // ASCII_Hex_Digit + [0-9]
+	'9\uFE0F\u20E3',      // Emoji_Keycap_Sequence used in string literal
+	'C',                  // ASCII_Hex_Digit
 ];
 
 const populateNonMatchStrings = ({ matchStrings, nonMatchStrings = [] }) => {

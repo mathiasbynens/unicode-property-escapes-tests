@@ -54,6 +54,8 @@ testExtendedCharacterClass({
     "f"
   ],
   nonMatchStrings: [
-    "\u2603"
+    "\u2603",
+    "\u{1D306}",
+    "\u{1F1E7}\u{1F1EA}"
   ],
 });

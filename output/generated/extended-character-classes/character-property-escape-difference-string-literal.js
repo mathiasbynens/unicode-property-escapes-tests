@@ -44,6 +44,8 @@ testExtendedCharacterClass({
     "4",
     "6\uFE0F\u20E3",
     "9\uFE0F\u20E3",
-    "\u2603"
+    "\u2603",
+    "\u{1D306}",
+    "\u{1F1E7}\u{1F1EA}"
   ],
 });

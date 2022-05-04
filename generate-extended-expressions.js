@@ -89,7 +89,8 @@ const resolveStrings = (operator, stringsA, stringsB) => {
 			break;
 		}
 		case '': { // Union.
-			matchStrings.push(...stringsA, ...stringsB);
+      const deduped = new Set([...stringsA, ...stringsB]);
+			matchStrings.push(...deduped);
 			matchStrings.sort();
 			break;
 		}

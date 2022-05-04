@@ -19,12 +19,8 @@ testExtendedCharacterClass({
   expression: "[\q{0|2|4|9\uFE0F\u20E3}\q{0|2|4|9\uFE0F\u20E3}]",
   matchStrings: [
     "0",
-    "0",
-    "2",
     "2",
     "4",
-    "4",
-    "9\uFE0F\u20E3",
     "9\uFE0F\u20E3"
   ],
   nonMatchStrings: [

@@ -18,7 +18,6 @@ testExtendedCharacterClass({
   regExp: /^[__]+$/v,
   expression: "[__]",
   matchStrings: [
-    "_",
     "_"
   ],
   nonMatchStrings: [

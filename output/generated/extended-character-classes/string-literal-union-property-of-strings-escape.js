@@ -32,7 +32,6 @@ testExtendedCharacterClass({
     "6\uFE0F\u20E3",
     "7\uFE0F\u20E3",
     "8\uFE0F\u20E3",
-    "9\uFE0F\u20E3",
     "9\uFE0F\u20E3"
   ],
   nonMatchStrings: [

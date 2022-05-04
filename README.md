@@ -1,6 +1,6 @@
 # Tests for RegExp Unicode property escapes
 
-This repository hosts a script that generates tests for [Unicode property escapes in ECMAScript regular expressions](https://github.com/tc39/proposal-regexp-unicode-property-escapes).
+This repository hosts a script that generates tests for [Unicode property escapes in ECMAScript regular expressions](https://github.com/tc39/proposal-regexp-unicode-property-escapes), including [property escapes for properties of strings](https://github.com/tc39/proposal-regexp-set-notation).
 
 [The plan](https://github.com/tc39/test262/issues/950) is to update the script every time the Unicode Standard is updated (i.e. yearly) and to upstream its output to [Test262](https://github.com/tc39/test262).
 

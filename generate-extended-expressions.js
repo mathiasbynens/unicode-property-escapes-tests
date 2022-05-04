@@ -104,7 +104,6 @@ const mix = (operators, parts) => {
 	for (const operator of operators) {
 		for (const partA of parts) {
 			for (const partB of parts) {
-				if (partA.expression === partB.expression) continue;
 				const expression = `${partA.expression}${operator}${partB.expression}`;
 				const { matchStrings, nonMatchStrings } = resolveStrings(operator, partA.strings, partB.strings);
 				const description = `${partA.description}-${describeOperator(operator)}-${partB.description}`;

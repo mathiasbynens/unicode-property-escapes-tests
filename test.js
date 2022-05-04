@@ -12,7 +12,7 @@ const symbols = buildString({
 	]
 });
 
-assert.equal([...symbols].length, 1113984);
+assert.equal([...symbols].length, 1_113_984);
 
 assert.throws(
 	() => {

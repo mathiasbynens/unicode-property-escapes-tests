@@ -160,6 +160,7 @@ for (const property of propertiesOfStrings) {
 
 const extendedExpressions = generateExtendedCharacterClassExpressions();
 for (const extendedExpression of extendedExpressions) {
+	console.log(`Handling \`[${ extendedExpression.expression }]\`…`);
 	const output = createExtendedCharacterClassTest({
 		expression: extendedExpression.expression,
 		matchStrings: extendedExpression.matchStrings,

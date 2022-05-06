@@ -2,8 +2,8 @@
 	"name": "unicode-property-escapes-tests",
 	"private": true,
 	"scripts": {
-		"clean": "rm -rf output && mkdir -p output/generated/strings output/generated/extended-character-classes",
-		"build": "npm run clean && node build.js && cp -r basic-tests/. output",
+		"clean": "rm -rf output && mkdir -p output/property-escapes/generated/strings output/unicodeSets/generated",
+		"build": "npm run clean && node build.js && cp -r basic-tests/. output/property-escapes",
 		"test": "node test.js"
 	},
 	"devDependencies": {

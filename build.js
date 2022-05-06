@@ -68,7 +68,7 @@ const handleExpression = (property, value, symbols) => {
 		nonMatchSymbols: nonMatchSymbols,
 		unicodeVersion: UNICODE_VERSION,
 	}).replace(/\n{3,}/g, '\n\n').trim() + '\n';
-	fs.writeFileSync(`output/generated/${ outputFile }.js`, output);
+	fs.writeFileSync(`output/property-escapes/generated/${ outputFile }.js`, output);
 };
 
 const properties = require('regenerate-unicode-properties');
@@ -124,7 +124,7 @@ const handlePropertyOfStrings = (property, strings) => {
 			unicodeVersion: UNICODE_VERSION,
 			stringify: stringify,
 		}).trim() + '\n';
-		fs.writeFileSync(`output/generated/strings/${ outputFile }.js`, output);
+		fs.writeFileSync(`output/property-escapes/generated/strings/${ outputFile }.js`, output);
 	}
 
 	{
@@ -132,7 +132,7 @@ const handlePropertyOfStrings = (property, strings) => {
 			property: property,
 			unicodeVersion: UNICODE_VERSION,
 		}).trim() + '\n';
-		fs.writeFileSync(`output/generated/strings/${ outputFile }-negative-P.js`, output);
+		fs.writeFileSync(`output/property-escapes/generated/strings/${ outputFile }-negative-P.js`, output);
 	}
 
 	{
@@ -140,7 +140,7 @@ const handlePropertyOfStrings = (property, strings) => {
 			property: property,
 			unicodeVersion: UNICODE_VERSION,
 		}).trim() + '\n';
-		fs.writeFileSync(`output/generated/strings/${ outputFile }-negative-CharacterClass.js`, output);
+		fs.writeFileSync(`output/property-escapes/generated/strings/${ outputFile }-negative-CharacterClass.js`, output);
 	}
 
 	{
@@ -148,7 +148,7 @@ const handlePropertyOfStrings = (property, strings) => {
 			property: property,
 			unicodeVersion: UNICODE_VERSION,
 		}).trim() + '\n';
-		fs.writeFileSync(`output/generated/strings/${ outputFile }-negative-u.js`, output);
+		fs.writeFileSync(`output/property-escapes/generated/strings/${ outputFile }-negative-u.js`, output);
 	}
 };
 
@@ -169,5 +169,5 @@ for (const extendedExpression of extendedExpressions) {
 		unicodeVersion: UNICODE_VERSION,
 		stringify: stringify,
 	}).trim() + '\n';
-	fs.writeFileSync(`output/generated/extended-character-classes/${extendedExpression.description}.js`, output);
+	fs.writeFileSync(`output/unicodeSets/generated/${extendedExpression.description}.js`, output);
 }

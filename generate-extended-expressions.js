@@ -58,12 +58,13 @@ const DEFAULT_NON_MATCH_STRINGS = [
 
 const populateNonMatchStrings = ({ matchStrings, nonMatchStrings = [] }) => {
 	const matchSet = new Set(matchStrings);
+	const nonMatchSet = new Set(nonMatchStrings);
 	for (const string of DEFAULT_NON_MATCH_STRINGS) {
 		if (matchSet.has(string)) continue;
-		nonMatchStrings.push(string);
+		nonMatchSet.add(string);
 	}
-	nonMatchStrings.sort();
-	return nonMatchStrings;
+	nonMatchStrings = [...nonMatchSet].sort();
+	return { matchStrings, nonMatchStrings };
 };
 
 const resolveStrings = (operator, stringsA, stringsB) => {
@@ -100,8 +101,8 @@ const resolveStrings = (operator, stringsA, stringsB) => {
 			throw new Error(`Unknown operator ${operator}`);
 		}
 	}
-	populateNonMatchStrings({ matchStrings, nonMatchStrings });
-	return { matchStrings, nonMatchStrings };
+	const result = populateNonMatchStrings({ matchStrings, nonMatchStrings });
+	return result;
 };
 
 const describeOperator = (operator) => {

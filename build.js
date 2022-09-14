@@ -73,11 +73,12 @@ const handleExpression = (property, value, symbols) => {
 
 const properties = require('regenerate-unicode-properties');
 for (const [property, values] of properties) {
+	if (property === 'Property_of_Strings') continue;
 	for (const value of values) {
 		const expression = `${ property }=${ value }`;
 		const set = require(
 			`regenerate-unicode-properties/${ property }/${ value }.js`
-		);
+		).characters;
 		handleExpression(property, value, set);
 	}
 }
@@ -152,9 +153,9 @@ const handlePropertyOfStrings = (property, strings) => {
 	}
 };
 
-const propertiesOfStrings = require('@unicode/unicode-14.0.0').Sequence_Property;
+const propertiesOfStrings = require(`@unicode/unicode-${UNICODE_VERSION}`).Sequence_Property;
 for (const property of propertiesOfStrings) {
-	const strings = require(`@unicode/unicode-14.0.0/Sequence_Property/${property}/index.js`);
+	const strings = require(`@unicode/unicode-${UNICODE_VERSION}/Sequence_Property/${property}/index.js`);
 	handlePropertyOfStrings(property, strings);
 }
 

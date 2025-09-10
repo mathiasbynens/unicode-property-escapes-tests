@@ -7,12 +7,12 @@
 		"test": "node test.js"
 	},
 	"devDependencies": {
-		"@unicode/unicode-16.0.0": "^1.6.0",
-		"jsesc": "^3.0.2",
+		"@unicode/unicode-17.0.0": "^1.6.12",
+		"jsesc": "^3.1.0",
 		"lodash.template": "^4.5.0",
 		"regenerate": "^1.4.2",
-		"regenerate-unicode-properties": "^10.2.0",
+		"regenerate-unicode-properties": "^10.2.2",
 		"unicode-property-aliases-ecmascript": "^2.1.0",
-		"unicode-property-value-aliases-ecmascript": "^2.2.0"
+		"unicode-property-value-aliases-ecmascript": "^2.2.1"
 	}
 }

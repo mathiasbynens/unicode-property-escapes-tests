@@ -153,12 +153,12 @@ const handlePropertyOfStrings = (property, strings) => {
 	}
 };
 
-const propertiesOfStrings = require(`@unicode/unicode-${UNICODE_VERSION}`).Sequence_Property;
+const propertiesOfStrings = require(`@unicode/unicode-${UNICODE_VERSION}`).default.Sequence_Property;
 for (const property of propertiesOfStrings) {
 	// `Emoji_Test` is not an official property (yet).
 	// https://github.com/mathiasbynens/emoji-test-regex-pattern/issues/7
 	if (property === 'Emoji_Test') continue;
-	const strings = require(`@unicode/unicode-${UNICODE_VERSION}/Sequence_Property/${property}/index.js`);
+	const strings = require(`@unicode/unicode-${UNICODE_VERSION}/Sequence_Property/${property}/index.mjs`).default;
 	handlePropertyOfStrings(property, strings);
 }
 

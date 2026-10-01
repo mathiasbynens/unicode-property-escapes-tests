@@ -16,13 +16,13 @@ const parts = [
 	{
 		description: 'character-property-escape',
 		expression: String.raw`\p{ASCII_Hex_Digit}`,
-		strings: new Set(require(`@unicode/unicode-${UNICODE_VERSION}/Binary_Property/ASCII_Hex_Digit/symbols.js`)),
+		strings: new Set(require(`@unicode/unicode-${UNICODE_VERSION}/Binary_Property/ASCII_Hex_Digit/symbols.mjs`).default),
 	},
 	// A property escape of a property of strings.
 	{
 		description: 'property-of-strings-escape',
 		expression: String.raw`\p{Emoji_Keycap_Sequence}`,
-		strings: new Set(require(`@unicode/unicode-${UNICODE_VERSION}/Sequence_Property/Emoji_Keycap_Sequence/index.js`)),
+		strings: new Set(require(`@unicode/unicode-${UNICODE_VERSION}/Sequence_Property/Emoji_Keycap_Sequence/index.mjs`).default),
 	},
 	// A (nested) character class.
 	{
